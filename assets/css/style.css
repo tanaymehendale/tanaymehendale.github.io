@@ -1,9 +1,71 @@
 /* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
 }
+
+/* Lead Section */
+#lead {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#lead-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    user-select: none;
+}
+
+#lead-content h1 {
+    font-size: 3em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+#lead-content h2 {
+    font-size: 1.5em;
+    font-weight: 300;
+    margin-bottom: 50px;
+    color: #fff;
+}
+
+.btn-rounded-white {
+    display: inline-block;
+    padding: 15px 45px;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    color: #fff;
+    background: transparent;
+    font-size: 1em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-rounded-white:hover {
+    background: #fff;
+    color: #2196F3;
+}
+
 
 /* Header */
 header {
@@ -32,61 +94,6 @@ nav ul li a {
     color: #333;
     font-weight: 500;
 }
-
-/* Lead Section */
-#lead{
-    /* background: linear-gradient(rgba(33, 33, 33, 0.7), rgba(33, 33, 33, 0.7)); */
-    background-color: rgba(0,0,0,1);
-    align-items: center;
-    height: 100vh;
-    justify-content: center;
-}
-
-#lead-content {
-    /* max-width: 900px; */
-    width: 100%;
-    margin: 0 auto;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-#lead-content h1 {
-    font-size: 3.5em;
-    font-weight: 700;
-    justify-content: center;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    line-height: 1.2;
-    margin-bottom: 20px;
-    color: #fff;
-}
-
-#lead-content h2 {
-    font-size: 1.75em;
-    font-weight: 300;
-    margin-bottom: 1.5em;
-    color: #fff;
-}
-
-.btn-rounded-white {
-    display: inline-block;
-    padding: 12px 28px;
-    border: 2px solid #fff;
-    border-radius: 25px;
-    color: #fff;
-    background: transparent;
-    font-size: 0.9em;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.btn-rounded-white:hover {
-    background: #fff;
-    color: #2196F3;
-}
-
 
 /* Projects Section */
 #projects h2{
