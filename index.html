@@ -3,60 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanay Mehendale</title>
+    <title>Tanay Mehendale - Portfolio</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            margin-top: 10%;
-        }
-        h1 {
-            font-size: 3em;
-            color: #ff6f61;
-        }
-        p {
-            font-size: 1.2em;
-        }
-        a {
-            text-decoration: none;
-            color: #007bff;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <h1>Tanay Mehendale</h1>
-        <!-- <nav>
+        <nav>
             <ul>
-                <li><a href="projects/customer-churn/index.html">Customer Churn Analysis</a></li>
-                <li><a href="projects/market-basket/index.html">Market Basket Analysis</a></li>
-                <li><a href="projects/data-warehouse/index.html">Data Warehousing Project</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
-        </nav> -->
+        </nav>
     </header>
-    <main>
-        <h2>Work in Progress!</h2>
-        <p>This website is a work in progress 🚧</p>
-        <p>However, you can still access some of the pages mentioned below. Inconvenience is regretted.</p>
-        <p>Current working pages - </p>
-        <ul>
-            <li><a href="projects/customer-churn/index.html">Customer Churn Analysis</a></li>
-            <!-- <li><a href="projects/market-basket/index.html">Market Basket Analysis</a></li>
-            <li><a href="projects/data-warehouse/index.html">Data Warehousing Project</a></li> -->
-        </ul>
-    </main>
+
+    <!-- Lead Section -->
+    <div id="lead">
+        <div id="lead-content">
+            <h1>Tanay Mehendale</h1>
+            <h2>Data Analyst | Data Engineer | Aspiring Product Manager</h2>
+            <a href="/tanaymehendale.github.io/assets/docs/Tanay Mehendale_Resume_DA7.pdf" class="btn-rounded-white" target="_blank" rel="noreferrer noopener">Download Resume</a>
+        </div>
+    </div>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <h3>Customer Churn Analysis in Tableau</h3>
+                <p>Interactive dashboard analyzing customer churn patterns using Tableau.</p>
+                <a href="projects/customer-churn/index.html" class="project-link">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>Market Basket Analysis</h3>
+                <p>Analysis of shopping patterns using R and Apriori algorithm.</p>
+                <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
+                <a href="https://github.com/tanaymehendale/market-basket-analysis" class="project-link" target="_blank" rel="noreferrer noopener">View Project</a>
+            </div>
+            <div class="project-card">
+                <h3>Data Warehouse for Retail Analytics using Microsoft SQL Server</h3>
+                <p>Comprehensive data warehouse implementation using SQL Server.</p>
+                <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
+            </div>
+            <div class="project-card">
+                <h3>POS System</h3>
+                <p>Built a POS system using MySQL and MongoDB</p>
+                <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
+            </div>
+            <div class="project-card">
+                <h3>FashionMNIST Image Classification</h3>
+                <p>Comparison of various models on classifying images based on the standard FashionMNIST dataset</p>
+                <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
+            </div>
+        </div>
+    </section>
+
     <footer>
-        <p text-align = "center">&copy; 2024 Tanay Mehendale</p>
+        <p>&copy; 2024 Tanay Mehendale</p>
     </footer>
 </body>
 </html>
