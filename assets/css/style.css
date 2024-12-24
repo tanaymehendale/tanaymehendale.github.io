@@ -95,8 +95,18 @@ nav ul li a {
     font-weight: 500;
 }
 
+/* About Section */
+#about h2{
+    margin-top: 2rem;
+    text-align: center; 
+    font-size: 30px;   
+    user-select: none;
+}
+
+
 /* Projects Section */
 #projects h2{
+    margin-top: 1rem;
     text-align: center; 
     font-size: 30px;   
     user-select: none;
@@ -151,6 +161,44 @@ nav ul li a:hover::after {
 }
 
 /* Footer */
-footer p{
+footer {
+    padding: 50px 0;
+    background: #f2f2f2;
+}
+
+footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+footer .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copyright {
+    color: #74808a;
+}
+
+.back-to-top {
     text-align: center;
+}
+
+.back-to-top i {
+    color: #74808a;
+    font-size: 1.2em;
+}
+
+.social a {
+    color: #74808a;
+    font-size: 1.5em;
+    margin-left: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social a:hover {
+    color: #333;
 }
