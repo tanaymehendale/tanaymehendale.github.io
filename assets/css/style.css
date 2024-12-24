@@ -95,8 +95,18 @@ nav ul li a {
     font-weight: 500;
 }
 
+/* About Section */
+#about h2{
+    margin-top: 2rem;
+    text-align: center; 
+    font-size: 30px;   
+    user-select: none;
+}
+
+
 /* Projects Section */
 #projects h2{
+    margin-top: 1rem;
     text-align: center; 
     font-size: 30px;   
     user-select: none;
@@ -151,6 +161,74 @@ nav ul li a:hover::after {
 }
 
 /* Footer */
-footer p{
-    text-align: center;
+footer {
+    padding: 50px 0;
+    background: #f2f2f2;
+}
+
+footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 20px;
+}
+
+footer .copyright {
+    color: #74808a;
+    font-size: 0.9em;
+}
+
+footer .back-to-top {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer .back-to-top a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #74808a;
+    border-radius: 50%;
+    color: #74808a;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+footer .back-to-top a:hover {
+    background: #74808a;
+    color: #fff;
+}
+
+footer .back-to-top i {
+    font-size: 20px;
+    line-height: 1;
+}
+
+
+footer .social {
+    justify-self: end;
+}
+
+footer .social a {
+    color: #74808a;
+    font-size: 1.5em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+footer .social a:hover {
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    footer .container {
+        flex-direction: column;
+        gap: 20px;
+    }
 }
