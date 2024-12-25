@@ -4,6 +4,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+html {
+    /* scroll-padding-top: 65px; Adjust this value based on your navbar height */
+    scroll-behavior: smooth;
+}
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -75,6 +79,7 @@ header {
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     z-index: 1000;
+    height: 60px;
 }
 
 nav ul {
@@ -94,15 +99,16 @@ nav ul li a {
     color: #333;
     font-weight: 500;
 }
-
+section {
+    padding-top: 65px; /* Same as scroll-padding-top */
+}
 /* About Section */
 #about h2{
-    margin-top: 2rem;
+    margin-top: 0.25rem;
     text-align: center; 
     font-size: 30px;   
     user-select: none;
 }
-
 
 /* Projects Section */
 #projects h2{
@@ -137,6 +143,14 @@ nav ul li a {
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Skills Section */
+#skills h2{
+    margin-top: 1rem;
+    text-align: center; 
+    font-size: 30px;   
+    user-select: none;
 }
 
 /* Navigation Enhancement */
@@ -177,8 +191,11 @@ footer .container {
 }
 
 footer .copyright {
-    color: #74808a;
+    /* color: #74808a; */
+    color: #0D1B2A;
+    font-weight: 100;
     font-size: 0.9em;
+    text-transform: uppercase;
 }
 
 footer .back-to-top {
@@ -217,9 +234,10 @@ footer .social {
 
 footer .social a {
     color: #74808a;
-    font-size: 1.5em;
+    font-size: 2em;
     text-decoration: none;
     transition: all 0.3s ease;
+    margin-right: 0.5em;
 }
 
 footer .social a:hover {
