@@ -7,9 +7,14 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY");
+        })();
+    </script>
 </head>
 <body>
-    <!-- Header -->
     <!-- Header -->
     <header>
         <nav>
@@ -164,10 +169,47 @@
 
     <!-- Skills Section -->
     <section id="skills">
-        <h2>Skills</h2>
-        <p>Coming soon</p>
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="underline"></div>
+            
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-logo">
+                        <img src="assets/images/skills/tableau.png" alt="Tableau">
+                    </div>
+                    <div class="skill-name">Tableau</div>
+                </div>
+                <!-- Add more skill cards following the same structure -->
+            </div>
+        </div>
     </section>
     
+    <!-- Contact -->    
+    <section id="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <form id="contact-form">
+                <div class="form-group">
+                    <input type="email" id="email" name="user_email" placeholder="Your email" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder="Your message" required></textarea>
+                </div>
+                <button type="submit" id="send-button">Send</button>
+            </form>
+            <div class="linkedin-prompt">
+                <p>or send me a Connect request on LinkedIn:</p>
+                <div class="linkedin-badge">
+                    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+                    <div class="LI-profile-badge" data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="tanay-mehendale"></div>
+                </div>                
+            </div>
+        </div>
+    </section>
+    
+    
+
     <!-- Footer -->
     <footer>
         <div class="container">
