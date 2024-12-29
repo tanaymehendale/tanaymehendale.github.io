@@ -10,9 +10,26 @@ html {
 }
 body {
     margin: 0;
+    font-size: clamp(1rem, 2.5vw, 1rem);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
 }
+.container {
+    width: min(90%, 120em);
+    margin: 0 auto;
+}
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 1rem;
+}
+.content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(1rem, 5vw, 2rem);
+}
+
+
 
 /* Lead Section */
 #lead {
@@ -31,7 +48,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
-    max-width: 900px;
+    max-width: 100rem;
     text-align: center;
     user-select: none;
 }
@@ -42,22 +59,22 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     line-height: 1.2;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
     color: #fff;
 }
 
 #lead-content h2 {
     font-size: 1.5em;
     font-weight: 300;
-    margin-bottom: 50px;
+    margin-bottom: 2rem;
     color: #fff;
 }
 
 .btn-rounded-white {
     display: inline-block;
-    padding: 15px 45px;
-    border: 2px solid #fff;
-    border-radius: 30px;
+    padding: 1.1rem 3rem;
+    border: 0.1em solid #fff;
+    border-radius: 3em;
     color: #fff;
     background: transparent;
     font-size: 1em;
@@ -70,6 +87,37 @@ body {
     color: #2196F3;
 }
 
+.chevron-down {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.chevron-down a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    height: 2em;
+    border: 0.1em solid #fff;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.chevron-down a:hover {
+    background: #fff;
+    color: #000;
+}
+
+.chevron-down a i {
+    font-size: 1.2rem;
+}
+
 
 /* Header */
 header {
@@ -77,9 +125,9 @@ header {
     top: 0;
     width: 100%;
     background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2em 5em rgba(0,0,0,0.1);
     z-index: 1000;
-    height: 60px;
+    height: 4em;
 }
 
 nav ul {
@@ -100,110 +148,113 @@ nav ul li a {
     font-weight: 500;
 }
 section {
-    padding-top: 65px; /* Same as scroll-padding-top */
+    padding-top: 6rem; /* Same as scroll-padding-top */
 }
 /* About Section */
 #about {
-    padding: 75px 15px;
+    padding: 7em 7em;
     background: #fff;
 }
 
 #about .container {
-    max-width: 1200px;
+    max-width: 100em;
     margin: 0 auto;
 }
-
+/* 
 .about-grid {
     display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 50px;
-}
+    grid-template-columns: 11em 1fr;
+    gap: 1em;
+} */
 
 .about-title h2 {
     color: #374054;
-    font-size: 2em;
+    text-align: center;
+    font-size: 2rem;
     margin: 0;
+    margin-bottom: 0.2em;
 }
 
 .about-title .underline {
-    width: 100px;
-    height: 3px;
+    width: 5rem;
+    height: 0.2em;
     background: #3498db;
-    margin-top: 10px;
+    margin-top: 0.5rem;
 }
 
 .about-content p {
     color: #74808a;
     margin: 0;
     font-size: 1em;
+    text-justify: newspaper;
     line-height: 1.8;
 }
-
+/* 
 @media (max-width: 768px) {
     .about-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
-}
+} */
 /* Experience Section */
 #experience {
-    padding: 75px 15px;
+    padding: 3em 4rem;
     background: #f9f9f9;
 }
 
 #experience .container {
-    max-width: 1200px;
+    max-width: 100em;
     margin: 0 auto;
 }
 
 #experience h2 {
     text-align: center;
     color: #374054;
-    font-size: 2.5em;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    margin-bottom: 0.2em;
 }
 
 .underline {
-    width: 100px;
-    height: 3px;
+    width: 5rem;
+    height: 0.2em;
     background: #3498db;
-    margin: 0 auto 50px;
+    margin: 0 auto 0.5em;
 }
 
 .timeline {
     position: relative;
-    padding-left: 40px;
-    border-left: 2px solid #3498db;
-    margin-left: 20px;
+    padding-left: 2.35em;
+    border-left: 0.15rem solid #3498db;
+    margin-left: 2rem;
 }
 
 .timeline-item {
     position: relative;
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
 }
 
 .timeline-item::before {
     content: '';
     position: absolute;
-    left: -51px;
+    left: -3.2em;
     top: 0;
-    width: 20px;
-    height: 20px;
+    width: 1.25rem;
+    height: 1.25rem;
     background: #fff;
-    border: 3px solid #3498db;
+    border: 0.2rem solid #3498db;
     border-radius: 50%;
 }
 
 .timeline-date {
     color: #74808a;
-    margin-bottom: 15px;
+    margin-bottom: 0.5rem;
 }
 
 .timeline-content {
     background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -220,14 +271,14 @@ section {
 .timeline-content h3 {
     color: #374054;
     font-size: 1.3em;
-    margin: 0 0 5px;
+    margin: 0 0 2rem;
 }
 
-.timeline-content h4 {
+/* .timeline-content h4 {
     color: #74808a;
     font-size: 1.1em;
-    margin: 0 0 15px;
-}
+    margin: 0 0 15rem;
+} */
 
 .timeline-content p {
     color: #74808a;
@@ -239,26 +290,26 @@ section {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 15px;
+    margin-bottom: 15rem;
 }
 
 .company-logo img {
-    width: 400px;
-    height: 50px;
+    width: 20rem;
+    height: 2.5em;
     object-fit: contain;
     object-position: left;
-    margin-bottom: 15px;
+    margin-bottom: 1.5em;
 }
 
 .company-info {
     text-align: left;
-    margin-bottom: 15px;
+    margin-bottom: 0.75em;
 }
 
 .company-info h3 {
     color: #374054;
     font-size: 1.3em;
-    margin: 0 0 5px;
+    margin: 0 0 0.1em;
 }
 
 .company-info h4 {
@@ -267,7 +318,7 @@ section {
     margin: 0;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .company-header {
         flex-direction: column-reverse;
         align-items: flex-start;
@@ -280,7 +331,8 @@ section {
     .company-logo img {
         margin-left: 0;
     }
-}
+} */
+
 /* Education Section */
 #education {
     padding: 75px 15px;
@@ -295,14 +347,15 @@ section {
 #education h2 {
     color: #374054;
     text-align: center;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    margin-bottom: 0.2  em;
 }
 
 .underline {
-    width: 100px;
-    height: 3px;
+    width: 5em;
+    height: 0.2em;
     background: #3498db;
-    margin: 0 auto 50px;
+    margin: 0 auto 0.5em;
 }
 .education-block {
     max-width: 900px;
@@ -378,11 +431,16 @@ h4 {
 
 
 /* Projects Section */
+#projects{
+    background: #f9f9f9;
+}
 #projects h2{
     margin-top: 1rem;
+    color: #374054;
     text-align: center; 
-    font-size: 30px;   
+    font-size: 2rem;   
     user-select: none;
+    margin-bottom: 0.2em;
 }
 
 .project-grid {
@@ -392,11 +450,35 @@ h4 {
     padding: 2rem;
 }
 
+.project-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+
 .project-card {
+    position: relative;
+    overflow: hidden;
     background: white;
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.underline {
+    width: 5em;
+    height: 0.2em;
+    background: #3498db;
+    margin: 0 auto 1em;
 }
 
 /* Project Cards Enhancement */
@@ -405,6 +487,8 @@ h4 {
     border-radius: 8px;
     overflow: hidden;
     user-select: none;
+    cursor: pointer;
+    /* pointer-events: none; */
 }
 
 .project-card:hover {
@@ -415,7 +499,8 @@ h4 {
 /* Skills Section */
 #skills {
     padding: 75px 15px;
-    background: #f9f9f9;
+    /* background: #f9f9f9; */
+    background: #ffffff;
 }
 
 #skills .container {
@@ -426,7 +511,8 @@ h4 {
 #skills h2 {
     text-align: center;
     color: #374054;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    margin-bottom: 0.2em;
 }
 
 .skills-grid {
@@ -506,6 +592,7 @@ nav ul li a:hover::after {
 
 #contact h2 {
     text-align: center;
+    font-size: 2rem;
     margin-bottom: 30px;
 }
 

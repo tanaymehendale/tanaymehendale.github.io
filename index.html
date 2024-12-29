@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         (function() {
-            emailjs.init("YOUR_PUBLIC_KEY");
+            emailjs.init("SBrWBb3pj61r4Pl8V"); // EmailJS public key
         })();
     </script>
 </head>
@@ -36,6 +36,12 @@
             <h2>Data Analyst | Data Engineer | Aspiring Product Manager</h2>
             <a href="https://tanaymehendale.github.io/assets/docs/Tanay%20Mehendale_Resume_DA7.pdf" class="btn-rounded-white" target="_blank" rel="noreferrer noopener">View Resume</a>
         </div>
+        <div class="chevron-down">
+            <a href="#" id="scroll-down">
+                <i class="fa fa-chevron-down"></i>
+            </a>
+        </div>
+             
     </div>
     
     <!-- About Section -->
@@ -47,7 +53,8 @@
                     <div class="underline"></div>
                 </div>
                 <div class="about-content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in iaculis ex. Etiam volutpat laoreet urna. Morbi ut tortor nec nulla commodo malesuada sit amet vel lacus. Fusce eget efficitur libero. Morbi dapibus porta quam laoreet placerat. Donec eu vehicula neque. Donec viverra lorem nunc, tempus euismod eros sollicitudin ut. Quisque et tincidunt libero. Donec id pharetra justo. Proin euismod lacinia dolor, eu scelerisque justo tempus pharetra. Vivamus nunc justo, finibus ut nisl sed, euismod rhoncus nulla. Proin sed magna egestas, egestas ante et, congue eros. In consequat, mauris dapibus tincidunt suscipit, ex libero aliquet diam, at maximus risus enim non leo.</p>
+                    <p>I am a Data Analyst and an aspiring Product Manager with an experience in software development, data analysis and developing business processes. I’m currently applying my learnings in multiple projects at Texas A&M University. I’m passionate about creating innovative, user-centric solutions and improving decision-making processes with the help of data.
+                    </p>
                 </div>
             </div>
         </div>
@@ -69,7 +76,11 @@
                             <h3>LTIMindtree</h3>
                             <h4><i>Senior SAP Technical Consultant</i></h4>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                        <p>
+                            <li>Spearheaded cross-functional coordination for release management in 52+ product releases, implementing process optimizations that reduced breaches by 84%</li>
+                            <li>Prioritized and delivered 70+ product features using SQL & SAP ABAP based on user needs, collaborating with global teams to reduce the turnaround time by 13%</li>
+                            <li>Led user acceptance testing initiatives, improving defect detection by 15% and overall product quality by 10%</li>
+                        </p>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -82,7 +93,11 @@
                             <h3>Larsen & Toubro Infotech</h3>
                             <h4><i>Associate SAP Consultant - Intern</i></h4>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                        <p>
+                            <li>Conducted comprehensive customer needs analysis and competitor research, resulting in data management solutions that improved retrieval efficiency by 20%</li>
+                            <li>Engaged directly with clients to identify pain points and align technological solutions with business goals, resulting in an increased satisfaction rating by 15%</li>
+                            <li>Leveraged data visualization tools like Tableau to develop and present insights to senior leadership, improving strategic decision-making and showcasing data-driven product strategy skills</li>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -106,10 +121,14 @@
                         <h4><i>Master of Science in Management Information Systems</i></h4>
                     </div>
                 </div>
+                <p>Relevant Coursework - </p>
                 <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    <li>ISTM 622 - Advanced Data Management</li>
+                    <li>ISTM 637 - Data Warehousing</li>
+                    <li>ECEN 758 - Data Mining</li>
+                    <li>CSCE 679 - Data visualization</li>
+                    <li>STAT 656 - Applied Analytics</li>
+                    <li>STAT 650 - Statistics</li>
                 </ul>
             </div>
 
@@ -125,9 +144,8 @@
                     </div>
                 </div>
                 <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    <li>Semi Finalist at Govt. of India & Texas Instruments' IICDC-2019</li>
+                    <li>Final Year Project - Investment Analysis using Machine Learning</li>
                 </ul>
             </div>
 
@@ -136,35 +154,41 @@
          
     <!-- Projects Section -->
     <section id="projects">
-        <h2>Projects</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <h3>Customer Churn Analysis in Tableau</h3>
-                <p>Interactive dashboard analyzing customer churn patterns using Tableau.</p>
-                <a href="projects/customer-churn/index.html" class="project-link" target="_blank" rel="noreferrer noopener">View Project</a>
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="underline"></div>
+
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-card-content">
+                        <h3>Customer Churn Analysis in Tableau</h3>
+                        <p>Interactive dashboard analyzing customer churn patterns using Tableau.</p>
+                        <a href="projects/customer-churn/index.html" class="project-link" target="_blank" rel="noreferrer noopener">View Project</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Market Basket Analysis</h3>
+                    <p>Analysis of shopping patterns using R and Apriori algorithm.</p>
+                    <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
+                    <a href="https://github.com/tanaymehendale/market-basket-analysis" class="project-link" target="_blank" rel="noreferrer noopener">View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>Data Warehouse for Retail Analytics using Microsoft SQL Server</h3>
+                    <p>Comprehensive data warehouse implementation using SQL Server.</p>
+                    <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
+                </div>
+                <div class="project-card">
+                    <h3>POS System</h3>
+                    <p>Built a POS system using MySQL and MongoDB</p>
+                    <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
+                </div>
+                <div class="project-card">
+                    <h3>FashionMNIST Image Classification</h3>
+                    <p>Comparison of various models on classifying images based on the standard FashionMNIST dataset</p>
+                    <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
+                </div>
             </div>
-            <div class="project-card">
-                <h3>Market Basket Analysis</h3>
-                <p>Analysis of shopping patterns using R and Apriori algorithm.</p>
-                <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
-                <a href="https://github.com/tanaymehendale/market-basket-analysis" class="project-link" target="_blank" rel="noreferrer noopener">View Project</a>
-            </div>
-            <div class="project-card">
-                <h3>Data Warehouse for Retail Analytics using Microsoft SQL Server</h3>
-                <p>Comprehensive data warehouse implementation using SQL Server.</p>
-                <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
-            </div>
-            <div class="project-card">
-                <h3>POS System</h3>
-                <p>Built a POS system using MySQL and MongoDB</p>
-                <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
-            </div>
-            <div class="project-card">
-                <h3>FashionMNIST Image Classification</h3>
-                <p>Comparison of various models on classifying images based on the standard FashionMNIST dataset</p>
-                <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
-            </div>
-        </div>
+        </div>    
     </section>
 
     <!-- Skills Section -->
@@ -175,10 +199,34 @@
             
             <div class="skills-grid">
                 <div class="skill-card">
-                    <div class="skill-logo">
+                    <!-- <div class="skill-logo">
                         <img src="assets/images/skills/tableau.png" alt="Tableau">
-                    </div>
+                    </div> -->
+                    <div class="skill-name">Python</div>
+                </div>
+                <div class="skill-card">
+                    <!-- <div class="skill-logo">
+                        <img src="assets/images/skills/tableau.png" alt="Tableau">
+                    </div> -->
                     <div class="skill-name">Tableau</div>
+                </div>
+                <div class="skill-card">
+                    <!-- <div class="skill-logo">
+                        <img src="assets/images/skills/tableau.png" alt="Tableau">
+                    </div> -->
+                    <div class="skill-name">SQL</div>
+                </div>
+                <div class="skill-card">
+                    <!-- <div class="skill-logo">
+                        <img src="assets/images/skills/tableau.png" alt="Tableau">
+                    </div> -->
+                    <div class="skill-name">MS Excel</div>
+                </div>
+                <div class="skill-card">
+                    <!-- <div class="skill-logo">
+                        <img src="assets/images/skills/tableau.png" alt="Tableau">
+                    </div> -->
+                    <div class="skill-name">Data Management</div>
                 </div>
                 <!-- Add more skill cards following the same structure -->
             </div>

@@ -7,6 +7,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.querySelector('#scroll-down').addEventListener('click', function(event) {
+    event.preventDefault();
+    window.scrollBy({
+        top: window.innerHeight,
+        behavior: 'smooth'
+    });
+});
+
+
 document.getElementById('contact-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -35,7 +44,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     };
     
     // EmailJS Service Added
-    emailjs.send('service_pphbjsl', 'template_m2gn5zc', templateParams)
+    emailjs.send('service_pphbjsl', 'template_m2gn5zc', templateParams) // params - serviceKey, templateKey
         .then(function(response) {
             alert('Message sent successfully!');
             document.getElementById('contact-form').reset();
