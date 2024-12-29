@@ -281,6 +281,100 @@ section {
         margin-left: 0;
     }
 }
+/* Education Section */
+#education {
+    padding: 75px 15px;
+    background: #fff;
+}
+
+#education .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#education h2 {
+    color: #374054;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.underline {
+    width: 100px;
+    height: 3px;
+    background: #3498db;
+    margin: 0 auto 50px;
+}
+.education-block {
+    max-width: 900px;
+    margin: 0 auto 30px;
+    padding: 25px;
+    border: 1px solid #dcd9d9;
+    border-radius: 4px;
+    background: #fff;
+    position: relative;
+}
+
+.education-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 7px;
+}
+
+.university-logo {
+    flex-shrink: 0;
+}
+
+.university-logo img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.university-info {
+    flex-grow: 1;
+    padding-right: 80px; /* Make space for the date */
+}
+
+.education-date {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    color: #74808a;
+}
+
+.university-info h3 {
+    margin: 0;
+    color: #374054;
+    font-size: 1.3em;
+}
+
+h4 {
+    color: #74808a;
+    font-style: italic;
+    margin: 0 0 15px;
+}
+
+@media (max-width: 768px) {
+    .education-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .university-info {
+        padding-right: 0;
+        text-align: center;
+    }
+
+    .education-date {
+        position: static;
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+    }
+}
+
 
 
 /* Projects Section */
