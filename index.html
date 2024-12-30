@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init(EMAILJS_PUBLIC_KEY); // EmailJS public key
+        })();
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -14,6 +20,8 @@
         <nav>
             <ul>
                 <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -28,47 +36,239 @@
             <h2>Data Analyst | Data Engineer | Aspiring Product Manager</h2>
             <a href="https://tanaymehendale.github.io/assets/docs/Tanay%20Mehendale_Resume_DA7.pdf" class="btn-rounded-white" target="_blank" rel="noreferrer noopener">View Resume</a>
         </div>
+        <div class="chevron-down">
+            <a href="#" id="scroll-down">
+                <i class="fa fa-chevron-down"></i>
+            </a>
+        </div>
+             
     </div>
     
     <!-- About Section -->
     <section id="about">
-        <h2>About</h2>
-        <p>Coming soon</p>
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-title">
+                    <h2>About Me</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="about-content">
+                    <p>I am a Data Analyst and an aspiring Product Manager with an experience in software development, data analysis and developing business processes. I’m currently applying my learnings in multiple projects at Texas A&M University. I’m passionate about creating innovative, user-centric solutions and improving decision-making processes with the help of data.
+                    </p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <h3>Customer Churn Analysis in Tableau</h3>
-                <p>Interactive dashboard analyzing customer churn patterns using Tableau.</p>
-                <a href="projects/customer-churn/index.html" class="project-link" target="_blank" rel="noreferrer noopener">View Project</a>
-            </div>
-            <div class="project-card">
-                <h3>Market Basket Analysis</h3>
-                <p>Analysis of shopping patterns using R and Apriori algorithm.</p>
-                <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
-                <a href="https://github.com/tanaymehendale/market-basket-analysis" class="project-link" target="_blank" rel="noreferrer noopener">View Project</a>
-            </div>
-            <div class="project-card">
-                <h3>Data Warehouse for Retail Analytics using Microsoft SQL Server</h3>
-                <p>Comprehensive data warehouse implementation using SQL Server.</p>
-                <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
-            </div>
-            <div class="project-card">
-                <h3>POS System</h3>
-                <p>Built a POS system using MySQL and MongoDB</p>
-                <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
-            </div>
-            <div class="project-card">
-                <h3>FashionMNIST Image Classification</h3>
-                <p>Comparison of various models on classifying images based on the standard FashionMNIST dataset</p>
-                <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2>Experience</h2>
+            <div class="underline"></div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">June 2021 – June 2023</div>
+                    <div class="timeline-content">
+                        <div class="company-logo">
+                            <img src="/tanaymehendale.github.io/assets/images/ltimindtree-logo-blue.png" alt="LTIMindtree Logo">
+                        </div>
+                        <div class="company-info">
+                            <h3>LTIMindtree</h3>
+                            <h4><i>Senior SAP Technical Consultant</i></h4>
+                        </div>
+                        <p>
+                            <li>Spearheaded cross-functional coordination for release management in 52+ product releases, implementing process optimizations that reduced breaches by 84%</li>
+                            <li>Prioritized and delivered 70+ product features using SQL & SAP ABAP based on user needs, collaborating with global teams to reduce the turnaround time by 13%</li>
+                            <li>Led user acceptance testing initiatives, improving defect detection by 15% and overall product quality by 10%</li>
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">January 2021 – June 2021</div>
+                    <div class="timeline-content">
+                        <div class="company-logo">
+                            <img src="/tanaymehendale.github.io/assets/images/LTI-logo.png" alt="Larsen & Toubro Infotech Logo">
+                        </div>
+                        <div class="company-info">
+                            <h3>Larsen & Toubro Infotech</h3>
+                            <h4><i>Associate SAP Consultant - Intern</i></h4>
+                        </div>
+                        <p>
+                            <li>Conducted comprehensive customer needs analysis and competitor research, resulting in data management solutions that improved retrieval efficiency by 20%</li>
+                            <li>Engaged directly with clients to identify pain points and align technological solutions with business goals, resulting in an increased satisfaction rating by 15%</li>
+                            <li>Leveraged data visualization tools like Tableau to develop and present insights to senior leadership, improving strategic decision-making and showcasing data-driven product strategy skills</li>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
     
+    <!-- Education section -->
+    <section id="education">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="underline"></div>
+
+            <div class="education-block">
+                <div class="education-header">
+                    <div class="university-logo">
+                        <img src="/tanaymehendale.github.io/assets/images/tamu-logo.png" alt="Texas A&M University Logo">
+                    </div>
+                    <div class="university-info">
+                        <h3>Texas A&M University</h3>
+                        <span class="education-date">Aug 2023 - May 2025</span>
+                        <h4><i>Master of Science in Management Information Systems</i></h4>
+                    </div>
+                </div>
+                <p>Relevant Coursework - </p>
+                <ul>
+                    <li>ISTM 622 - Advanced Data Management</li>
+                    <li>ISTM 637 - Data Warehousing</li>
+                    <li>ECEN 758 - Data Mining</li>
+                    <li>CSCE 679 - Data visualization</li>
+                    <li>STAT 656 - Applied Analytics</li>
+                    <li>STAT 650 - Statistics</li>
+                </ul>
+            </div>
+
+            <div class="education-block">
+                <div class="education-header">
+                    <div class="university-logo">
+                        <img src="assets/images/spit-logo.png" alt="S.P.I.T. Logo">
+                    </div>
+                    <div class="university-info">
+                        <h3>Sardar Patel Institute of Technology</h3>
+                        <span class="education-date">Aug 2017 - May 2021</span>
+                        <h4><i>Bachelor of Technology</i></h4>
+                    </div>
+                </div>
+                <ul>
+                    <li>Semi Finalist at Govt. of India & Texas Instruments' IICDC-2019</li>
+                    <li>Final Year Project - Investment Analysis using Machine Learning</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+         
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="underline"></div>
+
+            <div class="project-grid">
+                <a href="projects/customer-churn/index.html" class="project-card" target="_blank" rel="noreferrer noopener">
+                    <div class="card-content">
+                        <h3>Customer Churn Analysis in Tableau</h3>
+                        <p>Interactive dashboard analyzing customer churn patterns using Tableau.</p>
+                    <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
+                    </div>
+                </a>
+
+                <a href="https://github.com/tanaymehendale/market-basket-analysis" class="project-card" target="_blank" rel="noreferrer noopener">
+                    <div class="card-content">
+                        <h3>Market Basket Analysis</h3>
+                        <p>Analysis of shopping patterns using R and Apriori algorithm.</p>
+                    <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
+                    </div>
+                </a>
+
+                <a href="projects/data-warehouse/index.html" class="project-card" target="_blank" rel="noreferrer noopener">
+                    <div class="card-content">
+                        <h3>Data Warehouse for Retail Analytics using Microsoft SQL Server</h3>
+                        <p>Comprehensive data warehouse implementation using SQL Server.</p>
+                    <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
+                    </div>
+                </a>
+
+                <a href="projects/pos-system/index.html" class="project-card" target="_blank" rel="noreferrer noopener">
+                    <div class="card-content">
+                        <h3>POS System</h3>
+                        <p>Built a POS system using MySQL and MongoDB.</p>
+                    <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
+                    </div>
+                </a>
+                
+                <a href="https://akshatowl.github.io/FashionMNISTClassifiers/" class="project-card" target="_blank" rel="noreferrer noopener">
+                    <div class="card-content">
+                        <h3>FashionMNIST Image Classification</h3>
+                        <p>Comparison of various models on classifying images based on the standard FashionMNIST dataset.</p>
+                    <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
+                    </div>
+                </a>
+            </div>
+        </div>    
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="underline"></div>
+            
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <!-- <div class="skill-logo">
+                        <img src="assets/images/skills/tableau.png" alt="Tableau">
+                    </div> -->
+                    <div class="skill-name">Python</div>
+                </div>
+                <div class="skill-card">
+                    <!-- <div class="skill-logo">
+                        <img src="assets/images/skills/tableau.png" alt="Tableau">
+                    </div> -->
+                    <div class="skill-name">Tableau</div>
+                </div>
+                <div class="skill-card">
+                    <!-- <div class="skill-logo">
+                        <img src="assets/images/skills/tableau.png" alt="Tableau">
+                    </div> -->
+                    <div class="skill-name">SQL</div>
+                </div>
+                <div class="skill-card">
+                    <!-- <div class="skill-logo">
+                        <img src="assets/images/skills/tableau.png" alt="Tableau">
+                    </div> -->
+                    <div class="skill-name">MS Excel</div>
+                </div>
+                <div class="skill-card">
+                    <!-- <div class="skill-logo">
+                        <img src="assets/images/skills/tableau.png" alt="Tableau">
+                    </div> -->
+                    <div class="skill-name">Data Management</div>
+                </div>
+                <!-- Add more skill cards following the same structure -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact -->    
+    <section id="contact">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <form id="contact-form">
+                <div class="form-group">
+                    <input type="email" id="email" name="user_email" placeholder="Your email" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder="Your message" required></textarea>
+                </div>
+                <button type="submit" id="send-button">Send</button>
+            </form>
+            <div class="linkedin-prompt">
+                <p>or send me a Connect request on LinkedIn:</p>
+                <div class="linkedin-badge">
+                    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+                    <div class="LI-profile-badge" data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="tanay-mehendale"></div>
+                </div>                
+            </div>
+        </div>
+    </section>
+    
+    
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -89,7 +289,8 @@
                 </a>
             </div>
         </div>
-    </footer>    
+    </footer>
+    <script src="emailjs_config.js"></script>    
     <script src="script.js"></script>
 </body>
 </html>
