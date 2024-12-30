@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         (function() {
-            emailjs.init("SBrWBb3pj61r4Pl8V"); // EmailJS public key
+            emailjs.init(EMAILJS_PUBLIC_KEY); // EmailJS public key
         })();
     </script>
 </head>
@@ -159,34 +159,45 @@
             <div class="underline"></div>
 
             <div class="project-grid">
-                <div class="project-card">
-                    <div class="project-card-content">
+                <a href="projects/customer-churn/index.html" class="project-card" target="_blank" rel="noreferrer noopener">
+                    <div class="card-content">
                         <h3>Customer Churn Analysis in Tableau</h3>
                         <p>Interactive dashboard analyzing customer churn patterns using Tableau.</p>
-                        <a href="projects/customer-churn/index.html" class="project-link" target="_blank" rel="noreferrer noopener">View Project</a>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <h3>Market Basket Analysis</h3>
-                    <p>Analysis of shopping patterns using R and Apriori algorithm.</p>
                     <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
-                    <a href="https://github.com/tanaymehendale/market-basket-analysis" class="project-link" target="_blank" rel="noreferrer noopener">View Project</a>
-                </div>
-                <div class="project-card">
-                    <h3>Data Warehouse for Retail Analytics using Microsoft SQL Server</h3>
-                    <p>Comprehensive data warehouse implementation using SQL Server.</p>
-                    <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
-                </div>
-                <div class="project-card">
-                    <h3>POS System</h3>
-                    <p>Built a POS system using MySQL and MongoDB</p>
-                    <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
-                </div>
-                <div class="project-card">
-                    <h3>FashionMNIST Image Classification</h3>
-                    <p>Comparison of various models on classifying images based on the standard FashionMNIST dataset</p>
-                    <a href="projects/data-warehouse/index.html" class="project-link">Coming Soon</a>
-                </div>
+                    </div>
+                </a>
+
+                <a href="https://github.com/tanaymehendale/market-basket-analysis" class="project-card" target="_blank" rel="noreferrer noopener">
+                    <div class="card-content">
+                        <h3>Market Basket Analysis</h3>
+                        <p>Analysis of shopping patterns using R and Apriori algorithm.</p>
+                    <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
+                    </div>
+                </a>
+
+                <a href="projects/data-warehouse/index.html" class="project-card" target="_blank" rel="noreferrer noopener">
+                    <div class="card-content">
+                        <h3>Data Warehouse for Retail Analytics using Microsoft SQL Server</h3>
+                        <p>Comprehensive data warehouse implementation using SQL Server.</p>
+                    <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
+                    </div>
+                </a>
+
+                <a href="projects/pos-system/index.html" class="project-card" target="_blank" rel="noreferrer noopener">
+                    <div class="card-content">
+                        <h3>POS System</h3>
+                        <p>Built a POS system using MySQL and MongoDB.</p>
+                    <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
+                    </div>
+                </a>
+                
+                <a href="https://akshatowl.github.io/FashionMNISTClassifiers/" class="project-card" target="_blank" rel="noreferrer noopener">
+                    <div class="card-content">
+                        <h3>FashionMNIST Image Classification</h3>
+                        <p>Comparison of various models on classifying images based on the standard FashionMNIST dataset.</p>
+                    <!-- <a href="projects/market-basket/index.html" class="project-link">View Project</a> -->
+                    </div>
+                </a>
             </div>
         </div>    
     </section>
@@ -278,7 +289,8 @@
                 </a>
             </div>
         </div>
-    </footer>    
+    </footer>
+    <script src="emailjs_config.js"></script>    
     <script src="script.js"></script>
 </body>
 </html>

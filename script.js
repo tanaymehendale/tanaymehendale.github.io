@@ -44,7 +44,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     };
     
     // EmailJS Service Added
-    emailjs.send('service_pphbjsl', 'template_m2gn5zc', templateParams) // params - serviceKey, templateKey
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams) // params - serviceKey, templateKey
         .then(function(response) {
             alert('Message sent successfully!');
             document.getElementById('contact-form').reset();

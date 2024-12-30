@@ -198,7 +198,7 @@ section {
 } */
 /* Experience Section */
 #experience {
-    padding: 3em 4rem;
+    padding: 4.5em 4rem;
     background: #f9f9f9;
 }
 
@@ -435,7 +435,7 @@ h4 {
     background: #f9f9f9;
 }
 #projects h2{
-    margin-top: 1rem;
+    /* margin-top: 0.1rem; */
     color: #374054;
     text-align: center; 
     font-size: 2rem;   
@@ -484,16 +484,13 @@ h4 {
 /* Project Cards Enhancement */
 .project-card {
     transition: transform 0.3s ease;
+    text-decoration: none;
+    color: inherit;
     border-radius: 8px;
     overflow: hidden;
     user-select: none;
     cursor: pointer;
     /* pointer-events: none; */
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 /* Skills Section */
