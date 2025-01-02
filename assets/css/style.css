@@ -7,9 +7,16 @@
 html {
     /* scroll-padding-top: 65px; Adjust this value based on your navbar height */
     scroll-behavior: smooth;
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 body {
     margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 0;
     font-size: clamp(1rem, 2.5vw, 1rem);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -35,9 +42,10 @@ body {
 #lead {
     position: relative;
     min-height: 100vh;
-    width: 100%;
+    /* width: 100%; */
     background: black;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -152,13 +160,14 @@ section {
 }
 /* About Section */
 #about {
-    padding: 7em 7em;
+    /* padding: 7em 7em; */
+    padding-bottom: 4rem;
     background: #fff;
 }
 
 #about .container {
-    max-width: 100em;
-    margin: 0 auto;
+    max-width: 100rem;
+    margin: auto auto;
 }
 /* 
 .about-grid {
@@ -196,9 +205,32 @@ section {
         gap: 20px;
     }
 } */
+
+/* About Section Responsiveness */
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .about-title {
+        text-align: center;
+    }
+    
+    .about-title .underline {
+        margin: 10px auto;
+    }
+    
+    .about-content {
+        padding: 0 15px;
+    }
+}
+
 /* Experience Section */
 #experience {
-    padding: 4.5em 4rem;
+    /* padding: 4.5em 4rem; */
+    padding-bottom: 2rem;
     background: #f9f9f9;
 }
 
@@ -318,20 +350,25 @@ section {
     margin: 0;
 }
 
-/* @media (max-width: 768px) {
-    .company-header {
-        flex-direction: column-reverse;
-        align-items: flex-start;
-    }
-    
-    .company-logo {
-        margin-bottom: 10px;
-    }
-    
-    .company-logo img {
+
+/* Experience Section Responsiveness */
+@media (max-width: 768px) {
+    .timeline {
         margin-left: 0;
+        padding-left: 20px;
     }
-} */
+    
+    .timeline-content {
+        margin-left: 10px;
+    }
+    
+    .timeline-item::before {
+        left: -31px;
+        width: 15px;
+        height: 15px;
+    }
+}
+
 
 /* Education Section */
 #education {
@@ -360,7 +397,7 @@ section {
 .education-block {
     max-width: 900px;
     margin: 0 auto 30px;
-    padding: 25px;
+    padding: 40px;
     border: 1px solid #dcd9d9;
     border-radius: 4px;
     background: #fff;
@@ -556,6 +593,62 @@ h4 {
 
 
 /* Navigation Enhancement */
+/* Responsive Navigation */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 10px;
+    background: #333;
+    transition: all 0.3s ease;
+}
+
+/* Transform hamburger to X when active */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(10.5px, -10.25px);
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 60px;
+        flex-direction: column;
+        background: #fff;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-menu li {
+        margin: 2.5rem 0;
+    }
+}
+
+
+
 nav ul li a {
     position: relative;
     padding-bottom: 5px;
@@ -630,6 +723,7 @@ nav ul li a:hover::after {
 .linkedin-prompt {
     text-align: center;
     margin-top: 20px;
+    display: block;
 }
 
 .linkedin-badge {
@@ -677,6 +771,58 @@ nav ul li a:hover::after {
     }
 }
 
+/* LinkedIn Badge Container */
+.linkedin-badge {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.linkedin-badge iframe {
+    /* width: 100% !important; */
+    min-width: 280px !important;
+}
+
+@media (max-width: 480px) {
+    .linkedin-badge {
+        padding: 0 15px;
+        overflow: visible;
+    }
+}
+
+.linkedin-mobile {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.linkedin-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #0077b5;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background 0.3s ease;
+}
+
+.linkedin-button:hover {
+    background: #005582;
+}
+
+@media (max-width: 768px) {
+    .linkedin-desktop {
+        display: none;
+    }
+    
+    .linkedin-mobile {
+        display: block;
+    }
+}
+
 
 
 /* Footer */
@@ -700,7 +846,7 @@ footer .copyright {
     color: #0D1B2A;
     font-weight: 100;
     font-size: 0.9em;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 footer .back-to-top {
