@@ -15,7 +15,24 @@ document.querySelector('#scroll-down').addEventListener('click', function(event)
     });
 });
 
+// Navbar Responsiveness
 
+// Add this to your script.js
+const hamburger = document.querySelector(".hamburger");
+const navMenu = document.querySelector(".nav-menu");
+
+hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+});
+
+document.querySelectorAll(".nav-menu li a").forEach(n => n.addEventListener("click", () => {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+}));
+
+
+// Contact Form
 document.getElementById('contact-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
