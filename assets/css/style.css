@@ -195,7 +195,7 @@ section {
     color: #74808a;
     margin: 0;
     font-size: 1em;
-    text-justify: newspaper;
+    text-align: justify;
     line-height: 1.8;
 }
 /* 
@@ -334,7 +334,7 @@ section {
 }
 
 .company-info {
-    text-align: left;
+    text-align: justify;
     margin-bottom: 0.75em;
 }
 
@@ -349,7 +349,6 @@ section {
     font-size: 1.1em;
     margin: 0;
 }
-
 
 /* Experience Section Responsiveness */
 @media (max-width: 768px) {
@@ -900,4 +899,52 @@ footer .social a:hover {
         flex-direction: column;
         gap: 20px;
     }
+}
+
+/* Project Detail Pages */
+.project-detail {
+    padding: 80px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.project-title {
+    font-size: 2.5em;
+    color: #374054;
+    margin-bottom: 10px;
+}
+
+.project-date {
+    color: #74808a;
+    margin-bottom: 40px;
+}
+
+.project-section {
+    margin: 40px 0;
+}
+
+.project-section h2 {
+    color: #374054;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.content {
+    line-height: 1.8;
+    color: #74808a;
+}
+
+.project-links {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.external-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #3498db;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
 }

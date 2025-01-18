@@ -17,7 +17,6 @@ document.querySelector('#scroll-down').addEventListener('click', function(event)
 
 // Navbar Responsiveness
 
-// Add this to your script.js
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
 
