@@ -933,10 +933,55 @@ footer .social a:hover {
     line-height: 1.8;
     color: #74808a;
 }
-
+/* 
 .project-links {
     margin-top: 50px;
     text-align: center;
+} */
+
+.external-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #3498db;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+/* .back-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+} 
+*/
+
+.back-link a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: x-large;
+    transition: color 0.3s ease;
+}
+
+.back-link a:hover {
+    color: #2980b9;
+}
+
+.back-link i {
+    font-size: 20px;
+}
+.project-links {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
 .external-button {
@@ -947,4 +992,25 @@ footer .social a:hover {
     border-radius: 5px;
     text-decoration: none;
     transition: background 0.3s ease;
+}
+
+.external-button:hover {
+    background: #2980b9;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #3498db;
+    border-radius: 30px;
+    color: #3498db;
+    background: transparent;
+    font-size: 1em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: #3498db;
+    color: #fff;
 }
