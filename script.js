@@ -30,6 +30,33 @@ document.querySelectorAll(".nav-menu li a").forEach(n => n.addEventListener("cli
     navMenu.classList.remove("active");
 }));
 
+// Dynamic tab highlights in navbar
+// Add this to script.js
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('header nav a');
+    
+    window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (window.scrollY >= (sectionTop - 60)) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === current) {
+                link.classList.add('active');
+            }
+        });
+    });
+});
+
 
 // Contact Form
 document.getElementById('contact-form').addEventListener('submit', function(event) {
