@@ -903,7 +903,7 @@ footer .social a:hover {
 
 /* Project Detail Pages */
 .project-detail {
-    padding: 80px 20px;
+    padding: 5em 2rem;
     max-width: 900px;
     margin: 0 auto;
 }
@@ -911,26 +911,52 @@ footer .social a:hover {
 .project-title {
     font-size: 2.5em;
     color: #374054;
-    margin-bottom: 10px;
+    margin-bottom: 0.3em;
 }
 
 .project-date {
     color: #74808a;
-    margin-bottom: 40px;
+    margin-bottom: 0.05rem;
 }
 
 .project-section {
-    margin: 40px 0;
+    margin-top: 0.03rem;
+    margin-bottom: 0.01rem;
+}
+
+.project-section p {
+    text-align: justify;
 }
 
 .project-section h2 {
     color: #374054;
-    margin-bottom: 20px;
-    font-size: 1.8em;
+    margin-bottom: 0.5em;
+    font-size: 1.7em;
 }
+
+.achievement-box {
+    background: rgba(52, 152, 219, 0.1);
+    border: 2px solid rgba(52, 152, 219, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.achievement-box p {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #2c3e50;
+    line-height: 1.8;
+}
+
+.project-section.achievement h2 {
+    color: #3498db;
+}
+
 
 .content {
     line-height: 1.8;
+    font-size: 1.1em;
     color: #74808a;
 }
 /* 
@@ -939,15 +965,15 @@ footer .social a:hover {
     text-align: center;
 } */
 
-.external-button {
+/* .external-button {
     display: inline-block;
-    padding: 12px 25px;
+    padding: 2em 5em;
     background: #3498db;
     color: white;
-    border-radius: 5px;
+    border-radius: 10px;
     text-decoration: none;
     transition: background 0.3s ease;
-}
+} */
 
 /* .back-link {
     position: fixed;
@@ -986,6 +1012,7 @@ footer .social a:hover {
 
 .external-button {
     display: inline-block;
+    margin-top: 3em;
     padding: 12px 25px;
     background: #3498db;
     color: white;
@@ -1013,4 +1040,21 @@ footer .social a:hover {
 .back-button:hover {
     background: #3498db;
     color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .project-section {
+        margin: 0.1em 0;
+    }
+    
+    .project-section h2 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-section {
+        margin: 3em 0;
+    }
 }
