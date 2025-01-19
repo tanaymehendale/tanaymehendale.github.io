@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Data Warehouse</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>    
+    <div class="project-detail">
+        <div class="container">
+            <!-- Back button -->
+            <div class="back-link">
+                <a href="../../index.html#projects">
+                    <i class="fa fa-chevron-left"></i> Back
+                </a>
+            </div>            
+            <!-- Title Section -->
+            <h1 class="project-title">Data Warehouse for Retail Analytics using Microsoft SQL Server</h1>
+            <div class="project-date">September 2024 - December 2024</div>
+            
+            <!-- Achievement/Impact Section with Emphasis -->
+            <section class="project-section achievement">
+                <h2>Achievement/Impact</h2>
+                <div class="achievement-box">
+                    <p>Built an end-to-end data warehouse solution that reduced data processing time by 63% (from 5.5 to 2.0 hours) 
+                        and enabled analysis of $600M+ retail sales patterns, leading to optimized inventory management and promotion strategies.</p>
+                </div>
+            </section>
+
+            <!-- Other Sections -->
+            <section class="project-section">
+                <h2>Problem Statement</h2>
+                <div class="content">
+                    <p>Dominick's Fine Foods - A retail business, faced challenges in analyzing their sales patterns, customer behavior, and product performance due to:</p>
+                    <ul style="margin-left: 2em;">
+                        <li>Scattered data across multiple sources</li>
+                        <li>Manual data compilation taking 5+ hours monthly</li>
+                        <li>Inability to track historical changes in product categories</li>
+                        <li>Lack of unified view for sales and customer behavior analysis</li>
+                        <li>Complex requirements for analyzing specific product combinations</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Approach</h2>
+                <div class="content">
+                    <ol style="margin-left: 2em;">
+                        <li>Design two specialized data marts:
+                            <ul style="margin-left: 2em;">
+                                <li>Sales Data Mart for product performance analysis</li>
+                                <li>Store Information Data Mart for customer behavior tracking</li>
+                            </ul>
+                        </li>
+                        <li>Implement robust ETL processes:
+                            <ul style="margin-left: 2em;">
+                                <li>Type-2 SCD (Slowly Changing Dimensions) for tracking dimensional changes</li>
+                                <li>Automated data validation and transformation</li>
+                                <li>Error handling and logging mechanisms</li>
+                            </ul>
+                        </li>
+                        <li>Develop multi-tool visualization strategy:
+                            <ul style="margin-left: 2em;">
+                                <li>SSRS for static holiday season reports</li>
+                                <li>SSAS cubes for historical trend analysis</li>
+                                <li>Tableau for interactive dashboards</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Methodology</h2>
+                <div class="content">
+                    <ol style="margin-left: 2em;">
+                        <li>Data Mart Implementation:
+                            <ul style="margin-left: 2em;">
+                                <li>Created star schema designs for both marts</li>
+                                <li>Implemented fact tables (factSales, factStoreInfo)</li>
+                                <li>Developed shared dimensions (dimTime, dimStore)</li>
+                                <li>Established proper relationships and constraints</li>
+                            </ul>
+                        </li>
+                        <li>ETL Development:
+                            <ul style="margin-left: 2em;">
+                                <li>Built SSIS packages for data transformation</li>
+                                <li>Implemented lookup transformations</li>
+                                <li>Created derived calculations</li>
+                                <li>Set up incremental loading</li>
+                            </ul>
+                        </li>
+                        <li>BI Solution Development:
+                            <ul style="margin-left: 2em;">
+                                <li>Developed SSAS cubes with calculated measures</li>
+                                <li>Created named queries for optimization</li>
+                                <li>Designed specialized visualizations for each business question</li>
+                                <li>Implemented dual-axis charts for correlation analysis</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Result</h2>
+                <div class="content">
+                    <p>The solution successfully:</p>
+                    <ul style="margin-left: 2em;">
+                        <li>Reduced monthly data processing time from 5.5 to 2.0 hours</li>
+                        <li>Enabled analysis of 6 years of historical data</li>
+                        <li>Provided automated tracking of product category changes</li>
+                        <li>Delivered insights through 5 specialized dashboards</li>
+                        <li>Created a scalable foundation for future analytics needs</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- External Link -->
+            <div class="project-links">
+                <!-- <a href="https://external-link.com" class="external-button" target="_blank">
+                    <i class="fa fa-external-link"></i> View Project
+                </a> -->
+                <a href="javascript:history.back()" class="back-button">
+                    <i class="fa fa-arrow-left"></i> Back to homepage
+                </a>
+            </div>
+            
+            
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>Copyright © 2025 Tanay Mehendale</p>
+            </div>
+            <div class="back-to-top">
+                <a href="#">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+            <div class="social">
+                <a href="https://github.com/tanaymehendale" target="_blank">
+                    <i class="fa fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/tanay-mehendale" target="_blank">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <!-- <script src="emailjs_config.js"></script>     -->
+    <script src="script.js"></script>
+</body>
+</html>

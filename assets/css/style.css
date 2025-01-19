@@ -195,7 +195,7 @@ section {
     color: #74808a;
     margin: 0;
     font-size: 1em;
-    text-justify: newspaper;
+    text-align: justify;
     line-height: 1.8;
 }
 /* 
@@ -334,7 +334,7 @@ section {
 }
 
 .company-info {
-    text-align: left;
+    text-align: justify;
     margin-bottom: 0.75em;
 }
 
@@ -349,7 +349,6 @@ section {
     font-size: 1.1em;
     margin: 0;
 }
-
 
 /* Experience Section Responsiveness */
 @media (max-width: 768px) {
@@ -899,5 +898,163 @@ footer .social a:hover {
     footer .container {
         flex-direction: column;
         gap: 20px;
+    }
+}
+
+/* Project Detail Pages */
+.project-detail {
+    padding: 5em 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.project-title {
+    font-size: 2.5em;
+    color: #374054;
+    margin-bottom: 0.3em;
+}
+
+.project-date {
+    color: #74808a;
+    margin-bottom: 0.05rem;
+}
+
+.project-section {
+    margin-top: 0.03rem;
+    margin-bottom: 0.01rem;
+}
+
+.project-section p {
+    text-align: justify;
+}
+
+.project-section h2 {
+    color: #374054;
+    margin-bottom: 0.5em;
+    font-size: 1.7em;
+}
+
+.achievement-box {
+    background: rgba(52, 152, 219, 0.1);
+    border: 2px solid rgba(52, 152, 219, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.achievement-box p {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #2c3e50;
+    line-height: 1.8;
+}
+
+.project-section.achievement h2 {
+    color: #3498db;
+}
+
+
+.content {
+    line-height: 1.8;
+    font-size: 1.1em;
+    color: #74808a;
+}
+/* 
+.project-links {
+    margin-top: 50px;
+    text-align: center;
+} */
+
+/* .external-button {
+    display: inline-block;
+    padding: 2em 5em;
+    background: #3498db;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+} */
+
+/* .back-link {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+} 
+*/
+
+.back-link a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: x-large;
+    transition: color 0.3s ease;
+}
+
+.back-link a:hover {
+    color: #2980b9;
+}
+
+.back-link i {
+    font-size: 20px;
+}
+.project-links {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.external-button {
+    display: inline-block;
+    margin-top: 3em;
+    padding: 12px 25px;
+    background: #3498db;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.external-button:hover {
+    background: #2980b9;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #3498db;
+    border-radius: 30px;
+    color: #3498db;
+    background: transparent;
+    font-size: 1em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background: #3498db;
+    color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .project-section {
+        margin: 0.1em 0;
+    }
+    
+    .project-section h2 {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-section {
+        margin: 3em 0;
     }
 }

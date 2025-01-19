@@ -1,11 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Market Basket Analysis</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
-    <p>Page in works Stay Tuned! Meanwhile look at the GitHub Repo</p>
+<body>    
+    <div class="project-detail">
+        <div class="container">
+            <!-- Back button -->
+            <div class="back-link">
+                <a href="../../index.html#projects">
+                    <i class="fa fa-chevron-left"></i> Back
+                </a>
+            </div>            
+            <!-- Title Section -->
+            <h1 class="project-title">Market Basket Analysis in R</h1>
+            <div class="project-date">July 2019</div>
+
+            <!-- Achievement/Impact Section with Emphasis -->
+            <section class="project-section achievement">
+                <h2>Achievement/Impact</h2>
+                <div class="achievement-box">
+                    <p>Through analysis of approximately 15,000 grocery transactions using R and the Apriori algorithm, this project uncovered key product associations and purchasing patterns, leading to actionable recommendations that could optimize product placement and potentially increase sales through strategic merchandising.</p>
+                </div>
+            </section>
+
+            <!-- Other Sections -->
+            <section class="project-section">
+                <h2>Problem Statement</h2>
+                <div class="content">
+                    <p>A retail grocery store needed to understand customer purchasing patterns and product associations to optimize their store layout and boost sales. The analysis required processing transaction data to identify frequently purchased items and discover meaningful relationships between products that could inform merchandising decisions.</p>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Approach</h2>
+                <div class="content">
+                    <p>The analysis utilized the following strategy:
+                        <ul style="margin-left: 2em;">
+                            <li>Process and clean transaction data from groceries.csv</li>
+                            <li>Convert raw data into a transaction format suitable for association analysis</li>
+                            <li>Identify top-selling products and their contribution to overall sales</li>
+                            <li>Generate association rules using the Apriori algorithm</li>
+                            <li>Visualize product relationships through interactive graphs</li>
+                        </ul>
+                    </p>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Methodology</h2>
+                <div class="content">
+                    <p>The implementation involved several key steps using R:
+                        <ol style="margin-left: 2em;">
+                            <li>Transformed raw CSV data into a transaction database using the arules package</li>
+                            <li>Applied the Apriori algorithm with carefully tuned parameters (support = 0.001, confidence = 0.80)</li>
+                            <li>Created frequency plots to visualize top 20 selling items</li>
+                            <li>Generated association rules to understand product relationships</li>
+                            <li>Visualized rules using arulesViz package to create an interactive network graph</li>
+                        </ol>
+                    </p>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Result</h2>
+                <div class="content">
+                    <p>The analysis revealed several significant findings:
+                        <ul style="margin-left: 2em;">
+                            <li>The top 20 items accounted for approximately 50.37% of total sales</li>
+                            <li>Strong associations were discovered between certain product categories, particularly beverages and fresh produce</li>
+                            <li>Based on the findings, three key recommendations were developed:
+                                <ol style="margin-left: 2em;">
+                                    <li>Implement promotional offers on alcoholic beverages</li>
+                                    <li>Create dedicated aisles combining vegetables, fruits, herbs, rice, juices, and meat</li>
+                                    <li>Position vegetables and whole milk centrally, surrounded by complementary products</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+            </section>
+
+            <!-- External Link -->
+            <div class="project-links">
+                <a href="https://github.com/tanaymehendale/market-basket-analysis" class="external-button" target="_blank">
+                    <i class="fa fa-external-link"></i> View Project on GitHub
+                </a>
+                <a href="javascript:history.back()" class="back-button">
+                    <i class="fa fa-arrow-left"></i> Back to homepage
+                </a>
+            </div>
+            
+            
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>Copyright © 2025 Tanay Mehendale</p>
+            </div>
+            <div class="back-to-top">
+                <a href="#">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+            <div class="social">
+                <a href="https://github.com/tanaymehendale" target="_blank">
+                    <i class="fa fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/tanay-mehendale" target="_blank">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <!-- <script src="emailjs_config.js"></script>     -->
+    <script src="script.js"></script>
 </body>
 </html>
