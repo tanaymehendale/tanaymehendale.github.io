@@ -25,7 +25,7 @@
             <section class="project-section achievement">
                 <h2>Achievement/Impact</h2>
                 <div class="achievement-box">
-                    <p>Your achievement and impact statement...</p>
+                    <p>Successfully developed and compared five different machine learning models for fashion image classification, achieving up to 91% accuracy with CNN while providing a comprehensive analysis of each model's strengths and practical applications.</p>
                 </div>
             </section>
 
@@ -33,35 +33,86 @@
             <section class="project-section">
                 <h2>Problem Statement</h2>
                 <div class="content">
-                    <p>Problem description...</p>
+                    <p>With the growing need for automated fashion item classification in e-commerce and retail, 
+                        there's a crucial need to understand which machine learning approaches work best for image classification tasks. 
+                        Using the FashionMNIST dataset with 70,000 grayscale images of clothing items, 
+                        we aimed to compare traditional machine learning methods against modern deep learning approaches to determine their effectiveness in real-world fashion applications.</p>
                 </div>
             </section>
 
             <section class="project-section">
                 <h2>Approach</h2>
                 <div class="content">
-                    <p>How you planned to solve it...</p>
+                    <p>We planned to implement and compare five distinct models:</p>
+                    <ul style="margin-left: 2em;">
+                        <li>Convolutional Neural Network (CNN)</li>
+                        <li>K-Nearest Neighbors (KNN)</li>
+                        <li>Logistic Regression</li>
+                        <li>Support Vector Machine (SVM)</li>
+                        <li>Decision Trees/Random Forest</li>
+                    </ul>
+                    <p>Each model would be evaluated on the same dataset to understand their:</p>
+                    <ul style="margin-left: 2em;">
+                        <li>Classification accuracy and performance metrics</li>
+                        <li>Computational efficiency</li>
+                        <li>Practical implementation considerations</li>
+                        <li>Real-world business applications</li>
+                    </ul>
                 </div>
             </section>
 
             <section class="project-section">
                 <h2>Methodology</h2>
                 <div class="content">
-                    <p>What you actually did...</p>
+                    <ol style="margin-left: 2em;">
+                        <li>Data Processing:
+                            <ul style="margin-left: 2em;">
+                                <li>Utilized 28x28 pixel grayscale images from FashionMNIST</li>
+                                <li>Split data into training (60,000 images) and testing (10,000 images)</li>
+                                <li>Applied necessary preprocessing for each model type</li>
+                            </ul>
+                        </li>
+                        <li>Model Implementation:
+                            <ul style="margin-left: 2em;">
+                                <li>Built CNN using PyTorch with multiple convolutional layers</li>
+                                <li>Implemented KNN with optimized K value</li>
+                                <li>Developed Logistic Regression with multinomial classification</li>
+                                <li>Created SVM with kernel optimization</li>
+                                <li>Constructed Decision Trees with appropriate depth</li>
+                            </ul>
+                        </li>
+                        <li>Evaluation:
+                            <ul style="margin-left: 2em;">
+                                <li>Measured accuracy, precision, recall, and F1-score</li>
+                                <li>Created confusion matrices for each model</li>
+                                <li>Analyzed computational requirements</li>
+                                <li>Assessed practical applications</li>
+                            </ul>
+                        </li>
+                    </ol>
                 </div>
             </section>
 
             <section class="project-section">
                 <h2>Result</h2>
                 <div class="content">
-                    <p>Final outcomes...</p>
+                    <ul style="margin-left: 2em;">
+                        <li>CNN achieved highest accuracy at 91%</li>
+                        <li>Logistic Regression performed well at 84%</li>
+                        <li>KNN showed strong results at 85%</li>
+                        <li>SVM demonstrated robust performance at 89%</li>
+                        <li>Decision Trees achieved reasonable accuracy at 82%</li>
+                    </ul>
+                    <br>
+                    <p>The project demonstrated that while CNN provides the best accuracy, simpler models like Logistic Regression and KNN offer practical advantages in terms of implementation simplicity and computational efficiency. 
+                        This analysis provides valuable insights for businesses choosing between different classification approaches based on their specific needs and resources.</p>
                 </div>
             </section>
 
             <!-- External Link -->
             <div class="project-links">
                 <a href="https://akshatowl.github.io/FashionMNISTClassifiers/" class="external-button" target="_blank">
-                    <i class="fa fa-external-link"></i> View Project
+                    <i class="fa fa-external-link"></i> View Detailed Project Blog
                 </a>
                 <a href="javascript:history.back()" class="back-button">
                     <i class="fa fa-arrow-left"></i> Back to homepage

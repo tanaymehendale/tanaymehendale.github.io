@@ -158,6 +158,29 @@ nav ul li a {
 section {
     padding-top: 6rem; /* Same as scroll-padding-top */
 }
+
+/* Add to your existing nav styles */
+header nav a {
+    position: relative;
+}
+
+header nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #3498db;
+    transition: width 0.3s ease;
+}
+
+header nav a:hover::after,
+header nav a.active::after {
+    width: 100%;
+}
+
+
 /* About Section */
 #about {
     /* padding: 7em 7em; */
@@ -672,6 +695,7 @@ nav ul li a:hover::after {
     padding: 75px 15px;
     background: #f9f9f9;
     color: #374054;
+    text-align: center;
 }
 
 #contact .container {
@@ -718,6 +742,27 @@ nav ul li a:hover::after {
 #send-button:hover {
     background: #f2f2f2;
 }
+
+.email-button {
+    display: inline-block;
+    padding: 1em 2.5em;
+    background: #3498db;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: background 0.3s ease;
+    margin: 2em auto;
+}
+
+.email-button:hover {
+    background: #2980b9;
+}
+
+.email-button i {
+    margin-right: 1em;
+}
+
 
 .linkedin-prompt {
     text-align: center;
@@ -986,11 +1031,11 @@ footer .social a:hover {
 .back-link a {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.5em;
     color: #3498db;
     text-decoration: none;
     font-weight: 500;
-    font-size: x-large;
+    font-size: large;
     transition: color 0.3s ease;
 }
 
@@ -1013,7 +1058,7 @@ footer .social a:hover {
 .external-button {
     display: inline-block;
     margin-top: 3em;
-    padding: 12px 25px;
+    padding: 1em 2.5em;
     background: #3498db;
     color: white;
     border-radius: 5px;
@@ -1027,7 +1072,7 @@ footer .social a:hover {
 
 .back-button {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 1em 4em;
     border: 2px solid #3498db;
     border-radius: 30px;
     color: #3498db;
