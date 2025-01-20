@@ -23,9 +23,9 @@
 
             <!-- Achievement/Impact Section with Emphasis -->
             <section class="project-section achievement">
-                <h2>Achievement/Impact</h2>
+                <h2>Impact</h2>
                 <div class="achievement-box">
-                    <p>Your achievement and impact statement...</p>
+                    <p>Through comprehensive development of a Point-of-Sale (POS) system using MariaDB and MongoDB, this project demonstrated end-to-end database management capabilities from infrastructure setup to data migration, enabling efficient transaction processing and scalable data management</p>
                 </div>
             </section>
 
@@ -33,28 +33,64 @@
             <section class="project-section">
                 <h2>Problem Statement</h2>
                 <div class="content">
-                    <p>Problem description...</p>
+                    <p>A retail business needed a robust Point-of-Sale system that could handle customer transactions, inventory management, and business analytics. The system needed to be scalable, maintain data integrity, and eventually support fast read operations for growing business needs</p>
                 </div>
             </section>
 
             <section class="project-section">
                 <h2>Approach</h2>
                 <div class="content">
-                    <p>How you planned to solve it...</p>
+                    <p>The development strategy focused on a phased implementation:</p>
+                    <ul style="margin-left: 2em;">
+                        <li>Set up AWS EC2 infrastructure for hosting the database</li>
+                        <li>Design and implement relational schema in MariaDB</li>
+                        <li>Create business logic using stored procedures and triggers</li>
+                        <li>Implement data replication for scalability</li>
+                        <li>Migrate to MongoDB for improved read performance</li>
+                    </ul>
                 </div>
             </section>
 
             <section class="project-section">
                 <h2>Methodology</h2>
                 <div class="content">
-                    <p>What you actually did...</p>
+                    <h3>Infrastructure Setup</h3>
+                    <p>The implementation began with configuring an AWS EC2 instance and installing MariaDB. 
+                        Shell scripts were used to automate the installation process and configure necessary dependencies.</p>
+                    
+                    <h3>Database Development</h3>
+                    <p>The system was built progressively:</p>
+                    <ul style="margin-left: 2em;">
+                        <li>Created normalized database schema</li>
+                        <li>Implemented data validation using triggers</li>
+                        <li>Developed stored procedures for business logic</li>
+                        <li>Set up primary-secondary replication for scalability</li>
+                        <li>Configured peer-to-peer replication across multiple nodes</li>
+                    </ul>
+
+                    <h3>NoSQL Migration</h3>
+                    <p>The final phase involved migrating data to MongoDB:</p>
+                    <ul style="margin-left: 2em;">
+                        <li>Transformed relational data into JSON format</li>
+                        <li>Designed document structures for MongoDB</li>
+                        <li>Implemented MongoDB queries for business analytics</li>
+                    </ul>
                 </div>
             </section>
 
             <section class="project-section">
                 <h2>Result</h2>
                 <div class="content">
-                    <p>Final outcomes...</p>
+                    <p>The project delivered a fully functional POS system with:</p>
+                    <ul style="margin-left: 2em;">
+                        <li>Robust data integrity through triggers and stored procedures</li>
+                        <li>Improved read performance through replication</li>
+                        <li>Scalable architecture supporting multiple nodes</li>
+                        <li>Flexible NoSQL implementation for fast queries</li>
+                    </ul>
+                    <br>
+                    <p>The system successfully demonstrated the practical application of both relational and NoSQL databases in a real-world business context, 
+                        showcasing the benefits of polyglot persistence in modern database architecture</p>
                 </div>
             </section>
 
@@ -63,7 +99,7 @@
                 <!-- <a href="#" class="external-button" target="_blank" rel="noreferrer noopener">
                     <i class="fa fa-external-link"></i> View Project
                 </a> -->
-                <a href="javascript:history.back()" class="back-button">
+                <a href="../../index.html#projects" class="back-button">
                     <i class="fa fa-arrow-left"></i> Back to homepage
                 </a>
             </div>
