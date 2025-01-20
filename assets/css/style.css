@@ -42,8 +42,12 @@ body {
 #lead {
     position: relative;
     min-height: 100vh;
-    /* width: 100%; */
-    background: black;
+    /* background: black; */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,6 +55,7 @@ body {
 }
 
 #lead-content {
+    /* position: absolute; */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -76,6 +81,38 @@ body {
     font-weight: 300;
     margin-bottom: 2rem;
     color: #fff;
+}
+
+@media (max-width: 768px) {
+    #lead h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+    }
+
+    #lead h2 {
+        font-size: 1.2rem;
+        line-height: 1.5;
+    }
+
+    #lead .lead-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #lead h1 {
+        font-size: 2rem;
+    }
+
+    #lead h2 {
+        font-size: 1rem;
+    }
+
+    #lead .lead-button {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
 }
 
 .btn-rounded-white {
@@ -214,12 +251,40 @@ header nav a.active::after {
     margin-top: 0.5rem;
 }
 
+.about-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .about-content {
+        padding-top: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .about-image {
+        max-width: 150px;
+    }
+}
+
 .about-content p {
-    color: #74808a;
-    margin: 0;
-    font-size: 1em;
+    color: #374054;
+    margin: 2rem;
+    font-size: 1.1em;
     text-align: justify;
     line-height: 1.8;
+    /* padding-top: 50px; */
 }
 /* 
 @media (max-width: 768px) {
@@ -232,8 +297,10 @@ header nav a.active::after {
 /* About Section Responsiveness */
 .about-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(5em, 1fr)); */
+    grid-template-columns: 1fr;
     gap: 2rem;
+    /* align-items: start; */
 }
 
 @media (max-width: 768px) {
@@ -550,7 +617,31 @@ h4 {
     user-select: none;
     cursor: pointer;
     /* pointer-events: none; */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* padding: 20px; */
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+.skill-tags {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
 
 /* Skills Section */
 #skills {
@@ -580,7 +671,7 @@ h4 {
 
 .skill-card {
     display: flex;
-    align-items: center;
+    text-align: center;
     padding: 15px;
     background: #fff;
     border-radius: 5px;
@@ -610,7 +701,9 @@ h4 {
 .skill-name {
     color: #374054;
     font-weight: 500;
-    font-size: 1.1em;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 1.05em;
 }
 
 
@@ -977,6 +1070,12 @@ footer .social a:hover {
     color: #374054;
     margin-bottom: 0.5em;
     font-size: 1.7em;
+}
+
+.project-section h3 {
+    color: #374054;
+    margin-top: 1em;
+    font-size: 1.2em;
 }
 
 .achievement-box {
