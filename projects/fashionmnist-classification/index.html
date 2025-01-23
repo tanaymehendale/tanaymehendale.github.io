@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FashionMNIST Classification</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/images/portfolio-logo.png">
     <link rel="stylesheet" href="/assets/css/style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -20,6 +21,16 @@
             <!-- Title Section -->
             <h1 class="project-title">Image Classification on FashionMNIST Dataset</h1>
             <div class="project-date">November 2024</div>
+
+            <!-- Additional External Link -->
+            <div class="project-links-top">
+                <a href="https://akshatowl.github.io/FashionMNISTClassifiers/" class="external-button" target="_blank">
+                    <i class="fa fa-external-link"></i> View Detailed Project Blog
+                </a>
+                <!-- <a href="../../index.html#projects" class="back-button">
+                    <i class="fa fa-arrow-left"></i> Back to homepage
+                </a> -->
+            </div>
 
             <!-- Achievement/Impact Section with Emphasis -->
             <section class="project-section achievement">
@@ -122,6 +133,17 @@
             
         </div>
     </div>
+
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <!-- <a href="../../assets/docs/Tanay Mehendale_Resume_DA7.pdf" class="float-button resume-button" target="_blank">
+            <i class="fa fa-file-text"></i> View Resume
+        </a> -->
+        <a href="#" class="float-button scroll-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>    
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -145,5 +167,24 @@
     </footer>
     <!-- <script src="emailjs_config.js"></script>     -->
     <script src="script.js"></script>
+    <!-- Required Script for floating buttons -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const floatingButtons = document.querySelector('.floating-buttons');
+            if (window.scrollY > 300) {
+                floatingButtons.classList.add('visible');
+            } else {
+                floatingButtons.classList.remove('visible');
+            }
+        });
+        
+        document.querySelector('.scroll-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>
