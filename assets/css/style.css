@@ -20,6 +20,7 @@ body {
     font-size: clamp(1rem, 2.5vw, 1rem);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
+    user-select: none;
 }
 .container {
     width: min(90%, 120em);
@@ -35,8 +36,6 @@ body {
     flex-wrap: wrap;
     gap: clamp(1rem, 5vw, 2rem);
 }
-
-
 
 /* Lead Section */
 #lead {
@@ -85,19 +84,22 @@ body {
 
 @media (max-width: 768px) {
     #lead h1 {
-        font-size: 2.5rem;
+        font-size: 1em;
         line-height: 1.2;
+        margin: 0.8em 0.25em;
     }
 
     #lead h2 {
         font-size: 1.2rem;
         line-height: 1.5;
+        margin: 2em 0.25em;
     }
 
     #lead .lead-button {
         padding: 10px 20px;
-        font-size: 0.9rem;
+        font-size: 1rem;
     }
+
 }
 
 @media (max-width: 480px) {
@@ -217,7 +219,6 @@ header nav a.active::after {
     width: 100%;
 }
 
-
 /* About Section */
 #about {
     /* padding: 7em 7em; */
@@ -261,6 +262,10 @@ header nav a.active::after {
 }
 
 @media (max-width: 768px) {
+    .about-title h2{
+        font-size: 1.5em;
+    }
+
     .about-grid {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -269,6 +274,7 @@ header nav a.active::after {
     
     .about-content {
         padding-top: 0;
+        font-size: 0.8em;
     }
 }
 
@@ -442,6 +448,19 @@ header nav a.active::after {
 
 /* Experience Section Responsiveness */
 @media (max-width: 768px) {
+    #experience h2{
+        font-size: 1.5em;
+    }
+
+    #experience h3{
+        font-size: 1.25em;
+        text-align: left;
+    }
+    #experience h4{
+        font-size: 1em;
+        text-align: left;
+    }
+
     .timeline {
         margin-left: 0;
         padding-left: 20px;
@@ -449,6 +468,8 @@ header nav a.active::after {
     
     .timeline-content {
         margin-left: 10px;
+        font-size: 0.9em;
+        text-align: justify;
     }
     
     .timeline-item::before {
@@ -535,6 +556,21 @@ h4 {
 }
 
 @media (max-width: 768px) {
+    
+    #education h2{
+        font-size: 1.5em;
+    }
+    
+    #education h3{
+        font-size: 1.25em;
+        /* text-align: left; */
+    }
+    #education h4{
+        margin-top: 0.5em;
+        font-size: 1em;
+        /* text-align: left; */
+    }
+    
     .education-header {
         flex-direction: column;
         align-items: center;
@@ -544,6 +580,7 @@ h4 {
     .university-info {
         padding-right: 0;
         text-align: center;
+        /* font-size: small; */
     }
 
     .education-date {
@@ -551,6 +588,10 @@ h4 {
         display: block;
         text-align: center;
         margin-top: 10px;
+    }
+
+    #education p, ul {
+        font-size: 0.9em;
     }
 }
 
@@ -642,6 +683,20 @@ h4 {
     font-weight: 500;
 }
 
+@media (max-width: 768px){
+    #projects h2{
+        font-size: 1.5em;
+    }
+
+    .project-card p{
+        margin-top: 0.9em;
+        font-size: 0.9em;
+    }
+
+    .skill-tags{
+        font-size: 0.9em;
+    }
+}
 
 /* Skills Section */
 #skills {
@@ -704,6 +759,12 @@ h4 {
     text-align: left;
     vertical-align: middle;
     font-size: 1.05em;
+}
+
+@media (max-width: 768px){
+    #skills h2{
+        font-size: 1.5em;
+    }
 }
 
 
@@ -894,6 +955,10 @@ nav ul li a:hover::after {
 
 
 @media (max-width: 768px) {
+    #contact h2{
+        font-size: 1.5em;
+    }
+    
     .linkedin-prompt {
         margin-top: 15px;
     }
@@ -973,7 +1038,7 @@ nav ul li a:hover::after {
 .project-title {
     font-size: 2.5em;
     color: #374054;
-    margin-bottom: 0.3em;
+    /* margin-bottom: 0.3em; */
 }
 
 .project-date {
@@ -981,10 +1046,10 @@ nav ul li a:hover::after {
     margin-bottom: 0.05rem;
 }
 
-.project-section {
+/* .project-section {
     margin-top: 0.001em;
     margin-bottom: 0.001em;
-}
+} */
 
 .project-section p {
     text-align: justify;
@@ -1110,22 +1175,32 @@ nav ul li a:hover::after {
     color: #fff;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments - Project details */
 @media (max-width: 768px) {
+    .project-title{
+        margin-top: 0.7em;
+        font-size: 1.7em;
+    }
+    
     .project-section {
-        margin: 0.1em 0;
+        font-size: 0.9em;
+        /* margin-bottom: 0; */
     }
     
     .project-section h2 {
         font-size: 1.4rem;
     }
-}
 
-@media (max-width: 480px) {
-    .project-section {
-        margin: 3em 0;
+    .achievement-box{
+        font-size: small;
     }
 }
+/* 
+@media (max-width: 480px) {
+    .project-section {
+         margin: 3em 0; 
+    }
+} */
 
 
 .floating-buttons {
@@ -1173,18 +1248,18 @@ nav ul li a:hover::after {
     background: #2980b9;
 }
 
-
-
 /* Footer */
 footer {
-    padding: 50px 0;
+    /* padding: 50px 0; */
+    padding: 4em 0;
     background: #f2f2f2;
 }
 
 footer .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    /* padding: 0 15px; */
+    padding: 0 0.8em;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
@@ -1193,9 +1268,10 @@ footer .container {
 
 footer .copyright {
     /* color: #74808a; */
-    color: #0D1B2A;
-    font-weight: 100;
-    font-size: 0.9em;
+    color: #374054;
+    font-size: 1em;
+    font-weight: 400;
+    /* font-size: 0.9em; */
     /* text-transform: uppercase; */
 }
 
@@ -1246,8 +1322,18 @@ footer .social a:hover {
 }
 
 @media (max-width: 768px) {
+    
+    footer{
+        padding: 5em 0;
+    }
+
     footer .container {
         flex-direction: column;
         gap: 20px;
+    }
+
+    footer .copyright{
+        font-size: small;
+        font-weight: 400;
     }
 }
