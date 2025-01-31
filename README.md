@@ -1,9 +1,8 @@
-# Portfolio Website
-The website is a work in progress, but for now you can view the current working page -
-
-## Customer Churn Analysis Dashboard
-View the live dashboard here: https://tanaymehendale.github.io/projects/customer-churn/index.html
+# Personal Portfolio Website
+A clean, responsive portfolio website showcasing my professional journey, projects, and skills. Visit the live site at [tanaymehendale.github.io](https://tanaymehendale.github.io).
 
 ### Technologies Used
-- Tableau Desktop
-- GitHub Pages
+- HTML5
+- CSS3
+- JavaScript
+- Font Awesome
