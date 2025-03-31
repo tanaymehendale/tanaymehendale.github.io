@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Heatmaps using D3.js</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/images/portfolio-logo.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>    
+    <div class="project-detail">
+        <div class="container">
+            <!-- Back button -->
+            <div class="back-link">
+                <a href="../../index.html#projects">
+                    <i class="fa fa-chevron-left"></i> Back
+                </a>
+            </div>            
+            <!-- Title Section -->
+            <h1 class="project-title">Interactive Heatmaps using D3.js on Observable</h1>
+            <div class="project-date">March 2025</div>
+
+            <!-- Additional Button Link -->
+            <div class="project-links-top">
+                <a href="https://github.com/tanaymehendale/CSCE-679" class="external-button" target="_blank">
+                    <i class="fa fa-external-link"></i> GitHub Repository
+                </a><br>
+                <a href="https://observablehq.com/d/ed4cf2f624cad356" class="external-button" target="_blank">
+                    <i class="fa fa-external-link"></i> Level 1 Visualization
+                </a>
+                <a href="https://observablehq.com/d/ec193d17ea9be76a" class="external-button" target="_blank">
+                    <i class="fa fa-external-link"></i> Level 2 Visualization
+                </a>
+            </div>
+
+            <!-- Achievement/Impact Section with Emphasis -->
+            <section class="project-section achievement">
+                <h2>Impact</h2>
+                <div class="achievement-box">
+                    <p>This project provides an interactive visualization of Hong Kong's monthly temperatures from 1997 to 2017, enabling users to explore historical temperature trends dynamically. The visualizations offer insights into seasonal temperature variations and daily fluctuations, making them valuable for climate analysis and educational purposes.</p>
+                </div>
+            </section>
+
+            <!-- Other Sections -->
+            <section class="project-section">
+                <h2>Problem Statement</h2>
+                <div class="content">
+                    <p>Hong Kong's monthly temperature data spans decades, but static visualizations fail to convey the nuances of seasonal changes and daily fluctuations effectively. A dynamic, interactive visualization is needed to provide deeper insights into historical temperature patterns across years and months.</p>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Approach</h2>
+                <div class="content">
+                    <p>The project is divided into two levels:
+                        <ul style="margin-left: 2em;">
+                            <li><b>Level 1:</b> A heatmap that visualizes maximum or minimum monthly temperatures across years and months.</li>
+                            <li><b>Level 2:</b> An enhanced heatmap that overlays mini line charts within each cell to visualize daily temperature changes for each month.</li>
+                        </ul>
+                        Both visualizations are implemented using D3.js in an Observable Notebook environment, allowing for interactivity and dynamic updates.
+                    </p>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Methodology</h2>
+                <div class="content">
+                    <p>
+                        <ol style="margin-left: 2em;">
+                            <li style="margin-left: 2em;">Data Aggregation:
+                                <ul>
+                                    <li>Monthly maximum and minimum temperatures are aggregated for Level 1</li>
+                                    <li>Daily temperature records are processed for Level 2</li>
+                                </ul>
+                            </li>
+                            <li style="margin-left: 2em;">Visualization Design:
+                                <ul>
+                                    <li>Level 1 uses a heatmap layout with color-coded cells representing temperatures</li>
+                                    <li>Level 2 builds upon Level 1 by adding mini line charts within each cell to show daily fluctuations</li>
+                                </ul>
+                            </li>
+                            <li style="margin-left: 2em;">Interactivity:
+                                <ul>
+                                    <li>Radio buttons allow users to toggle between maximum and minimum temperature views</li>
+                                    <li>Tooltips display detailed information (e.g., year, month, average temperature) when hovering over cells</li>
+                                </ul>
+                            </li>
+                            <li style="margin-left: 2em;">Global Scaling:
+                                <ul>
+                                    <li>Cell colors are scaled globally based on average monthly temperatures</li>
+                                    <li>Mini line charts are scaled globally to ensure consistent representation across all cells</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </p>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Result</h2>
+                <div class="content">
+                    <p>The project successfully delivers two interactive visualizations:
+                        <ul style="margin-left: 2em;">
+                            <li>Level 1 Heatmap:
+                                <ol style="margin-left: 2em;">
+                                    <li>Users can toggle between maximum and minimum temperature views</li>
+                                    <li>Tooltips provide detailed information about each cell's year, month, and temperature</li>
+                                </ol>
+                            </li>
+                            <li>Level 2 Enhanced Heatmap:
+                                <ol style="margin-left: 2em;">
+                                    <li>Mini line charts overlay each cell, showing daily maximum and minimum temperature variations</li>
+                                    <li>Global scaling ensures consistent representation across all cells</li>
+                                </ol>
+                            </li>
+                        </ul>
+                        These visualizations offer a dynamic way to explore Hong Kong's historical temperature data, making the information accessible and engaging for climate researchers, educators, and enthusiasts.
+                    </p>
+                </div>
+            </section>
+
+            <!-- External Link -->
+            <div class="project-links">
+                <a href="https://github.com/tanaymehendale/CSCE-679" class="external-button" target="_blank">
+                    <i class="fa fa-external-link"></i> View GitHub Repository
+                </a>
+                <a href="../../index.html#projects" class="back-button">
+                    <i class="fa fa-arrow-left"></i> Back to homepage
+                </a>
+            </div>
+            
+            
+        </div>
+    </div>
+    
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <!-- <a href="../../assets/docs/Tanay Mehendale_Resume_DA7.pdf" class="float-button resume-button" target="_blank">
+            <i class="fa fa-file-text"></i> View Resume
+        </a> -->
+        <a href="#" class="float-button scroll-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>    
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>Copyright © 2025 Tanay Mehendale</p>
+            </div>
+            <div class="back-to-top">
+                <a href="#">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+            <div class="social">
+                <a href="https://github.com/tanaymehendale" target="_blank">
+                    <i class="fa fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/tanay-mehendale" target="_blank">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <!-- Required Script for floating buttons -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const floatingButtons = document.querySelector('.floating-buttons');
+            if (window.scrollY > 300) {
+                floatingButtons.classList.add('visible');
+            } else {
+                floatingButtons.classList.remove('visible');
+            }
+        });
+        
+        document.querySelector('.scroll-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
