@@ -17,18 +17,6 @@
 </head>
 <body>
     <!-- Header -->
-    <!-- <header>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header> -->
     <header>
         <nav>
             <!-- <div class="nav-brand">Tanay Mehendale</div> -->
@@ -39,9 +27,9 @@
             </div>
             <ul class="nav-menu">
                 <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#education">Education</a></li>
-                <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -50,9 +38,15 @@
 
     <!-- Lead Section -->
     <div id="lead">
+        <video autoplay muted loop playsinline id="lead-video">
+            <source src="assets/images/lead-bg-video.mp4" type="video/mp4">
+            <!-- <source src="assets/videos/lead-video.webm" type="video/webm"> -->
+            Your browser does not support HTML5 video.
+        </video>
         <div id="lead-content">
             <h1>Tanay Mehendale</h1>
-            <h2>Data Analyst | Data Engineer | Aspiring Product Manager</h2>
+            <!-- <h2>Data Analyst | Data Engineer | Aspiring Product Manager</h2> -->
+            <h2><span id="typing-effect"></span></h2>
             <a href="assets/docs/Tanay Mehendale_Resume.pdf" class="btn-rounded-white" target="_blank" rel="noreferrer noopener">View Resume</a>
         </div>
         <div class="chevron-down">
@@ -80,6 +74,88 @@
         </div>
     </section>
     
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="underline"></div>
+
+            <div class="project-grid">
+                <a href="projects/customer-churn/index.html" class="project-card">
+                    <div class="card-content">
+                        <h3>Customer Churn Analysis in Tableau</h3>
+                        <p>Interactive dashboard analyzing customer churn patterns using Tableau.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Tableau</span>
+                            <span class="tag">Data Visualization</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="projects/market-basket/index.html" class="project-card">
+                    <div class="card-content">
+                        <h3>Market Basket Analysis</h3>
+                        <p>Analysis of shopping patterns using R and Apriori algorithm.</p>
+                        <div class="skill-tags">
+                            <span class="tag">R Programming</span>
+                            <span class="tag">Data Analysis</span>
+                            <!-- <span class="tag">Data Mining</span> -->
+                        </div>
+                    </div>
+                </a>
+
+                <a href="projects/data-warehouse/index.html" class="project-card">
+                    <div class="card-content">
+                        <h3>Data Warehouse for Retail Analytics using Microsoft SQL Server</h3>
+                        <p>Comprehensive data warehouse implementation using SQL Server.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Data Warehousing</span>
+                            <span class="tag">SQL Server</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="projects/pos-system/index.html" class="project-card">
+                <!-- <a href="projects/pos-system/index.html" class="project-card"> -->
+                    <div class="card-content">
+                        <h3>Point-of-Sale (POS) System</h3>
+                        <p>Built a POS system using MySQL and MongoDB.</p>
+                        <div class="skill-tags">
+                            <span class="tag">AWS EC2</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">MariaDB</span>
+                            <span class="tag">NoSQL</span>
+                            <span class="tag">Database Design</span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="projects/fashionmnist-classification/index.html" class="project-card">
+                <!-- <a href="projects/fashionmnist-classification/index.html" class="project-card"> -->
+                    <div class="card-content">
+                        <h3>FashionMNIST Image Classification</h3>
+                        <p>Comparison of various models on classifying images based on the standard FashionMNIST dataset.</p>
+                        <div class="skill-tags">
+                            <!-- <span class="tag">Python</span> -->
+                            <span class="tag">Data Mining</span>
+                            <span class="tag">Machine Learning</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="projects/heatmap-visualization/index.html" class="project-card">
+                        <div class="card-content">
+                            <h3>Interactive Heatmaps using D3.js on Observable</h3>
+                            <p>An interactive visualization to explore historical temperature trends dynamically</p>
+                            <div class="skill-tags">
+                                <span class="tag">Data Visualization</span>
+                                <span class="tag">D3.js</span>
+                            </div>
+                        </div>
+                    </a>
+            </div>
+        </div>    
+    </section>
 
     <!-- Experience Section -->
     <section id="experience">
@@ -191,89 +267,6 @@
             </div>
 
         </div>
-    </section>
-         
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="container">
-            <h2>Projects</h2>
-            <div class="underline"></div>
-
-            <div class="project-grid">
-                <a href="projects/customer-churn/index.html" class="project-card">
-                    <div class="card-content">
-                        <h3>Customer Churn Analysis in Tableau</h3>
-                        <p>Interactive dashboard analyzing customer churn patterns using Tableau.</p>
-                        <div class="skill-tags">
-                            <span class="tag">Tableau</span>
-                            <span class="tag">Data Visualization</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="projects/market-basket/index.html" class="project-card">
-                    <div class="card-content">
-                        <h3>Market Basket Analysis</h3>
-                        <p>Analysis of shopping patterns using R and Apriori algorithm.</p>
-                        <div class="skill-tags">
-                            <span class="tag">R Programming</span>
-                            <span class="tag">Data Analysis</span>
-                            <!-- <span class="tag">Data Mining</span> -->
-                        </div>
-                    </div>
-                </a>
-
-                <a href="projects/data-warehouse/index.html" class="project-card">
-                    <div class="card-content">
-                        <h3>Data Warehouse for Retail Analytics using Microsoft SQL Server</h3>
-                        <p>Comprehensive data warehouse implementation using SQL Server.</p>
-                        <div class="skill-tags">
-                            <span class="tag">Data Warehousing</span>
-                            <span class="tag">SQL Server</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="projects/pos-system/index.html" class="project-card">
-                <!-- <a href="projects/pos-system/index.html" class="project-card"> -->
-                    <div class="card-content">
-                        <h3>Point-of-Sale (POS) System</h3>
-                        <p>Built a POS system using MySQL and MongoDB.</p>
-                        <div class="skill-tags">
-                            <span class="tag">AWS EC2</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">MariaDB</span>
-                            <span class="tag">NoSQL</span>
-                            <span class="tag">Database Design</span>
-                        </div>
-                    </div>
-                </a>
-                
-                <a href="projects/fashionmnist-classification/index.html" class="project-card">
-                <!-- <a href="projects/fashionmnist-classification/index.html" class="project-card"> -->
-                    <div class="card-content">
-                        <h3>FashionMNIST Image Classification</h3>
-                        <p>Comparison of various models on classifying images based on the standard FashionMNIST dataset.</p>
-                        <div class="skill-tags">
-                            <!-- <span class="tag">Python</span> -->
-                            <span class="tag">Data Mining</span>
-                            <span class="tag">Machine Learning</span>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="projects/heatmap-visualization/index.html" class="project-card">
-                        <div class="card-content">
-                            <h3>Interactive Heatmaps using D3.js on Observable</h3>
-                            <p>An interactive visualization to explore historical temperature trends dynamically</p>
-                            <div class="skill-tags">
-                                <span class="tag">Data Visualization</span>
-                                <span class="tag">D3.js</span>
-                            </div>
-                        </div>
-                    </a>
-            </div>
-        </div>    
     </section>
 
     <!-- Skills Section -->
