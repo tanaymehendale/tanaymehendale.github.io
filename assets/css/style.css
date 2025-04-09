@@ -42,7 +42,7 @@ body {
     position: relative;
     min-height: 100vh;
     /* background: black; */
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/background.jpg');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/lead-bg-video.mp4');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -53,8 +53,19 @@ body {
     justify-content: center;
 }
 
+#lead-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    z-index: -1;
+}
+
 #lead-content {
     /* position: absolute; */
+    z-index: 1;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -75,9 +86,25 @@ body {
     color: #fff;
 }
 
+#typing-effect {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #fff;
+    border-right: 2px solid #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
 #lead-content h2 {
-    font-size: 1.5em;
-    font-weight: 300;
+    font-size: 2em;
+    font-weight: 400;
     margin-bottom: 2rem;
     color: #fff;
 }

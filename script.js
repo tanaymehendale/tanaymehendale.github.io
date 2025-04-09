@@ -15,6 +15,44 @@ document.querySelector('#scroll-down').addEventListener('click', function(event)
     });
 });
 
+// Lead content typing effect
+document.addEventListener("DOMContentLoaded", () => {
+    const phrases = ["Data Analyst", "Data Engineer", "Aspiring Product Manager"];
+    const typingElement = document.getElementById("typing-effect");
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+        const currentPhrase = phrases[phraseIndex];
+        if (isDeleting) {
+            // Remove characters
+            charIndex--;
+            typingElement.textContent = currentPhrase.substring(0, charIndex);
+        } else {
+            // Add characters
+            charIndex++;
+            typingElement.textContent = currentPhrase.substring(0, charIndex);
+        }
+
+        // Determine typing speed
+        let typingSpeed = isDeleting ? 50 : 70;
+
+        // When phrase is fully typed or deleted
+        if (!isDeleting && charIndex === currentPhrase.length) {
+            typingSpeed = 2000; // Pause before deleting
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length; // Move to next phrase
+        }
+
+        setTimeout(typeEffect, typingSpeed);
+    }
+
+    typeEffect();
+});
+
 // Navbar Responsiveness
 
 const hamburger = document.querySelector(".hamburger");
