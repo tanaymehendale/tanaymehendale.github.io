@@ -15,9 +15,23 @@ document.querySelector('#scroll-down').addEventListener('click', function(event)
     });
 });
 
+// Lazy loading for lead background
+document.addEventListener("DOMContentLoaded", () => {
+    const video = document.getElementById("lead-video");
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                video.setAttribute("preload", "auto");
+                observer.disconnect();
+            }
+        });
+    });
+    observer.observe(video);
+});
+
 // Lead content typing effect
 document.addEventListener("DOMContentLoaded", () => {
-    const phrases = ["Data Analyst", "Data Engineer", "Aspiring Product Manager"];
+    const phrases = ["Data Analyst", "Data Engineer", "MS-MIS Grad @ Texas A&M", "DJ/Producer - @musicbytanzy"];
     const typingElement = document.getElementById("typing-effect");
     let phraseIndex = 0;
     let charIndex = 0;
@@ -112,43 +126,3 @@ document.querySelector('.scroll-top').addEventListener('click', function(e) {
         behavior: 'smooth'
     });
 });
-
-
-
-// // Contact Form
-// document.getElementById('contact-form').addEventListener('submit', function(event) {
-//     event.preventDefault();
-
-//     const email = document.getElementById('email').value.trim();
-//     const subject = document.getElementById('subject').value.trim();
-//     const message = document.getElementById('message').value.trim();
-
-//     if (!email) {
-//         alert('Please fill in your email');
-//         return;
-//     }
-//     if (!subject) {
-//         alert('Please fill in subject of the message');
-//         return;
-//     }
-//     if (!message) {
-//         alert('Please type in your message');
-//         return;
-//     }
-
-//     const templateParams = {
-//         from_email: email,
-//         to_email: 'tanaymehendale@gmail.com',
-//         subject: subject,
-//         message: message
-//     };
-    
-//     // EmailJS Service Added
-//     emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams) // params - serviceKey, templateKey
-//         .then(function(response) {
-//             alert('Message sent successfully!');
-//             document.getElementById('contact-form').reset();
-//         }, function(error) {
-//             alert('Failed to send message. Please try again.');
-//         });
-// });
