@@ -9,11 +9,12 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script>
+    <!-- <script>
         (function() {
             emailjs.init(EMAILJS_PUBLIC_KEY); // EmailJS public key
         })();
-    </script>
+    </script> -->
+    <link rel="preload" href="assets/images/lead-bg-video.mp4" as="video" type="video/mp4">
 </head>
 <body>
     <!-- Header -->
@@ -38,7 +39,7 @@
 
     <!-- Lead Section -->
     <div id="lead">
-        <video autoplay muted loop playsinline id="lead-video" preload="metadata">
+        <video autoplay muted loop playsinline id="lead-video" preload="auto" poster="assets/images/preload-frame.png">
             <source src="assets/images/lead-bg-video.mp4" type="video/mp4">
             <!-- <source src="assets/videos/lead-video.webm" type="video/webm"> -->
             Your browser does not support HTML5 video.
@@ -92,18 +93,6 @@
                     </div>
                 </a>
 
-                <a href="projects/market-basket/index.html" class="project-card">
-                    <div class="card-content">
-                        <h3>Market Basket Analysis</h3>
-                        <p>Analysis of shopping patterns using R and Apriori algorithm.</p>
-                        <div class="skill-tags">
-                            <span class="tag">R Programming</span>
-                            <span class="tag">Data Analysis</span>
-                            <!-- <span class="tag">Data Mining</span> -->
-                        </div>
-                    </div>
-                </a>
-
                 <a href="projects/data-warehouse/index.html" class="project-card">
                     <div class="card-content">
                         <h3>Data Warehouse for Retail Analytics using Microsoft SQL Server</h3>
@@ -115,6 +104,30 @@
                     </div>
                 </a>
 
+                <a href="projects/resqvision/index.html" class="project-card">
+                    <div class="card-content">
+                        <h3>ResQVision - Emergency Analytics Dashboard</h3>
+                        <p>Visualizing emergency response patterns to optimize operations and resources.</p>
+                        <div class="skill-tags">
+                            <span class="tag">Data Visualization</span>
+                            <span class="tag">D3.js</span>
+                            <span class="tag">React.js</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="projects/market-basket/index.html" class="project-card">
+                    <div class="card-content">
+                        <h3>Market Basket Analysis</h3>
+                        <p>Analysis of shopping patterns using R and Apriori algorithm.</p>
+                        <div class="skill-tags">
+                            <span class="tag">R Programming</span>
+                            <span class="tag">Data Analysis</span>
+                            <!-- <span class="tag">Data Mining</span> -->
+                        </div>
+                    </div>
+                </a>
+                
                 <a href="projects/pos-system/index.html" class="project-card">
                 <!-- <a href="projects/pos-system/index.html" class="project-card"> -->
                     <div class="card-content">
@@ -142,17 +155,17 @@
                         </div>
                     </div>
                 </a>
-
+<!-- 
                 <a href="projects/heatmap-visualization/index.html" class="project-card">
-                        <div class="card-content">
-                            <h3>Interactive Heatmaps using D3.js on Observable</h3>
-                            <p>An interactive visualization to explore historical temperature trends dynamically</p>
-                            <div class="skill-tags">
-                                <span class="tag">Data Visualization</span>
-                                <span class="tag">D3.js</span>
-                            </div>
+                    <div class="card-content">
+                        <h3>Interactive Heatmaps using D3.js on Observable</h3>
+                        <p>An interactive visualization to explore historical temperature trends dynamically</p>
+                        <div class="skill-tags">
+                            <span class="tag">Data Visualization</span>
+                            <span class="tag">D3.js</span>
                         </div>
-                    </a>
+                    </div>
+                </a> -->
             </div>
         </div>    
     </section>
