@@ -42,7 +42,7 @@ body {
     position: relative;
     min-height: 100vh;
     /* background: black; */
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/lead-bg-video.mp4');
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('../images/lead-bg-video.mp4');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -250,7 +250,10 @@ header nav a.active::after {
 #about {
     /* padding: 7em 7em; */
     padding-bottom: 4rem;
-    background: #fff;
+    /* background: #D7F9FF; cyan blue */
+    /* background: #F9FBF2; ivory */
+    background: #f9f9f9;
+    /* background: #D8FDFD; */
 }
 
 #about .container {
@@ -265,7 +268,8 @@ header nav a.active::after {
 } */
 
 .about-title h2 {
-    color: #374054;
+    /* color: #374054; */
+    color: #0E1C36; /*oxford blue*/
     text-align: center;
     font-size: 2rem;
     margin: 0;
@@ -354,6 +358,7 @@ header nav a.active::after {
 #experience {
     /* padding: 4.5em 4rem; */
     padding-bottom: 2rem;
+    /* background: #F9FBF2; */
     background: #f9f9f9;
 }
 
@@ -364,7 +369,7 @@ header nav a.active::after {
 
 #experience h2 {
     text-align: center;
-    color: #374054;
+    color: #0E1C36;
     font-size: 2rem;
     margin-bottom: 0.2em;
 }
@@ -510,7 +515,7 @@ header nav a.active::after {
 /* Education Section */
 #education {
     padding: 75px 15px;
-    background: #fff;
+    background: #F9FBF2;
 }
 
 #education .container {
@@ -519,7 +524,7 @@ header nav a.active::after {
 }
 
 #education h2 {
-    color: #374054;
+    color: #0E1C36;
     text-align: center;
     font-size: 2rem;
     margin-bottom: 0.2  em;
@@ -626,11 +631,12 @@ h4 {
 
 /* Projects Section */
 #projects{
-    background: #f9f9f9;
+    /* background: #f9f9f9; */
+    background: #F9FBF2;     /* ivory */
 }
 #projects h2{
     /* margin-top: 0.1rem; */
-    color: #374054;
+    color: #0E1C36;
     text-align: center; 
     font-size: 2rem;   
     user-select: none;
@@ -729,7 +735,7 @@ h4 {
 #skills {
     padding: 75px 15px;
     /* background: #f9f9f9; */
-    background: #ffffff;
+    background: #f9f9f9;
 }
 
 #skills .container {
@@ -739,7 +745,7 @@ h4 {
 
 #skills h2 {
     text-align: center;
-    color: #374054;
+    color: #0E1C36;
     font-size: 2rem;
     margin-bottom: 0.2em;
 }
@@ -874,8 +880,8 @@ nav ul li a:hover::after {
 /* Contact */
 #contact {
     padding: 75px 15px;
-    background: #f9f9f9;
-    color: #374054;
+    background: #F9FBF2;
+    color: #0E1C36;
     text-align: center;
 }
 
@@ -1030,7 +1036,8 @@ nav ul li a:hover::after {
 
 .project-title {
     font-size: 2.5em;
-    color: #374054;
+    /* color: #374054; */
+    color: #0E1C36;
     /* margin-bottom: 0.3em; */
 }
 
@@ -1049,7 +1056,7 @@ nav ul li a:hover::after {
 }
 
 .project-section h2 {
-    color: #374054;
+    color: #0E1C36;
     margin-bottom: 0.5em;
     font-size: 1.7em;
 }
@@ -1244,8 +1251,8 @@ nav ul li a:hover::after {
 /* Footer */
 footer {
     /* padding: 50px 0; */
-    padding: 4em 0;
-    background: #f2f2f2;
+    padding: 4em 0; 
+    background: #34495E;
 }
 
 footer .container {
@@ -1261,7 +1268,7 @@ footer .container {
 
 footer .copyright {
     /* color: #74808a; */
-    color: #374054;
+    color: #ECF0F1;
     font-size: 1em;
     font-weight: 400;
     /* font-size: 0.9em; */
@@ -1280,16 +1287,19 @@ footer .back-to-top a {
     justify-content: center;
     width: 40px;
     height: 40px;
-    border: 2px solid #74808a;
+    /* border: 2px solid #74808a; */
+    border: 2px solid #ECF0F1;
     border-radius: 50%;
-    color: #74808a;
+    /* color: #74808a; */
+    color: #ECF0F1;
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
 footer .back-to-top a:hover {
-    background: #74808a;
-    color: #fff;
+    /* background: #74808a; */
+    background: #ffffff;
+    color: #34495E;
 }
 
 footer .back-to-top i {
@@ -1303,7 +1313,7 @@ footer .social {
 }
 
 footer .social a {
-    color: #74808a;
+    color: #ECF0F1;
     font-size: 2em;
     text-decoration: none;
     transition: all 0.3s ease;
