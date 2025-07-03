@@ -772,8 +772,8 @@ h4 {
 }
 
 .skill-logo {
-    width: 40px;
-    height: 40px;
+    width: 1em;
+    height: 1em;
     margin-right: 15px;
     display: flex;
     align-items: center;
@@ -1173,6 +1173,17 @@ nav ul li a:hover::after {
 .back-button:hover {
     background: #3498db;
     color: #fff;
+}
+
+.coming-soon-box {
+    display: flow-root;
+    text-align: center;
+    background: rgba(52,152,219,0.07);
+    border: 2px dashed #3498db;
+    border-radius: 12px;
+    padding: 40px 30px;
+    margin: 0 auto;
+    box-shadow: 0 2px 8px rgba(52,152,219,0.04);
 }
 
 /* Responsive adjustments - Project details */
