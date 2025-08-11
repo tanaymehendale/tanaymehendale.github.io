@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Time Streaming</title>
+    <link rel="icon" type="image/x-icon" href="../../assets/images/portfolio-logo.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>    
+    <div class="project-detail">
+        <div class="container">
+            <!-- Back button -->
+            <div class="back-link">
+                <a href="../../index.html#projects">
+                    <i class="fa fa-chevron-left"></i> Back
+                </a>
+            </div>            
+            <!-- Title Section -->
+            <h1 class="project-title">Real Time Streaming</h1>
+            <div class="project-date">Jul 2025 - Aug 2025</div>
+
+            <!-- Achievement/Impact Section with Emphasis -->
+            <section class="project-section achievement">
+                <h2>Impact</h2>
+                <div class="achievement-box">
+                    <p>Built a reproducible real-time pipeline that runs entirely on WSL2 + Docker (9 containers: Airflow web + scheduler + Postgres, Kafka broker + ZooKeeper + Control Center, Spark master + worker, Cassandra)</p>
+                </div>
+            </section>
+
+            <!-- Additional Button Link -->
+            <div class="project-links-top">
+                <a href="https://github.com/tanaymehendale/real-time-streaming" class="external-button" target="_blank">
+                    <i class="fa fa-external-link"></i> GitHub Repository
+                </a>
+            </div>
+
+            <!-- Other Sections -->
+            <section class="project-section">
+                <h2>Problem Statement</h2>
+                <div class="content">
+                    <p>I wanted an end-to-end, locally reproducible streaming system that:
+                        <ol style="margin-left: 2em;">
+                            <li>Pulls synthetic user data from a public API,</li>
+                            <li>Transports it via a durable queue,</li>
+                            <li>processes it with a streaming engine, and</li>
+                            <li>persists it in a queryable store.</li>
+                        </ol>
+                        Constraints: run on Windows 10 via WSL, no managed services, and keep the setup beginner-friendly.
+                    </p>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Approach</h2>
+                <div class="content">
+                    <p>I chose a well-known “starter” architecture
+                        <ul style="margin-left: 2em;">
+                            <li>Airflow orchestrates and produces JSON events to Kafka (users_created topic)</li>
+                            <li>Spark Structured Streaming reads Kafka, parses JSON, and writes to Cassandra.</li>
+                            <li>Cassandra stores the final table spark_streams.created_users</li>
+                            <li>Control Center gives me Kafka visibility; Postgres holds Airflow metadata; ZooKeeper coordinates Kafka.</li>
+                        </ul>
+                    </p>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Methodology</h2>
+                <div class="content">
+                    <p>
+                        This project runs like a small real-time mail system. 
+                        <br>
+                        On a schedule, Airflow calls a public “random user” API to generate realistic test records and drops each one as a message onto Kafka, which acts as a reliable queue so nothing gets lost if parts start or stop. 
+                        <br>
+                        Spark Structured Streaming continuously reads those messages, cleans and structures the fields (name, email, phone, etc.), and writes the results into Cassandra, a fast database optimized for streaming inserts. 
+                        <br>
+                        To keep it frictionless, the Spark job auto-creates the Cassandra keyspace/table on first run, and the Airflow task ensures the Kafka topic exists before producing - so a fresh clone “just works.” 
+                        <br>
+                        You can verify the flow end-to-end by triggering the Airflow task, watching messages appear in Kafka’s UI, and seeing row counts grow in Cassandra.
+                    </p>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>Result</h2>
+                <div class="content">
+                    <p>A fully working local pipeline that ingests synthetic user events, streams them through Kafka, transforms/parses them in Spark, and lands structured rows in Cassandra
+                    </p>
+                </div>
+            </section>
+
+            <!-- External Link -->
+            <div class="project-links">
+                <a href="https://github.com/tanaymehendale/ResQVision" class="external-button" target="_blank">
+                    <i class="fa fa-external-link"></i> View GitHub Repository
+                </a>
+                <a href="../../index.html#projects" class="back-button">
+                    <i class="fa fa-arrow-left"></i> Back to homepage
+                </a>
+            </div>
+            
+            
+        </div>
+    </div>
+    
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <!-- <a href="../../assets/docs/Tanay Mehendale_Resume_DA7.pdf" class="float-button resume-button" target="_blank">
+            <i class="fa fa-file-text"></i> View Resume
+        </a> -->
+        <a href="#" class="float-button scroll-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>    
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>Copyright © 2025 Tanay Mehendale</p>
+            </div>
+            <div class="back-to-top">
+                <a href="#">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+            <div class="social">
+                <a href="https://github.com/tanaymehendale" target="_blank">
+                    <i class="fa fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/tanay-mehendale" target="_blank">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <!-- Required Script for floating buttons -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const floatingButtons = document.querySelector('.floating-buttons');
+            if (window.scrollY > 300) {
+                floatingButtons.classList.add('visible');
+            } else {
+                floatingButtons.classList.remove('visible');
+            }
+        });
+        
+        document.querySelector('.scroll-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
