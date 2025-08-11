@@ -1156,7 +1156,7 @@ nav ul li a:hover::after {
 
 /* Project Detail Pages */
 .project-detail {
-    padding: 5em 1rem;
+    padding: calc(var(--nav-height) + 2rem) 1rem 3rem;
     max-width: 900px;
     margin: 0 auto;
 }
@@ -1173,10 +1173,9 @@ nav ul li a:hover::after {
     margin-bottom: 0.05rem;
 }
 
-/* .project-section {
-    margin-top: 0.001em;
-    margin-bottom: 0.001em;
-} */
+.project-section {
+    margin: 2.5rem 0;
+}
 
 .project-section p {
     text-align: justify;
@@ -1205,7 +1204,7 @@ nav ul li a:hover::after {
 .achievement-box p {
     font-size: 1.1em;
     font-weight: 500;
-    color: #2c3e50;
+    color: var(--text-color);
     line-height: 1.8;
 }
 
@@ -1261,7 +1260,8 @@ nav ul li a:hover::after {
 .back-link i {
     font-size: 20px;
 }
-.project-links {
+.project-links,
+.project-links-top {
     text-align: center;
     margin-top: 20px;
     display: flex;

@@ -91,17 +91,11 @@
             <section class="project-section">
                 <h2>Methodology</h2>
                 <div class="content">
-                    <p>
-                        This project runs like a small real-time mail system. 
-                        <br>
-                        On a schedule, Airflow calls a public “random user” API to generate realistic test records and drops each one as a message onto Kafka, which acts as a reliable queue so nothing gets lost if parts start or stop. 
-                        <br>
-                        Spark Structured Streaming continuously reads those messages, cleans and structures the fields (name, email, phone, etc.), and writes the results into Cassandra, a fast database optimized for streaming inserts. 
-                        <br>
-                        To keep it frictionless, the Spark job auto-creates the Cassandra keyspace/table on first run, and the Airflow task ensures the Kafka topic exists before producing - so a fresh clone “just works.” 
-                        <br>
-                        You can verify the flow end-to-end by triggering the Airflow task, watching messages appear in Kafka’s UI, and seeing row counts grow in Cassandra.
-                    </p>
+                    <p>This project runs like a small real-time mail system.</p>
+                    <p>On a schedule, Airflow calls a public “random user” API to generate realistic test records and drops each one as a message onto Kafka, which acts as a reliable queue so nothing gets lost if parts start or stop.</p>
+                    <p>Spark Structured Streaming continuously reads those messages, cleans and structures the fields (name, email, phone, etc.), and writes the results into Cassandra, a fast database optimized for streaming inserts.</p>
+                    <p>To keep it frictionless, the Spark job auto-creates the Cassandra keyspace/table on first run, and the Airflow task ensures the Kafka topic exists before producing - so a fresh clone “just works.”</p>
+                    <p>You can verify the flow end-to-end by triggering the Airflow task, watching messages appear in Kafka’s UI, and seeing row counts grow in Cassandra.</p>
                 </div>
             </section>
 
