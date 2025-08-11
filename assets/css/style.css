@@ -11,10 +11,10 @@
     --text-color: #1f2937;
     --section-bg: #f9f9f9;
     --card-bg: #ffffff;
-    --nav-bg: rgba(255, 255, 255, 0.6);
+    --nav-bg: rgba(255, 255, 255, 0.3);
     --accent-color: #7c3aed;
     --accent-hover: #6d28d9;
-    --footer-bg: #34495E;
+    --footer-bg: #ede9fe;
 }
 
 body.dark-mode {
@@ -22,10 +22,10 @@ body.dark-mode {
     --text-color: #f5f5f5;
     --section-bg: #1e1e1e;
     --card-bg: #1a1a1a;
-    --nav-bg: rgba(18, 18, 18, 0.6);
+    --nav-bg: rgba(18, 18, 18, 0.3);
     --accent-color: #a78bfa;
     --accent-hover: #8b5cf6;
-    --footer-bg: #0f172a;
+    --footer-bg: #1e1b2e;
 }
 
 body.dark-mode header {
@@ -47,20 +47,32 @@ body {
     font-size: clamp(1rem, 2.5vw, 1rem);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    user-select: none;
+    user-select: text;
     background: var(--bg-color);
     color: var(--text-color);
     transition: background 0.3s ease, color 0.3s ease;
 }
+button,
+.btn-rounded-white,
+.float-button,
+.email-button,
+.linkedin-button,
+.resume-button,
+.scroll-top {
+    user-select: none;
+}
+
 .container {
     width: min(90%, 120em);
     margin: 0 auto;
 }
+
 .grid-layout {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 1rem;
 }
+
 .content-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -103,7 +115,7 @@ body {
     width: 100%;
     max-width: 100rem;
     text-align: center;
-    user-select: none;
+    user-select: text;
 }
 
 #lead-content h1 {
@@ -240,16 +252,34 @@ header {
 nav {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 100%;
+    padding: 0 1rem;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-logo {
+    height: 2.5rem;
+    width: auto;
+}
+
+.nav-name {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
 }
 
 .theme-toggle {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
     background: rgba(255, 255, 255, 0.3);
     border: none;
     color: var(--text-color);
@@ -257,6 +287,7 @@ nav {
     border-radius: 50%;
     cursor: pointer;
     transition: background 0.3s ease;
+    margin-left: 1rem;
 }
 
 .theme-toggle:hover {
@@ -271,7 +302,7 @@ nav ul {
     display: flex;
     justify-content: center;
     list-style: none;
-    padding: 1rem;
+    padding: 0;
     margin: 0;
 }
 
@@ -379,7 +410,7 @@ header nav a.active::after {
 }
 
 .about-content p {
-    color: #374054;
+    color: var(--text-color);
     margin: 2rem;
     font-size: 1.1em;
     text-align: justify;
@@ -492,7 +523,7 @@ header nav a.active::after {
 }
 
 .timeline-content h3 {
-    color: #374054;
+    color: var(--text-color);
     font-size: 1.3em;
     margin: 0 0 2rem;
 }
@@ -530,7 +561,7 @@ header nav a.active::after {
 }
 
 .company-info h3 {
-    color: #374054;
+    color: var(--text-color);
     font-size: 1.3em;
     margin: 0 0 0.1em;
 }
@@ -640,7 +671,7 @@ header nav a.active::after {
 
 .university-info h3 {
     margin: 0;
-    color: #374054;
+    color: var(--text-color);
     font-size: 1.3em;
 }
 
@@ -700,9 +731,8 @@ h4 {
 #projects h2{
     /* margin-top: 0.1rem; */
     color: var(--text-color);
-    text-align: center; 
-    font-size: 2rem;   
-    user-select: none;
+    text-align: center;
+    font-size: 2rem;
     margin-bottom: 0.2em;
 }
 
@@ -751,7 +781,6 @@ h4 {
     color: inherit;
     border-radius: 8px;
     overflow: hidden;
-    user-select: none;
     cursor: pointer;
     /* pointer-events: none; */
     position: relative;
@@ -850,7 +879,7 @@ h4 {
 }
 
 .skill-name {
-    color: #374054;
+    color: var(--text-color);
     font-weight: 500;
     text-align: left;
     vertical-align: middle;
@@ -1129,7 +1158,7 @@ nav ul li a:hover::after {
 }
 
 .project-section h3 {
-    color: #374054;
+    color: var(--text-color);
     /* margin-top: 1em; */
     font-size: 1.2em;
 }
