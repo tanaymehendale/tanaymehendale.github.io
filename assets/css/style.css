@@ -38,7 +38,42 @@ body.dark-mode {
 body.dark-mode header {
     border-bottom: 1px solid var(--separator-color);
 }
+
+:root {
+    /* Light theme colors inspired by mosaic.so */
+    --bg-color: #ffffff;
+    --text-color: #1f2937;
+    --section-bg: #f9f9f9;
+    --card-bg: #ffffff;
+    --section-gradient: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+    --nav-bg: rgba(255, 255, 255, 0.3);
+    --accent-color: #7c3aed;
+    --accent-hover: #6d28d9;
+    --footer-bg: #ede9fe;
+    --nav-height: clamp(3.5rem, 8vw, 5rem);
+    --card-border: #e5e7eb;
+    --separator-color: #e5e7eb;
+}
+
+body.dark-mode {
+    --bg-color: #0d1117;
+    --text-color: #c9d1d9;
+    --section-bg: #0d1117;
+    --card-bg: #161b22;
+    --section-gradient: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+    --nav-bg: rgba(13, 17, 23, 0.8);
+    --accent-color: #a78bfa;
+    --accent-hover: #8b5cf6;
+    --footer-bg: #0d1117;
+    --card-border: #30363d;
+    --separator-color: #30363d;
+}
+
+body.dark-mode header {
+    border-bottom: 1px solid var(--separator-color);
+}
 html {
+    scroll-padding-top: calc(var(--nav-height) + 2rem); /* Adjust based on navbar height and offset */
     scroll-padding-top: calc(var(--nav-height) + 2rem); /* Adjust based on navbar height and offset */
     scroll-behavior: smooth;
     max-width: 100%;
@@ -70,19 +105,38 @@ button,
 .linkedin-button,
 .resume-button,
 .scroll-top {
+    user-select: text;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.no-scroll {
+    overflow: hidden;
+}
+button,
+.btn-rounded-white,
+.float-button,
+.email-button,
+.linkedin-button,
+.resume-button,
+.scroll-top {
     user-select: none;
 }
+
 
 .container {
     width: min(90%, 120em);
     margin: 0 auto;
 }
 
+
 .grid-layout {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 1rem;
 }
+
 
 .content-wrapper {
     display: flex;
@@ -127,9 +181,11 @@ button,
     max-width: 100rem;
     text-align: center;
     user-select: text;
+    user-select: text;
 }
 
 #lead-content h1 {
+    font-size: clamp(2rem, 6vw, 3.5rem);
     font-size: clamp(2rem, 6vw, 3.5rem);
     font-weight: 700;
     text-transform: uppercase;
@@ -157,6 +213,7 @@ button,
 
 #lead-content h2 {
     font-size: clamp(1.25rem, 4vw, 2rem);
+    font-size: clamp(1.25rem, 4vw, 2rem);
     font-weight: 400;
     margin-bottom: 2rem;
     color: #fff;
@@ -165,10 +222,12 @@ button,
 .btn-rounded-white {
     display: inline-block;
     padding: clamp(0.6rem, 1.5vw, 1.1rem) clamp(1.2rem, 3vw, 3rem);
+    padding: clamp(0.6rem, 1.5vw, 1.1rem) clamp(1.2rem, 3vw, 3rem);
     border: 0.1em solid #fff;
     border-radius: 3em;
     color: #fff;
     background: transparent;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
     font-size: clamp(0.875rem, 2.5vw, 1rem);
     text-decoration: none;
     transition: all 0.3s ease;
@@ -176,6 +235,7 @@ button,
 
 .btn-rounded-white:hover {
     background: #fff;
+    color: var(--accent-color);
     color: var(--accent-color);
 }
 
@@ -221,9 +281,68 @@ header {
     background: var(--nav-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 2rem);
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 2em 5em rgba(0,0,0,0.1);
     border-radius: 3rem;
+    border-radius: 3rem;
     z-index: 1000;
+    height: var(--nav-height);
+}
+
+nav {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-logo {
+    height: clamp(2.5rem, 6vw, 3rem);
+    width: auto;
+}
+
+.nav-name {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: var(--text-color);
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-left: 1rem;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+body.dark-mode .theme-toggle {
+    background: rgba(0, 0, 0, 0.3);
     height: var(--nav-height);
 }
 
@@ -282,19 +401,34 @@ nav ul {
     justify-content: center;
     list-style: none;
     padding: 0;
+    padding: 0;
     margin: 0;
 }
 
 nav ul li {
+    margin: 0 2rem;
     margin: 0 2rem;
 }
 
 nav ul li a {
     text-decoration: none;
     color: var(--text-color);
+    color: var(--text-color);
     font-weight: 500;
 }
 section {
+    padding: 6rem 0; /* Same as scroll-padding-top */
+}
+
+section + section {
+    border-top: 1px solid var(--separator-color);
+}
+
+section .container {
+    background: var(--section-gradient);
+    padding: 4rem 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.05);
     padding: 6rem 0; /* Same as scroll-padding-top */
 }
 
@@ -322,6 +456,7 @@ header nav a::after {
     width: 0;
     height: 2px;
     background: var(--accent-color);
+    background: var(--accent-color);
     transition: width 0.3s ease;
 }
 
@@ -334,6 +469,7 @@ header nav a.active::after {
 #about {
     padding-bottom: 4rem;
     background: transparent;
+    background: transparent;
 }
 
 #about .container {
@@ -342,6 +478,7 @@ header nav a.active::after {
 }
 
 .about-title h2 {
+    color: var(--text-color); /*oxford blue*/
     color: var(--text-color); /*oxford blue*/
     text-align: center;
     font-size: 2rem;
@@ -353,7 +490,15 @@ header nav a.active::after {
     width: 5rem;
     height: 0.2em;
     background: var(--accent-color);
+    background: var(--accent-color);
     margin-top: 0.5rem;
+}
+
+.about-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
 
 .about-wrapper {
@@ -366,7 +511,13 @@ header nav a.active::after {
 .about-image {
     width: 250px;
     border-radius: 1rem;
+    width: 250px;
+    border-radius: 1rem;
     object-fit: cover;
+}
+
+.about-content {
+    flex: 1;
 }
 
 .about-content {
@@ -376,15 +527,23 @@ header nav a.active::after {
 .about-content p {
     color: var(--text-color);
     margin: 0;
+    color: var(--text-color);
+    margin: 0;
     font-size: 1.1em;
     text-align: justify;
     line-height: 1.8;
 }
 
+
 @media (max-width: 768px) {
     .about-title h2 {
         font-size: 1.5em;
+    .about-title h2 {
+        font-size: 1.5em;
     }
+
+    .about-wrapper {
+        flex-direction: column;
 
     .about-wrapper {
         flex-direction: column;
@@ -394,9 +553,16 @@ header nav a.active::after {
     .about-image {
         width: 80%;
         max-width: 300px;
+
+    .about-image {
+        width: 80%;
+        max-width: 300px;
     }
 
+
     .about-content {
+        padding-top: 0;
+        font-size: 0.95em;
         padding-top: 0;
         font-size: 0.95em;
     }
@@ -405,6 +571,7 @@ header nav a.active::after {
 /* Experience Section */
 #experience {
     padding-bottom: 2rem;
+    background: transparent;
     background: transparent;
 }
 
@@ -416,6 +583,7 @@ header nav a.active::after {
 #experience h2 {
     text-align: center;
     color: var(--text-color);
+    color: var(--text-color);
     font-size: 2rem;
     margin-bottom: 0.2em;
 }
@@ -424,12 +592,14 @@ header nav a.active::after {
     width: 5rem;
     height: 0.2em;
     background: var(--accent-color);
+    background: var(--accent-color);
     margin: 0 auto 0.5em;
 }
 
 .timeline {
     position: relative;
     padding-left: 2.35em;
+    border-left: 0.15rem solid var(--accent-color);
     border-left: 0.15rem solid var(--accent-color);
     margin-left: 2rem;
 }
@@ -452,19 +622,24 @@ header nav a.active::after {
     height: 1.25rem;
     background: var(--bg-color);
     border: 0.2rem solid var(--accent-color);
+    background: var(--bg-color);
+    border: 0.2rem solid var(--accent-color);
     border-radius: 50%;
 }
 
 .timeline-date {
+    color: var(--text-color);
     color: var(--text-color);
     margin-bottom: 0.5rem;
 }
 
 .timeline-content {
     background: var(--card-bg);
+    background: var(--card-bg);
     padding: 2rem;
     border-radius: 0.5rem;
     box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,0.1);
+    border: 1px solid var(--card-border);
     border: 1px solid var(--card-border);
     display: flex;
     flex-direction: column;
@@ -485,6 +660,7 @@ header nav a.active::after {
 
 .timeline-content p {
     color: var(--text-color);
+    color: var(--text-color);
     margin: 0;
     line-height: 1.6;
     text-align: left;
@@ -495,7 +671,13 @@ header nav a.active::after {
     transform: translateY(-4px);
 }
 
+.timeline-content:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-4px);
+}
+
 .timeline-content h3 {
+    color: var(--text-color);
     color: var(--text-color);
     font-size: 1.3em;
     margin: 0 0 2rem;
@@ -503,11 +685,13 @@ header nav a.active::after {
 
 /* .timeline-content h4 {
     color: var(--text-color);
+    color: var(--text-color);
     font-size: 1.1em;
     margin: 0 0 15rem;
 } */
 
 .timeline-content p {
+    color: var(--text-color);
     color: var(--text-color);
     margin: 0;
     line-height: 1.6;
@@ -523,6 +707,8 @@ header nav a.active::after {
 .company-logo img {
     height: 3rem;
     width: auto;
+    height: 3rem;
+    width: auto;
     object-fit: contain;
     object-position: left;
     margin-bottom: 1.5em;
@@ -535,11 +721,13 @@ header nav a.active::after {
 
 .company-info h3 {
     color: var(--text-color);
+    color: var(--text-color);
     font-size: 1.3em;
     margin: 0 0 0.1em;
 }
 
 .company-info h4 {
+    color: var(--text-color);
     color: var(--text-color);
     font-size: 1.1em;
     margin: 0;
@@ -583,6 +771,7 @@ header nav a.active::after {
 #education {
     padding: 75px 15px;
     background: transparent;
+    background: transparent;
 }
 
 #education .container {
@@ -591,6 +780,7 @@ header nav a.active::after {
 }
 
 #education h2 {
+    color: var(--text-color);
     color: var(--text-color);
     text-align: center;
     font-size: 2rem;
@@ -601,6 +791,7 @@ header nav a.active::after {
     width: 5em;
     height: 0.2em;
     background: var(--accent-color);
+    background: var(--accent-color);
     margin: 0 auto 0.5em;
 }
 .education-block {
@@ -608,7 +799,9 @@ header nav a.active::after {
     margin: 0 auto 30px;
     padding: 40px;
     border: 1px solid var(--card-border);
+    border: 1px solid var(--card-border);
     border-radius: 4px;
+    background: var(--card-bg);
     background: var(--card-bg);
     position: relative;
     transition: border-color 0.3s ease, transform 0.3s ease;
@@ -659,15 +852,18 @@ header nav a.active::after {
     top: 25px;
     right: 25px;
     color: var(--text-color);
+    color: var(--text-color);
 }
 
 .university-info h3 {
     margin: 0;
     color: var(--text-color);
+    color: var(--text-color);
     font-size: 1.3em;
 }
 
 h4 {
+    color: var(--text-color);
     color: var(--text-color);
     font-style: italic;
     margin: 0 0 15px;
@@ -718,9 +914,13 @@ h4 {
 /* Projects Section */
 #projects{
     background: transparent;     /* ivory */
+    background: transparent;     /* ivory */
 }
 #projects h2{
     /* margin-top: 0.1rem; */
+    color: var(--text-color);
+    text-align: center;
+    font-size: 2rem;
     color: var(--text-color);
     text-align: center;
     font-size: 2rem;
@@ -731,8 +931,13 @@ h4 {
     overflow: hidden;
 }
 
+#projects .container {
+    overflow: hidden;
+}
+
 .project-grid {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 2rem;
     padding: 2rem;
@@ -776,6 +981,7 @@ h4 {
     position: relative;
     overflow: hidden;
     background: var(--card-bg);
+    background: var(--card-bg);
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -795,17 +1001,20 @@ h4 {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     border-color: var(--accent-color);
+    border-color: var(--accent-color);
 }
 
 .underline {
     width: 5em;
     height: 0.2em;
     background: var(--accent-color);
+    background: var(--accent-color);
     margin: 0 auto 1em;
 }
 
 /* Project Cards Enhancement */
 .project-card {
+    transition: border-color 0.3s ease, transform 0.3s ease;
     transition: border-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;
@@ -819,7 +1028,10 @@ h4 {
     height: 100%;
     /* padding: 20px; */
     border: 1px solid var(--card-border);
+    border: 1px solid var(--card-border);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: var(--card-bg);
+    padding: 1.5rem;
     background: var(--card-bg);
     padding: 1.5rem;
 }
@@ -832,6 +1044,8 @@ h4 {
 }
 
 .tag {
+    background: rgba(124, 58, 237, 0.1);
+    color: var(--accent-color);
     background: rgba(124, 58, 237, 0.1);
     color: var(--accent-color);
     padding: 4px 12px;
@@ -859,6 +1073,7 @@ h4 {
 #skills {
     padding: 75px 15px;
     background: transparent;
+    background: transparent;
 }
 
 #skills .container {
@@ -869,6 +1084,7 @@ h4 {
 #skills h2 {
     text-align: center;
     color: var(--text-color);
+    color: var(--text-color);
     font-size: 2rem;
     margin-bottom: 0.2em;
 }
@@ -876,22 +1092,38 @@ h4 {
 /* Skills carousel */
 .skills-carousel {
     overflow: hidden;
+/* Skills carousel */
+.skills-carousel {
+    overflow: hidden;
     margin-top: 30px;
 }
 
 .skills-track {
+.skills-track {
     display: flex;
+    gap: 20px;
+    animation: scroll 20s linear infinite;
     gap: 20px;
     animation: scroll 20s linear infinite;
 }
 
 .skills-carousel:hover .skills-track {
     animation-play-state: paused;
+.skills-carousel:hover .skills-track {
+    animation-play-state: paused;
 }
 
 .skill-card {
+.skill-card {
     display: flex;
     align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 5px;
+    flex: 0 0 auto;
+    transition: border-color 0.3s ease;
     gap: 10px;
     padding: 10px 15px;
     background: var(--card-bg);
@@ -913,9 +1145,22 @@ h4 {
 @keyframes scroll {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
+.skill-card img {
+    width: 40px;
+    height: 40px;
+}
+
+.skill-card:hover {
+    border-color: var(--accent-color);
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 .skill-name {
+    color: var(--text-color);
     color: var(--text-color);
     font-weight: 500;
     text-align: left;
@@ -1079,6 +1324,8 @@ nav ul li a:hover::after {
     padding: 75px 15px;
     background: transparent;
     color: var(--text-color);
+    background: transparent;
+    color: var(--text-color);
     text-align: center;
 }
 
@@ -1097,6 +1344,7 @@ nav ul li a:hover::after {
     display: inline-block;
     padding: 1em 2.5em;
     background: var(--accent-color);
+    background: var(--accent-color);
     color: white;
     border-radius: 5px;
     text-decoration: none;
@@ -1106,6 +1354,7 @@ nav ul li a:hover::after {
 }
 
 .email-button:hover {
+    background: var(--accent-hover);
     background: var(--accent-hover);
 }
 
@@ -1227,6 +1476,7 @@ nav ul li a:hover::after {
 /* Project Detail Pages */
 .project-detail {
     padding: calc(var(--nav-height) + 2rem) 1rem 3rem;
+    padding: calc(var(--nav-height) + 2rem) 1rem 3rem;
     max-width: 900px;
     margin: 0 auto;
 }
@@ -1235,14 +1485,19 @@ nav ul li a:hover::after {
     font-size: 2.5em;
     /* color: #374054; */
     color: var(--text-color);
+    color: var(--text-color);
     /* margin-bottom: 0.3em; */
 }
 
 .project-date {
     color: var(--text-color);
+    color: var(--text-color);
     margin-bottom: 0.05rem;
 }
 
+.project-section {
+    margin: 2.5rem 0;
+}
 .project-section {
     margin: 2.5rem 0;
 }
@@ -1253,11 +1508,13 @@ nav ul li a:hover::after {
 
 .project-section h2 {
     color: var(--text-color);
+    color: var(--text-color);
     margin-bottom: 0.5em;
     font-size: 1.7em;
 }
 
 .project-section h3 {
+    color: var(--text-color);
     color: var(--text-color);
     /* margin-top: 1em; */
     font-size: 1.2em;
@@ -1275,10 +1532,12 @@ nav ul li a:hover::after {
     font-size: 1.1em;
     font-weight: 500;
     color: var(--text-color);
+    color: var(--text-color);
     line-height: 1.8;
 }
 
 .project-section.achievement h2 {
+    color: var(--accent-color);
     color: var(--accent-color);
 }
 
@@ -1286,6 +1545,7 @@ nav ul li a:hover::after {
 .content {
     line-height: 1.8;
     font-size: 1.1em;
+    color: var(--text-color);
     color: var(--text-color);
 }
 /* 
@@ -1297,6 +1557,7 @@ nav ul li a:hover::after {
 /* .external-button {
     display: inline-block;
     padding: 2em 5em;
+    background: var(--accent-color);
     background: var(--accent-color);
     color: white;
     border-radius: 10px;
@@ -1317,6 +1578,7 @@ nav ul li a:hover::after {
     align-items: center;
     gap: 0.5em;
     color: var(--accent-color);
+    color: var(--accent-color);
     text-decoration: none;
     font-weight: 500;
     font-size: large;
@@ -1325,11 +1587,14 @@ nav ul li a:hover::after {
 
 .back-link a:hover {
     color: var(--accent-hover);
+    color: var(--accent-hover);
 }
 
 .back-link i {
     font-size: 20px;
 }
+.project-links,
+.project-links-top {
 .project-links,
 .project-links-top {
     text-align: center;
@@ -1345,6 +1610,7 @@ nav ul li a:hover::after {
     margin-top: 1em;
     padding: 1em 2.5em;
     background: var(--accent-color);
+    background: var(--accent-color);
     color: white;
     border-radius: 5px;
     text-decoration: none;
@@ -1353,13 +1619,16 @@ nav ul li a:hover::after {
 
 .external-button:hover {
     background: var(--accent-hover);
+    background: var(--accent-hover);
 }
 
 .back-button {
     display: inline-block;
     padding: 1em 4em;
     border: 2px solid var(--accent-color);
+    border: 2px solid var(--accent-color);
     border-radius: 30px;
+    color: var(--accent-color);
     color: var(--accent-color);
     background: transparent;
     font-size: 1em;
@@ -1369,6 +1638,7 @@ nav ul li a:hover::after {
 
 .back-button:hover {
     background: var(--accent-color);
+    background: var(--accent-color);
     color: #fff;
 }
 
@@ -1376,6 +1646,7 @@ nav ul li a:hover::after {
     display: flow-root;
     text-align: center;
     background: rgba(52,152,219,0.07);
+    border: 2px dashed var(--accent-color);
     border: 2px dashed var(--accent-color);
     border-radius: 12px;
     padding: 40px 30px;
@@ -1433,6 +1704,7 @@ nav ul li a:hover::after {
     align-items: center;
     padding: 10px 15px;
     background: var(--accent-color);
+    background: var(--accent-color);
     color: white;
     border-radius: 5px;
     text-decoration: none;
@@ -1442,23 +1714,30 @@ nav ul li a:hover::after {
 .resume-button {
     background: transparent;
     border: 2px solid var(--accent-color);
+    border: 2px solid var(--accent-color);
     border-radius: 1.5em;
+    color: var(--accent-color);
     color: var(--accent-color);
     gap: 0.5em;
 }
 
 .resume-button:hover {
     background: var(--accent-color);
+    background: var(--accent-color);
     color: white;
 }
 
 .scroll-top:hover {
+    background: var(--accent-hover);
     background: var(--accent-hover);
 }
 
 /* Footer */
 footer {
     /* padding: 50px 0; */
+    padding: 4em 0;
+    background: var(--footer-bg);
+    color: var(--text-color);
     padding: 4em 0;
     background: var(--footer-bg);
     color: var(--text-color);
@@ -1477,6 +1756,7 @@ footer .container {
 
 footer .copyright {
     color: var(--text-color);
+    color: var(--text-color);
     font-size: 1em;
     font-weight: 400;
 }
@@ -1494,13 +1774,18 @@ footer .back-to-top a {
     width: 40px;
     height: 40px;
     border: 2px solid var(--text-color);
+    border: 2px solid var(--text-color);
     border-radius: 50%;
+    color: var(--text-color);
     color: var(--text-color);
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
 footer .back-to-top a:hover {
+    /* background: var(--text-color); */
+    background: var(--bg-color);
+    color: var(--footer-bg);
     /* background: var(--text-color); */
     background: var(--bg-color);
     color: var(--footer-bg);
@@ -1518,6 +1803,7 @@ footer .social {
 
 footer .social a {
     color: var(--text-color);
+    color: var(--text-color);
     font-size: 2em;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -1525,6 +1811,7 @@ footer .social a {
 }
 
 footer .social a:hover {
+    color: var(--accent-color);
     color: var(--accent-color);
 }
 

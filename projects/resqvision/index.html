@@ -31,6 +31,28 @@
             </div>
         </nav>
     </header>
+<body class="dark-mode">
+    <header>
+        <nav>
+            <div class="nav-left">
+                <img id="nav-logo" src="/assets/images/portfolio-logo.png" alt="Logo" class="nav-logo">
+                <span class="nav-name">Tanay Mehendale</span>
+            </div>
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="/index.html#about">About</a></li>
+                    <li><a href="/index.html#projects">Projects</a></li>
+                    <li><a href="/index.html#experience">Experience</a></li>
+                    <li><a href="/index.html#education">Education</a></li>
+                    <li><a href="/index.html#skills">Skills</a></li>
+                    <li><a href="/index.html#contact">Contact</a></li>
+                </ul>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fa fa-sun-o"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
     <div class="project-detail">
         <div class="container">
             <!-- Back button -->
@@ -41,6 +63,7 @@
             </div>            
             <!-- Title Section -->
             <h1 class="project-title">ResQVision - Emergency Analytics</h1>
+            <div class="project-date">Feb 2025 - Apr 2025</div>
             <div class="project-date">Feb 2025 - Apr 2025</div>
 
             <!-- Achievement/Impact Section with Emphasis -->
@@ -103,12 +126,43 @@
                             <p>Hosted the live dashboard on Netlify for easy access and demonstration. User feedback was collected via an embedded survey to iteratively refine user experience.</p>
                         </li>
                     </ul>
+                    <ul style="margin-left: 2em;">
+                        <li style="margin-left: 2em;">
+                            <b>Data Engineering:</b>
+                            <p>Preprocessing emergency incident data using Python to derive temporal fields (Month, Day of Week, Hour) and enrich records with environmental and infrastructural variables (Weather Condition, Traffic Congestion, Road Type).</p>
+                        </li>
+                        <li style="margin-left: 2em;">
+                            <b>Visualization Stack:</b>
+                            <p>Built interactive visualizations using D3.js and React.js, ensuring smooth transitions, dynamic scaling, and modular component structures.</p>
+                        </li>
+                        <li style="margin-left: 2em;">
+                            <b>Dashboard Design:</b>
+                            <p>implemented three distinct dashboards:</p>
+                            <ol style="margin-left: 2em;">
+                                <li><b>Incidents Dashboard</b> (Bar charts, Time Series)</li>
+                                <li><b>Response Analysis Dashboard</b> (Grouped Bar Chart, Line Chart, Heatmap)</li>
+                                <li><b>Weather Impact Dashboard</b> (Heatmap)</li>
+                            </ol>
+                            <p>All dashboards were equipped with global filters (Region, Time Range, Severity, Traffic) to enable comparative and drill-down analysis.</p>
+                        </li>
+                        <li style="margin-left: 2em;">
+                            <b>Deployment:</b>
+                            <p>Hosted the live dashboard on Netlify for easy access and demonstration. User feedback was collected via an embedded survey to iteratively refine user experience.</p>
+                        </li>
+                    </ul>
                 </div>
             </section>
 
             <section class="project-section">
                 <h2>Result</h2>
                 <div class="content">
+                    <p>ResQVision successfully transforms complex emergency system data into a cohesive, exploratory environment where users can:</p>
+                    <ul style="margin-left: 2em;">
+                        <li>Identify trends in emergency type and severity across time and regions,</li>
+                        <li>Assess the operational impact of ambulance shortages, road types, and injury scale on response time,</li>
+                        <li>Uncover how environmental factors like bad weather and traffic congestion exacerbate delays.</li>
+                    </ul>
+                    <p>The project serves as a strong proof-of-concept for real-world EMS decision support systems. User feedback indicated high scores for ease of navigation, clarity of insights, and potential usefulness in operational and policy settings.</p>
                     <p>ResQVision successfully transforms complex emergency system data into a cohesive, exploratory environment where users can:</p>
                     <ul style="margin-left: 2em;">
                         <li>Identify trends in emergency type and severity across time and regions,</li>
@@ -164,11 +218,15 @@
 
     <div class="floating-buttons">
         <a href="/assets/docs/Tanay Mehendale_Resume_DE.pdf" class="float-button resume-button" target="_blank">
+        <a href="/assets/docs/Tanay Mehendale_Resume_DE.pdf" class="float-button resume-button" target="_blank">
             <i class="fa fa-file-text"></i> View Resume
+        </a>
         </a>
         <a href="#" class="float-button scroll-top">
             <i class="fa fa-chevron-up"></i>
         </a>
+    </div>
+
     </div>
 
     <!-- Footer -->
@@ -193,5 +251,7 @@
         </div>
     </footer>
     <script src="/script.js"></script>
+    <script src="/script.js"></script>
 </body>
 </html>
+

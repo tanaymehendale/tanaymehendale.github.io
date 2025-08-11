@@ -112,6 +112,36 @@ themeToggle.addEventListener('click', () => {
     updateLogo(isDark);
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
+// Dark/Light theme toggle
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = themeToggle.querySelector('i');
+const navLogo = document.getElementById('nav-logo');
+
+function updateLogo(isDark) {
+    navLogo.src = isDark ? '/assets/images/portfolio-logo.png' : '/assets/images/portfolio-logo-black.png';
+}
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+    document.body.classList.remove('dark-mode');
+    themeIcon.classList.add('fa-moon-o');
+    themeIcon.classList.remove('fa-sun-o');
+    updateLogo(false);
+} else {
+    document.body.classList.add('dark-mode');
+    themeIcon.classList.add('fa-sun-o');
+    themeIcon.classList.remove('fa-moon-o');
+    updateLogo(true);
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    themeIcon.classList.toggle('fa-sun-o', isDark);
+    themeIcon.classList.toggle('fa-moon-o', !isDark);
+    updateLogo(isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
 
 // Dynamic tab highlights in navbar
 document.addEventListener('DOMContentLoaded', function() {
@@ -161,10 +191,33 @@ if (moreBtn && moreMenu) {
         });
     });
 }
+// Bottom navigation drop-up menu
+const moreBtn = document.getElementById('more-btn');
+const moreMenu = document.getElementById('more-menu');
+
+if (moreBtn && moreMenu) {
+    moreBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        moreMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!moreMenu.contains(e.target) && e.target !== moreBtn) {
+            moreMenu.classList.remove('show');
+        }
+    });
+
+    moreMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            moreMenu.classList.remove('show');
+        });
+    });
+}
 
 // Floating Back-to-top & Resume buttons
 window.addEventListener('scroll', function() {
     const floatingButtons = document.querySelector('.floating-buttons');
+    if (!floatingButtons) return;
     if (!floatingButtons) return;
     if (window.scrollY > 300) {
         floatingButtons.classList.add('visible');
