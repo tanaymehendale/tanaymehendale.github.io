@@ -82,6 +82,24 @@ document.querySelectorAll(".nav-menu li a").forEach(n => n.addEventListener("cli
     navMenu.classList.remove("active");
 }));
 
+// Dark/Light theme toggle
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = themeToggle.querySelector('i');
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeIcon.classList.replace('fa-moon-o', 'fa-sun-o');
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    themeIcon.classList.toggle('fa-sun-o', isDark);
+    themeIcon.classList.toggle('fa-moon-o', !isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
+
 // Dynamic tab highlights in navbar
 document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('section');
