@@ -1,19 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('.back-to-top a').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector('#lead').scrollIntoView({
+    const backTop = document.querySelector('.back-to-top a');
+    if (backTop) {
+        backTop.addEventListener('click', function(e) {
+            e.preventDefault();
+            const lead = document.querySelector('#lead');
+            if (lead) {
+                lead.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    }
+});
+
+const scrollDown = document.getElementById('scroll-down');
+if (scrollDown) {
+    scrollDown.addEventListener('click', function(event) {
+        event.preventDefault();
+        window.scrollBy({
+            top: window.innerHeight,
             behavior: 'smooth'
         });
     });
-});
-
-document.querySelector('#scroll-down').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.scrollBy({
-        top: window.innerHeight,
-        behavior: 'smooth'
-    });
-});
+}
 
 // Lazy loading for lead background
 document.addEventListener("DOMContentLoaded", () => {
@@ -67,20 +76,36 @@ document.addEventListener("DOMContentLoaded", () => {
     typeEffect();
 });
 
-// Navbar Responsiveness
+// Dark/Light theme toggle
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = themeToggle.querySelector('i');
+const navLogo = document.getElementById('nav-logo');
 
-const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector(".nav-menu");
+function updateLogo(isDark) {
+    navLogo.src = isDark ? '/assets/images/portfolio-logo.png' : '/assets/images/portfolio-logo-black.png';
+}
 
-hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+    document.body.classList.remove('dark-mode');
+    themeIcon.classList.add('fa-moon-o');
+    themeIcon.classList.remove('fa-sun-o');
+    updateLogo(false);
+} else {
+    document.body.classList.add('dark-mode');
+    themeIcon.classList.add('fa-sun-o');
+    themeIcon.classList.remove('fa-moon-o');
+    updateLogo(true);
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    themeIcon.classList.toggle('fa-sun-o', isDark);
+    themeIcon.classList.toggle('fa-moon-o', !isDark);
+    updateLogo(isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
-
-document.querySelectorAll(".nav-menu li a").forEach(n => n.addEventListener("click", () => {
-    hamburger.classList.remove("active");
-    navMenu.classList.remove("active");
-}));
 
 // Dynamic tab highlights in navbar
 document.addEventListener('DOMContentLoaded', function() {
@@ -108,10 +133,33 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Bottom navigation drop-up menu
+const moreBtn = document.getElementById('more-btn');
+const moreMenu = document.getElementById('more-menu');
+
+if (moreBtn && moreMenu) {
+    moreBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        moreMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!moreMenu.contains(e.target) && e.target !== moreBtn) {
+            moreMenu.classList.remove('show');
+        }
+    });
+
+    moreMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            moreMenu.classList.remove('show');
+        });
+    });
+}
 
 // Floating Back-to-top & Resume buttons
 window.addEventListener('scroll', function() {
     const floatingButtons = document.querySelector('.floating-buttons');
+    if (!floatingButtons) return;
     if (window.scrollY > 300) {
         floatingButtons.classList.add('visible');
     } else {
@@ -119,10 +167,13 @@ window.addEventListener('scroll', function() {
     }
 });
 
-document.querySelector('.scroll-top').addEventListener('click', function(e) {
-    e.preventDefault();
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+const scrollTopBtn = document.querySelector('.scroll-top');
+if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
-});
+}

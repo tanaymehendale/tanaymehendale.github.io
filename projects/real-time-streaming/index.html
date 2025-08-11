@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Market Basket Analysis</title>
+    <title>Real Time Streaming</title>
     <link rel="icon" type="image/x-icon" href="../../assets/images/portfolio-logo.png">
     <link rel="stylesheet" href="/assets/css/style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -40,45 +40,49 @@
                 </a>
             </div>            
             <!-- Title Section -->
-            <h1 class="project-title">Market Basket Analysis in R</h1>
-            <div class="project-date">July 2019</div>
+            <h1 class="project-title">Real Time Streaming</h1>
+            <div class="project-date">Jul 2025 - Aug 2025</div>
 
             <!-- Achievement/Impact Section with Emphasis -->
             <section class="project-section achievement">
                 <h2>Impact</h2>
                 <div class="achievement-box">
-                    <p>Through analysis of approximately 15,000 grocery transactions using R and the Apriori algorithm, this project uncovered key product associations and purchasing patterns, leading to actionable recommendations that could optimize product placement and potentially increase sales through strategic merchandising.</p>
+                    <p>Built a reproducible real-time pipeline that runs entirely on WSL2 + Docker (9 containers: Airflow web + scheduler + Postgres, Kafka broker + ZooKeeper + Control Center, Spark master + worker, Cassandra)</p>
                 </div>
             </section>
 
             <!-- Additional Button Link -->
             <div class="project-links-top">
-                <a href="https://github.com/tanaymehendale/market-basket-analysis" class="external-button" target="_blank">
-                    <i class="fa fa-external-link"></i> View Project on GitHub
+                <a href="https://github.com/tanaymehendale/real-time-streaming" class="external-button" target="_blank">
+                    <i class="fa fa-external-link"></i> GitHub Repository
                 </a>
-                <!-- <a href="../../index.html#projects" class="back-button">
-                    <i class="fa fa-arrow-left"></i> Back to homepage
-                </a> -->
             </div>
 
             <!-- Other Sections -->
             <section class="project-section">
                 <h2>Problem Statement</h2>
                 <div class="content">
-                    <p>A retail grocery store needed to understand customer purchasing patterns and product associations to optimize their store layout and boost sales. The analysis required processing transaction data to identify frequently purchased items and discover meaningful relationships between products that could inform merchandising decisions.</p>
+                    <p>I wanted an end-to-end, locally reproducible streaming system that:
+                        <ol style="margin-left: 2em;">
+                            <li>Pulls synthetic user data from a public API,</li>
+                            <li>Transports it via a durable queue,</li>
+                            <li>processes it with a streaming engine, and</li>
+                            <li>persists it in a queryable store.</li>
+                        </ol>
+                        Constraints: run on Windows 10 via WSL, no managed services, and keep the setup beginner-friendly.
+                    </p>
                 </div>
             </section>
 
             <section class="project-section">
                 <h2>Approach</h2>
                 <div class="content">
-                    <p>The analysis utilized the following strategy:
+                    <p>I chose a well-known “starter” architecture
                         <ul style="margin-left: 2em;">
-                            <li>Process and clean transaction data from groceries.csv</li>
-                            <li>Convert raw data into a transaction format suitable for association analysis</li>
-                            <li>Identify top-selling products and their contribution to overall sales</li>
-                            <li>Generate association rules using the Apriori algorithm</li>
-                            <li>Visualize product relationships through interactive graphs</li>
+                            <li>Airflow orchestrates and produces JSON events to Kafka (users_created topic)</li>
+                            <li>Spark Structured Streaming reads Kafka, parses JSON, and writes to Cassandra.</li>
+                            <li>Cassandra stores the final table spark_streams.created_users</li>
+                            <li>Control Center gives me Kafka visibility; Postgres holds Airflow metadata; ZooKeeper coordinates Kafka.</li>
                         </ul>
                     </p>
                 </div>
@@ -87,41 +91,26 @@
             <section class="project-section">
                 <h2>Methodology</h2>
                 <div class="content">
-                    <p>The implementation involved several key steps using R:
-                        <ol style="margin-left: 2em;">
-                            <li>Transformed raw CSV data into a transaction database using the arules package</li>
-                            <li>Applied the Apriori algorithm with carefully tuned parameters (support = 0.001, confidence = 0.80)</li>
-                            <li>Created frequency plots to visualize top 20 selling items</li>
-                            <li>Generated association rules to understand product relationships</li>
-                            <li>Visualized rules using arulesViz package to create an interactive network graph</li>
-                        </ol>
-                    </p>
+                    <p>This project runs like a small real-time mail system.</p>
+                    <p>On a schedule, Airflow calls a public “random user” API to generate realistic test records and drops each one as a message onto Kafka, which acts as a reliable queue so nothing gets lost if parts start or stop.</p>
+                    <p>Spark Structured Streaming continuously reads those messages, cleans and structures the fields (name, email, phone, etc.), and writes the results into Cassandra, a fast database optimized for streaming inserts.</p>
+                    <p>To keep it frictionless, the Spark job auto-creates the Cassandra keyspace/table on first run, and the Airflow task ensures the Kafka topic exists before producing - so a fresh clone “just works.”</p>
+                    <p>You can verify the flow end-to-end by triggering the Airflow task, watching messages appear in Kafka’s UI, and seeing row counts grow in Cassandra.</p>
                 </div>
             </section>
 
             <section class="project-section">
                 <h2>Result</h2>
                 <div class="content">
-                    <p>The analysis revealed several significant findings:
-                        <ul style="margin-left: 2em;">
-                            <li>The top 20 items accounted for approximately 50.37% of total sales</li>
-                            <li>Strong associations were discovered between certain product categories, particularly beverages and fresh produce</li>
-                            <li>Based on the findings, three key recommendations were developed:
-                                <ol style="margin-left: 2em;">
-                                    <li>Implement promotional offers on alcoholic beverages</li>
-                                    <li>Create dedicated aisles combining vegetables, fruits, herbs, rice, juices, and meat</li>
-                                    <li>Position vegetables and whole milk centrally, surrounded by complementary products</li>
-                                </ol>
-                            </li>
-                        </ul>
+                    <p>A fully working local pipeline that ingests synthetic user events, streams them through Kafka, transforms/parses them in Spark, and lands structured rows in Cassandra
                     </p>
                 </div>
             </section>
 
             <!-- External Link -->
             <div class="project-links">
-                <a href="https://github.com/tanaymehendale/market-basket-analysis" class="external-button" target="_blank">
-                    <i class="fa fa-external-link"></i> View Project on GitHub
+                <a href="https://github.com/tanaymehendale/real-time-streaming" class="external-button" target="_blank">
+                    <i class="fa fa-external-link"></i> View GitHub Repository
                 </a>
                 <a href="../../index.html#projects" class="back-button">
                     <i class="fa fa-arrow-left"></i> Back to homepage
