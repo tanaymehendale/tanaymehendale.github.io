@@ -20,22 +20,25 @@
     <!-- Header -->
     <header>
         <nav>
-            <!-- <div class="nav-brand">Tanay Mehendale</div> -->
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="nav-left">
+                <img id="nav-logo" src="assets/images/portfolio-logo-black.png" alt="Logo" class="nav-logo">
+                <span class="nav-name">Tanay Mehendale</span>
             </div>
-            <ul class="nav-menu">
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fa fa-moon-o"></i>
+                </button>
+            </div>
         </nav>
-    </header>    
+    </header>
 
     <!-- Lead Section -->
     <div id="lead">
@@ -61,11 +64,11 @@
     <!-- About Section -->
     <section id="about">
         <div class="container">
-            <div class="about-grid">
-                <div class="about-title">
-                    <h2>About Me</h2>
-                    <div class="underline"></div>
-                </div>
+            <div class="about-title">
+                <h2>About Me</h2>
+                <div class="underline"></div>
+            </div>
+            <div class="about-wrapper">
                 <img src="assets/images/profile.jpg" alt="Tanay Mehendale" class="about-image">
                 <div class="about-content">
                     <p>Hi, I’m Tanay — a data enthusiast with 2+ years of experience working across the data stack. I’ve built scalable pipelines, designed relational and NoSQL models, and helped turn raw data into actionable insights through tools like Spark, Redshift, and Tableau. Lately, I’ve been diving deeper into AI-driven data quality and automation tools. I’m passionate about building reliable data systems that can drive smarter products and better decisions.
@@ -89,6 +92,19 @@
                         <div class="skill-tags">
                             <span class="tag">#Tableau</span>
                             <span class="tag">#Data Visualization</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="projects/real-time-streaming/index.html" class="project-card">
+                    <div class="card-content">
+                        <h3>Real Time Data Streaming</h3>
+                        <p>End-to-end real-time data pipeline using Airflow, Kafka and Spark</p>
+                        <div class="skill-tags">
+                            <span class="tag">#Data Engineering</span>
+                            <span class="tag">#Spark</span>
+                            <span class="tag">#Airflow</span>
+                            <span class="tag">#Cassandra</span>
                         </div>
                     </div>
                 </a>
@@ -388,7 +404,22 @@
             </div>
         </div>
     </section>
-    
+
+    <!-- Bottom Navigation for Mobile/Tablet -->
+    <nav class="bottom-nav">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+        <div class="dropup">
+            <button id="more-btn">More</button>
+            <div id="more-menu" class="dropup-menu">
+                <a href="#about">About</a>
+                <a href="#education">Education</a>
+                <a href="#skills">Skills</a>
+            </div>
+        </div>
+    </nav>
+
     <div class="floating-buttons">
         <a href="assets/docs/Tanay Mehendale_Resume_DE.pdf" class="float-button resume-button" target="_blank">
             <i class="fa fa-file-text"></i> View Resume

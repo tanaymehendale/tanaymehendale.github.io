@@ -67,20 +67,32 @@ document.addEventListener("DOMContentLoaded", () => {
     typeEffect();
 });
 
-// Navbar Responsiveness
+// Dark/Light theme toggle
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = themeToggle.querySelector('i');
+const navLogo = document.getElementById('nav-logo');
 
-const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector(".nav-menu");
+function updateLogo(isDark) {
+    navLogo.src = isDark ? 'assets/images/portfolio-logo.png' : 'assets/images/portfolio-logo-black.png';
+}
 
-hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeIcon.classList.replace('fa-moon-o', 'fa-sun-o');
+    updateLogo(true);
+} else {
+    updateLogo(false);
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    themeIcon.classList.toggle('fa-sun-o', isDark);
+    themeIcon.classList.toggle('fa-moon-o', !isDark);
+    updateLogo(isDark);
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
-
-document.querySelectorAll(".nav-menu li a").forEach(n => n.addEventListener("click", () => {
-    hamburger.classList.remove("active");
-    navMenu.classList.remove("active");
-}));
 
 // Dynamic tab highlights in navbar
 document.addEventListener('DOMContentLoaded', function() {
@@ -108,6 +120,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Bottom navigation drop-up menu
+const moreBtn = document.getElementById('more-btn');
+const moreMenu = document.getElementById('more-menu');
+
+if (moreBtn && moreMenu) {
+    moreBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        moreMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!moreMenu.contains(e.target) && e.target !== moreBtn) {
+            moreMenu.classList.remove('show');
+        }
+    });
+
+    moreMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            moreMenu.classList.remove('show');
+        });
+    });
+}
 
 // Floating Back-to-top & Resume buttons
 window.addEventListener('scroll', function() {
