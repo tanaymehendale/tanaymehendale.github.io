@@ -85,11 +85,19 @@ document.querySelectorAll(".nav-menu li a").forEach(n => n.addEventListener("cli
 // Dark/Light theme toggle
 const themeToggle = document.getElementById('theme-toggle');
 const themeIcon = themeToggle.querySelector('i');
+const navLogo = document.getElementById('nav-logo');
+
+function updateLogo(isDark) {
+    navLogo.src = isDark ? 'assets/images/portfolio-logo.png' : 'assets/images/portfolio-logo-black.png';
+}
 
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'dark') {
     document.body.classList.add('dark-mode');
     themeIcon.classList.replace('fa-moon-o', 'fa-sun-o');
+    updateLogo(true);
+} else {
+    updateLogo(false);
 }
 
 themeToggle.addEventListener('click', () => {
@@ -97,6 +105,7 @@ themeToggle.addEventListener('click', () => {
     const isDark = document.body.classList.contains('dark-mode');
     themeIcon.classList.toggle('fa-sun-o', isDark);
     themeIcon.classList.toggle('fa-moon-o', !isDark);
+    updateLogo(isDark);
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
 
