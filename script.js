@@ -1,19 +1,28 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('.back-to-top a').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector('#lead').scrollIntoView({
+    const backTop = document.querySelector('.back-to-top a');
+    if (backTop) {
+        backTop.addEventListener('click', function(e) {
+            e.preventDefault();
+            const lead = document.querySelector('#lead');
+            if (lead) {
+                lead.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    }
+});
+
+const scrollDown = document.getElementById('scroll-down');
+if (scrollDown) {
+    scrollDown.addEventListener('click', function(event) {
+        event.preventDefault();
+        window.scrollBy({
+            top: window.innerHeight,
             behavior: 'smooth'
         });
     });
-});
-
-document.querySelector('#scroll-down').addEventListener('click', function(event) {
-    event.preventDefault();
-    window.scrollBy({
-        top: window.innerHeight,
-        behavior: 'smooth'
-    });
-});
+}
 
 // Lazy loading for lead background
 document.addEventListener("DOMContentLoaded", () => {
@@ -73,16 +82,20 @@ const themeIcon = themeToggle.querySelector('i');
 const navLogo = document.getElementById('nav-logo');
 
 function updateLogo(isDark) {
-    navLogo.src = isDark ? 'assets/images/portfolio-logo.png' : 'assets/images/portfolio-logo-black.png';
+    navLogo.src = isDark ? '/assets/images/portfolio-logo.png' : '/assets/images/portfolio-logo-black.png';
 }
 
 const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
-    document.body.classList.add('dark-mode');
-    themeIcon.classList.replace('fa-moon-o', 'fa-sun-o');
-    updateLogo(true);
-} else {
+if (savedTheme === 'light') {
+    document.body.classList.remove('dark-mode');
+    themeIcon.classList.add('fa-moon-o');
+    themeIcon.classList.remove('fa-sun-o');
     updateLogo(false);
+} else {
+    document.body.classList.add('dark-mode');
+    themeIcon.classList.add('fa-sun-o');
+    themeIcon.classList.remove('fa-moon-o');
+    updateLogo(true);
 }
 
 themeToggle.addEventListener('click', () => {
@@ -146,6 +159,7 @@ if (moreBtn && moreMenu) {
 // Floating Back-to-top & Resume buttons
 window.addEventListener('scroll', function() {
     const floatingButtons = document.querySelector('.floating-buttons');
+    if (!floatingButtons) return;
     if (window.scrollY > 300) {
         floatingButtons.classList.add('visible');
     } else {
@@ -153,10 +167,13 @@ window.addEventListener('scroll', function() {
     }
 });
 
-document.querySelector('.scroll-top').addEventListener('click', function(e) {
-    e.preventDefault();
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+const scrollTopBtn = document.querySelector('.scroll-top');
+if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
-});
+}

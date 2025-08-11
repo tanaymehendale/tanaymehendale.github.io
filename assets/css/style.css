@@ -938,7 +938,7 @@ h4 {
     }
 
     .floating-buttons {
-        bottom: calc(var(--nav-height) + 1.5rem);
+        display: none;
     }
 }
 
@@ -947,11 +947,10 @@ h4 {
 }
 
 .dropup-menu {
-    display: none;
     position: absolute;
     bottom: var(--nav-height);
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, 10px);
     background: var(--nav-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -959,6 +958,10 @@ h4 {
     border-radius: 1rem;
     padding: 0.5rem 0;
     z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .dropup-menu a {
@@ -974,7 +977,10 @@ h4 {
 }
 
 .dropup-menu.show {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
 }
 
 
