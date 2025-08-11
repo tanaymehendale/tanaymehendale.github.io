@@ -16,6 +16,7 @@
     --accent-color: #7c3aed;
     --accent-hover: #6d28d9;
     --footer-bg: #ede9fe;
+    --nav-height: clamp(3.5rem, 8vw, 5rem);
 }
 
 body.dark-mode {
@@ -34,7 +35,7 @@ body.dark-mode header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 html {
-    scroll-padding-top: calc(5rem + 2rem); /* Adjust based on navbar height and offset */
+    scroll-padding-top: calc(var(--nav-height) + 2rem); /* Adjust based on navbar height and offset */
     scroll-behavior: smooth;
     max-width: 100%;
     overflow-x: hidden;
@@ -121,7 +122,7 @@ button,
 }
 
 #lead-content h1 {
-    font-size: 3em;
+    font-size: clamp(2rem, 6vw, 3.5rem);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -147,55 +148,20 @@ button,
 }
 
 #lead-content h2 {
-    font-size: 2em;
+    font-size: clamp(1.25rem, 4vw, 2rem);
     font-weight: 400;
     margin-bottom: 2rem;
     color: #fff;
 }
 
-@media (max-width: 768px) {
-    #lead h1 {
-        font-size: 1em;
-        line-height: 1.2;
-        margin: 0.8em 0.25em;
-    }
-
-    #lead h2 {
-        font-size: 1.2rem;
-        line-height: 1.5;
-        margin: 2em 0.25em;
-    }
-
-    #lead .lead-button {
-        padding: 10px 20px;
-        font-size: 1rem;
-    }
-
-}
-
-@media (max-width: 480px) {
-    #lead h1 {
-        font-size: 2rem;
-    }
-
-    #lead h2 {
-        font-size: 1rem;
-    }
-
-    #lead .lead-button {
-        padding: 8px 16px;
-        font-size: 0.8rem;
-    }
-}
-
 .btn-rounded-white {
     display: inline-block;
-    padding: 1.1rem 3rem;
+    padding: clamp(0.6rem, 1.5vw, 1.1rem) clamp(1.2rem, 3vw, 3rem);
     border: 0.1em solid #fff;
     border-radius: 3em;
     color: #fff;
     background: transparent;
-    font-size: 1em;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
     text-decoration: none;
     transition: all 0.3s ease;
 }
@@ -250,7 +216,7 @@ header {
     box-shadow: 0 2em 5em rgba(0,0,0,0.1);
     border-radius: 3rem;
     z-index: 1000;
-    height: 5rem;
+    height: var(--nav-height);
 }
 
 nav {
@@ -259,7 +225,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    padding: 0 2rem;
+    padding: 0 clamp(1rem, 3vw, 2rem);
 }
 
 .nav-left {
@@ -269,13 +235,14 @@ nav {
 }
 
 .nav-logo {
-    height: 3rem;
+    height: clamp(2.5rem, 6vw, 3rem);
     width: auto;
 }
 
 .nav-name {
     font-weight: 600;
     color: var(--text-color);
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
 }
 
 .nav-right {
@@ -708,9 +675,13 @@ h4 {
     margin-bottom: 0.2em;
 }
 
+#projects .container {
+    overflow: hidden;
+}
+
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     gap: 2rem;
     padding: 2rem;
 }
@@ -869,10 +840,8 @@ h4 {
 .hamburger {
     display: none;
     cursor: pointer;
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
+    flex-direction: column;
+    justify-content: center;
 }
 
 .hamburger span {
@@ -886,7 +855,7 @@ h4 {
 
 /* Transform hamburger to X when active */
 .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
+    transform: translateY(8px) rotate(45deg);
 }
 
 .hamburger.active span:nth-child(2) {
@@ -894,18 +863,35 @@ h4 {
 }
 
 .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(10.5px, -10.25px);
+    transform: translateY(-8px) rotate(-45deg);
 }
 
 @media (max-width: 768px) {
-    .hamburger {
-        display: block;
+    nav {
+        justify-content: center;
     }
-    
+
+    .nav-left {
+        margin: 0 auto;
+    }
+
+    .nav-right {
+        position: absolute;
+        right: clamp(0.5rem, 2vw, 1rem);
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
     .nav-menu {
         position: fixed;
         left: -100%;
-        top: calc(5rem + 1rem);
+        top: calc(var(--nav-height) + 1rem);
         flex-direction: column;
         background: var(--bg-color);
         width: 100%;
@@ -913,11 +899,11 @@ h4 {
         transition: 0.3s;
         box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
     }
-    
+
     .nav-menu.active {
         left: 0;
     }
-    
+
     .nav-menu li {
         margin: 2.5rem 0;
     }
