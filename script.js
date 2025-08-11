@@ -72,15 +72,27 @@ document.addEventListener("DOMContentLoaded", () => {
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
 
-hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-});
-
-document.querySelectorAll(".nav-menu li a").forEach(n => n.addEventListener("click", () => {
+function closeNav() {
     hamburger.classList.remove("active");
     navMenu.classList.remove("active");
-}));
+    document.body.classList.remove("no-scroll");
+}
+
+hamburger.addEventListener("click", () => {
+    const isOpen = navMenu.classList.toggle("active");
+    hamburger.classList.toggle("active", isOpen);
+    document.body.classList.toggle("no-scroll", isOpen);
+});
+
+document.querySelectorAll(".nav-menu li a").forEach(n => n.addEventListener("click", closeNav));
+
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        closeNav();
+    }
+});
+
+window.addEventListener('orientationchange', closeNav);
 
 // Dark/Light theme toggle
 const themeToggle = document.getElementById('theme-toggle');
