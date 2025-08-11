@@ -67,33 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
     typeEffect();
 });
 
-// Navbar Responsiveness
-
-const hamburger = document.querySelector(".hamburger");
-const navMenu = document.querySelector(".nav-menu");
-
-function closeNav() {
-    hamburger.classList.remove("active");
-    navMenu.classList.remove("active");
-    document.body.classList.remove("no-scroll");
-}
-
-hamburger.addEventListener("click", () => {
-    const isOpen = navMenu.classList.toggle("active");
-    hamburger.classList.toggle("active", isOpen);
-    document.body.classList.toggle("no-scroll", isOpen);
-});
-
-document.querySelectorAll(".nav-menu li a").forEach(n => n.addEventListener("click", closeNav));
-
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-        closeNav();
-    }
-});
-
-window.addEventListener('orientationchange', closeNav);
-
 // Dark/Light theme toggle
 const themeToggle = document.getElementById('theme-toggle');
 const themeIcon = themeToggle.querySelector('i');
@@ -147,6 +120,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Bottom navigation drop-up menu
+const moreBtn = document.getElementById('more-btn');
+const moreMenu = document.getElementById('more-menu');
+
+if (moreBtn && moreMenu) {
+    moreBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        moreMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!moreMenu.contains(e.target) && e.target !== moreBtn) {
+            moreMenu.classList.remove('show');
+        }
+    });
+
+    moreMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            moreMenu.classList.remove('show');
+        });
+    });
+}
 
 // Floating Back-to-top & Resume buttons
 window.addEventListener('scroll', function() {
