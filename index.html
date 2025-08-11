@@ -16,12 +16,12 @@
     </script> -->
     <link rel="preload" href="assets/images/lead-bg-video.mp4" as="video" type="video/mp4">
 </head>
-<body>
+<body class="dark-mode">
     <!-- Header -->
     <header>
         <nav>
             <div class="nav-left">
-                <img id="nav-logo" src="assets/images/portfolio-logo-black.png" alt="Logo" class="nav-logo">
+                <img id="nav-logo" src="/assets/images/portfolio-logo.png" alt="Logo" class="nav-logo">
                 <span class="nav-name">Tanay Mehendale</span>
             </div>
             <div class="nav-right">
@@ -34,7 +34,7 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-                    <i class="fa fa-moon-o"></i>
+                    <i class="fa fa-sun-o"></i>
                 </button>
             </div>
         </nav>
@@ -304,77 +304,35 @@
             <h2>Skills</h2>
             <div class="underline"></div>
             
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <!-- <div class="skill-logo">
-                        <img src="assets/images/skills/tableau.png" alt="Tableau">
-                    </div> -->
-                    <div class="skill-name">Python</div>
+            <div class="skills-carousel">
+                <div class="skills-track">
+                    <div class="skill-card"><img src="/assets/images/skills/python-5.svg" alt="Python"><div class="skill-name">Python</div></div>
+                    <div class="skill-card"><img src="/assets/images/skills/mysql-logo-pure.svg" alt="SQL"><div class="skill-name">SQL</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/r-lang.svg" alt="R"><div class="skill-name">R</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/git-icon.svg" alt="Git"><div class="skill-name">Git</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/aws-2.svg" alt="AWS"><div class="skill-name">AWS</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/apache-spark-5.svg" alt="Apache Spark"><div class="skill-name">Apache Spark</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/cassandra.svg" alt="Cassandra"><div class="skill-name">Cassandra</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/mongodb-icon-2.svg" alt="MongoDB"><div class="skill-name">MongoDB</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/microsoft-sql-server-1.svg" alt="SSIS"><div class="skill-name">SSIS</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/tableau-software.svg" alt="Tableau"><div class="skill-name">Tableau</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/microsoft-excel-2013.svg" alt="Excel"><div class="skill-name">Excel</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/microsoft-5.svg" alt="Power BI"><div class="skill-name">Power BI</div></div>
+                    
+                    <!-- Duplicate for seamless scroll -->
+                    <div class="skill-card"><img src="/assets/images/skills/python-5.svg" alt="Python"><div class="skill-name">Python</div></div>
+                    <div class="skill-card"><img src="/assets/images/skills/mysql-logo-pure.svg" alt="SQL"><div class="skill-name">SQL</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/r-lang.svg" alt="R"><div class="skill-name">R</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/git-icon.svg" alt="Git"><div class="skill-name">Git</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/aws-2.svg" alt="AWS"><div class="skill-name">AWS</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/apache-spark-5.svg" alt="Apache Spark"><div class="skill-name">Apache Spark</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/cassandra.svg" alt="Cassandra"><div class="skill-name">Cassandra</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/mongodb-icon-2.svg" alt="MongoDB"><div class="skill-name">MongoDB</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/microsoft-sql-server-1.svg" alt="SSIS"><div class="skill-name">SSIS</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/tableau-software.svg" alt="Tableau"><div class="skill-name">Tableau</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/microsoft-excel-2013.svg" alt="Excel"><div class="skill-name">Excel</div></div>
+                    <div class="skill-card"><img src="assets/images/skills/microsoft-5.svg" alt="Power BI"><div class="skill-name">Power BI</div></div>
                 </div>
-                <div class="skill-card">
-                    <!-- <div class="skill-logo">
-                        <img src="assets/images/skills/tableau.png" alt="Tableau">
-                    </div> -->
-                    <div class="skill-name">Tableau</div>
-                </div>
-                <div class="skill-card">
-                    <!-- <div class="skill-logo">
-                        <img src="assets/images/skills/tableau.png" alt="Tableau">
-                    </div> -->
-                    <div class="skill-name">SQL</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-name">R</div>
-                </div>
-                <div class="skill-card">
-                    <!-- <div class="skill-logo">
-                        <img src="assets/images/skills/tableau.png" alt="Tableau">
-                    </div> -->
-                    <div class="skill-name">Microsoft Excel</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-name">AWS Redshift</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-name">Microsoft SQL Server</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-name">SSIS</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-name">SSAS</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-name">SSRS</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-name">Power BI</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-name">Extract Transform Load (ETL)</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-name">Data Cleaning</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-name">Data Modeling</div>
-                </div>
-                <div class="skill-card">
-                    <!-- <div class="skill-logo">
-                        <img src="assets/images/skills/tableau.png" alt="Tableau">
-                    </div> -->
-                    <div class="skill-name">Data Management</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-name">Exploratory Data Analysis (EDA)</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-name">A/B Testing</div>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-name">Business Intelligence</div>
-                </div>
-                <!-- Add more skill cards following the same structure -->
             </div>
         </div>
     </section>
@@ -388,7 +346,7 @@
             </a>
                         
             <div class="linkedin-prompt">
-                <p>or send me a Connect request on LinkedIn:</p>
+                <p style="color: var(--text-color)">or send me a Connect request on LinkedIn:</p>
                 <!-- <div class="badge-info">
                     <p><i>Please refresh the page if you click anywhere other than "View Profile".</i></p>
                 </div> -->

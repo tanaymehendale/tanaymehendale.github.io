@@ -17,22 +17,26 @@
     --accent-hover: #6d28d9;
     --footer-bg: #ede9fe;
     --nav-height: clamp(3.5rem, 8vw, 5rem);
+    --card-border: #e5e7eb;
+    --separator-color: #e5e7eb;
 }
 
 body.dark-mode {
-    --bg-color: #121212;
-    --text-color: #f5f5f5;
-    --section-bg: #1e1e1e;
-    --card-bg: #1a1a1a;
-    --section-gradient: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-    --nav-bg: rgba(18, 18, 18, 0.3);
+    --bg-color: #0d1117;
+    --text-color: #c9d1d9;
+    --section-bg: #0d1117;
+    --card-bg: #161b22;
+    --section-gradient: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+    --nav-bg: rgba(13, 17, 23, 0.8);
     --accent-color: #a78bfa;
     --accent-hover: #8b5cf6;
-    --footer-bg: #1e1b2e;
+    --footer-bg: #0d1117;
+    --card-border: #30363d;
+    --separator-color: #30363d;
 }
 
 body.dark-mode header {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--separator-color);
 }
 html {
     scroll-padding-top: calc(var(--nav-height) + 2rem); /* Adjust based on navbar height and offset */
@@ -294,6 +298,10 @@ section {
     padding: 6rem 0; /* Same as scroll-padding-top */
 }
 
+section + section {
+    border-top: 1px solid var(--separator-color);
+}
+
 section .container {
     background: var(--section-gradient);
     padding: 4rem 2rem;
@@ -453,10 +461,12 @@ header nav a.active::after {
     padding: 2rem;
     border-radius: 0.5rem;
     box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,0.1);
+    border: 1px solid var(--card-border);
     display: flex;
     flex-direction: column;
     align-items: left;
     text-align: left;
+    transition: border-color 0.3s ease, transform 0.3s ease;
 }
 
 .timeline-content p {
@@ -464,6 +474,11 @@ header nav a.active::after {
     margin: 0;
     line-height: 1.6;
     text-align: left;
+}
+
+.timeline-content:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-4px);
 }
 
 .timeline-content h3 {
@@ -578,10 +593,16 @@ header nav a.active::after {
     max-width: 900px;
     margin: 0 auto 30px;
     padding: 40px;
-    border: 1px solid #dcd9d9;
+    border: 1px solid var(--card-border);
     border-radius: 4px;
     background: var(--card-bg);
     position: relative;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.education-block:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-4px);
 }
 
 .education-header {
@@ -707,11 +728,14 @@ h4 {
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border: 1px solid var(--card-border);
+    transition: border-color 0.3s ease;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent-color);
 }
 
 .underline {
@@ -723,7 +747,7 @@ h4 {
 
 /* Project Cards Enhancement */
 .project-card {
-    transition: transform 0.3s ease;
+    transition: border-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;
     border-radius: 8px;
@@ -735,8 +759,10 @@ h4 {
     flex-direction: column;
     height: 100%;
     /* padding: 20px; */
-    border: 1px solid #ddd;
+    border: 1px solid var(--card-border);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: var(--card-bg);
+    padding: 1.5rem;
 }
 
 .skill-tags {
@@ -788,40 +814,46 @@ h4 {
     margin-bottom: 0.2em;
 }
 
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+/* Skills carousel */
+.skills-carousel {
+    overflow: hidden;
     margin-top: 30px;
+}
+
+.skills-track {
+    display: flex;
+    gap: 20px;
+    animation: scroll 20s linear infinite;
+}
+
+.skills-carousel:hover .skills-track {
+    animation-play-state: paused;
 }
 
 .skill-card {
     display: flex;
-    text-align: center;
-    padding: 15px;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
     background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    flex: 0 0 auto;
+    transition: border-color 0.3s ease;
+}
+
+.skill-card img {
+    width: 40px;
+    height: 40px;
 }
 
 .skill-card:hover {
-    transform: translateY(-3px);
+    border-color: var(--accent-color);
 }
 
-.skill-logo {
-    width: 1em;
-    height: 1em;
-    margin-right: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.skill-logo img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 .skill-name {
@@ -906,7 +938,7 @@ h4 {
     }
 
     .floating-buttons {
-        bottom: calc(var(--nav-height) + 1.5rem);
+        display: none;
     }
 }
 
@@ -915,11 +947,10 @@ h4 {
 }
 
 .dropup-menu {
-    display: none;
     position: absolute;
     bottom: var(--nav-height);
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, 10px);
     background: var(--nav-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -927,6 +958,10 @@ h4 {
     border-radius: 1rem;
     padding: 0.5rem 0;
     z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .dropup-menu a {
@@ -942,7 +977,10 @@ h4 {
 }
 
 .dropup-menu.show {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
 }
 
 
@@ -1118,7 +1156,7 @@ nav ul li a:hover::after {
 
 /* Project Detail Pages */
 .project-detail {
-    padding: 5em 1rem;
+    padding: calc(var(--nav-height) + 2rem) 1rem 3rem;
     max-width: 900px;
     margin: 0 auto;
 }
@@ -1135,10 +1173,9 @@ nav ul li a:hover::after {
     margin-bottom: 0.05rem;
 }
 
-/* .project-section {
-    margin-top: 0.001em;
-    margin-bottom: 0.001em;
-} */
+.project-section {
+    margin: 2.5rem 0;
+}
 
 .project-section p {
     text-align: justify;
@@ -1167,7 +1204,7 @@ nav ul li a:hover::after {
 .achievement-box p {
     font-size: 1.1em;
     font-weight: 500;
-    color: #2c3e50;
+    color: var(--text-color);
     line-height: 1.8;
 }
 
@@ -1223,7 +1260,8 @@ nav ul li a:hover::after {
 .back-link i {
     font-size: 20px;
 }
-.project-links {
+.project-links,
+.project-links-top {
     text-align: center;
     margin-top: 20px;
     display: flex;
