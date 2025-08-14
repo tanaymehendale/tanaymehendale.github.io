@@ -926,6 +926,15 @@ h4 {
     text-decoration: none;
     font-weight: 500;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.bottom-nav a i,
+.bottom-nav button i {
+    font-size: 1.2rem;
 }
 
 .bottom-nav button:focus {
@@ -936,7 +945,9 @@ h4 {
     .bottom-nav {
         display: flex;
     }
+}
 
+@media (max-width: 768px) {
     .floating-buttons {
         display: none;
     }
