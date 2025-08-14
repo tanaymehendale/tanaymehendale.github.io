@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Remove floating buttons on mobile
+    if (window.innerWidth <= 768) {
+        const floatingButtons = document.querySelector('.floating-buttons');
+        if (floatingButtons) floatingButtons.remove();
+    }
 });
 
 const scrollDown = document.getElementById('scroll-down');
@@ -177,3 +183,46 @@ if (scrollTopBtn) {
         });
     });
 }
+
+// Project section filters
+document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    if (filterBtns.length && projectCards.length) {
+        const showCategory = (cat) => {
+            projectCards.forEach(card => {
+                card.classList.toggle('show', card.dataset.category === cat);
+            });
+        };
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                showCategory(btn.dataset.filter);
+            });
+        });
+
+        showCategory('data-engineering');
+    }
+});
+
+// Collapsible Experience and Education cards
+document.addEventListener('DOMContentLoaded', () => {
+    function setupCollapsible(sectionSelector, cardSelector) {
+        const section = document.querySelector(sectionSelector);
+        if (!section) return;
+        const cards = section.querySelectorAll(cardSelector);
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                cards.forEach(c => {
+                    if (c !== card) c.classList.remove('active');
+                });
+                card.classList.toggle('active');
+            });
+        });
+    }
+
+    setupCollapsible('#experience', '.timeline-item');
+    setupCollapsible('#education', '.education-block');
+});

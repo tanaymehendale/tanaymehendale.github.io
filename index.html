@@ -84,8 +84,14 @@
             <h2>Projects</h2>
             <div class="underline"></div>
 
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="data-engineering">Data Engineering</button>
+                <button class="filter-btn" data-filter="data-analysis">Data Science/Visualization</button>
+                <button class="filter-btn" data-filter="product-management">Product Management</button>
+            </div>
+
             <div class="project-grid">
-                <a href="projects/customer-churn/index.html" class="project-card">
+                <a href="projects/customer-churn/index.html" class="project-card" data-category="data-analysis">
                     <div class="card-content">
                         <h3>Customer Churn Analysis in Tableau</h3>
                         <p>Interactive dashboard analyzing customer churn patterns using Tableau.</p>
@@ -96,7 +102,7 @@
                     </div>
                 </a>
 
-                <a href="projects/real-time-streaming/index.html" class="project-card">
+                <a href="projects/real-time-streaming/index.html" class="project-card" data-category="data-engineering">
                     <div class="card-content">
                         <h3>Real Time Data Streaming</h3>
                         <p>End-to-end real-time data pipeline using Airflow, Kafka and Spark</p>
@@ -109,7 +115,7 @@
                     </div>
                 </a>
 
-                <a href="projects/data-warehouse/index.html" class="project-card">
+                <a href="projects/data-warehouse/index.html" class="project-card" data-category="data-engineering">
                     <div class="card-content">
                         <h3>Data Warehouse for Retail Analytics using Microsoft SQL Server</h3>
                         <p>Comprehensive data warehouse implementation using SQL Server.</p>
@@ -120,7 +126,7 @@
                     </div>
                 </a>
 
-                <a href="projects/resqvision/index.html" class="project-card">
+                <a href="projects/resqvision/index.html" class="project-card" data-category="data-analysis">
                     <div class="card-content">
                         <h3>ResQVision - Emergency Analytics Dashboard</h3>
                         <p>Visualizing emergency response patterns to optimize operations and resources.</p>
@@ -132,20 +138,18 @@
                     </div>
                 </a>
 
-                <a href="projects/market-basket/index.html" class="project-card">
+                <a href="projects/market-basket/index.html" class="project-card" data-category="data-analysis">
                     <div class="card-content">
                         <h3>Market Basket Analysis</h3>
                         <p>Analysis of shopping patterns using R and Apriori algorithm.</p>
                         <div class="skill-tags">
                             <span class="tag">#R Programming</span>
                             <span class="tag">#Data Analysis</span>
-                            <!-- <span class="tag">Data Mining</span> -->
                         </div>
                     </div>
                 </a>
-                
-                <a href="projects/pos-system/index.html" class="project-card">
-                <!-- <a href="projects/pos-system/index.html" class="project-card"> -->
+
+                <a href="projects/pos-system/index.html" class="project-card" data-category="data-engineering">
                     <div class="card-content">
                         <h3>Point-of-Sale (POS) System</h3>
                         <p>Built a POS system using MySQL and MongoDB.</p>
@@ -158,32 +162,30 @@
                         </div>
                     </div>
                 </a>
-                
-                <a href="projects/fashionmnist-classification/index.html" class="project-card">
-                <!-- <a href="projects/fashionmnist-classification/index.html" class="project-card"> -->
+
+                <a href="projects/fashionmnist-classification/index.html" class="project-card" data-category="data-analysis">
                     <div class="card-content">
                         <h3>FashionMNIST Image Classification</h3>
                         <p>Comparison of various models on classifying images based on the standard FashionMNIST dataset.</p>
                         <div class="skill-tags">
-                            <!-- <span class="tag">Python</span> -->
                             <span class="tag">#Data Mining</span>
                             <span class="tag">#Machine Learning</span>
                         </div>
                     </div>
                 </a>
-<!-- 
-                <a href="projects/heatmap-visualization/index.html" class="project-card">
+
+                <a href="projects/heatmap-visualization/index.html" class="project-card" data-category="data-analysis">
                     <div class="card-content">
                         <h3>Interactive Heatmaps using D3.js on Observable</h3>
                         <p>An interactive visualization to explore historical temperature trends dynamically</p>
                         <div class="skill-tags">
-                            <span class="tag">Data Visualization</span>
-                            <span class="tag">D3.js</span>
+                            <span class="tag">#Data Visualization</span>
+                            <span class="tag">#D3.js</span>
                         </div>
                     </div>
-                </a> -->
+                </a>
             </div>
-        </div>    
+        </div>
     </section>
 
     <!-- Experience Section -->
@@ -202,10 +204,10 @@
                             <h3>Texas A&M University - Graduate and Professional School</h3>
                             <h4><i>Business Analyst - Student Assistant</i></h4>
                         </div>
-                        <p>
+                        <ul class="details">
                             <li>Achieved a 60% reduction in manual workload by automating 54 Google Sheets using Google Apps Script, JavaScript and Python benefiting 80+ stakeholders across multiple university departments</li>
                             <li>Reduced admission application reviews by 7.5% by creating an automated candidate filtering system for international student admission process</li>
-                        </p>
+                        </ul>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -218,13 +220,13 @@
                             <h3>LTIMindtree</h3>
                             <h4><i>Senior SAP Technical Consultant</i></h4>
                         </div>
-                        <p>
+                        <ul class="details">
                             <li>Developed data visualization dashboards using Tableau to track KPIs and present insights to the senior leadership, enhancing strategic decision-making</li>
                             <li>Enabled real-time inventory decisions by developing custom SAP transactions and reports using SQL and ABAP, handling datasets of 100,000+ records</li>
                             <li>Spearheaded cross-functional coordination for release management in 52+ product releases, implementing process optimizations that reduced breaches by 84%</li>
                             <li>Prioritized and delivered 70+ product features using SQL & SAP ABAP based on user needs, collaborating with global teams to reduce the turnaround time by 13%</li>
                             <!-- <li>Led user acceptance testing initiatives, improving defect detection by 15% and overall product quality by 10%</li> -->
-                        </p>
+                        </ul>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -237,10 +239,10 @@
                             <h3>Larsen & Toubro Infotech</h3>
                             <h4><i>Associate SAP Consultant - Intern</i></h4>
                         </div>
-                        <p>
+                        <ul class="details">
                             <li>Engaged directly with clients to identify pain points and align technological solutions with business goals, resulting in an increased satisfaction rating by 15%</li>
                             <li>Leveraged data visualization tools like Tableau to develop and present insights to senior leadership, improving strategic decision-making and showcasing data-driven product strategy skills</li>
-                        </p>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -264,16 +266,18 @@
                         <h4><i>Master of Science in Management Information Systems</i></h4>
                     </div>
                 </div>
-                <p>Current GPA: 3.93</p>
-                <p>Leadership Position: Head of Marketing & Communications at Business Information Technology Students (BITS)</p><br>
-                <p>Relevant Coursework - </p>
-                <ul>
-                    <li>ISTM 622 - Advanced Data Management</li>
-                    <li>ISTM 637 - Data Warehousing</li>
-                    <li>ECEN 758 - Data Mining</li>
-                    <li>CSCE 679 - Data Visualization</li>
-                    <li>STAT 650 - Statistics & Foundations of Big Data</li>
-                </ul>
+                <div class="card-details">
+                    <p>Current GPA: 3.93</p>
+                    <p>Leadership Position: Head of Marketing & Communications at Business Information Technology Students (BITS)</p><br>
+                    <p>Relevant Coursework - </p>
+                    <ul>
+                        <li>ISTM 622 - Advanced Data Management</li>
+                        <li>ISTM 637 - Data Warehousing</li>
+                        <li>ECEN 758 - Data Mining</li>
+                        <li>CSCE 679 - Data Visualization</li>
+                        <li>STAT 650 - Statistics & Foundations of Big Data</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="education-block">
@@ -287,12 +291,14 @@
                         <h4><i>Bachelor of Technology</i></h4>
                     </div>
                 </div>
-                <p>Achievements:</p>
-                <ul>
-                    <li>Semi Finalist (Top 20 out of 800+ teams) at IICDC-2019, a national innovation hackathon by Texas Instruments & Dept. of Science & Technology - Govt. of India for building an affordable non-invasive flow meter</li>
-                    <li>Winner - Case Study Presentation by Fire & Security Association of India (FSAI)</li>
-                    <!-- <li>Volunteered for beach cleanup drives in Mumbai under Mr. Afroz Shah through 'SEVA' initiative</li> -->
-                </ul>
+                <div class="card-details">
+                    <p>Achievements:</p>
+                    <ul>
+                        <li>Semi Finalist (Top 20 out of 800+ teams) at IICDC-2019, a national innovation hackathon by Texas Instruments & Dept. of Science & Technology - Govt. of India for building an affordable non-invasive flow meter</li>
+                        <li>Winner - Case Study Presentation by Fire & Security Association of India (FSAI)</li>
+                        <!-- <li>Volunteered for beach cleanup drives in Mumbai under Mr. Afroz Shah through 'SEVA' initiative</li> -->
+                    </ul>
+                </div>
             </div>
 
         </div>
