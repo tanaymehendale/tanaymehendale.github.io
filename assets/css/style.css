@@ -38,6 +38,40 @@ body.dark-mode {
 body.dark-mode header {
     border-bottom: 1px solid var(--separator-color);
 }
+/*  
+:root {
+    --bg-color: #ffffff;
+    --text-color: #1f2937;
+    --section-bg: #f9f9f9;
+    --card-bg: #ffffff;
+    --section-gradient: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
+    --nav-bg: rgba(255, 255, 255, 0.3);
+    --accent-color: #7c3aed;
+    --accent-hover: #6d28d9;
+    --footer-bg: #ede9fe;
+    --nav-height: clamp(3.5rem, 8vw, 5rem);
+    --card-border: #e5e7eb;
+    --separator-color: #e5e7eb;
+} */
+/* 
+body.dark-mode {
+    --bg-color: #0d1117;
+    --text-color: #c9d1d9;
+    --section-bg: #0d1117;
+    --card-bg: #161b22;
+    --section-gradient: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+    --nav-bg: rgba(13, 17, 23, 0.8);
+    --accent-color: #a78bfa;
+    --accent-hover: #8b5cf6;
+    --footer-bg: #0d1117;
+    --card-border: #30363d;
+    --separator-color: #30363d;
+}
+
+body.dark-mode header {
+    border-bottom: 1px solid var(--separator-color);
+}  */
+
 html {
     scroll-padding-top: calc(var(--nav-height) + 2rem); /* Adjust based on navbar height and offset */
     scroll-behavior: smooth;
@@ -70,8 +104,25 @@ button,
 .linkedin-button,
 .resume-button,
 .scroll-top {
-    user-select: none;
+    user-select: text;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s ease, color 0.3s ease;
 }
+/* 
+body.no-scroll {
+    overflow: hidden;
+}
+button,
+.btn-rounded-white,
+.float-button,
+.email-button,
+.linkedin-button,
+.resume-button,
+.scroll-top {
+    user-select: none;
+} */
+
 
 .container {
     width: min(90%, 120em);
@@ -256,6 +307,7 @@ nav {
 .nav-right {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
 }
 
 .theme-toggle {
@@ -276,6 +328,56 @@ nav {
 body.dark-mode .theme-toggle {
     background: rgba(0, 0, 0, 0.3);
 }
+
+/* nav {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-logo {
+    height: clamp(2.5rem, 6vw, 3rem);
+    width: auto;
+}
+
+.nav-name {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: clamp(1.25rem, 4vw, 1.5rem);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.theme-toggle {
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: var(--text-color);
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-left: 1rem;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+body.dark-mode .theme-toggle {
+    background: rgba(0, 0, 0, 0.3);
+} */
 
 nav ul {
     display: flex;
@@ -501,12 +603,6 @@ header nav a.active::after {
     margin: 0 0 2rem;
 }
 
-/* .timeline-content h4 {
-    color: var(--text-color);
-    font-size: 1.1em;
-    margin: 0 0 15rem;
-} */
-
 .timeline-content p {
     color: var(--text-color);
     margin: 0;
@@ -578,7 +674,6 @@ header nav a.active::after {
     }
 }
 
-
 /* Education Section */
 #education {
     padding: 75px 15px;
@@ -600,7 +695,7 @@ header nav a.active::after {
 .underline {
     width: 5em;
     height: 0.2em;
-    background: var(--accent-color);
+    background: var(--accent-color);    
     margin: 0 auto 0.5em;
 }
 .education-block {
@@ -681,12 +776,10 @@ h4 {
     
     #education h3{
         font-size: 1.25em;
-        /* text-align: left; */
     }
     #education h4{
         margin-top: 0.5em;
         font-size: 1em;
-        /* text-align: left; */
     }
     
     .education-header {
@@ -698,7 +791,6 @@ h4 {
     .university-info {
         padding-right: 0;
         text-align: center;
-        /* font-size: small; */
     }
 
     .education-date {
@@ -717,10 +809,9 @@ h4 {
 
 /* Projects Section */
 #projects{
-    background: transparent;     /* ivory */
+    background: transparent; 
 }
 #projects h2{
-    /* margin-top: 0.1rem; */
     color: var(--text-color);
     text-align: center;
     font-size: 2rem;
@@ -812,12 +903,10 @@ h4 {
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
-    /* pointer-events: none; */
     position: relative;
     display: flex;
     flex-direction: column;
     height: 100%;
-    /* padding: 20px; */
     border: 1px solid var(--card-border);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background: var(--card-bg);
@@ -872,7 +961,6 @@ h4 {
     font-size: 2rem;
     margin-bottom: 0.2em;
 }
-
 /* Skills carousel */
 .skills-carousel {
     overflow: hidden;
@@ -882,7 +970,16 @@ h4 {
 .skills-track {
     display: flex;
     gap: 20px;
-    animation: scroll 20s linear infinite;
+    animation: scroll 7s linear infinite;
+}
+
+@media (max-width: 768px) {
+    .skills-track {
+        display: flex;
+        gap: 20px;
+        animation: scroll 4s linear infinite;
+    }
+
 }
 
 .skills-carousel:hover .skills-track {
@@ -901,6 +998,19 @@ h4 {
     transition: border-color 0.3s ease;
 }
 
+.skill-card img {
+    width: 40px;
+    height: 40px;
+}
+
+.skill-card:hover {
+    border-color: var(--accent-color);
+}
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
 .skill-card img {
     width: 40px;
     height: 40px;
@@ -1288,29 +1398,6 @@ nav ul li a:hover::after {
     font-size: 1.1em;
     color: var(--text-color);
 }
-/* 
-.project-links {
-    margin-top: 50px;
-    text-align: center;
-} */
-
-/* .external-button {
-    display: inline-block;
-    padding: 2em 5em;
-    background: var(--accent-color);
-    color: white;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: background 0.3s ease;
-} */
-
-/* .back-link {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1000;
-} 
-*/
 
 .back-link a {
     display: flex;
@@ -1330,6 +1417,7 @@ nav ul li a:hover::after {
 .back-link i {
     font-size: 20px;
 }
+
 .project-links,
 .project-links-top {
     text-align: center;
@@ -1403,12 +1491,6 @@ nav ul li a:hover::after {
         font-size: small;
     }
 }
-/* 
-@media (max-width: 480px) {
-    .project-section {
-         margin: 3em 0; 
-    }
-} */
 
 
 .floating-buttons {
@@ -1467,7 +1549,6 @@ footer {
 footer .container {
     max-width: 1200px;
     margin: 0 auto;
-    /* padding: 0 15px; */
     padding: 0 0.8em;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -1482,7 +1563,7 @@ footer .copyright {
 }
 
 footer .back-to-top {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
 }
@@ -1501,8 +1582,7 @@ footer .back-to-top a {
 }
 
 footer .back-to-top a:hover {
-    /* background: var(--text-color); */
-    background: var(--bg-color);
+    background: #fff;
     color: var(--footer-bg);
 }
 
@@ -1510,7 +1590,6 @@ footer .back-to-top i {
     font-size: 20px;
     line-height: 1;
 }
-
 
 footer .social {
     justify-self: end;
@@ -1530,7 +1609,7 @@ footer .social a:hover {
 
 @media (max-width: 768px) {
     
-    footer{
+    footer {
         padding: 5em 0;
     }
 
