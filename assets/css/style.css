@@ -38,39 +38,6 @@ body.dark-mode {
 body.dark-mode header {
     border-bottom: 1px solid var(--separator-color);
 }
-/*  
-:root {
-    --bg-color: #ffffff;
-    --text-color: #1f2937;
-    --section-bg: #f9f9f9;
-    --card-bg: #ffffff;
-    --section-gradient: linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%);
-    --nav-bg: rgba(255, 255, 255, 0.3);
-    --accent-color: #7c3aed;
-    --accent-hover: #6d28d9;
-    --footer-bg: #ede9fe;
-    --nav-height: clamp(3.5rem, 8vw, 5rem);
-    --card-border: #e5e7eb;
-    --separator-color: #e5e7eb;
-} */
-/* 
-body.dark-mode {
-    --bg-color: #0d1117;
-    --text-color: #c9d1d9;
-    --section-bg: #0d1117;
-    --card-bg: #161b22;
-    --section-gradient: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
-    --nav-bg: rgba(13, 17, 23, 0.8);
-    --accent-color: #a78bfa;
-    --accent-hover: #8b5cf6;
-    --footer-bg: #0d1117;
-    --card-border: #30363d;
-    --separator-color: #30363d;
-}
-
-body.dark-mode header {
-    border-bottom: 1px solid var(--separator-color);
-}  */
 
 html {
     scroll-padding-top: calc(var(--nav-height) + 2rem); /* Adjust based on navbar height and offset */
@@ -109,21 +76,6 @@ button,
     color: var(--text-color);
     transition: background 0.3s ease, color 0.3s ease;
 }
-/* 
-body.no-scroll {
-    overflow: hidden;
-}
-button,
-.btn-rounded-white,
-.float-button,
-.email-button,
-.linkedin-button,
-.resume-button,
-.scroll-top {
-    user-select: none;
-} */
-
-
 .container {
     width: min(90%, 120em);
     margin: 0 auto;
