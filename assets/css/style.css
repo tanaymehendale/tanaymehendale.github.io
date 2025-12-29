@@ -483,6 +483,23 @@ header nav a.active::after {
     line-height: 1.8;
 }
 
+.about-social  {
+    justify-self: auto;
+}
+
+.about-social  a {
+    color: var(--text-color);
+    font-size: 2em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin-right: 0.5em;
+}
+
+.about-social a:hover {
+    color: var(--accent-color);
+}
+
+
 @media (max-width: 768px) {
     .about-title h2 {
         font-size: 1.5em;
