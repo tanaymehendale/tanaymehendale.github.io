@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Lead content typing effect
 document.addEventListener("DOMContentLoaded", () => {
-    const phrases = ["Data Engineer", "Data Analyst", "AI Engineer", "MS-MIS Grad @ Texas A&M", "DJ/Producer - @musicbytanzy"];
+    const phrases = ["AI Engineer @ HCLTech", "MS-MIS '25 @ Texas A&M", "DJ/Producer - @musicbytanzy"];
     const typingElement = document.getElementById("typing-effect");
     let phraseIndex = 0;
     let charIndex = 0;
