@@ -44,43 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(video);
 });
 
-// Lead content typing effect
-document.addEventListener("DOMContentLoaded", () => {
-    const phrases = ["AI Engineer @ HCLTech", "MS-MIS '25 @ Texas A&M", "DJ/Producer - @musicbytanzy"];
-    const typingElement = document.getElementById("typing-effect");
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-
-    function typeEffect() {
-        const currentPhrase = phrases[phraseIndex];
-        if (isDeleting) {
-            // Remove characters
-            charIndex--;
-            typingElement.textContent = currentPhrase.substring(0, charIndex);
-        } else {
-            // Add characters
-            charIndex++;
-            typingElement.textContent = currentPhrase.substring(0, charIndex);
-        }
-
-        // Determine typing speed
-        let typingSpeed = isDeleting ? 50 : 70;
-
-        // When phrase is fully typed or deleted
-        if (!isDeleting && charIndex === currentPhrase.length) {
-            typingSpeed = 2000; // Pause before deleting
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            isDeleting = false;
-            phraseIndex = (phraseIndex + 1) % phrases.length; // Move to next phrase
-        }
-
-        setTimeout(typeEffect, typingSpeed);
-    }
-
-    typeEffect();
-});
 
 // Dark/Light theme toggle
 const themeToggle = document.getElementById('theme-toggle');
@@ -113,24 +76,30 @@ themeToggle.addEventListener('click', () => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
 
-// Dynamic tab highlights in navbar
+// Dynamic tab highlights in navbar (top + bottom)
 document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('header nav a');
-    
+    const bottomNavLinks = document.querySelectorAll('.bottom-nav > a');
+
     window.addEventListener('scroll', () => {
         let current = '';
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            
             if (window.scrollY >= (sectionTop - 60)) {
                 current = section.getAttribute('id');
             }
         });
-        
+
         navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').substring(1) === current) {
+                link.classList.add('active');
+            }
+        });
+
+        bottomNavLinks.forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href').substring(1) === current) {
                 link.classList.add('active');
@@ -184,28 +153,6 @@ if (scrollTopBtn) {
     });
 }
 
-// Project section filters
-document.addEventListener('DOMContentLoaded', () => {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
-    if (filterBtns.length && projectCards.length) {
-        const showCategory = (cat) => {
-            projectCards.forEach(card => {
-                card.classList.toggle('show', card.dataset.category === cat);
-            });
-        };
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                showCategory(btn.dataset.filter);
-            });
-        });
-
-        showCategory('data-engineering');
-    }
-});
 
 // Collapsible Experience and Education cards
 document.addEventListener('DOMContentLoaded', () => {

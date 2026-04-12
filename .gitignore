@@ -1,0 +1,4 @@
+*venv/
+.env
+emailjs_config.js
+node_modules/

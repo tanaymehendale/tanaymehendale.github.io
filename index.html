@@ -15,6 +15,9 @@
         })();
     </script> -->
     <link rel="preload" href="assets/images/lead-bg-video.mp4" as="video" type="video/mp4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body class="dark-mode">
     <!-- Header -->
@@ -44,46 +47,49 @@
     <div id="lead">
         <video autoplay muted loop playsinline id="lead-video" preload="auto" poster="assets/images/preload-frame.png">
             <source src="assets/images/lead-bg-video.mp4" type="video/mp4">
-            <!-- <source src="assets/videos/lead-video.webm" type="video/webm"> -->
             Your browser does not support HTML5 video.
         </video>
         <div id="lead-content">
-            <h1>Tanay Mehendale</h1>
-            <!-- <h2>Data Analyst | Data Engineer | Aspiring Product Manager</h2> -->
-            <h2><span id="typing-effect"></span></h2>
-            <a href="assets/docs/Tanay Mehendale_Resume_AI.pdf" class="btn-rounded-white" target="_blank" rel="noreferrer noopener">View Resume</a>
-        </div>
-        <div class="chevron-down">
-            <a href="#" id="scroll-down">
-                <i class="fa fa-chevron-down"></i>
+            <p class="lead-eyebrow">AI Engineer &amp; Data Systems Builder</p>
+            <h1 class="lead-name">Tanay<br>Mehendale</h1>
+            <div class="lead-meta">
+                <span class="lead-fact">HCLTech</span>
+                <span class="lead-sep">·</span>
+                <span class="lead-fact">MS-MIS @ Texas A&amp;M</span>
+                <span class="lead-sep">·</span>
+                <span class="lead-fact">DJ &amp; Producer</span>
+            </div>
+            <a href="assets/docs/Tanay Mehendale_Resume_AI.pdf" class="lead-resume-link" target="_blank" rel="noreferrer noopener">
+                View Resume <span class="lead-arrow">↗</span>
             </a>
         </div>
     </div>
     
     <!-- About Section -->
     <section id="about">
-        <div class="container">
-            <div class="about-title">
-                <h2>About Me</h2>
-                <div class="underline"></div>
+        <div class="container about-container">
+            <div class="about-left">
+                <span class="section-eyebrow">The Person</span>
+                <h2 class="section-display-title">Curious<br>Builder</h2>
+                <div class="about-interests">
+                    <span class="interest-tag">EDM</span>
+                    <span class="interest-tag">Formula 1</span>
+                    <span class="interest-tag">Sci-Fi</span>
+                    <span class="interest-tag">Data Systems</span>
+                    <span class="interest-tag">AI Pipelines</span>
+                </div>
             </div>
-            <div class="about-wrapper">
+            <div class="about-right">
                 <img src="assets/images/profile.jpg" alt="Tanay Mehendale" class="about-image">
-                <div class="about-content">
-                    <p>Hi, I’m Tanay! I build data and backend systems that power analytics and AI products. I work with Python, SQL, AWS, streaming pipelines, and LLM based agents. I enjoy breaking systems, fixing them, and making them scale. When I am not building, you will find me listening to EDM, following F1 or reading sci-fi novels!<br>
-                        <br>
-                        Follow me on:
-                    </p>
-                    <div class="about-social">
-                        <div class="social">
-                            <a href="https://github.com/tanaymehendale" target="_blank">
-                                <i class="fa fa-github"></i>
-                            </a>
-                            <a href="https://linkedin.com/in/tanay-mehendale" target="_blank">
-                                <i class="fa fa-linkedin"></i>
-                            </a>
-                        </div>
-                    </div>
+                <p class="about-bio">I build data and backend systems that power analytics and AI products — Python, SQL, AWS, streaming pipelines, LLM-based agents. I enjoy breaking systems, fixing them, and making them scale.</p>
+                <p class="about-bio">When I’m not building: EDM on the decks, F1 on the screen, sci-fi on the nightstand.</p>
+                <div class="about-social-row">
+                    <a href="https://github.com/tanaymehendale" target="_blank" class="about-social-link">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/tanay-mehendale" target="_blank" class="about-social-link">
+                        <i class="fa fa-linkedin"></i> LinkedIn
+                    </a>
                 </div>
             </div>
         </div>
@@ -91,139 +97,62 @@
     
     <!-- Projects Section -->
     <section id="projects">
-        <div class="container">
-            <h2>Projects</h2>
-            <div class="underline"></div>
+        <div class="container projects-container">
+            <div class="section-header-block">
+                <span class="section-eyebrow">Selected Work</span>
+                <h2 class="section-display-title">The<br>Work</h2>
+            </div>
+            <div class="project-log">
 
-            <!-- <div class="project-filters">
-                <button class="filter-btn active" data-filter="data-engineering">Data Engineering</button>
-                <button class="filter-btn" data-filter="data-analysis">Data Science/Visualization</button>
-                <button class="filter-btn" data-filter="product-management">Product Management</button>
-            </div> -->
-
-            <div class="project-grid">
-                
-                <a href="projects/apartment-finder-ai/index.html" class="project-card" data-category="ai">
-                    <div class="card-content">
-                        <h3>ApartmentFinder AI</h3>
-                        <p>A Multi-Agent AI System that simplifies relocation moves.</p>
-                        <div class="skill-tags">
-                            <span class="tag">#AI Agents</span>
-                            <span class="tag">#RAG Pipeline</span>
-                            <span class="tag">#MCP</span>
-                            <span class="tag">#Google ADK</span>
+                <a href="projects/apartment-finder-ai/index.html" class="proj-entry">
+                    <div class="proj-top">
+                        <span class="proj-idx">01</span>
+                        <div class="proj-info">
+                            <h3 class="proj-title">ApartmentFinder AI</h3>
+                            <p class="proj-desc">A Multi-Agent AI system that simplifies relocation moves — Google ADK, RAG pipelines, and MCP in one coherent product.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">AI Agents</span>
+                                <span class="proj-tag">RAG Pipeline</span>
+                                <span class="proj-tag">MCP</span>
+                                <span class="proj-tag">Google ADK</span>
+                            </div>
                         </div>
+                        <span class="proj-arrow">↗</span>
                     </div>
                 </a>
 
-
-                <!-- <a href="projects/customer-churn/index.html" class="project-card" data-category="data-analysis">
-                    <div class="card-content">
-                        <h3>Customer Churn Analysis in Tableau</h3>
-                        <p>Interactive dashboard analyzing customer churn patterns using Tableau.</p>
-                        <div class="skill-tags">
-                            <span class="tag">#Tableau</span>
-                            <span class="tag">#Data Visualization</span>
+                <a href="projects/real-time-streaming/index.html" class="proj-entry">
+                    <div class="proj-top">
+                        <span class="proj-idx">02</span>
+                        <div class="proj-info">
+                            <h3 class="proj-title">Real-Time Data Streaming</h3>
+                            <p class="proj-desc">End-to-end real-time pipeline using Airflow, Kafka, and Spark — built for scale and reliability from source to sink.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">Apache Spark</span>
+                                <span class="proj-tag">Kafka</span>
+                                <span class="proj-tag">Airflow</span>
+                                <span class="proj-tag">Cassandra</span>
+                            </div>
                         </div>
-                    </div>
-                </a> -->
-
-                <a href="projects/real-time-streaming/index.html" class="project-card" data-category="data-engineering">
-                    <div class="card-content">
-                        <h3>Real Time Data Streaming</h3>
-                        <p>End-to-end real-time data pipeline using Airflow, Kafka and Spark</p>
-                        <div class="skill-tags">
-                            <span class="tag">#Data Engineering</span>
-                            <span class="tag">#Spark</span>
-                            <span class="tag">#Airflow</span>
-                            <span class="tag">#Cassandra</span>
-                        </div>
+                        <span class="proj-arrow">↗</span>
                     </div>
                 </a>
 
-                <a href="projects/data-warehouse/index.html" class="project-card" data-category="data-engineering">
-                    <div class="card-content">
-                        <h3>Data Warehouse for Retail Analytics</h3>
-                        <p>Comprehensive data warehouse implementation using SQL Server.</p>
-                        <div class="skill-tags">
-                            <span class="tag">#Data Warehousing</span>
-                            <span class="tag">#SQL Server</span>
+                <a href="projects/data-warehouse/index.html" class="proj-entry">
+                    <div class="proj-top">
+                        <span class="proj-idx">03</span>
+                        <div class="proj-info">
+                            <h3 class="proj-title">Data Warehouse for Retail Analytics</h3>
+                            <p class="proj-desc">Comprehensive data warehouse implementation using SQL Server — schema design, ETL pipelines, and a full reporting layer.</p>
+                            <div class="proj-tags">
+                                <span class="proj-tag">Data Warehousing</span>
+                                <span class="proj-tag">SQL Server</span>
+                            </div>
                         </div>
+                        <span class="proj-arrow">↗</span>
                     </div>
                 </a>
 
-                <!-- <a href="projects/resqvision/index.html" class="project-card" data-category="data-analysis">
-                    <div class="card-content">
-                        <h3>ResQVision</h3>
-                        <p>Visualizing emergency response patterns to optimize operations and resources.</p>
-                        <div class="skill-tags">
-                            <span class="tag">#Data Visualization</span>
-                            <span class="tag">#D3.js</span>
-                            <span class="tag">#React.js</span>
-                        </div>
-                    </div>
-                </a> -->
-                
-        <!--    <a href="projects/market-basket/index.html" class="project-card" data-category="data-analysis">
-                    <div class="card-content">
-                        <h3>Market Basket Analysis</h3>
-                        <p>Analysis of shopping patterns using R and Apriori algorithm.</p>
-                        <div class="skill-tags">
-                            <span class="tag">#R Programming</span>
-                            <span class="tag">#Data Analysis</span>
-                        </div>
-                    </div>
-                </a> -->
-
-                <!-- <a href="projects/quote-to-cash/index.html" class="project-card" data-category="data-analysis">
-                    <div class="card-content">
-                        <h3>Quote-to-Cash Analysis</h3>
-                        <p>Interactive Agentic AI Dashboard that triggers actions using Tableau Next</p>
-                        <div class="skill-tags">
-                            <span class="tag">#Salesforce</span>
-                            <span class="tag">#TableauNext</span>
-                            <span class="tag">#AI</span>
-                            <span class="tag">#DataAnalytics</span>
-                        </div>
-                    </div>
-                </a> -->
-
-                <!-- <a href="projects/pos-system/index.html" class="project-card" data-category="data-engineering">
-                    <div class="card-content">
-                        <h3>Point-of-Sale (POS) System</h3>
-                        <p>Built a POS system using MySQL and MongoDB.</p>
-                        <div class="skill-tags">
-                            <span class="tag">#AWS EC2</span>
-                            <span class="tag">#Python</span>
-                            <span class="tag">#MariaDB</span>
-                            <span class="tag">#NoSQL</span>
-                            <span class="tag">#Database Design</span>
-                        </div>
-                    </div>
-                </a> -->
-
-                <!-- <a href="projects/fashionmnist-classification/index.html" class="project-card" data-category="data-analysis">
-                    <div class="card-content">
-                        <h3>FashionMNIST Image Classification</h3>
-                        <p>Comparison of various models on classifying images based on the standard FashionMNIST dataset.</p>
-                        <div class="skill-tags">
-                            <span class="tag">#Data Mining</span>
-                            <span class="tag">#Machine Learning</span>
-                        </div>
-                    </div>
-                </a> -->
-
-                <!-- <a href="projects/investobuddy/index.html" class="project-card" data-category="data-analysis">
-                    <div class="card-content">
-                        <h3>Investobuddy</h3>
-                        <p>Investment Analysis tool powered by Machine Learning Techniques such as LSTM and Random Forest</p>
-                        <div class="skill-tags">
-                            <span class="tag">#Machine Learning</span>
-                            <span class="tag">#Python</span>
-                            <span class="tag">#Flask</span>
-                        </div>
-                    </div>
-                </a> -->
             </div>
         </div>
     </section>
@@ -231,100 +160,113 @@
     <!-- Experience Section -->
     <section id="experience">
         <div class="container">
-            <h2>Experience</h2>
-            <div class="underline"></div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date">Feb 2026 – Present</div>
-                    <div class="timeline-content">
-                        <div class="company-logo">
-                            <img src="assets/images/HCLT-logo.png" alt="Larsen & Toubro Infotech Logo">
+            <div class="section-header-block">
+                <span class="section-eyebrow">Work History</span>
+                <h2 class="section-display-title">The<br>Record</h2>
+            </div>
+            <div class="exp-log">
+
+                <div class="timeline-item exp-entry">
+                    <div class="exp-top">
+                        <span class="exp-idx">01</span>
+                        <div class="exp-id">
+                            <img src="assets/images/HCLT-logo.png" alt="HCLTech" class="exp-logo">
+                            <div>
+                                <h3 class="exp-company">HCLTech</h3>
+                                <h4 class="exp-role">AI Engineer</h4>
+                            </div>
                         </div>
-                        <div class="company-info">
-                            <h3>HCLTech</h3>
-                            <h4><i>AI Engineer</i></h4>
-                        </div>
-                        <ul class="details">
-                            <li>Developing AI Agents using Microsoft Agent Framework</li>
-                        </ul> 
+                        <time class="exp-date">Feb 2026 – Present</time>
+                        <span class="exp-toggle">↓</span>
                     </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">August 2025 – Feb 2026</div>
-                    <div class="timeline-content">
-                        <div class="company-logo">
-                            <img src="assets/images/tamu-logo.png" alt="Texas A&M Logo">
+                    <div class="details">
+                        <div class="details-body">
+                            <p class="exp-skills-line">Microsoft Agent Framework · AI Agents · LLMs</p>
+                            <ul>
+                                <li>Developing AI Agents using Microsoft Agent Framework</li>
+                            </ul>
                         </div>
-                        <div class="company-info">
-                            <h3>Texas A&M University</h3>
-                            <h4><i>Data Engineer Intern - Research</i></h4>
-                        </div>
-                        <ul class="details">
-                            <p><b>Skills: <i>Python, ETL, AWS, Data Pipelines, Data Modeling, Pandas, Medallion Architecture</i></b></p>
-                            <li>Architected a Python based ETL pipeline to consolidate 3 data sources into a multi-layer data lake on Amazon S3, reducing data preparation time by 40% and aiding time series analysis</li>
-                            <li>Developed scalable logic to ingest 2M+ unstructured raw text via Reddit API, implementing regex-based alias matching across 25+ subreddits to expand data coverage by 300%</li>
-                            <li>Optimized performance by resolving API failures, resulting in 100% data capture reliability and a 34% increase in speed</li>
-                            <li>Integrated LLM based sentiment analysis to derive 12 distinct themes, creating high-value categorical features to improve segmentation and trend modeling</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-date">April 2024 – May 2025</div>
-                    <div class="timeline-content">
-                        <div class="company-logo">
-                            <img src="assets/images/tamu-logo.png" alt="Texas A&M Logo">
-                        </div>
-                        <div class="company-info">
-                            <h3>Texas A&M University</h3>
-                            <h4><i>Graduate Teaching Assistant</i></h4>
-                        </div>
-                        <ul class="details">
-                            <p><b>ISTM 380 Human-Computer Interaction:</b> User Experience, UI/UX, Design principles, Accessibility, Usability, Attention, Memory</p>
-                            <p><b>ISTM 320 Systems Analysis & Design:</b> Requirements Gathering, Data Modeling (ERDs, Data Flow Diagrams, UML)</p>
-                            <p><b>SCMT 468 Enterprise Resource Planning (ERP):</b> SAP, Sales & Distribution, Materials Management, Warehouse Management, Inventory Management</p>
-                            <li>Mentored 245+ students across 4 courses through labs and office hours, clarifying requirements, debugging, and coaching presentations, improving submission quality and reducing repeated rework</li>
-                        </ul>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-date">January 2021 – June 2023</div>
-                    <div class="timeline-content">
-                        <div class="company-logo">
-                            <img src="assets/images/ltimindtree-logo-blue.png" alt="LTIMindtree Logo">
+                <div class="timeline-item exp-entry">
+                    <div class="exp-top">
+                        <span class="exp-idx">02</span>
+                        <div class="exp-id">
+                            <img src="assets/images/tamu-logo.png" alt="Texas A&M University" class="exp-logo">
+                            <div>
+                                <h3 class="exp-company">Texas A&M University</h3>
+                                <h4 class="exp-role">Data Engineer Intern – Research</h4>
+                            </div>
                         </div>
-                        <div class="company-info">
-                            <h3>LTIMindtree</h3>
-                            <h4><i>Software Engineer</i></h4>
+                        <time class="exp-date">Aug 2025 – Feb 2026</time>
+                        <span class="exp-toggle">↓</span>
+                    </div>
+                    <div class="details">
+                        <div class="details-body">
+                            <p class="exp-skills-line">Python · ETL · AWS · Data Pipelines · Pandas · Medallion Architecture</p>
+                            <ul>
+                                <li>Architected a Python based ETL pipeline to consolidate 3 data sources into a multi-layer data lake on Amazon S3, reducing data preparation time by 40% and aiding time series analysis</li>
+                                <li>Developed scalable logic to ingest 2M+ unstructured raw text via Reddit API, implementing regex-based alias matching across 25+ subreddits to expand data coverage by 300%</li>
+                                <li>Optimized performance by resolving API failures, resulting in 100% data capture reliability and a 34% increase in speed</li>
+                                <li>Integrated LLM based sentiment analysis to derive 12 distinct themes, creating high-value categorical features to improve segmentation and trend modeling</li>
+                            </ul>
                         </div>
-                        <ul class="details">
-                            <p><b>Skills: <i>SQL, Python, ETL, AWS, S3, Glue, Data Modeling, Root Cause Analysis</i></b></p>
-                            <li>Developed 45+ custom ERP transactions using ABAP with SQL, improving data retrieval speed by 95% for 400+ users</li>
-                            <li>Supported SAP to AWS ETL migration by extracting ERP data, validating S3 and Glue outputs, improving Redshift load consistency across weekly cycles</li>
-                            <li>Diagnosed and resolved 30+ technical support issues via root cause analysis, cutting average resolution time by 35%</li>
-                            <li>Collaborated with global teams to optimize SDLC audits and change management practices, reducing SOX compliance issues by 84% across 52+ releases</li>
-                        </ul>
                     </div>
                 </div>
-                <!-- <div class="timeline-item">
-                    <div class="timeline-date">January 2021 – June 2021</div>
-                    <div class="timeline-content">
-                        <div class="company-logo">
-                            <img src="assets/images/LTI-logo.png" alt="Larsen & Toubro Infotech Logo">
+
+                <div class="timeline-item exp-entry">
+                    <div class="exp-top">
+                        <span class="exp-idx">03</span>
+                        <div class="exp-id">
+                            <img src="assets/images/tamu-logo.png" alt="Texas A&M University" class="exp-logo">
+                            <div>
+                                <h3 class="exp-company">Texas A&M University</h3>
+                                <h4 class="exp-role">Graduate Teaching Assistant</h4>
+                            </div>
                         </div>
-                        <div class="company-info">
-                            <h3>Larsen & Toubro Infotech (now LTIMindtree)</h3>
-                            <h4><i>Associate SAP Consultant - Intern</i></h4>
-                        </div>
-                        <ul class="details">
-                            <li>Engaged directly with clients to identify pain points and align technological solutions with business goals, resulting in an increased satisfaction rating by 15%</li>
-                            <li>Conducted root cause analysis and regression testing across 46+ support tickets, improving average issue resolution time from 120 minutes to 85 minutes</li>
-                            <li>Presented insights in 12+ leadership meetings involving technical and non-technical stakeholders, suggested 5 process improvements in manufacturing and sales based on fulfillment and backlog trends</li>
-                            <li>Supported Git-based version control and peer reviews to ensure high-quality deployment workflows</li>
-                        </ul>
+                        <time class="exp-date">Apr 2024 – May 2025</time>
+                        <span class="exp-toggle">↓</span>
                     </div>
-                </div> -->
+                    <div class="details">
+                        <div class="details-body">
+                            <p class="exp-skills-line">HCI · Systems Analysis &amp; Design · ERP · SAP</p>
+                            <ul>
+                                <li><strong>ISTM 380 Human-Computer Interaction:</strong> User Experience, UI/UX, Design principles, Accessibility, Usability, Attention, Memory</li>
+                                <li><strong>ISTM 320 Systems Analysis &amp; Design:</strong> Requirements Gathering, Data Modeling (ERDs, Data Flow Diagrams, UML)</li>
+                                <li><strong>SCMT 468 Enterprise Resource Planning:</strong> SAP, Sales &amp; Distribution, Materials Management, Warehouse Management, Inventory Management</li>
+                                <li>Mentored 245+ students across 4 courses through labs and office hours, clarifying requirements, debugging, and coaching presentations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item exp-entry">
+                    <div class="exp-top">
+                        <span class="exp-idx">04</span>
+                        <div class="exp-id">
+                            <img src="assets/images/ltimindtree-logo-blue.png" alt="LTIMindtree" class="exp-logo">
+                            <div>
+                                <h3 class="exp-company">LTIMindtree</h3>
+                                <h4 class="exp-role">Software Engineer</h4>
+                            </div>
+                        </div>
+                        <time class="exp-date">Jan 2021 – Jun 2023</time>
+                        <span class="exp-toggle">↓</span>
+                    </div>
+                    <div class="details">
+                        <div class="details-body">
+                            <p class="exp-skills-line">SQL · Python · ETL · AWS · S3 · Glue · ABAP · Data Modeling</p>
+                            <ul>
+                                <li>Developed 45+ custom ERP transactions using ABAP with SQL, improving data retrieval speed by 95% for 400+ users</li>
+                                <li>Supported SAP to AWS ETL migration by extracting ERP data, validating S3 and Glue outputs, improving Redshift load consistency across weekly cycles</li>
+                                <li>Diagnosed and resolved 30+ technical support issues via root cause analysis, cutting average resolution time by 35%</li>
+                                <li>Collaborated with global teams to optimize SDLC audits and change management practices, reducing SOX compliance issues by 84% across 52+ releases</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -332,127 +274,160 @@
     <!-- Education section -->
     <section id="education">
         <div class="container">
-            <h2>Education</h2>
-            <div class="underline"></div>
-
-            <div class="education-block">
-                <div class="education-header">
-                    <div class="university-logo">
-                        <img src="assets/images/tamu-logo.png" alt="Texas A&M University Logo">
-                    </div>
-                    <div class="university-info">
-                        <h3>Mays Business School (Texas A&M University)</h3>
-                        <span class="education-date">Aug 2023 - May 2025</span>
-                        <h4><i>Master of Science - Management Information Systems</i></h4>
-                    </div>
-                </div>
-                <div class="card-details">
-                    <p>GPA: 3.83</p>
-                    <p>Head of Marketing & Communications at Business Information Technology Students (BITS)</p><br>
-                    <p>Relevant Coursework - </p>
-                    <ul>
-                        <li>ISTM 622 - Advanced Data Management</li>
-                        <li>ISTM 637 - Data Warehousing</li>
-                        <li>ECEN 758 - Data Mining</li>
-                        <li>CSCE 679 - Data Visualization</li>
-                        <li>STAT 650 - Statistics & Foundations of Big Data</li>
-                    </ul>
-                </div>
+            <div class="section-header-block">
+                <span class="section-eyebrow">Academic Background</span>
+                <h2 class="section-display-title">The<br>Foundation</h2>
             </div>
+            <div class="edu-log">
 
-            <div class="education-block">
-                <div class="education-header">
-                    <div class="university-logo">
-                        <img src="assets/images/spit-logo.png" alt="S.P.I.T. Logo">
+                <div class="education-block edu-entry">
+                    <div class="edu-top">
+                        <img src="assets/images/tamu-logo.png" alt="Texas A&M University" class="edu-logo">
+                        <div class="edu-id">
+                            <h3 class="edu-school">Mays Business School, Texas A&amp;M University</h3>
+                            <h4 class="edu-degree">Master of Science — Management Information Systems</h4>
+                        </div>
+                        <time class="edu-date">Aug 2023 – May 2025</time>
+                        <span class="exp-toggle">↓</span>
                     </div>
-                    <div class="university-info">
-                        <h3>Sardar Patel Institute of Technology (University of Mumbai)</h3>
-                        <span class="education-date">Aug 2017 - May 2021</span>
-                        <h4><i>Bachelor of Technology - Electronics and Telecommunications</i></h4>
+                    <div class="details">
+                        <div class="details-body">
+                            <p class="edu-gpa">GPA: 3.83 &nbsp;·&nbsp; Head of Marketing &amp; Comms, BITS</p>
+                            <p class="edu-coursework-label">Relevant Coursework</p>
+                            <ul>
+                                <li>ISTM 622 – Advanced Data Management</li>
+                                <li>ISTM 637 – Data Warehousing</li>
+                                <li>ECEN 758 – Data Mining</li>
+                                <li>CSCE 679 – Data Visualization</li>
+                                <li>STAT 650 – Statistics &amp; Foundations of Big Data</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="card-details">
-                    <p>Achievements:</p>
-                    <ul>
-                        <li>Semi Finalist (Top 20 out of 800+ teams) at IICDC-2019, a national innovation hackathon by Texas Instruments & Dept. of Science & Technology - Govt. of India for building an affordable non-invasive flow meter</li>
-                        <li>Winner - Case Study Presentation by Fire & Security Association of India (FSAI)</li>
-                        <!-- <li>Volunteered for beach cleanup drives in Mumbai under Mr. Afroz Shah through 'SEVA' initiative</li> -->
-                    </ul>
+
+                <div class="education-block edu-entry">
+                    <div class="edu-top">
+                        <img src="assets/images/spit-logo.png" alt="S.P.I.T." class="edu-logo">
+                        <div class="edu-id">
+                            <h3 class="edu-school">Sardar Patel Institute of Technology, University of Mumbai</h3>
+                            <h4 class="edu-degree">Bachelor of Technology — Electronics &amp; Telecommunications</h4>
+                        </div>
+                        <time class="edu-date">Aug 2017 – May 2021</time>
+                        <span class="exp-toggle">↓</span>
+                    </div>
+                    <div class="details">
+                        <div class="details-body">
+                            <ul>
+                                <li>Semi Finalist (Top 20 of 800+ teams) at IICDC-2019, national innovation hackathon by Texas Instruments &amp; Dept. of Science &amp; Technology, Govt. of India — affordable non-invasive flow meter</li>
+                                <li>Winner — Case Study Presentation by Fire &amp; Security Association of India (FSAI)</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-
         </div>
     </section>
 
     <!-- Skills Section -->
     <section id="skills">
-        <div class="container">
-            <h2>Skills</h2>
-            <div class="underline"></div>
-            
-            <div class="skills-carousel">
-                <div class="skills-track">
-                    <div class="skill-card"><img src="/assets/images/skills/python-5.svg" alt="Python"><div class="skill-name">Python</div></div>
-                    <div class="skill-card"><img src="/assets/images/skills/mysql-logo-pure.svg" alt="SQL"><div class="skill-name">SQL</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/r-lang.svg" alt="R"><div class="skill-name">R</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/git-icon.svg" alt="Git"><div class="skill-name">Git</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/aws-2.svg" alt="AWS"><div class="skill-name">AWS</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/apache-spark-5.svg" alt="Apache Spark"><div class="skill-name">Apache Spark</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/cassandra.svg" alt="Cassandra"><div class="skill-name">Cassandra</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/mongodb-icon-2.svg" alt="MongoDB"><div class="skill-name">MongoDB</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/microsoft-sql-server-1.svg" alt="SSIS"><div class="skill-name">SSIS</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/tableau-software.svg" alt="Tableau"><div class="skill-name">Tableau</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/microsoft-excel-2013.svg" alt="Excel"><div class="skill-name">Excel</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/microsoft-5.svg" alt="Power BI"><div class="skill-name">Power BI</div></div>
-                    
-                    <!-- Duplicate for seamless scroll -->
-                    <div class="skill-card"><img src="/assets/images/skills/python-5.svg" alt="Python"><div class="skill-name">Python</div></div>
-                    <div class="skill-card"><img src="/assets/images/skills/mysql-logo-pure.svg" alt="SQL"><div class="skill-name">SQL</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/r-lang.svg" alt="R"><div class="skill-name">R</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/git-icon.svg" alt="Git"><div class="skill-name">Git</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/aws-2.svg" alt="AWS"><div class="skill-name">AWS</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/apache-spark-5.svg" alt="Apache Spark"><div class="skill-name">Apache Spark</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/cassandra.svg" alt="Cassandra"><div class="skill-name">Cassandra</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/mongodb-icon-2.svg" alt="MongoDB"><div class="skill-name">MongoDB</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/microsoft-sql-server-1.svg" alt="SSIS"><div class="skill-name">SSIS</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/tableau-software.svg" alt="Tableau"><div class="skill-name">Tableau</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/microsoft-excel-2013.svg" alt="Excel"><div class="skill-name">Excel</div></div>
-                    <div class="skill-card"><img src="assets/images/skills/microsoft-5.svg" alt="Power BI"><div class="skill-name">Power BI</div></div>
+        <div class="container skills-container">
+            <div class="skills-header">
+                <span class="skills-eyebrow">Technical Arsenal</span>
+                <h2 class="skills-title">The<br>Stack</h2>
+                <p class="skills-sub">Tools I've shipped real things with — weighted by how often I'd reach for them under pressure.</p>
+                <div class="skills-legend">
+                    <span class="leg-item"><span class="leg-dot leg-heavy"></span>Core stack</span>
+                    <span class="leg-item"><span class="leg-dot leg-mid"></span>Regular use</span>
+                    <span class="leg-item"><span class="leg-dot leg-low"></span>Contextual</span>
+                </div>
+            </div>
+            <div class="skills-manifest">
+                <div class="skill-row">
+                    <span class="skill-num">01</span>
+                    <span class="skill-cat">Languages</span>
+                    <div class="skill-items">
+                        <span class="sk sk-core">Python</span><span class="sk-sep">·</span><span class="sk sk-core">SQL</span><span class="sk-sep">·</span><span class="sk sk-mid">R</span><span class="sk-sep">·</span><span class="sk sk-mid">ABAP</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-num">02</span>
+                    <span class="skill-cat">Data Engineering</span>
+                    <div class="skill-items">
+                        <span class="sk sk-core">Apache Spark</span><span class="sk-sep">·</span><span class="sk sk-core">Kafka</span><span class="sk-sep">·</span><span class="sk sk-core">dbt</span><span class="sk-sep">·</span><span class="sk sk-mid">Airflow</span><span class="sk-sep">·</span><span class="sk sk-mid">SSIS</span><span class="sk-sep">·</span><span class="sk sk-low">Fivetran</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-num">03</span>
+                    <span class="skill-cat">Cloud & Storage</span>
+                    <div class="skill-items">
+                        <span class="sk sk-core">AWS</span><span class="sk-sep">·</span><span class="sk sk-core">S3</span><span class="sk-sep">·</span><span class="sk sk-core">Git</span><span class="sk-sep">·</span><span class="sk sk-mid">Glue</span><span class="sk-sep">·</span><span class="sk sk-mid">Redshift</span><span class="sk-sep">·</span><span class="sk sk-low">Docker</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-num">04</span>
+                    <span class="skill-cat">Databases</span>
+                    <div class="skill-items">
+                        <span class="sk sk-core">Snowflake</span><span class="sk-sep">·</span><span class="sk sk-core">PostgreSQL</span><span class="sk-sep">·</span><span class="sk sk-mid">MongoDB</span><span class="sk-sep">·</span><span class="sk sk-mid">DynamoDB</span><span class="sk-sep">·</span><span class="sk sk-low">Cassandra</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-num">05</span>
+                    <span class="skill-cat">AI & ML</span>
+                    <div class="skill-items">
+                        <span class="sk sk-core">LangChain</span><span class="sk-sep">·</span><span class="sk sk-core">OpenAI API</span><span class="sk-sep">·</span><span class="sk sk-mid">scikit-learn</span><span class="sk-sep">·</span><span class="sk sk-mid">Pandas</span><span class="sk-sep">·</span><span class="sk sk-mid">RAG</span><span class="sk-sep">·</span><span class="sk sk-low">PyTorch</span>
+                    </div>
+                </div>
+                <div class="skill-row">
+                    <span class="skill-num">06</span>
+                    <span class="skill-cat">Analytics & BI</span>
+                    <div class="skill-items">
+                        <span class="sk sk-core">Tableau</span><span class="sk-sep">·</span><span class="sk sk-core">Power BI</span><span class="sk-sep">·</span><span class="sk sk-mid">Excel</span><span class="sk-sep">·</span><span class="sk sk-low">Matplotlib</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- Contact -->    
+    <!-- Contact -->
     <section id="contact">
-        <div class="container">
-            <h2>Get in Touch</h2>
-            <a href="mailto:tanay.mehendale@tamu.edu?subject=Looking%20to%20connect%20-%20via%20Portfolio" class="email-button">
-                <i class="fa fa-envelope"></i> Contact me via Email
-            </a>
-                        
-            <div class="linkedin-prompt">
-                <p style="color: var(--text-color)">or send me a Connect request on LinkedIn:</p>
-                <!-- <div class="badge-info">
-                    <p><i>Please refresh the page if you click anywhere other than "View Profile".</i></p>
-                </div> -->
-                <div class="linkedin-badge">
-                    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
-                    <div class="LI-profile-badge" data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="tanay-mehendale"></div>
+        <div class="container contact-container">
+            <div class="contact-headline">
+                <span class="section-eyebrow">Get In Touch</span>
+                <h2 class="contact-title">Let's<br>Talk</h2>
+                <p class="contact-sub">I'm always up for a conversation about data systems, AI pipelines, or whatever problem you're trying to solve.</p>
+            </div>
+            <div class="contact-links">
+                <a href="mailto:tanay.mehendale@tamu.edu?subject=Looking%20to%20connect%20-%20via%20Portfolio" class="contact-row contact-email-row">
+                    <span class="contact-row-label">Email</span>
+                    <span class="contact-row-value">tanay.mehendale@tamu.edu</span>
+                </a>
+                <div class="contact-row contact-li-row">
+                    <span class="contact-row-label">LinkedIn</span>
+                    <div class="contact-li-content">
+                        <div class="linkedin-badge">
+                            <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+                            <div class="LI-profile-badge" data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="tanay-mehendale"></div>
+                        </div>
+                        <div class="linkedin-mobile">
+                            <a href="https://www.linkedin.com/in/tanay-mehendale" target="_blank" class="linkedin-button">
+                                <i class="fa fa-linkedin"></i> Connect on LinkedIn
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="linkedin-mobile">
-                    <a href="https://www.linkedin.com/in/tanay-mehendale" target="_blank" class="linkedin-button">
-                        <i class="fa fa-linkedin"></i> Connect on LinkedIn
-                    </a>
-                </div>                
             </div>
         </div>
     </section>
 
     <!-- Bottom Navigation for Mobile/Tablet -->
     <nav class="bottom-nav">
+        <a href="#about">
+            <i class="fa fa-user-o"></i>
+            <span>About</span>
+        </a>
         <a href="#projects">
-            <i class="fa fa-lightbulb-o"></i>
+            <i class="fa fa-code"></i>
             <span>Projects</span>
         </a>
         <a href="#experience">
@@ -460,18 +435,17 @@
             <span>Experience</span>
         </a>
         <a href="#contact">
-            <i class="fa fa-phone"></i>
+            <i class="fa fa-envelope-o"></i>
             <span>Contact</span>
         </a>
         <div class="dropup">
             <button id="more-btn">
-                <i class="fa fa-bars"></i>
+                <i class="fa fa-ellipsis-h"></i>
                 <span>More</span>
             </button>
             <div id="more-menu" class="dropup-menu">
-                <a href="#about">About</a>
-                <a href="#education">Education</a>
-                <a href="#skills">Skills</a>
+                <a href="#education"><i class="fa fa-graduation-cap"></i> Education</a>
+                <a href="#skills"><i class="fa fa-terminal"></i> Skills</a>
             </div>
         </div>
     </nav>
