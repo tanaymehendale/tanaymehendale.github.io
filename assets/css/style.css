@@ -97,7 +97,8 @@ button,
 #lead {
     position: relative;
     min-height: 100vh;
-    background: oklch(8% 0.02 300);
+    /* Fallback: deep lake-blue for the brief moment before image loads */
+    background: oklch(18% 0.06 240);
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -109,29 +110,42 @@ button,
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        to top,
-        oklch(6% 0.03 300 / 0.92) 0%,
-        oklch(6% 0.03 300 / 0.45) 50%,
-        oklch(6% 0.03 300 / 0.18) 100%
-    );
-    z-index: 0;
+    /* Two-layer gradient:
+       Vertical: deep lake-blue darkness rising from bottom (where snow is bright)
+       Horizontal: extra shadow on the left where all the text lives */
+    background:
+        linear-gradient(
+            to right,
+            oklch(5% 0.04 240 / 0.38) 0%,
+            oklch(5% 0.04 240 / 0.12) 45%,
+            transparent 70%
+        ),
+        linear-gradient(
+            to top,
+            oklch(8% 0.05 240 / 0.96) 0%,
+            oklch(8% 0.05 240 / 0.72) 25%,
+            oklch(8% 0.05 240 / 0.3) 55%,
+            oklch(8% 0.05 240 / 0.06) 100%
+        );
+    z-index: 1;
     pointer-events: none;
 }
 
-#lead-video {
+#lead-bg-img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -1;
+    /* Bias slightly upward — shows more mountain/lake, less snow foot */
+    object-position: center 20%;
+    z-index: 0;
 }
 
 #lead-content {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     padding: clamp(28px, 6vw, 80px);
     padding-bottom: clamp(48px, 8vw, 96px);
     width: 100%;
@@ -1948,5 +1962,79 @@ footer .social a:hover {
     footer .copyright{
         font-size: small;
         font-weight: 400;
+    }
+}
+
+/* ================================
+   Hardening — overflow, focus, motion
+   ================================ */
+
+/* 1. Grid/flex children: allow shrinking below content size */
+.exp-id,
+.edu-id,
+.proj-info,
+.about-right,
+.contact-row-value,
+.skill-items {
+    min-width: 0;
+}
+
+/* 2. Text overflow in fixed-width columns */
+.skill-cat {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.exp-company,
+.edu-school {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 3. Body text: break long unbreakable strings (URLs, tech names) */
+.about-bio,
+.proj-desc,
+.exp-skills-line,
+.exp-entry .details-body li,
+.edu-entry .details-body li {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* 4. Focus styles for keyboard navigation */
+:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Collapsible rows need visible focus since they use tabindex */
+.timeline-item.exp-entry:focus-visible,
+.education-block.edu-entry:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* 5. Reduced motion — disable all transitions/animations */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    /* Keep expand/collapse functional but instant */
+    .details {
+        transition: none;
     }
 }

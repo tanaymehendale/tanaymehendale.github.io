@@ -30,19 +30,6 @@ if (scrollDown) {
     });
 }
 
-// Lazy loading for lead background
-document.addEventListener("DOMContentLoaded", () => {
-    const video = document.getElementById("lead-video");
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                video.setAttribute("preload", "auto");
-                observer.disconnect();
-            }
-        });
-    });
-    observer.observe(video);
-});
 
 
 // Dark/Light theme toggle
@@ -161,11 +148,31 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!section) return;
         const cards = section.querySelectorAll(cardSelector);
         cards.forEach(card => {
-            card.addEventListener('click', () => {
+            // Keyboard accessibility
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-expanded', 'false');
+
+            const toggle = () => {
+                const isActive = card.classList.contains('active');
+                // Collapse all others
                 cards.forEach(c => {
-                    if (c !== card) c.classList.remove('active');
+                    c.classList.remove('active');
+                    c.setAttribute('aria-expanded', 'false');
                 });
-                card.classList.toggle('active');
+                // Toggle this one
+                if (!isActive) {
+                    card.classList.add('active');
+                    card.setAttribute('aria-expanded', 'true');
+                }
+            };
+
+            card.addEventListener('click', toggle);
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggle();
+                }
             });
         });
     }
