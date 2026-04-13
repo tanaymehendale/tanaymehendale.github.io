@@ -1,0 +1,16 @@
+{
+  "name": "tanaymehendale.github.io",
+  "version": "1.0.0",
+  "description": "A clean, responsive portfolio website showcasing my professional journey, projects, and skills. Visit the live site at [tanaymehendale.github.io](https://tanaymehendale.github.io).",
+  "main": "emailjs_config.js",
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "dev": "npx @11ty/eleventy --serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.5"
+  }
+}

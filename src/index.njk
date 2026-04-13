@@ -1,51 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanay Mehendale - Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="assets/images/portfolio-logo.png">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <!-- <script>
-        (function() {
-            emailjs.init(EMAILJS_PUBLIC_KEY); // EmailJS public key
-        })();
-    </script> -->
-    <link rel="preload" href="assets/images/hero-bg.jpg" as="image">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-</head>
-<body class="dark-mode">
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="nav-left">
-                <img id="nav-logo" src="/assets/images/portfolio-logo.png" alt="Logo" class="nav-logo">
-                <span class="nav-name">Tanay Mehendale</span>
-            </div>
-            <div class="nav-right">
-                <ul class="nav-menu">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-                    <i class="fa fa-sun-o"></i>
-                </button>
-            </div>
-        </nav>
-    </header>
+---
+layout: base.njk
+pageTitle: "Tanay Mehendale - Portfolio"
+---
 
     <!-- Lead Section -->
     <div id="lead">
-        <img src="assets/images/hero-bg.jpg" id="lead-bg-img" alt="" aria-hidden="true">
+        <img src="/assets/images/hero-bg.jpg" id="lead-bg-img" alt="" aria-hidden="true">
         <div id="lead-content">
             <p class="lead-eyebrow">AI Engineer &amp; Data Systems Builder</p>
             <h1 class="lead-name">Tanay<br>Mehendale</h1>
@@ -56,12 +16,12 @@
                 <span class="lead-sep">·</span>
                 <span class="lead-fact">DJ &amp; Producer</span>
             </div>
-            <a href="assets/docs/Tanay Mehendale_Resume_AI.pdf" class="lead-resume-link" target="_blank" rel="noreferrer noopener">
+            <a href="/assets/docs/Tanay Mehendale_Resume_AI.pdf" class="lead-resume-link" target="_blank" rel="noreferrer noopener">
                 View Resume <span class="lead-arrow">↗</span>
             </a>
         </div>
     </div>
-    
+
     <!-- About Section -->
     <section id="about">
         <div class="container about-container">
@@ -77,9 +37,9 @@
                 </div>
             </div>
             <div class="about-right">
-                <img src="assets/images/profile.jpg" alt="Tanay Mehendale" class="about-image">
+                <img src="/assets/images/profile.jpg" alt="Tanay Mehendale" class="about-image">
                 <p class="about-bio">I build data and backend systems that power analytics and AI products — Python, SQL, AWS, streaming pipelines, LLM-based agents. I enjoy breaking systems, fixing them, and making them scale.</p>
-                <p class="about-bio">When I’m not building: EDM on the decks, F1 on the screen, sci-fi on the nightstand.</p>
+                <p class="about-bio">When I'm not building: EDM on the decks, F1 on the screen, sci-fi on the nightstand.</p>
                 <div class="about-social-row">
                     <a href="https://github.com/tanaymehendale" target="_blank" class="about-social-link">
                         <i class="fa fa-github"></i> GitHub
@@ -91,7 +51,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Projects Section -->
     <section id="projects">
         <div class="container projects-container">
@@ -101,54 +61,23 @@
             </div>
             <div class="project-log">
 
-                <a href="projects/apartment-finder-ai/index.html" class="proj-entry">
+                {% for project in projects %}
+                <a href="/projects/{{ project.slug }}/" class="proj-entry{% if project.featured %} proj-featured{% endif %}">
                     <div class="proj-top">
-                        <span class="proj-idx">01</span>
+                        <span class="proj-idx">{{ loop.index | twoDigit }}</span>
                         <div class="proj-info">
-                            <h3 class="proj-title">ApartmentFinder AI</h3>
-                            <p class="proj-desc">A Multi-Agent AI system that simplifies relocation moves — Google ADK, RAG pipelines, and MCP in one coherent product.</p>
+                            <h3 class="proj-title">{{ project.title }}</h3>
+                            <p class="proj-desc">{{ project.shortDesc }}</p>
                             <div class="proj-tags">
-                                <span class="proj-tag">AI Agents</span>
-                                <span class="proj-tag">RAG Pipeline</span>
-                                <span class="proj-tag">MCP</span>
-                                <span class="proj-tag">Google ADK</span>
+                                {% for tag in project.tags %}
+                                <span class="proj-tag">{{ tag }}</span>
+                                {% endfor %}
                             </div>
                         </div>
                         <span class="proj-arrow">↗</span>
                     </div>
                 </a>
-
-                <a href="projects/real-time-streaming/index.html" class="proj-entry">
-                    <div class="proj-top">
-                        <span class="proj-idx">02</span>
-                        <div class="proj-info">
-                            <h3 class="proj-title">Real-Time Data Streaming</h3>
-                            <p class="proj-desc">End-to-end real-time pipeline using Airflow, Kafka, and Spark — built for scale and reliability from source to sink.</p>
-                            <div class="proj-tags">
-                                <span class="proj-tag">Apache Spark</span>
-                                <span class="proj-tag">Kafka</span>
-                                <span class="proj-tag">Airflow</span>
-                                <span class="proj-tag">Cassandra</span>
-                            </div>
-                        </div>
-                        <span class="proj-arrow">↗</span>
-                    </div>
-                </a>
-
-                <a href="projects/data-warehouse/index.html" class="proj-entry">
-                    <div class="proj-top">
-                        <span class="proj-idx">03</span>
-                        <div class="proj-info">
-                            <h3 class="proj-title">Data Warehouse for Retail Analytics</h3>
-                            <p class="proj-desc">Comprehensive data warehouse implementation using SQL Server — schema design, ETL pipelines, and a full reporting layer.</p>
-                            <div class="proj-tags">
-                                <span class="proj-tag">Data Warehousing</span>
-                                <span class="proj-tag">SQL Server</span>
-                            </div>
-                        </div>
-                        <span class="proj-arrow">↗</span>
-                    </div>
-                </a>
+                {% endfor %}
 
             </div>
         </div>
@@ -167,7 +96,7 @@
                     <div class="exp-top">
                         <span class="exp-idx">01</span>
                         <div class="exp-id">
-                            <img src="assets/images/HCLT-logo.png" alt="HCLTech" class="exp-logo">
+                            <img src="/assets/images/HCLT-logo.png" alt="HCLTech" class="exp-logo">
                             <div>
                                 <h3 class="exp-company">HCLTech</h3>
                                 <h4 class="exp-role">AI Engineer</h4>
@@ -190,7 +119,7 @@
                     <div class="exp-top">
                         <span class="exp-idx">02</span>
                         <div class="exp-id">
-                            <img src="assets/images/tamu-logo.png" alt="Texas A&M University" class="exp-logo">
+                            <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="exp-logo">
                             <div>
                                 <h3 class="exp-company">Texas A&M University</h3>
                                 <h4 class="exp-role">Data Engineer Intern – Research</h4>
@@ -216,7 +145,7 @@
                     <div class="exp-top">
                         <span class="exp-idx">03</span>
                         <div class="exp-id">
-                            <img src="assets/images/tamu-logo.png" alt="Texas A&M University" class="exp-logo">
+                            <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="exp-logo">
                             <div>
                                 <h3 class="exp-company">Texas A&M University</h3>
                                 <h4 class="exp-role">Graduate Teaching Assistant</h4>
@@ -242,7 +171,7 @@
                     <div class="exp-top">
                         <span class="exp-idx">04</span>
                         <div class="exp-id">
-                            <img src="assets/images/ltimindtree-logo-blue.png" alt="LTIMindtree" class="exp-logo">
+                            <img src="/assets/images/ltimindtree-logo-blue.png" alt="LTIMindtree" class="exp-logo">
                             <div>
                                 <h3 class="exp-company">LTIMindtree</h3>
                                 <h4 class="exp-role">Software Engineer</h4>
@@ -267,8 +196,8 @@
             </div>
         </div>
     </section>
-    
-    <!-- Education section -->
+
+    <!-- Education Section -->
     <section id="education">
         <div class="container">
             <div class="section-header-block">
@@ -279,7 +208,7 @@
 
                 <div class="education-block edu-entry">
                     <div class="edu-top">
-                        <img src="assets/images/tamu-logo.png" alt="Texas A&M University" class="edu-logo">
+                        <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="edu-logo">
                         <div class="edu-id">
                             <h3 class="edu-school">Mays Business School, Texas A&amp;M University</h3>
                             <h4 class="edu-degree">Master of Science — Management Information Systems</h4>
@@ -304,7 +233,7 @@
 
                 <div class="education-block edu-entry">
                     <div class="edu-top">
-                        <img src="assets/images/spit-logo.png" alt="S.P.I.T." class="edu-logo">
+                        <img src="/assets/images/spit-logo.png" alt="S.P.I.T." class="edu-logo">
                         <div class="edu-id">
                             <h3 class="edu-school">Sardar Patel Institute of Technology, University of Mumbai</h3>
                             <h4 class="edu-degree">Bachelor of Technology — Electronics &amp; Telecommunications</h4>
@@ -356,7 +285,7 @@
                 </div>
                 <div class="skill-row">
                     <span class="skill-num">03</span>
-                    <span class="skill-cat">Cloud & Storage</span>
+                    <span class="skill-cat">Cloud &amp; Storage</span>
                     <div class="skill-items">
                         <span class="sk sk-core">AWS</span><span class="sk-sep">·</span><span class="sk sk-core">S3</span><span class="sk-sep">·</span><span class="sk sk-core">Git</span><span class="sk-sep">·</span><span class="sk sk-mid">Glue</span><span class="sk-sep">·</span><span class="sk sk-mid">Redshift</span><span class="sk-sep">·</span><span class="sk sk-low">Docker</span>
                     </div>
@@ -370,14 +299,14 @@
                 </div>
                 <div class="skill-row">
                     <span class="skill-num">05</span>
-                    <span class="skill-cat">AI & ML</span>
+                    <span class="skill-cat">AI &amp; ML</span>
                     <div class="skill-items">
                         <span class="sk sk-core">LangChain</span><span class="sk-sep">·</span><span class="sk sk-core">OpenAI API</span><span class="sk-sep">·</span><span class="sk sk-mid">scikit-learn</span><span class="sk-sep">·</span><span class="sk sk-mid">Pandas</span><span class="sk-sep">·</span><span class="sk sk-mid">RAG</span><span class="sk-sep">·</span><span class="sk sk-low">PyTorch</span>
                     </div>
                 </div>
                 <div class="skill-row">
                     <span class="skill-num">06</span>
-                    <span class="skill-cat">Analytics & BI</span>
+                    <span class="skill-cat">Analytics &amp; BI</span>
                     <div class="skill-items">
                         <span class="sk sk-core">Tableau</span><span class="sk-sep">·</span><span class="sk sk-core">Power BI</span><span class="sk-sep">·</span><span class="sk sk-mid">Excel</span><span class="sk-sep">·</span><span class="sk sk-low">Matplotlib</span>
                     </div>
@@ -385,8 +314,8 @@
             </div>
         </div>
     </section>
-    
-    <!-- Contact -->
+
+    <!-- Contact Section -->
     <section id="contact">
         <div class="container contact-container">
             <div class="contact-headline">
@@ -416,69 +345,3 @@
             </div>
         </div>
     </section>
-
-    <!-- Bottom Navigation for Mobile/Tablet -->
-    <nav class="bottom-nav">
-        <a href="#about">
-            <i class="fa fa-user-o"></i>
-            <span>About</span>
-        </a>
-        <a href="#projects">
-            <i class="fa fa-code"></i>
-            <span>Projects</span>
-        </a>
-        <a href="#experience">
-            <i class="fa fa-briefcase"></i>
-            <span>Experience</span>
-        </a>
-        <a href="#contact">
-            <i class="fa fa-envelope-o"></i>
-            <span>Contact</span>
-        </a>
-        <div class="dropup">
-            <button id="more-btn">
-                <i class="fa fa-ellipsis-h"></i>
-                <span>More</span>
-            </button>
-            <div id="more-menu" class="dropup-menu">
-                <a href="#education"><i class="fa fa-graduation-cap"></i> Education</a>
-                <a href="#skills"><i class="fa fa-terminal"></i> Skills</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="floating-buttons">
-        <a href="assets/docs/Tanay Mehendale_Resume_AI.pdf" class="float-button resume-button" target="_blank">
-            <i class="fa fa-file-text"></i> View Resume
-        </a>
-        <a href="#" class="float-button scroll-top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
-    </div>    
-    
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="copyright">
-                <p>Copyright © 2025 Tanay Mehendale</p>
-            </div>
-            <div class="back-to-top">
-                <a href="#lead">
-                    <i class="fa fa-chevron-up"></i>
-                </a>
-            </div>
-            <div class="social">
-                <a href="https://github.com/tanaymehendale" target="_blank">
-                    <i class="fa fa-github"></i>
-                </a>
-                <a href="https://linkedin.com/in/tanay-mehendale" target="_blank">
-                    <i class="fa fa-linkedin"></i>
-                </a>
-            </div>
-        </div>
-    </footer>
-    <script src="emailjs_config.js"></script>    
-    <script src="script.js"></script>
-</body>
-</html>
