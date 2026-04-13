@@ -3,3 +3,6 @@
 emailjs_config.js
 node_modules/
 _site/
+.claude/
+.playwright/
+.playwright-cli/
