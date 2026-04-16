@@ -2,7 +2,7 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, new-ui-3]
   workflow_dispatch:
 
 permissions:
