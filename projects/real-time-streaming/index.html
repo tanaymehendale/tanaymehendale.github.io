@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanay Mehendale - Portfolio</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/portfolio-logo.png">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link rel="preload" href="/assets/images/hero-bg.jpg" as="image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Bricolage+Grotesque:wght@700;800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="dark-mode">
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="nav-left">
+                <img id="nav-logo" src="/assets/images/portfolio-logo.png" alt="Logo" class="nav-logo">
+                <span class="nav-name">Tanay Mehendale</span>
+            </div>
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="/#about">About</a></li>
+                    <li><a href="/#projects">Projects</a></li>
+                    <li><a href="/#experience">Experience</a></li>
+                    <li><a href="/#education">Education</a></li>
+                    <li><a href="/#skills">Skills</a></li>
+                    <li><a href="/#contact">Contact</a></li>
+                </ul>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fa fa-sun-o"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div id="pd-progress-bar" class="pd-progress-bar" aria-hidden="true"></div>
+
+<div class="project-detail">
+
+    <!-- Hero -->
+    <div class="pd-hero">
+        <div class="pd-hero-inner">
+            <a href="/#projects" class="pd-breadcrumb">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M9 11L5 7l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Projects
+            </a>
+
+            <h1 class="pd-title">Real-Time Data Streaming</h1>
+
+            
+            <div class="pd-tags">
+                
+                <span class="pd-tag">Apache Spark</span>
+                
+                <span class="pd-tag">Kafka</span>
+                
+                <span class="pd-tag">Airflow</span>
+                
+                <span class="pd-tag">Cassandra</span>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Two-column layout -->
+    <div class="pd-layout">
+
+        <!-- Sidebar -->
+        <aside class="pd-sidebar" aria-label="Page navigation">
+            <div class="pd-sidebar-sticky">
+                
+                <nav class="pd-sidenav">
+                    <p class="pd-sidenav-label">Contents</p>
+                    
+                    <a class="pd-sidenav-link" href="#pd-s-1">
+                        <span class="pd-sidenav-num" aria-hidden="true">01</span>
+                        <span>Problem Statement</span>
+                    </a>
+                    
+                    <a class="pd-sidenav-link" href="#pd-s-2">
+                        <span class="pd-sidenav-num" aria-hidden="true">02</span>
+                        <span>Approach</span>
+                    </a>
+                    
+                    <a class="pd-sidenav-link" href="#pd-s-3">
+                        <span class="pd-sidenav-num" aria-hidden="true">03</span>
+                        <span>Methodology</span>
+                    </a>
+                    
+                    <a class="pd-sidenav-link" href="#pd-s-4">
+                        <span class="pd-sidenav-num" aria-hidden="true">04</span>
+                        <span>Result</span>
+                    </a>
+                    
+                </nav>
+                
+
+                
+                <div class="pd-sidebar-links">
+                    
+                    <a href="https://github.com/tanaymehendale/real-time-streaming" class="pd-ext-link" target="_blank" rel="noreferrer noopener">
+                        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+                            <path d="M1.5 9.5l8-8M9.5 9.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        GitHub Repository
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="pd-main">
+
+            
+
+            
+            <div class="pd-impact">
+                <span class="pd-impact-label">Impact</span>
+                <p class="pd-impact-text">Building a reproducible real-time pipeline that runs entirely on WSL2 + Docker (9 containers: Airflow web + scheduler + Postgres, Kafka broker + ZooKeeper + Control Center, Spark master + worker, Cassandra)</p>
+            </div>
+            
+
+            <!-- Mobile-only links (shown above sections on small screens) -->
+            
+            <div class="pd-mobile-links">
+                
+                <a href="https://github.com/tanaymehendale/real-time-streaming" class="pd-cta" target="_blank" rel="noreferrer noopener">
+                    GitHub Repository
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+                        <path d="M1.5 9.5l8-8M9.5 9.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                
+            </div>
+            
+
+            <!-- Coming soon state -->
+            
+
+            <!-- Content sections -->
+            
+            
+            <section class="pd-section" id="pd-s-1">
+                <div class="pd-section-hd">
+                    <span class="pd-section-num" aria-hidden="true">01</span>
+                    <h2 class="pd-section-title">Problem Statement</h2>
+                </div>
+                <div class="pd-section-body">
+                    <p>I wanted an end-to-end, locally reproducible streaming system that:
+          <ol style="margin-left: 2em;">
+            <li>Pulls synthetic user data from a public API,</li>
+            <li>Transports it via a durable queue,</li>
+            <li>processes it with a streaming engine, and</li>
+            <li>persists it in a queryable store.</li>
+          </ol>
+          Constraints: run on Windows 10 via WSL, no managed services, and keep the setup beginner-friendly.
+        </p>
+                </div>
+            </section>
+            
+            <section class="pd-section" id="pd-s-2">
+                <div class="pd-section-hd">
+                    <span class="pd-section-num" aria-hidden="true">02</span>
+                    <h2 class="pd-section-title">Approach</h2>
+                </div>
+                <div class="pd-section-body">
+                    <p>I chose a well-known "starter" architecture:
+          <ul style="margin-left: 2em;">
+            <li>Airflow orchestrates and produces JSON events to Kafka (users_created topic)</li>
+            <li>Spark Structured Streaming reads Kafka, parses JSON, and writes to Cassandra.</li>
+            <li>Cassandra stores the final table spark_streams.created_users</li>
+            <li>Control Center gives me Kafka visibility; Postgres holds Airflow metadata; ZooKeeper coordinates Kafka.</li>
+          </ul>
+        </p>
+                </div>
+            </section>
+            
+            <section class="pd-section" id="pd-s-3">
+                <div class="pd-section-hd">
+                    <span class="pd-section-num" aria-hidden="true">03</span>
+                    <h2 class="pd-section-title">Methodology</h2>
+                </div>
+                <div class="pd-section-body">
+                    <p>This project runs like a small real-time mail system.</p>
+        <p>On a schedule, Airflow calls a public "random user" API to generate realistic test records and drops each one as a message onto Kafka, which acts as a reliable queue so nothing gets lost if parts start or stop.</p>
+        <p>Spark Structured Streaming continuously reads those messages, cleans and structures the fields (name, email, phone, etc.), and writes the results into Cassandra, a fast database optimized for streaming inserts.</p>
+        <p>To keep it frictionless, the Spark job auto-creates the Cassandra keyspace/table on first run, and the Airflow task ensures the Kafka topic exists before producing — so a fresh clone "just works."</p>
+        <p>You can verify the flow end-to-end by triggering the Airflow task, watching messages appear in Kafka's UI, and seeing row counts grow in Cassandra.</p>
+                </div>
+            </section>
+            
+            <section class="pd-section" id="pd-s-4">
+                <div class="pd-section-hd">
+                    <span class="pd-section-num" aria-hidden="true">04</span>
+                    <h2 class="pd-section-title">Result</h2>
+                </div>
+                <div class="pd-section-body">
+                    <p>A fully working local pipeline that ingests synthetic user events, streams them through Kafka, transforms/parses them in Spark, and lands structured rows in Cassandra.</p>
+                </div>
+            </section>
+            
+            
+
+            <!-- Bottom actions -->
+            <div class="pd-footer-actions">
+                
+                
+                <a href="https://github.com/tanaymehendale/real-time-streaming" class="pd-cta" target="_blank" rel="noreferrer noopener">
+                    GitHub Repository
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+                        <path d="M1.5 9.5l8-8M9.5 9.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                
+                
+                <a href="/#projects" class="pd-back-home">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                        <path d="M10 6H2M2 6L5.5 2.5M2 6L5.5 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    All projects
+                </a>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<script>
+(function () {
+    // ── Reading progress bar ─────────────────────────────────
+    var bar = document.getElementById('pd-progress-bar');
+    if (bar) {
+        function updateBar() {
+            var total = document.documentElement.scrollHeight - window.innerHeight;
+            bar.style.transform = 'scaleX(' + (total > 0 ? window.scrollY / total : 0) + ')';
+        }
+        window.addEventListener('scroll', updateBar, { passive: true });
+        updateBar();
+    }
+
+    // ── Scrollspy ────────────────────────────────────────────
+    var navLinks = document.querySelectorAll('.pd-sidenav-link');
+    var sections = document.querySelectorAll('.pd-section');
+    if (navLinks.length && sections.length) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var id = entry.target.id;
+                    navLinks.forEach(function (l) {
+                        l.classList.toggle('is-active', l.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+        sections.forEach(function (s) { io.observe(s); });
+    }
+
+    // ── Sticky sidebar (JS-driven) ───────────────────────────
+    // CSS position:sticky is broken when overflow-x:hidden on html/body
+    // promotes overflow-y to 'auto', creating a non-viewport scroll container.
+    // We replicate sticky with translateY instead.
+    var sticky = document.querySelector('.pd-sidebar-sticky');
+    var sidebar = document.querySelector('.pd-sidebar');
+    if (sticky && sidebar) {
+        var OFFSET = 0;
+        var sidebarAbsTop = null;
+
+        function computeOffset() {
+            var hdr = document.querySelector('header');
+            OFFSET = (hdr ? hdr.offsetHeight : 70) + 32; // nav + 2rem
+        }
+
+        function cacheSidebarTop() {
+            sidebarAbsTop = sidebar.getBoundingClientRect().top + window.pageYOffset;
+        }
+
+        function updateSticky() {
+            if (sidebarAbsTop === null) return;
+            var scrollY = window.pageYOffset;
+            var sidebarH = sidebar.offsetHeight;
+            var stickyH = sticky.offsetHeight;
+            var start = sidebarAbsTop - OFFSET;
+            var end   = sidebarAbsTop + sidebarH - OFFSET - stickyH;
+            var ty = scrollY <= start ? 0
+                   : scrollY >= end  ? Math.max(0, end - start)
+                   : scrollY - start;
+            sticky.style.transform = 'translateY(' + ty + 'px)';
+        }
+
+        function init() {
+            computeOffset();
+            cacheSidebarTop();
+            updateSticky();
+        }
+
+        window.addEventListener('scroll', updateSticky, { passive: true });
+        window.addEventListener('resize', init, { passive: true });
+        window.addEventListener('load', init);
+        init();
+    }
+}());
+</script>
+
+
+    <!-- Bottom Navigation for Mobile/Tablet -->
+    <nav class="bottom-nav">
+        <a href="/#about">
+            <i class="fa fa-user-o"></i>
+            <span>About</span>
+        </a>
+        <a href="/#projects">
+            <i class="fa fa-code"></i>
+            <span>Projects</span>
+        </a>
+        <a href="/#experience">
+            <i class="fa fa-briefcase"></i>
+            <span>Experience</span>
+        </a>
+        <a href="/#contact">
+            <i class="fa fa-envelope-o"></i>
+            <span>Contact</span>
+        </a>
+        <div class="dropup">
+            <button id="more-btn">
+                <i class="fa fa-ellipsis-h"></i>
+                <span>More</span>
+            </button>
+            <div id="more-menu" class="dropup-menu">
+                <a href="/#education"><i class="fa fa-graduation-cap"></i> Education</a>
+                <a href="/#skills"><i class="fa fa-terminal"></i> Skills</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="floating-buttons">
+        <a href="/assets/docs/Tanay Mehendale_Resume_AI.pdf" class="float-button resume-button" target="_blank">
+            <i class="fa fa-file-text"></i> View Resume
+        </a>
+        <a href="#" class="float-button scroll-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="sf-inner">
+
+            <!-- Tagline + links -->
+            <div class="sf-top">
+                <p class="sf-tagline">
+                    Built with curiosity,<br>
+                    coffee, and too many<br>
+                    browser tabs.
+                </p>
+                <nav class="sf-nav" aria-label="Footer links">
+                    <a href="#" class="sf-link" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                            <path d="M6 10V2M6 2L2.5 5.5M6 2L9.5 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Back to top
+                    </a>
+                    <a href="https://github.com/tanaymehendale" class="sf-link" target="_blank" rel="noreferrer noopener">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                            <path d="M1.5 10.5l9-9M10.5 10.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/tanay-mehendale" class="sf-link" target="_blank" rel="noreferrer noopener">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                            <path d="M1.5 10.5l9-9M10.5 10.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <a href="/assets/docs/Tanay Mehendale_Resume_AI.pdf" class="sf-link" target="_blank" rel="noreferrer noopener">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                            <path d="M1.5 10.5l9-9M10.5 10.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Resume
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Visual signature: large outlined name -->
+            <div class="sf-signature" aria-hidden="true">
+                <span class="sf-name">Tanay Mehendale</span>
+            </div>
+
+            <!-- Copyright -->
+            <div class="sf-bottom">
+                <p class="sf-copy">© 2026 Tanay Mehendale</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="/emailjs_config.js"></script>
+    <script src="/script.js"></script>
+</body>
+</html>
