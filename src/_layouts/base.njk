@@ -20,56 +20,86 @@
     <header>
         <nav>
             <div class="nav-left">
-                <img id="nav-logo" src="/assets/images/portfolio-logo.png" alt="Logo" class="nav-logo">
-                <span class="nav-name">Tanay Mehendale</span>
+                <a href="/" class="nav-logo-link" aria-label="Tanay Mehendale — Home">
+                    <img src="/assets/images/portfolio-logo.png" alt="" class="nav-logo-img nav-logo-default" aria-hidden="true">
+                    <img src="/assets/images/portfolio-logo-black.png" alt="" class="nav-logo-img nav-logo-black" aria-hidden="true">
+                </a>
             </div>
             <div class="nav-right">
                 <ul class="nav-menu">
                     <li><a href="/#about">About</a></li>
                     <li><a href="/#projects">Projects</a></li>
-                    <li><a href="/#experience">Experience</a></li>
+                    <li><a href="/#experience">Work</a></li>
                     <li><a href="/#education">Education</a></li>
                     <li><a href="/#skills">Skills</a></li>
                     <li><a href="/#contact">Contact</a></li>
                 </ul>
-                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-                    <i class="fa fa-sun-o"></i>
+                <a href="/assets/docs/Tanay Mehendale_Resume_AI.pdf" class="nav-resume-btn" target="_blank" rel="noreferrer noopener" aria-label="View resume PDF">
+                    View Resume <span aria-hidden="true">↗</span>
+                </a>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light theme">
+                    <svg class="theme-icon theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                    <svg class="theme-icon theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                </button>
+                <button id="nav-hamburger" class="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-overlay">
+                    <span class="ham-bar"></span>
+                    <span class="ham-bar"></span>
+                    <span class="ham-bar"></span>
                 </button>
             </div>
         </nav>
     </header>
 
+    <!-- Full-screen mobile menu overlay -->
+    <div id="nav-overlay" class="nav-overlay" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+        <div class="overlay-watermark" aria-hidden="true">TM</div>
+        <nav class="overlay-nav" aria-label="Main navigation">
+            <a href="/#about" class="overlay-link">
+                <span class="overlay-num">01</span>
+                <span class="overlay-label">About</span>
+            </a>
+            <a href="/#projects" class="overlay-link">
+                <span class="overlay-num">02</span>
+                <span class="overlay-label">Projects</span>
+            </a>
+            <a href="/#experience" class="overlay-link">
+                <span class="overlay-num">03</span>
+                <span class="overlay-label">Work</span>
+            </a>
+            <a href="/#education" class="overlay-link">
+                <span class="overlay-num">04</span>
+                <span class="overlay-label">Education</span>
+            </a>
+            <a href="/#skills" class="overlay-link">
+                <span class="overlay-num">05</span>
+                <span class="overlay-label">Skills</span>
+            </a>
+            <a href="/#contact" class="overlay-link">
+                <span class="overlay-num">06</span>
+                <span class="overlay-label">Contact</span>
+            </a>
+        </nav>
+        <div class="overlay-footer">
+            <a href="https://github.com/tanaymehendale" target="_blank" rel="noreferrer" class="overlay-social">GitHub</a>
+            <a href="https://linkedin.com/in/tanay-mehendale" target="_blank" rel="noreferrer" class="overlay-social">LinkedIn</a>
+            <a href="/assets/docs/Tanay Mehendale_Resume_AI.pdf" target="_blank" rel="noreferrer" class="overlay-social">Resume ↗</a>
+        </div>
+    </div>
+
     {{ content | safe }}
 
-    <!-- Bottom Navigation for Mobile/Tablet -->
-    <nav class="bottom-nav">
-        <a href="/#about">
-            <i class="fa fa-user-o"></i>
-            <span>About</span>
-        </a>
-        <a href="/#projects">
-            <i class="fa fa-code"></i>
-            <span>Projects</span>
-        </a>
-        <a href="/#experience">
-            <i class="fa fa-briefcase"></i>
-            <span>Experience</span>
-        </a>
-        <a href="/#contact">
-            <i class="fa fa-envelope-o"></i>
-            <span>Contact</span>
-        </a>
-        <div class="dropup">
-            <button id="more-btn">
-                <i class="fa fa-ellipsis-h"></i>
-                <span>More</span>
-            </button>
-            <div id="more-menu" class="dropup-menu">
-                <a href="/#education"><i class="fa fa-graduation-cap"></i> Education</a>
-                <a href="/#skills"><i class="fa fa-terminal"></i> Skills</a>
-            </div>
-        </div>
-    </nav>
 
     <div class="floating-buttons">
         <a href="/assets/docs/Tanay Mehendale_Resume_AI.pdf" class="float-button resume-button" target="_blank">
