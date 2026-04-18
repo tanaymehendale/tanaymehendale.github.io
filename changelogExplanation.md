@@ -4,6 +4,26 @@ _This file is auto-maintained by Claude Code. Each entry represents a batch of c
 
 ---
 
+## [2026-04-18 00:00] — Mobile navbar: liquid glass overlay + font consistency with desktop
+
+### Changes
+
+| File | What Changed | Why (Plain English) |
+|------|-------------|---------------------|
+| `assets/css/style.css` | Mobile `header.scrolled`: upgraded `backdrop-filter` from `blur(18px)` to `blur(42px) saturate(200%) brightness(108%)`; added full layered `box-shadow` (inset highlights + outer ambient); added `border`; enabled specular rim (`::before { opacity: 1 }`) | The mobile header was using a much weaker version of the glass effect than the desktop pill. The full desktop-grade filter parameters are now applied on mobile too, so both surfaces use the same frosted-glass quality when active. |
+| `assets/css/style.css` | Mobile `header.scrolled` dark-mode background opacity: `0.32 → 0.72` | `0.32` opacity was designed for the desktop pill floating over a colourful hero image — enough contrast there because vivid content bleeds through the blur. On mobile scrolled past the hero, the content behind is dark text on a dark background, so `0.32` was effectively invisible. `0.72` gives the glass tint a visible floor over dark content. |
+| `assets/css/style.css` | Mobile `header.scrolled` light-mode: added full desktop glass values (`oklch(100% 0 0 / 0.38)`, layered box-shadow, proper border) | Brought the light-mode mobile glass in line with the desktop light-mode variant — previously it was just a `border-bottom` on a near-opaque white background, with no depth or blur. |
+| `assets/css/style.css` | `.nav-overlay`: changed from `background: oklch(7% 0.018 250)` (solid) to `oklch(7% 0.018 250 / 0.78)` + `backdrop-filter: blur(48px) saturate(180%) brightness(85%)` | The staggered overlay menu had a fully opaque black background — no glass effect at all. Making it semi-transparent and adding the blur means the page content shows through frosted, turning the entire overlay into a liquid glass surface rather than a plain dark sheet. |
+| `assets/css/style.css` | Added `body:not(.dark-mode) .nav-overlay` with white-frosted glass values | Light-mode overlay was missing a variant entirely. Without this rule it would show the dark glass in light mode, looking jarring. |
+| `assets/css/style.css` | `.overlay-label` font-family: `'Bricolage Grotesque'` → `'Hanken Grotesk', 'Segoe UI', sans-serif` | The overlay menu labels used a completely different display font from the desktop nav (`Hanken Grotesk`). Switching to `Hanken Grotesk` makes the menu typographically consistent with the desktop navigation while keeping the large display size and weight intact. |
+
+### Decisions & Assumptions
+- **`blur(48px)` for overlay vs `blur(42px)` for header bar**: The overlay covers the full screen so a slightly larger blur radius creates a stronger frosting effect that reads clearly as "glass layer" rather than just a background tint. The header bar uses the same value as the desktop pill for direct consistency.
+- **`brightness(85%)` on overlay vs `brightness(108%)` on header**: The header glass lightens slightly to float above content; the overlay darkens slightly to recede, maintaining the visual hierarchy that the header is "above" the overlay.
+- **Opacity floor at `0.72` for dark-mode header**: Chosen to match the perceived brightness of the original `0.92` opaque header while allowing enough see-through for the blur to register. Values below `~0.65` were invisible over dark content; values above `~0.82` lose the glass character.
+
+---
+
 ## [2026-04-17 00:00] — Navbar redesign: liquid glass pill, scroll animation, logo/icon/contrast polish
 
 ### Changes

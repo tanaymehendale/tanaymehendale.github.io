@@ -24,6 +24,19 @@ layout: base.njk
                 {% endfor %}
             </div>
             {% endif %}
+
+            {% if project.links.length and not project.isComingSoon %}
+            <div class="pd-hero-links">
+                {% for link in project.links %}
+                <a href="{{ link.url }}" class="pd-hero-cta" target="_blank" rel="noreferrer noopener">
+                    {{ link.label }}
+                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
+                        <path d="M1.5 9.5l8-8M9.5 9.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                {% endfor %}
+            </div>
+            {% endif %}
         </div>
     </div>
 
@@ -73,20 +86,6 @@ layout: base.njk
             <div class="pd-impact">
                 <span class="pd-impact-label">Impact</span>
                 <p class="pd-impact-text">{{ project.impact | safe }}</p>
-            </div>
-            {% endif %}
-
-            <!-- Mobile-only links (shown above sections on small screens) -->
-            {% if project.links.length and not project.isComingSoon %}
-            <div class="pd-mobile-links">
-                {% for link in project.links %}
-                <a href="{{ link.url }}" class="pd-cta" target="_blank" rel="noreferrer noopener">
-                    {{ link.label }}
-                    <svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true">
-                        <path d="M1.5 9.5l8-8M9.5 9.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
-                {% endfor %}
             </div>
             {% endif %}
 

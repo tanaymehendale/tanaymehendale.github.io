@@ -153,23 +153,24 @@ button,
 
 .lead-eyebrow {
     font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.55);
-    margin: 0 0 20px;
+    color: rgba(255, 255, 255, 0.82);
+    margin: clamp(10px, 1.5vw, 18px) 0 clamp(20px, 3vw, 36px);
 }
 
 .lead-name {
     font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-    font-size: clamp(3.2rem, 13vw, 11rem);
+    /* font-size: clamp(3.2rem, 13vw, 11rem); */
+    font-size: clamp(3rem, 11vw, 10rem);
     font-weight: 700;
     line-height: 0.84;
     letter-spacing: -0.02em;
     text-transform: uppercase;
     color: #fff;
-    margin: 0 0 clamp(20px, 3.5vw, 44px);
+    margin: 0;
 }
 
 .lead-meta {
@@ -182,7 +183,7 @@ button,
 
 .lead-fact {
     font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.95rem;
     font-weight: 500;
     color: rgba(255, 255, 255, 0.7);
     letter-spacing: 0.03em;
@@ -190,7 +191,7 @@ button,
 
 .lead-sep {
     color: rgba(255, 255, 255, 0.25);
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     user-select: none;
 }
 
@@ -199,19 +200,22 @@ button,
     align-items: center;
     gap: 6px;
     font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
-    font-size: 0.75rem;
+    font-size: 1rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: #fff;
     text-decoration: none;
-    padding-bottom: 3px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-    transition: border-color 0.2s ease;
+    padding: 0.52em 1.15em;
+    border: 1px solid color-mix(in oklch, #a78bfa 55%, transparent);
+    border-radius: 999px;
+    background: color-mix(in oklch, #a78bfa 12%, transparent);
+    transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .lead-resume-link:hover {
-    border-color: rgba(255, 255, 255, 0.85);
+    border-color: color-mix(in oklch, #a78bfa 85%, transparent);
+    background: color-mix(in oklch, #a78bfa 22%, transparent);
 }
 
 .lead-arrow {
@@ -263,7 +267,7 @@ header::before {
     transition: opacity 0.38s ease;
 }
 
-/* ── Mobile: transparent strip → frosted on scroll ── */
+/* ── Mobile: transparent strip → liquid glass on scroll ── */
 @media (max-width: 1024px) {
     header {
         top: 0;
@@ -272,28 +276,43 @@ header::before {
         width: 100%;
         height: var(--nav-height);
         border-radius: 0;
-        background: oklch(9% 0.012 235 / 0);
-        backdrop-filter: blur(0px);
-        -webkit-backdrop-filter: blur(0px);
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
         border: none;
-        border-bottom: 1px solid transparent;
         box-shadow: none;
     }
 
     body:not(.dark-mode) header {
-        background: oklch(98% 0.006 240 / 0);
+        background: transparent;
     }
 
     header.scrolled {
-        background: oklch(9% 0.012 235 / 0.92);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        border-bottom: 1px solid oklch(22% 0.012 235);
+        background: oklch(16% 0.024 288 / 0.72);
+        backdrop-filter: blur(42px) saturate(200%) brightness(108%);
+        -webkit-backdrop-filter: blur(42px) saturate(200%) brightness(108%);
+        border: 1px solid oklch(100% 0 0 / 0.14);
+        box-shadow:
+            inset 0 1.5px 0 oklch(100% 0 0 / 0.22),
+            inset 0 -1px 0 oklch(0% 0 0 / 0.28),
+            0 2px 4px oklch(0% 0 0 / 0.12),
+            0 10px 30px oklch(5% 0.025 288 / 0.42),
+            0 1px 2px oklch(0% 0 0 / 0.08);
+    }
+
+    header.scrolled::before {
+        opacity: 1;
     }
 
     body:not(.dark-mode) header.scrolled {
-        background: oklch(98% 0.006 240 / 0.94);
-        border-bottom: 1px solid oklch(88% 0.008 240);
+        background: oklch(100% 0 0 / 0.38);
+        border: 1px solid oklch(96% 0.005 290 / 0.85);
+        box-shadow:
+            inset 0 1.5px 0 oklch(100% 0 0),
+            inset 0 -1px 0 oklch(72% 0.012 290 / 0.18),
+            0 2px 4px oklch(0% 0 0 / 0.05),
+            0 10px 30px oklch(48% 0.01 290 / 0.14),
+            0 1px 2px oklch(0% 0 0 / 0.04);
     }
 
     /* Keep nav readable over the always-dark hero */
@@ -707,23 +726,25 @@ section .container {
 
 .about-social-link {
     font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
-    font-size: 0.72rem;
+    font-size: 0.76rem;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text-color);
+    color: var(--accent-color);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    padding-bottom: 2px;
-    border-bottom: 1px solid var(--separator-color);
-    transition: color 0.2s ease, border-color 0.2s ease;
+    padding: 0.45em 1em;
+    border: 1px solid color-mix(in oklch, var(--accent-color) 40%, transparent);
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--accent-color) 6%, transparent);
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
 .about-social-link:hover {
-    color: var(--accent-color);
     border-color: var(--accent-color);
+    background: color-mix(in oklch, var(--accent-color) 14%, transparent);
 }
 
 @media (max-width: 768px) {
@@ -825,7 +846,11 @@ section .container {
 }
 
 .timeline-item.exp-entry:hover {
-    background: color-mix(in oklch, var(--accent-color) 5%, transparent);
+    background: color-mix(in oklch, var(--accent-color) 8%, transparent);
+}
+
+.timeline-item.exp-entry.active {
+    background: color-mix(in oklch, var(--accent-color) 7%, transparent);
 }
 
 .exp-top {
@@ -893,11 +918,11 @@ section .container {
 }
 
 .exp-toggle {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     color: var(--text-color);
-    opacity: 0.3;
+    opacity: 0.45;
     align-self: center;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    transition: transform 0.25s ease, opacity 0.15s ease;
     user-select: none;
     text-align: center;
     display: inline-block;
@@ -906,7 +931,7 @@ section .container {
 .timeline-item.exp-entry.active .exp-toggle,
 .education-block.edu-entry.active .exp-toggle {
     transform: rotate(180deg);
-    opacity: 0.6;
+    opacity: 0.9;
 }
 
 .exp-entry .details-body {
@@ -1025,7 +1050,11 @@ section .container {
 }
 
 .education-block.edu-entry:hover {
-    background: color-mix(in oklch, var(--accent-color) 5%, transparent);
+    background: color-mix(in oklch, var(--accent-color) 8%, transparent);
+}
+
+.education-block.edu-entry.active {
+    background: color-mix(in oklch, var(--accent-color) 7%, transparent);
 }
 
 .edu-top {
@@ -1620,7 +1649,9 @@ header.scrolled .nav-hamburger {
     position: fixed;
     inset: 0;
     z-index: 998;
-    background: oklch(7% 0.018 250);
+    background: oklch(7% 0.018 250 / 0.78);
+    backdrop-filter: blur(48px) saturate(180%) brightness(85%);
+    -webkit-backdrop-filter: blur(48px) saturate(180%) brightness(85%);
     display: flex;
     flex-direction: column;
     padding: calc(var(--nav-height) + clamp(2rem, 5vh, 4rem))
@@ -1632,6 +1663,12 @@ header.scrolled .nav-hamburger {
     pointer-events: none;
     visibility: hidden;
     transition: opacity 0.38s ease, visibility 0.38s ease;
+}
+
+body:not(.dark-mode) .nav-overlay {
+    background: oklch(97% 0.005 240 / 0.82);
+    backdrop-filter: blur(48px) saturate(160%) brightness(108%);
+    -webkit-backdrop-filter: blur(48px) saturate(160%) brightness(108%);
 }
 
 .nav-overlay.is-open {
@@ -1715,7 +1752,7 @@ header.scrolled .nav-hamburger {
 }
 
 .overlay-label {
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
     font-weight: 800;
     font-size: clamp(2.4rem, 8vw, 5rem);
     line-height: 1;
@@ -2118,21 +2155,68 @@ header.scrolled .nav-hamburger {
     transition: background 0.3s ease;
 }
 
-.resume-button {
-    background: transparent;
-    border: 2px solid var(--accent-color);
-    border-radius: 1.5em;
-    color: var(--accent-color);
-    gap: 0.5em;
+/* ── Scroll-to-top: liquid glass pill ── */
+.scroll-top {
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border-radius: 999px;
+    justify-content: center;
+    color: oklch(88% 0.01 240);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+
+    /* Glass core — dark mode */
+    background: oklch(16% 0.024 288 / 0.35);
+    backdrop-filter: blur(40px) saturate(180%) brightness(110%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(110%);
+    border: 1px solid oklch(100% 0 0 / 0.15);
+    box-shadow:
+        inset 0 1.5px 0 oklch(100% 0 0 / 0.22),
+        inset 0 -1px 0 oklch(0% 0 0 / 0.28),
+        0 4px 12px oklch(0% 0 0 / 0.18),
+        0 10px 32px oklch(5% 0.025 288 / 0.45);
+    transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
-.resume-button:hover {
-    background: var(--accent-color);
-    color: white;
+/* Specular rim */
+.scroll-top::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+        to bottom,
+        oklch(100% 0 0 / 0.18) 0%,
+        oklch(100% 0 0 / 0.06) 2px,
+        transparent 45%
+    );
+    pointer-events: none;
+}
+
+body:not(.dark-mode) .scroll-top {
+    background: oklch(100% 0 0 / 0.42);
+    border: 1px solid oklch(80% 0.008 290 / 0.6);
+    color: var(--text-color);
+    box-shadow:
+        inset 0 1.5px 0 oklch(100% 0 0),
+        inset 0 -1px 0 oklch(72% 0.012 290 / 0.18),
+        0 4px 12px oklch(0% 0 0 / 0.07),
+        0 10px 28px oklch(60% 0.012 290 / 0.15);
 }
 
 .scroll-top:hover {
-    background: var(--accent-hover);
+    background: oklch(16% 0.024 288 / 0.52);
+    box-shadow:
+        inset 0 1.5px 0 oklch(100% 0 0 / 0.28),
+        inset 0 -1px 0 oklch(0% 0 0 / 0.35),
+        0 4px 16px oklch(0% 0 0 / 0.24),
+        0 14px 40px oklch(5% 0.025 288 / 0.55);
+}
+
+body:not(.dark-mode) .scroll-top:hover {
+    background: oklch(100% 0 0 / 0.6);
 }
 
 /* Footer */
@@ -2282,14 +2366,14 @@ footer.site-footer {
     font-size: 0.82rem;
     font-weight: 500;
     color: var(--text-color);
-    opacity: 0.5;
+    opacity: 0.7;
     text-decoration: none;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
     font-family: inherit;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.15s ease;
 }
 
 .sf-link:hover {
@@ -2298,6 +2382,50 @@ footer.site-footer {
 
 .sf-link svg {
     flex-shrink: 0;
+}
+
+.sf-resume-cta {
+    opacity: 1;
+    color: var(--accent-color);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-size: 0.76rem;
+    padding: 0.44em 1em;
+    border: 1px solid color-mix(in oklch, var(--accent-color) 40%, transparent);
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--accent-color) 6%, transparent);
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.sf-resume-cta:hover {
+    opacity: 1;
+    border-color: var(--accent-color);
+    background: color-mix(in oklch, var(--accent-color) 14%, transparent);
+}
+
+.sf-social-cta {
+    opacity: 1;
+    font-weight: 600;
+    font-size: 0.76rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.44em 1em;
+    border: 1px solid color-mix(in oklch, var(--text-color) 28%, transparent);
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--text-color) 5%, transparent);
+    transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.sf-social-cta:hover {
+    opacity: 1;
+    border-color: color-mix(in oklch, var(--text-color) 60%, transparent);
+    background: color-mix(in oklch, var(--text-color) 10%, transparent);
+}
+
+.sf-backtop {
+    opacity: 0.45;
+    font-size: 0.78rem;
 }
 
 /* ── Signature: outlined display name ─────────────────────── */
@@ -2514,6 +2642,58 @@ body:not(.dark-mode) .sf-name {
     border: 1px solid var(--separator-color);
     color: var(--text-color);
     opacity: 0.6;
+}
+
+/* ── Hero external links ──────────────────────────────────── */
+.pd-hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+}
+
+.pd-hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: oklch(0.77 0.14 58);
+    text-decoration: none;
+    padding: 0.48em 1.05em;
+    border: 1px solid oklch(0.77 0.14 58 / 0.4);
+    border-radius: 999px;
+    background: oklch(0.77 0.14 58 / 0.08);
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+body:not(.dark-mode) .pd-hero-cta {
+    color: oklch(0.48 0.14 55);
+    border-color: oklch(0.48 0.14 55 / 0.4);
+    background: oklch(0.48 0.14 55 / 0.07);
+}
+
+.pd-hero-cta:hover {
+    border-color: oklch(0.77 0.14 58 / 0.75);
+    background: oklch(0.77 0.14 58 / 0.16);
+}
+
+body:not(.dark-mode) .pd-hero-cta:hover {
+    border-color: oklch(0.48 0.14 55 / 0.7);
+    background: oklch(0.48 0.14 55 / 0.12);
+}
+
+.pd-hero-cta svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+    transition: opacity 0.15s ease;
+}
+
+.pd-hero-cta:hover svg {
+    opacity: 1;
 }
 
 /* ── Two-column layout ────────────────────────────────────── */
