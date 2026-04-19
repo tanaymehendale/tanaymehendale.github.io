@@ -148,42 +148,40 @@ if (scrollTopBtn) {
 }
 
 
-// Collapsible Experience and Education cards
+// Journey section: animated spine + strip active state + scroll-to
 document.addEventListener('DOMContentLoaded', () => {
-    function setupCollapsible(sectionSelector, cardSelector) {
-        const section = document.querySelector(sectionSelector);
-        if (!section) return;
-        const cards = section.querySelectorAll(cardSelector);
-        cards.forEach(card => {
-            // Keyboard accessibility
-            card.setAttribute('tabindex', '0');
-            card.setAttribute('role', 'button');
-            card.setAttribute('aria-expanded', 'false');
+    const log = document.querySelector('.journey-log');
+    if (!log) return;
 
-            const toggle = () => {
-                const isActive = card.classList.contains('active');
-                // Collapse all others
-                cards.forEach(c => {
-                    c.classList.remove('active');
-                    c.setAttribute('aria-expanded', 'false');
+    const chapters = [...log.querySelectorAll('.journey-chapter')];
+    const stripBtns = [...document.querySelectorAll('.strip-year')];
+
+    // Animate spine in when log enters viewport
+    const spineObs = new IntersectionObserver(([e]) => {
+        if (e.isIntersecting) { log.classList.add('spine-active'); spineObs.disconnect(); }
+    }, { threshold: 0.05 });
+    spineObs.observe(log);
+
+    // Fade-in chapters + sync active strip year
+    const chapterObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                stripBtns.forEach(b => {
+                    const isActive = b.dataset.target === entry.target.id;
+                    b.classList.toggle('active', isActive);
+                    entry.target.classList.toggle('strip-active', isActive);
                 });
-                // Toggle this one
-                if (!isActive) {
-                    card.classList.add('active');
-                    card.setAttribute('aria-expanded', 'true');
-                }
-            };
-
-            card.addEventListener('click', toggle);
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    toggle();
-                }
-            });
+            }
         });
-    }
+    }, { threshold: 0.2, rootMargin: '-10% 0px -50% 0px' });
+    chapters.forEach(c => chapterObs.observe(c));
 
-    setupCollapsible('#experience', '.timeline-item');
-    setupCollapsible('#education', '.education-block');
+    // Strip button click → smooth scroll to chapter
+    stripBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = document.getElementById(btn.dataset.target);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
 });

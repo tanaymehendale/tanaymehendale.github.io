@@ -4,6 +4,28 @@ _This file is auto-maintained by Claude Code. Each entry represents a batch of c
 
 ---
 
+## [2026-04-19 00:00] — Unified Experience + Education into a single journey section with year-strip nav and animated spine
+
+### Changes
+
+| File | What Changed | Why (Plain English) |
+|------|-------------|---------------------|
+| `src/index.njk` | Removed separate `#experience` and `#education` sections; replaced with a single `#journey` section containing 6 always-expanded chapters (HCLTech, TAMU Data Eng, TAMU TA, Texas A&M MS, LTIMindtree, SPIT B.Tech), a sticky year-strip nav, and a spine container | Two accordion lists felt like a spreadsheet — no sense of progression. A unified section lets the viewer read the whole career story top-to-bottom without clicking anything. |
+| `src/_layouts/base.njk` | Desktop nav: replaced two links ("Work" `#experience`, "Education" `#education`) with a single "Journey" `#journey` link; same change in the mobile overlay (renumbered from 6 links to 5) | Merging sections into one meant two nav items became redundant. One link is cleaner and signals that work and school are told as a single story, not separate silos. |
+| `assets/css/style.css` | Removed all `.exp-*`, `.edu-*`, `.timeline-item`, `.education-block`, `.details`, `.details-body` rules (~390 lines); added `.journey-*`, `.chapter-*`, `.strip-*` rules (~230 lines) | The old accordion CSS is dead code once the HTML changed. The new rules implement: a sticky year strip with an active underline indicator, an absolutely-positioned spine with an animated `::after` fill, node dots that spring in via `scale(0→1)` on viewport entry, and chapter layout using a two-column grid (dot column + content column). |
+| `assets/css/style.css` | Updated the "hardening" section: removed `.exp-id`, `.edu-id`, `.exp-company`, `.edu-school`, `.exp-skills-line`, `.exp-entry .details-body li`, `.edu-entry .details-body li`, and the focus-visible collapsible rules; added `.chapter-id` and `.chapter-org` overflow rules inline within the component CSS | Keeping stale class references in the utility section would silently target nothing — confusing and dead weight. The new overflow and wrapping rules are colocated with the component styles. |
+| `assets/css/style.css` | Added `@media (max-width: 600px)` fixes: `white-space: normal` on `.chapter-org`, `order: 3/4` on date and type so they share a row below the logo+name | "Sardar Patel Institute of Technology, University of Mumbai" with `white-space: nowrap` was visually clipped on 390px screens. Allowing wrap and using flex `order` to anchor date+badge below the name block keeps mobile readable without restructuring the DOM. |
+| `script.js` | Removed `setupCollapsible()` function and its two call-sites for `#experience` and `#education`; added `setupJourney()` IIFE with three IntersectionObservers | The accordion JS is dead once content is always-expanded. The new function does: (1) animate the spine line in when the log container enters the viewport, (2) fade+slide each chapter in as it scrolls into view and sync the active year in the strip, (3) wire strip button clicks to `scrollIntoView`. |
+
+### Decisions & Assumptions
+- **Newest-first ordering**: User confirmed resume convention — HCLTech (2026) at top, SPIT B.Tech (2017) at bottom. This matches recruiter scanning habits even though it inverts the narrative arc.
+- **TAMU TA and Data Engineer as separate chapters, not sub-entries**: The two roles have non-overlapping dates and very different content (ETL pipelines vs. teaching HCI). Merging them under one TAMU header would have buried the data engineering work inside the teaching role.
+- **Year strip shows start-years only (2026, 2025, 2024, 2023, 2021, 2017)**: Using the year each role *began* rather than ended is the natural anchor — clicking "2023" should land you at the beginning of the Texas A&M MS chapter, not its graduation date.
+- **`rootMargin: '-10% 0px -50% 0px'` on chapter IntersectionObserver**: Standard `threshold: 0.2` alone caused the strip to flip to the next year before the current chapter had fully cleared. The bottom margin of -50% ensures the strip only updates when a chapter occupies the upper half of the viewport — the "reading zone".
+- **Spine `::after` fill animates to 100% instantly on trigger**: A per-chapter incremental fill would require calculating each chapter's position relative to the container. The simpler approach — fill the whole line once the log enters the viewport — gives the same sense of a drawing timeline without fragile position math.
+
+---
+
 ## [2026-04-18 00:00] — Mobile navbar: liquid glass overlay + font consistency with desktop
 
 ### Changes
