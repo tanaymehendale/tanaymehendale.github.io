@@ -14,6 +14,22 @@ module.exports = function(eleventyConfig) {
     return String(n).padStart(2, "0");
   });
 
+  // Human-readable category label
+  eleventyConfig.addFilter("categoryLabel", function(cat) {
+    const labels = {
+      "ai-ml": "AI & Machine Learning",
+      "data-engg": "Data Engineering",
+      "data-analytics": "Data Analytics",
+      "pm": "Product Management",
+    };
+    return labels[cat] || cat;
+  });
+
+  // Filter projects array to featured only
+  eleventyConfig.addFilter("featuredOnly", function(projects) {
+    return (projects || []).filter(p => p.featured);
+  });
+
   return {
     dir: {
       input: "src",

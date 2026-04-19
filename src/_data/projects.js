@@ -1,6 +1,8 @@
 module.exports = [
   {
     slug: "apartment-finder-ai",
+    category: "ai-ml",
+    image: "/assets/images/projects/apartment-finder-ai-arch.png",
     title: "ApartmentFinder AI",
     shortDesc: "A Multi-Agent AI system that simplifies relocation moves — Google ADK, RAG pipelines, and MCP in one coherent product.",
     tags: ["AI Agents", "RAG Pipeline", "MCP", "Google ADK"],
@@ -16,6 +18,7 @@ module.exports = [
   },
   {
     slug: "real-time-streaming",
+    category: "data-engg",
     title: "Real-Time Data Streaming",
     shortDesc: "End-to-end real-time pipeline using Airflow, Kafka, and Spark — built for scale and reliability from source to sink.",
     tags: ["Apache Spark", "Kafka", "Airflow", "Cassandra"],
@@ -64,6 +67,7 @@ module.exports = [
   },
   {
     slug: "data-warehouse",
+    category: "data-engg",
     title: "Data Warehouse for Retail Analytics",
     shortDesc: "Comprehensive data warehouse implementation using SQL Server — schema design, ETL pipelines, and a full reporting layer.",
     tags: ["Data Warehousing", "SQL Server", "SSIS", "SSAS", "Tableau"],
@@ -154,6 +158,7 @@ module.exports = [
   },
   {
     slug: "resqvision",
+    category: "data-analytics",
     title: "ResQVision — Emergency Analytics",
     shortDesc: "Interactive D3.js + React dashboard visualizing 15,000+ emergency incidents to surface response bottlenecks and resource gaps.",
     tags: ["D3.js", "React.js", "Data Visualization", "Python"],
@@ -209,6 +214,7 @@ module.exports = [
   },
   {
     slug: "investobuddy",
+    category: "ai-ml",
     title: "Investobuddy",
     shortDesc: "Investment analysis tool combining value investing principles with LSTM + Monte Carlo — buy/sell signals via Flask + Angular.",
     tags: ["LSTM", "PyTorch", "Flask", "Angular", "Monte Carlo"],
@@ -267,6 +273,7 @@ module.exports = [
   },
   {
     slug: "customer-churn",
+    category: "data-analytics",
     title: "Customer Churn Analysis in Tableau",
     shortDesc: "Tableau dashboard on 6,687 telecom customer records — churn driver analysis revealing a 26.86% churn rate.",
     tags: ["Tableau", "Business Intelligence", "Data Analysis"],
@@ -314,6 +321,7 @@ module.exports = [
   },
   {
     slug: "fashionmnist-classification",
+    category: "ai-ml",
     title: "Image Classification on FashionMNIST",
     shortDesc: "Compared CNN, KNN, SVM, Logistic Regression, and Decision Trees on 70K fashion images — CNN hitting 91% accuracy.",
     tags: ["PyTorch", "CNN", "scikit-learn", "Machine Learning"],
@@ -382,6 +390,7 @@ module.exports = [
   },
   {
     slug: "heatmap-visualization",
+    category: "data-analytics",
     title: "Interactive Heatmaps using D3.js",
     shortDesc: "Two-level D3.js heatmap on Observable — Hong Kong temperature trends 1997–2017 with mini in-cell line charts.",
     tags: ["D3.js", "Observable", "Data Visualization"],
@@ -442,6 +451,7 @@ module.exports = [
   },
   {
     slug: "market-basket",
+    category: "data-analytics",
     title: "Market Basket Analysis in R",
     shortDesc: "Apriori algorithm on 15,000 grocery transactions in R — association rules driving store layout and promotion recommendations.",
     tags: ["R", "Apriori", "arules", "Business Analytics"],
@@ -496,6 +506,7 @@ module.exports = [
   },
   {
     slug: "pos-system",
+    category: "data-engg",
     title: "AWS Point-of-Sale (POS) System",
     shortDesc: "MariaDB + MongoDB POS system on AWS EC2 — normalized schema, stored procedures, replication, and NoSQL migration.",
     tags: ["AWS EC2", "MariaDB", "MongoDB", "Database Design"],
@@ -557,6 +568,7 @@ module.exports = [
   },
   {
     slug: "quote-to-cash",
+    category: "data-analytics",
     title: "Quote-to-Cash Analysis — Tableau Next & Salesforce",
     shortDesc: "Revenue flow analytics dashboard built during the Salesforce Tableau Next Hackathon — Q2C pipeline reimagined.",
     tags: ["Tableau Next", "Salesforce", "Business Analytics"],

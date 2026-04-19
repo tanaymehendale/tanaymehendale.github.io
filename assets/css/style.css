@@ -1341,6 +1341,272 @@ section .container {
 }
 
 /* ================================
+   Featured Projects Grid (landing page)
+   ================================ */
+.featured-projects-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: clamp(10px, 1.5vw, 18px);
+    margin-top: clamp(32px, 5vw, 56px);
+}
+
+.proj-secondary-stack {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 1.5vw, 18px);
+}
+
+.proj-secondary-stack .proj-card {
+    flex: 1;
+}
+
+/* Shared card base */
+.proj-card {
+    display: flex;
+    flex-direction: column;
+    padding: clamp(20px, 2.5vw, 32px);
+    border: 1px solid var(--separator-color);
+    border-radius: 4px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    gap: clamp(14px, 1.8vw, 20px);
+}
+
+.proj-card:hover {
+    border-color: var(--accent-color);
+    background: color-mix(in oklch, var(--accent-color) 4%, transparent);
+}
+
+.proj-card:hover .proj-card-title {
+    color: var(--accent-color);
+}
+
+.proj-card:hover .proj-arrow {
+    opacity: 0.65;
+    transform: translate(2px, -2px);
+}
+
+.proj-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Arrow in top-right of hero; standalone arrow in secondary cards */
+.proj-hero .proj-card-top .proj-arrow {
+    opacity: 0.25;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.proj-hero:hover .proj-card-top .proj-arrow {
+    opacity: 0.65;
+    transform: translate(2px, -2px);
+}
+
+.proj-category-label {
+    font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    opacity: 0.7;
+}
+
+/* Hero image */
+.proj-hero-image {
+    flex: 1;
+    min-height: 0;
+    border-radius: 3px;
+    overflow: hidden;
+    background: color-mix(in oklch, var(--text-color) 4%, transparent);
+}
+
+.proj-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.proj-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.proj-card-title {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.05;
+    transition: color 0.2s ease;
+}
+
+.proj-hero .proj-card-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+}
+
+/* Secondary: push arrow to bottom */
+.proj-secondary {
+    justify-content: space-between;
+}
+
+.proj-secondary .proj-card-title {
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+}
+
+.proj-card-desc {
+    font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: var(--text-color);
+    opacity: 0.55;
+    margin: 0;
+}
+
+.proj-hero .proj-card-desc {
+    max-width: 52ch;
+}
+
+/* "View all" link below grid */
+.proj-view-all {
+    margin-top: clamp(20px, 3vw, 32px);
+    display: flex;
+    justify-content: center;
+}
+
+.proj-view-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+    font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.proj-view-all-link:hover {
+    background: var(--accent-color);
+    color: oklch(98% 0.005 280);
+}
+
+.proj-arrow-inline {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.proj-view-all-link:hover .proj-arrow-inline {
+    transform: translate(2px, -2px);
+}
+
+/* Mobile: stack featured cards */
+@media (max-width: 768px) {
+    .featured-projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .proj-secondary-stack {
+        flex-direction: column;
+    }
+
+    .proj-hero .proj-card-title {
+        font-size: 1.7rem;
+    }
+}
+
+/* ================================
+   All Projects Page (/projects/)
+   ================================ */
+.all-projects-page {
+    padding: clamp(48px, 8vw, 96px) 15px;
+}
+
+.all-projects-page .projects-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: clamp(28px, 4vw, 44px);
+    margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.filter-chip {
+    font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 7px 18px;
+    border: 1px solid var(--separator-color);
+    border-radius: 100px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-color);
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.filter-chip:hover,
+.filter-chip.active {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    background: color-mix(in oklch, var(--accent-color) 6%, transparent);
+}
+
+.filter-chip.chip-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.all-projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: clamp(12px, 2vw, 20px);
+}
+
+.proj-all-card {
+    justify-content: flex-start;
+}
+
+.proj-all-card .proj-card-title {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+}
+
+.proj-featured-badge {
+    font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 100px;
+    padding: 2px 8px;
+    opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+    .all-projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================================
    Skills Section — The Stack
    ================================ */
 #skills {
