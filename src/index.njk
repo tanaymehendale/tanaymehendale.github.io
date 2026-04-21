@@ -284,60 +284,163 @@ pageTitle: "Tanay Mehendale - Portfolio"
 
     <!-- Skills Section -->
     <section id="skills">
-        <div class="container skills-container">
-            <div class="skills-header">
-                <span class="skills-eyebrow">Technical Arsenal</span>
-                <h2 class="skills-title">The<br>Stack</h2>
-                <p class="skills-sub">Tools I've shipped real things with — weighted by how often I'd reach for them under pressure.</p>
-                <div class="skills-legend">
-                    <span class="leg-item"><span class="leg-dot leg-heavy"></span>Core stack</span>
-                    <span class="leg-item"><span class="leg-dot leg-mid"></span>Regular use</span>
-                    <span class="leg-item"><span class="leg-dot leg-low"></span>Contextual</span>
+        <div class="container">
+            <div class="skills-header-row">
+                <div class="skills-header-left">
+                    <span class="skills-eyebrow">What I reach for</span>
+                    <h2 class="skills-title">The<br>Stack</h2>
+                </div>
+                <div class="skills-header-right">
+                    <p class="skills-sub">Tools I've shipped real things with — weighted by how often I'd reach for them under pressure.</p>
+                    <div class="skills-legend">
+                        <span class="leg-item"><span class="leg-dot leg-heavy"></span>Core stack</span>
+                        <span class="leg-item"><span class="leg-dot leg-mid"></span>Regular use</span>
+                        <span class="leg-item"><span class="leg-dot leg-low"></span>Contextual</span>
+                    </div>
                 </div>
             </div>
-            <div class="skills-manifest">
-                <div class="skill-row">
-                    <span class="skill-num">01</span>
-                    <span class="skill-cat">Languages</span>
-                    <div class="skill-items">
-                        <span class="sk sk-core">Python</span><span class="sk-sep">·</span><span class="sk sk-core">SQL</span><span class="sk-sep">·</span><span class="sk sk-mid">R</span><span class="sk-sep">·</span><span class="sk sk-mid">ABAP</span>
+
+            <div class="skills-mixer">
+
+                <!-- CH 01: AI & Agents -->
+                <div class="mix-channel mix-channel--highlight">
+                    <div class="channel-peak" style="--peak-w: 100%"></div>
+                    <div class="channel-skills">
+                        <span class="sk sk-core">LLM</span>
+                        <span class="sk sk-core">RAG</span>
+                        <span class="sk sk-core">LangChain</span>
+                        <span class="sk sk-core">Agentic AI</span>
+                        <span class="sk sk-core">MCP</span>
+                        <span class="sk sk-mid">MSAF</span>
+                        <span class="sk sk-mid">Google ADK</span>
+                        <span class="sk sk-mid">Graph-RAG</span>
+                        <span class="sk sk-low">Azure OpenAI</span>
+                    </div>
+                    <div class="channel-footer">
+                        <span class="channel-num">01</span>
+                        <span class="channel-label">AI &amp; Agents</span>
                     </div>
                 </div>
-                <div class="skill-row">
-                    <span class="skill-num">02</span>
-                    <span class="skill-cat">Data Engineering</span>
-                    <div class="skill-items">
-                        <span class="sk sk-core">Apache Spark</span><span class="sk-sep">·</span><span class="sk sk-core">Kafka</span><span class="sk-sep">·</span><span class="sk sk-core">dbt</span><span class="sk-sep">·</span><span class="sk sk-mid">Airflow</span><span class="sk-sep">·</span><span class="sk sk-mid">SSIS</span><span class="sk-sep">·</span><span class="sk sk-low">Fivetran</span>
+
+                <!-- CH 02: Languages -->
+                <div class="mix-channel">
+                    <div class="channel-peak" style="--peak-w: 85%"></div>
+                    <div class="channel-skills">
+                        <span class="sk sk-core">Python</span>
+                        <span class="sk sk-core">SQL</span>
+                        <span class="sk sk-mid">TypeScript</span>
+                        <span class="sk sk-mid">JavaScript</span>
+                        <span class="sk sk-mid">Java</span>
+                        <span class="sk sk-mid">Shell / Bash</span>
+                        <span class="sk sk-low">C++</span>
+                        <span class="sk sk-low">R</span>
+                    </div>
+                    <div class="channel-footer">
+                        <span class="channel-num">02</span>
+                        <span class="channel-label">Languages</span>
                     </div>
                 </div>
-                <div class="skill-row">
-                    <span class="skill-num">03</span>
-                    <span class="skill-cat">Cloud &amp; Storage</span>
-                    <div class="skill-items">
-                        <span class="sk sk-core">AWS</span><span class="sk-sep">·</span><span class="sk sk-core">S3</span><span class="sk-sep">·</span><span class="sk sk-core">Git</span><span class="sk-sep">·</span><span class="sk sk-mid">Glue</span><span class="sk-sep">·</span><span class="sk sk-mid">Redshift</span><span class="sk-sep">·</span><span class="sk sk-low">Docker</span>
+
+                <!-- CH 03: Data Engineering -->
+                <div class="mix-channel">
+                    <div class="channel-peak" style="--peak-w: 75%"></div>
+                    <div class="channel-skills">
+                        <span class="sk sk-core">Spark</span>
+                        <span class="sk sk-core">Kafka</span>
+                        <span class="sk sk-core">Airflow</span>
+                        <span class="sk sk-core">Snowflake</span>
+                        <span class="sk sk-mid">dbt</span>
+                        <span class="sk sk-mid">ETL / ELT</span>
+                        <span class="sk sk-low">SSIS</span>
+                        <span class="sk sk-low">SSAS</span>
+                    </div>
+                    <div class="channel-footer">
+                        <span class="channel-num">03</span>
+                        <span class="channel-label">Data Engg</span>
                     </div>
                 </div>
-                <div class="skill-row">
-                    <span class="skill-num">04</span>
-                    <span class="skill-cat">Databases</span>
-                    <div class="skill-items">
-                        <span class="sk sk-core">Snowflake</span><span class="sk-sep">·</span><span class="sk sk-core">PostgreSQL</span><span class="sk-sep">·</span><span class="sk sk-mid">MongoDB</span><span class="sk-sep">·</span><span class="sk sk-mid">DynamoDB</span><span class="sk-sep">·</span><span class="sk sk-low">Cassandra</span>
+
+                <!-- CH 04: Cloud -->
+                <div class="mix-channel">
+                    <div class="channel-peak" style="--peak-w: 60%"></div>
+                    <div class="channel-skills">
+                        <span class="sk sk-core">AWS</span>
+                        <span class="sk sk-core">Docker</span>
+                        <span class="sk sk-core">Git</span>
+                        <span class="sk sk-mid">S3</span>
+                        <span class="sk sk-mid">Athena</span>
+                        <span class="sk sk-mid">Redshift</span>
+                        <span class="sk sk-low">EC2</span>
+                        <span class="sk sk-low">RDS</span>
+                    </div>
+                    <div class="channel-footer">
+                        <span class="channel-num">04</span>
+                        <span class="channel-label">Cloud</span>
                     </div>
                 </div>
-                <div class="skill-row">
-                    <span class="skill-num">05</span>
-                    <span class="skill-cat">AI &amp; ML</span>
-                    <div class="skill-items">
-                        <span class="sk sk-core">LangChain</span><span class="sk-sep">·</span><span class="sk sk-core">OpenAI API</span><span class="sk-sep">·</span><span class="sk sk-mid">scikit-learn</span><span class="sk-sep">·</span><span class="sk sk-mid">Pandas</span><span class="sk-sep">·</span><span class="sk sk-mid">RAG</span><span class="sk-sep">·</span><span class="sk sk-low">PyTorch</span>
+
+                <!-- CH 05: Databases -->
+                <div class="mix-channel">
+                    <div class="channel-peak" style="--peak-w: 55%"></div>
+                    <div class="channel-skills">
+                        <span class="sk sk-core">PostgreSQL</span>
+                        <span class="sk sk-core">MongoDB</span>
+                        <span class="sk sk-mid">MySQL</span>
+                        <span class="sk sk-mid">Cassandra</span>
+                        <span class="sk sk-low">MariaDB</span>
+                        <span class="sk sk-low">SAP HANA</span>
+                    </div>
+                    <div class="channel-footer">
+                        <span class="channel-num">05</span>
+                        <span class="channel-label">Databases</span>
                     </div>
                 </div>
-                <div class="skill-row">
-                    <span class="skill-num">06</span>
-                    <span class="skill-cat">Analytics &amp; BI</span>
-                    <div class="skill-items">
-                        <span class="sk sk-core">Tableau</span><span class="sk-sep">·</span><span class="sk sk-core">Power BI</span><span class="sk-sep">·</span><span class="sk sk-mid">Excel</span><span class="sk-sep">·</span><span class="sk sk-low">Matplotlib</span>
+
+                <!-- CH 06: Analytics & BI -->
+                <div class="mix-channel">
+                    <div class="channel-peak" style="--peak-w: 45%"></div>
+                    <div class="channel-skills">
+                        <span class="sk sk-core">Tableau</span>
+                        <span class="sk sk-core">Power BI</span>
+                        <span class="sk sk-mid">Grafana</span>
+                        <span class="sk sk-low">SSRS</span>
+                    </div>
+                    <div class="channel-footer">
+                        <span class="channel-num">06</span>
+                        <span class="channel-label">Analytics &amp; BI</span>
                     </div>
                 </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications">
+        <div class="container certs-container">
+            <div class="certs-header">
+                <span class="section-eyebrow">Verified credentials</span>
+                <h2 class="section-display-title certs-title">Certified</h2>
+            </div>
+            <div class="certs-grid">
+                <a href="https://www.credly.com/badges/eb145d22-9fdf-4353-b9d6-662635a713c4/" target="_blank" rel="noreferrer noopener" class="cert-card">
+                    <div class="cert-card-top">
+                        <img src="/assets/images/aws-logo.svg" alt="Amazon Web Services" class="cert-logo cert-logo--aws">
+                        <span class="cert-card-arrow">↗</span>
+                    </div>
+                    <p class="cert-card-name">AWS Solutions Architect</p>
+                    <p class="cert-card-level">Associate · SAA-C03 · Expires Oct 2028</p>
+                    <span class="cert-card-verify">Verify on Credly</span>
+                </a>
+                <a href="https://www.datacamp.com/certificate/DEA0011529585080" target="_blank" rel="noreferrer noopener" class="cert-card">
+                    <div class="cert-card-top">
+                        <img src="/assets/images/datacamp-logo.svg" alt="DataCamp" class="cert-logo cert-logo--datacamp">
+                        <span class="cert-card-arrow">↗</span>
+                    </div>
+                    <p class="cert-card-name">Associate Data Engineer</p>
+                    <p class="cert-card-level">Professional Certification · Expires Jun 2027</p>
+                    <span class="cert-card-verify">Verify on DataCamp</span>
+                </a>
             </div>
         </div>
     </section>
@@ -351,9 +454,9 @@ pageTitle: "Tanay Mehendale - Portfolio"
                 <p class="contact-sub">I'm always up for a conversation about data systems, AI pipelines, or whatever problem you're trying to solve.</p>
             </div>
             <div class="contact-links">
-                <a href="mailto:tanay.mehendale@tamu.edu?subject=Looking%20to%20connect%20-%20via%20Portfolio" class="contact-row contact-email-row">
+                <a href="mailto:tanaymehendale@gmail.com?subject=Looking%20to%20connect%20-%20via%20Portfolio" class="contact-row contact-email-row">
                     <span class="contact-row-label">Email</span>
-                    <span class="contact-row-value">tanay.mehendale@tamu.edu</span>
+                    <span class="contact-row-value">tanaymehendale@gmail.com</span>
                 </a>
                 <div class="contact-row contact-li-row">
                     <span class="contact-row-label">LinkedIn</span>
