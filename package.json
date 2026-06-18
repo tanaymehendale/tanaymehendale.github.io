@@ -5,7 +5,7 @@
   "main": "emailjs_config.js",
   "scripts": {
     "build": "npx @11ty/eleventy",
-    "dev": "npx @11ty/eleventy --serve"
+    "dev": "npx @11ty/eleventy --serve --port=8080"
   },
   "keywords": [],
   "author": "",

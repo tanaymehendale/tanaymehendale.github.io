@@ -4,6 +4,31 @@ _This file is auto-maintained by Claude Code. Each entry represents a batch of c
 
 ---
 
+## [2026-04-21 14:40] — Skills section redesigned as DJ mixer channels; Certifications spun out as its own section with brand logos
+
+### Changes
+
+| File | What Changed | Why (Plain English) |
+|------|-------------|---------------------|
+| `src/index.njk` | Replaced `#skills` numbered-row manifest with a 6-column `.skills-mixer` grid; each `.mix-channel` is a vertical channel strip: skills stacked top-to-bottom, `.channel-footer` label at the bottom, `.channel-peak` bar at the top | The old table layout read like a spreadsheet. The new layout is inspired by a DJ mixer board — each category is a channel strip, skills flow from loudest (core) to quietest (contextual), and the peak bar at the top of each channel signals which ones are "hot" (AI & Agents = full width, accent colour). |
+| `src/index.njk` | Curated skill list for Agentic AI Engineer / SWE / Data Engineer target roles; removed ABAP, Fivetran, DynamoDB, PyTorch, Matplotlib, Glue, Excel; added MSAF, Google ADK, Graph-RAG, Azure OpenAI, TypeScript, Shell/Bash, ETL/ELT, Grafana | The old list reflected past SAP/consulting work heavily. The new list is weighted toward the three target roles, with AI & Agents placed first so recruiters scanning for those skills see them immediately. |
+| `src/index.njk` | Extracted certifications into a standalone `#certifications` section with two clickable `<a>` cards (Credly and DataCamp links); removed the inline cert row from the skills manifest | Certifications buried at the bottom of the skills table were easy to miss and not clickable. A dedicated section with full-border cards makes them a first-class credential display with direct verification links. |
+| `assets/css/style.css` | Replaced all old `.skills-container`, `.skills-header`, `.skills-manifest`, `.skill-row`, `.skill-cat`, `.skill-items`, `.skill-num`, `.sk-sep` rules with `.skills-mixer`, `.mix-channel`, `.channel-peak`, `.channel-skills`, `.channel-footer`, `.channel-num`, `.channel-label`; added responsive breakpoints at 900px (3-col) and 540px (2-col) | Every old class was tied to the row-based layout and became dead code once the HTML changed. The new rules implement the mixer grid, the CSS custom property `--peak-w` for per-channel bar widths, hover tinting, and the highlighted state for the AI & Agents channel. |
+| `assets/css/style.css` | Added `.skills-header-row` two-column grid replacing the old sticky left-column layout; `.skills-legend` changed from `flex-direction: column` to `row` with wrapping | The sticky header made sense when there was a tall manifest to scroll against. With the mixer board, the header and board sit in a single viewport — sticky adds no value. Switching the legend to a horizontal row makes it compact and scannable at a glance. |
+| `assets/css/style.css` | Added `.certs-container`, `.certs-grid`, `.cert-card`, `.cert-card-top`, `.cert-card-name`, `.cert-card-level`, `.cert-card-verify`, `.cert-logo`, `.cert-logo--aws`, `.cert-logo--datacamp` rules | New cert section needed its own CSS. The card uses a full border (no side-stripe) and a `translateY(-3px)` lift on hover. The logos use CSS `filter` to tint monochrome SVGs to brand colours (AWS orange, DataCamp green) without needing separate light/dark image files. |
+| `assets/images/aws-logo.svg` | New file — Amazon Web Services logo from Simple Icons | Local SVG avoids an external CDN dependency. Tinted via `.cert-logo--aws` CSS filter so it adapts to both light and dark mode automatically. |
+| `assets/images/datacamp-logo.svg` | New file — DataCamp logo from Simple Icons | Same rationale as AWS logo — locally hosted, theme-adaptive via CSS filter. |
+| `src/_layouts/base.njk` | Added "Certs" link (`/#certifications`) to desktop nav `<ul>` and mobile overlay; renumbered overlay Contact from `05` to `06` | New section needs a nav entry so visitors can jump directly to credentials. Desktop adds one `<li>`; the mobile overlay required renumbering Contact since Certs is inserted before it. |
+
+### Decisions & Assumptions
+- **DJ mixer metaphor over F1 telemetry**: Both were on the table (user said "DJ/EDM or F1"). The mixer wins because it maps more directly to the content — categories = channels, proficiency = gain level, peak bar = VU meter. F1 telemetry would have required RPM-style arcs or numerical readouts that don't translate cleanly to a list of skill names.
+- **Category label at the bottom of each channel**: On real DJ/audio hardware, input channel labels (mic, guitar, etc.) sit at the base of the fader strip. Putting category names at the bottom faithfully extends the metaphor and creates an unexpected layout — vs. the conventional top label.
+- **`--peak-w` CSS custom property per channel**: Using an inline style variable lets each channel declare its own peak width in HTML without separate CSS classes. Easier to tune per-channel without touching the stylesheet.
+- **Proficiency shown by size + weight, not colour**: Colour-only proficiency encoding fails colour-blindness checks. Size and weight alone carry the signal — core skills are 1rem/600, low skills are 0.82rem/400/35% opacity.
+- **Cert logos tinted via CSS `filter` rather than two image variants**: A single SVG + filter means one file per brand instead of two, and the tint automatically adapts when the theme changes without any JS. Trade-off: `filter` approximations aren't pixel-perfect matches to brand hex values, but they're close enough for small logos at card scale.
+
+---
+
 ## [2026-04-19 00:00] — Unified Experience + Education into a single journey section with year-strip nav and animated spine
 
 ### Changes

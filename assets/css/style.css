@@ -1098,6 +1098,343 @@ section .container {
 
 
 
+/* ================================
+   Journey Section — Map Mode (desktop)
+   ================================ */
+
+/* Responsive: map on desktop, timeline on mobile */
+.journey-map-desktop  { display: none; }
+.journey-timeline-mobile { display: block; }
+
+@media (min-width: 769px) {
+    .journey-map-desktop    { display: block; }
+    .journey-timeline-mobile { display: none; }
+}
+
+/* ── Map wrapper ── */
+#journey {
+    padding: 0;
+}
+
+.journey-map-desktop {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    min-height: 540px;
+    overflow: hidden;
+}
+
+#journey-map {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Mapbox attribution/logo: keep visible but tuck it small */
+.mapboxgl-ctrl-bottom-left,
+.mapboxgl-ctrl-bottom-right {
+    opacity: 0.5;
+    font-size: 10px;
+}
+
+/* ── Section header overlay (top-left) ── */
+.jmap-section-header {
+    position: absolute;
+    top: clamp(1.5rem, 4vw, 3rem);
+    left: clamp(1.5rem, 4vw, 3rem);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.jmap-section-header .section-eyebrow {
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+
+.jmap-section-header .section-display-title {
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    line-height: 0.9;
+}
+
+/* ── Info card (right panel) ── */
+.jmap-info-card {
+    position: absolute;
+    top: clamp(1.5rem, 3vw, 2.5rem);
+    right: clamp(1.5rem, 3vw, 2.5rem);
+    width: min(340px, calc(100vw - 3rem));
+    max-height: calc(90vh - 6rem);
+    overflow-y: auto;
+    background: rgba(10, 10, 18, 0.82);
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    padding: 1.4rem 1.5rem 1.5rem;
+    color: #fff;
+    z-index: 10;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+
+.jmap-info-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Card top: logo + meta */
+.jmap-card-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.jmap-logo {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.1);
+    padding: 4px;
+    flex-shrink: 0;
+}
+
+.jmap-logo[src=""] {
+    display: none;
+}
+
+.jmap-meta {
+    flex: 1;
+    min-width: 0;
+}
+
+.jmap-type-badge {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-bottom: 0.3rem;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.8);
+}
+
+.jmap-type-badge[data-type="work"]      { background: oklch(0.55 0.18 250 / 0.35); color: oklch(0.85 0.12 250); }
+.jmap-type-badge[data-type="education"] { background: oklch(0.55 0.14 140 / 0.35); color: oklch(0.85 0.1 140); }
+.jmap-type-badge[data-type="home"]      { background: oklch(0.55 0.14 30 / 0.35);  color: oklch(0.85 0.1 30); }
+
+.jmap-org {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 2px;
+    color: #fff;
+}
+
+.jmap-role {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    margin: 0 0 4px;
+    line-height: 1.4;
+}
+
+.jmap-date {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.5);
+    display: block;
+}
+
+.jmap-location {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.45);
+    display: block;
+    margin-top: 2px;
+}
+
+/* Bullets */
+.jmap-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 0.75rem;
+}
+
+.jmap-bullets li {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.8rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.8);
+    padding: 3px 0 3px 1.1rem;
+    position: relative;
+}
+
+.jmap-bullets li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.7rem;
+    top: 6px;
+}
+
+/* Photos grid */
+.jmap-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.jmap-photos[style*="display: none"] { display: none !important; }
+
+.jmap-photo img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.jmap-photo figcaption {
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.45);
+    margin-top: 3px;
+    text-align: center;
+}
+
+/* ── Navigation (bottom-center) ── */
+.jmap-nav {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    gap: 0.75rem;
+    z-index: 10;
+    background: rgba(10, 10, 18, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    width: auto;
+    white-space: nowrap;
+}
+
+.jmap-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+    flex-shrink: 0;
+}
+
+.jmap-btn:hover:not(:disabled) {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.35);
+}
+
+.jmap-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* Progress dots */
+.jmap-progress {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 0 0.25rem;
+}
+
+.jmap-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.jmap-dot.active {
+    background: #fff;
+    width: 18px;
+    border-radius: 3px;
+}
+
+/* ── Map pins ── */
+.jmap-pin {
+    cursor: pointer;
+}
+
+.jmap-pin-inner {
+    width: 40px;
+    height: 40px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    background: rgba(10, 10, 18, 0.9);
+    border: 2px solid rgba(255,255,255,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.jmap-pin-inner:hover {
+    box-shadow: 0 6px 24px rgba(0,0,0,0.7);
+}
+
+.jmap-pin-inner img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    transform: rotate(45deg);
+    border-radius: 2px;
+}
+
+.jmap-pin-inner span {
+    transform: rotate(45deg);
+    font-size: 1rem;
+    line-height: 1;
+}
+
+/* Pin type accents */
+.jmap-pin[data-type="home"]      .jmap-pin-inner { border-color: oklch(0.8 0.14 30); }
+.jmap-pin[data-type="work"]      .jmap-pin-inner { border-color: oklch(0.75 0.18 250); }
+.jmap-pin[data-type="education"] .jmap-pin-inner { border-color: oklch(0.75 0.14 140); }
+
+/* ── Plane marker ── */
+.jmap-plane {
+    font-size: 1.4rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+    transform-origin: center;
+    pointer-events: none;
+}
+
 /* Projects Section */
 #projects {
     padding: clamp(48px, 8vw, 96px) 15px;

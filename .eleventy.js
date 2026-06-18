@@ -3,6 +3,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "assets": "assets" });
   eleventyConfig.addPassthroughCopy("script.js");
   eleventyConfig.addPassthroughCopy("emailjs_config.js");
+  eleventyConfig.addPassthroughCopy("mapbox_config.js");
 
   // Preserve the customer-churn Tableau dashboard (standalone HTML)
   eleventyConfig.addPassthroughCopy({

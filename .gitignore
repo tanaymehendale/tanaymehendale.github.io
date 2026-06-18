@@ -1,6 +1,7 @@
 *venv/
 .env
 emailjs_config.js
+mapbox_config.js
 node_modules/
 _site/
 .claude/

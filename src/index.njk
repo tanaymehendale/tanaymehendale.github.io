@@ -121,166 +121,215 @@ pageTitle: "Tanay Mehendale - Portfolio"
 
     <!-- Journey Section -->
     <section id="journey">
-        <div class="container">
-            <div class="section-header-block">
+
+        <!-- ── Desktop: Immersive Map (hidden on mobile) ── -->
+        <div class="journey-map-desktop">
+
+            <!-- Section header overlaid top-left -->
+            <div class="jmap-section-header">
                 <span class="section-eyebrow">End to End</span>
                 <h2 class="section-display-title">The<br>Arc</h2>
             </div>
 
-            <!-- Sticky year-strip navigator -->
-            <div class="journey-strip-wrap">
-                <nav class="journey-strip" aria-label="Jump to year">
-                    <button class="strip-year" data-target="chapter-2026">2026</button>
-                    <button class="strip-year" data-target="chapter-2025">2025</button>
-                    <button class="strip-year" data-target="chapter-2024">2024</button>
-                    <button class="strip-year" data-target="chapter-2023">2023</button>
-                    <button class="strip-year" data-target="chapter-2021">2021</button>
-                    <button class="strip-year" data-target="chapter-2017">2017</button>
-                </nav>
+            <!-- Mapbox canvas -->
+            <div id="journey-map"></div>
+
+            <!-- Info card: right panel -->
+            <div class="jmap-info-card" aria-live="polite">
+                <div class="jmap-card-top">
+                    <img class="jmap-logo" src="" alt="">
+                    <div class="jmap-meta">
+                        <span class="jmap-type-badge"></span>
+                        <h3 class="jmap-org"></h3>
+                        <h4 class="jmap-role"></h4>
+                        <time class="jmap-date"></time>
+                        <span class="jmap-location"></span>
+                    </div>
+                </div>
+                <ul class="jmap-bullets"></ul>
+                <div class="jmap-photos"></div>
             </div>
 
-            <!-- Spine + chapters -->
-            <div class="journey-log">
-                <div class="journey-spine" aria-hidden="true"></div>
+            <!-- Navigation -->
+            <nav class="jmap-nav" aria-label="Journey navigation">
+                <button class="jmap-btn jmap-prev" aria-label="Previous stop" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <div class="jmap-progress" role="tablist" aria-label="Journey stops"></div>
+                <button class="jmap-btn jmap-next" aria-label="Next stop">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </nav>
 
-                <!-- HCLTech -->
-                <div class="journey-chapter" id="chapter-2026">
-                    <div class="chapter-node" aria-hidden="true"></div>
-                    <div class="chapter-content">
-                        <div class="chapter-header">
-                            <img src="/assets/images/HCLT-logo.png" alt="HCLTech" class="chapter-logo">
-                            <div class="chapter-id">
-                                <h3 class="chapter-org">HCLTech</h3>
-                                <h4 class="chapter-role">AI Engineer — Agentic AI · Strategic Accounts</h4>
-                            </div>
-                            <time class="chapter-date">Feb 2026 – Present</time>
-                            <span class="chapter-type chapter-type--work">Work</span>
-                        </div>
-                        <p class="chapter-skills">Microsoft Agent Framework · AI Agents · LLMs</p>
-                        <ul class="chapter-bullets">
-                            <li>Supporting a strategic enterprise tech account as an AI Engineer at HCLTech</li>
-                            <li>Contribute to AI‑led proposal development, solution narratives, and executive‑ready responses aligned with enterprise cloud, data, and responsible AI principles</li>
-                            <li>Collaborate across technical, commercial, and stakeholder teams to deliver compliant, high‑quality submissions for complex, large‑scale engagements</li>
-                        </ul>
-                    </div>
+        </div>
+
+        <!-- ── Mobile: Animated timeline (hidden on desktop) ── -->
+        <div class="journey-timeline-mobile">
+            <div class="container">
+                <div class="section-header-block">
+                    <span class="section-eyebrow">End to End</span>
+                    <h2 class="section-display-title">The<br>Arc</h2>
                 </div>
 
-                <!-- TAMU Data Engineer -->
-                <div class="journey-chapter" id="chapter-2025">
-                    <div class="chapter-node" aria-hidden="true"></div>
-                    <div class="chapter-content">
-                        <div class="chapter-header">
-                            <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="chapter-logo">
-                            <div class="chapter-id">
-                                <h3 class="chapter-org">Texas A&amp;M University</h3>
-                                <h4 class="chapter-role">Data Engineer Intern — Research</h4>
-                            </div>
-                            <time class="chapter-date">Aug 2025 – Feb 2026</time>
-                            <span class="chapter-type chapter-type--work">Work</span>
-                        </div>
-                        <p class="chapter-skills">Python · ETL · AWS · Data Pipelines · Pandas · Medallion Architecture</p>
-                        <ul class="chapter-bullets">
-                            <li>Architected a Python based ETL pipeline to consolidate 3 data sources into a multi-layer data lake on Amazon S3, reducing data preparation time by 40% and aiding time series analysis</li>
-                            <li>Developed scalable logic to ingest 2M+ unstructured raw text via Reddit API, implementing regex-based alias matching across 25+ subreddits to expand data coverage by 300%</li>
-                            <li>Optimized performance by resolving API failures, resulting in 100% data capture reliability and a 34% increase in speed</li>
-                            <li>Integrated LLM based sentiment analysis to derive 12 distinct themes, creating high-value categorical features to improve segmentation and trend modeling</li>
-                        </ul>
-                    </div>
+                <!-- Sticky year-strip navigator -->
+                <div class="journey-strip-wrap">
+                    <nav class="journey-strip" aria-label="Jump to year">
+                        <button class="strip-year" data-target="chapter-2026">2026</button>
+                        <button class="strip-year" data-target="chapter-2025">2025</button>
+                        <button class="strip-year" data-target="chapter-2024">2024</button>
+                        <button class="strip-year" data-target="chapter-2023">2023</button>
+                        <button class="strip-year" data-target="chapter-2021">2021</button>
+                        <button class="strip-year" data-target="chapter-2017">2017</button>
+                    </nav>
                 </div>
 
-                <!-- TAMU Teaching Assistant -->
-                <div class="journey-chapter" id="chapter-2024">
-                    <div class="chapter-node" aria-hidden="true"></div>
-                    <div class="chapter-content">
-                        <div class="chapter-header">
-                            <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="chapter-logo">
-                            <div class="chapter-id">
-                                <h3 class="chapter-org">Texas A&amp;M University</h3>
-                                <h4 class="chapter-role">Graduate Teaching Assistant</h4>
-                            </div>
-                            <time class="chapter-date">Apr 2024 – May 2025</time>
-                            <span class="chapter-type chapter-type--work">Work</span>
-                        </div>
-                        <p class="chapter-skills">HCI · Systems Analysis &amp; Design · ERP · SAP</p>
-                        <ul class="chapter-bullets">
-                            <li><strong>ISTM 380 Human-Computer Interaction:</strong> User Experience, UI/UX, Design principles, Accessibility, Usability, Attention, Memory</li>
-                            <li><strong>ISTM 320 Systems Analysis &amp; Design:</strong> Requirements Gathering, Data Modeling (ERDs, Data Flow Diagrams, UML)</li>
-                            <li><strong>SCMT 468 Enterprise Resource Planning:</strong> SAP, Sales &amp; Distribution, Materials Management, Warehouse Management, Inventory Management</li>
-                            <li>Mentored 245+ students across 4 courses through labs and office hours, clarifying requirements, debugging, and coaching presentations</li>
-                        </ul>
-                    </div>
-                </div>
+                <!-- Spine + chapters -->
+                <div class="journey-log">
+                    <div class="journey-spine" aria-hidden="true"></div>
 
-                <!-- Texas A&M MS -->
-                <div class="journey-chapter" id="chapter-2023">
-                    <div class="chapter-node" aria-hidden="true"></div>
-                    <div class="chapter-content">
-                        <div class="chapter-header">
-                            <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="chapter-logo">
-                            <div class="chapter-id">
-                                <h3 class="chapter-org">Mays Business School, Texas A&amp;M University</h3>
-                                <h4 class="chapter-role">Master of Science — Management Information Systems</h4>
+                    <!-- HCLTech -->
+                    <div class="journey-chapter" id="chapter-2026">
+                        <div class="chapter-node" aria-hidden="true"></div>
+                        <div class="chapter-content">
+                            <div class="chapter-header">
+                                <img src="/assets/images/HCLT-logo.png" alt="HCLTech" class="chapter-logo">
+                                <div class="chapter-id">
+                                    <h3 class="chapter-org">HCLTech</h3>
+                                    <h4 class="chapter-role">AI Engineer — Agentic AI · Strategic Accounts</h4>
+                                </div>
+                                <time class="chapter-date">Feb 2026 – Present</time>
+                                <span class="chapter-type chapter-type--work">Work</span>
                             </div>
-                            <time class="chapter-date">Aug 2023 – May 2025</time>
-                            <span class="chapter-type chapter-type--edu">MS</span>
+                            <p class="chapter-skills">Microsoft Agent Framework · AI Agents · LLMs</p>
+                            <ul class="chapter-bullets">
+                                <li>Supporting a strategic enterprise tech account as an AI Engineer at HCLTech</li>
+                                <li>Contribute to AI‑led proposal development, solution narratives, and executive‑ready responses aligned with enterprise cloud, data, and responsible AI principles</li>
+                                <li>Collaborate across technical, commercial, and stakeholder teams to deliver compliant, high‑quality submissions for complex, large‑scale engagements</li>
+                            </ul>
                         </div>
-                        <p class="chapter-skills">GPA: 3.83 · Head of Marketing &amp; Comms, BITS</p>
-                        <ul class="chapter-bullets">
-                            <li>ISTM 622 – Advanced Data Management</li>
-                            <li>ISTM 637 – Data Warehousing</li>
-                            <li>ECEN 758 – Data Mining</li>
-                            <li>CSCE 679 – Data Visualization</li>
-                            <li>STAT 650 – Statistics &amp; Foundations of Big Data</li>
-                        </ul>
                     </div>
-                </div>
 
-                <!-- LTIMindtree -->
-                <div class="journey-chapter" id="chapter-2021">
-                    <div class="chapter-node" aria-hidden="true"></div>
-                    <div class="chapter-content">
-                        <div class="chapter-header">
-                            <img src="/assets/images/ltimindtree-logo-blue.png" alt="LTIMindtree" class="chapter-logo">
-                            <div class="chapter-id">
-                                <h3 class="chapter-org">LTIMindtree</h3>
-                                <h4 class="chapter-role">Software Engineer</h4>
+                    <!-- TAMU Data Engineer -->
+                    <div class="journey-chapter" id="chapter-2025">
+                        <div class="chapter-node" aria-hidden="true"></div>
+                        <div class="chapter-content">
+                            <div class="chapter-header">
+                                <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="chapter-logo">
+                                <div class="chapter-id">
+                                    <h3 class="chapter-org">Texas A&amp;M University</h3>
+                                    <h4 class="chapter-role">Data Engineer Intern — Research</h4>
+                                </div>
+                                <time class="chapter-date">Aug 2025 – Feb 2026</time>
+                                <span class="chapter-type chapter-type--work">Work</span>
                             </div>
-                            <time class="chapter-date">Jan 2021 – Jun 2023</time>
-                            <span class="chapter-type chapter-type--work">Work</span>
+                            <p class="chapter-skills">Python · ETL · AWS · Data Pipelines · Pandas · Medallion Architecture</p>
+                            <ul class="chapter-bullets">
+                                <li>Architected a Python based ETL pipeline to consolidate 3 data sources into a multi-layer data lake on Amazon S3, reducing data preparation time by 40% and aiding time series analysis</li>
+                                <li>Developed scalable logic to ingest 2M+ unstructured raw text via Reddit API, implementing regex-based alias matching across 25+ subreddits to expand data coverage by 300%</li>
+                                <li>Optimized performance by resolving API failures, resulting in 100% data capture reliability and a 34% increase in speed</li>
+                                <li>Integrated LLM based sentiment analysis to derive 12 distinct themes, creating high-value categorical features to improve segmentation and trend modeling</li>
+                            </ul>
                         </div>
-                        <p class="chapter-skills">SQL · Python · ETL · AWS · S3 · Glue · ABAP · Data Modeling</p>
-                        <ul class="chapter-bullets">
-                            <li>Developed 45+ custom ERP transactions using ABAP with SQL, improving data retrieval speed by 95% for 400+ users</li>
-                            <li>Supported SAP to AWS ETL migration by extracting ERP data, validating S3 and Glue outputs, improving Redshift load consistency across weekly cycles</li>
-                            <li>Diagnosed and resolved 30+ technical support issues via root cause analysis, cutting average resolution time by 35%</li>
-                            <li>Collaborated with global teams to optimize SDLC audits and change management practices, reducing SOX compliance issues by 84% across 52+ releases</li>
-                        </ul>
                     </div>
-                </div>
 
-                <!-- SPIT B.Tech -->
-                <div class="journey-chapter" id="chapter-2017">
-                    <div class="chapter-node" aria-hidden="true"></div>
-                    <div class="chapter-content">
-                        <div class="chapter-header">
-                            <img src="/assets/images/spit-logo.png" alt="S.P.I.T." class="chapter-logo">
-                            <div class="chapter-id">
-                                <h3 class="chapter-org">Sardar Patel Institute of Technology, University of Mumbai</h3>
-                                <h4 class="chapter-role">Bachelor of Technology — Electronics &amp; Telecommunications</h4>
+                    <!-- TAMU Teaching Assistant -->
+                    <div class="journey-chapter" id="chapter-2024">
+                        <div class="chapter-node" aria-hidden="true"></div>
+                        <div class="chapter-content">
+                            <div class="chapter-header">
+                                <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="chapter-logo">
+                                <div class="chapter-id">
+                                    <h3 class="chapter-org">Texas A&amp;M University</h3>
+                                    <h4 class="chapter-role">Graduate Teaching Assistant</h4>
+                                </div>
+                                <time class="chapter-date">Apr 2024 – May 2025</time>
+                                <span class="chapter-type chapter-type--work">Work</span>
                             </div>
-                            <time class="chapter-date">Aug 2017 – May 2021</time>
-                            <span class="chapter-type chapter-type--edu">B.Tech</span>
+                            <p class="chapter-skills">HCI · Systems Analysis &amp; Design · ERP · SAP</p>
+                            <ul class="chapter-bullets">
+                                <li><strong>ISTM 380 Human-Computer Interaction:</strong> User Experience, UI/UX, Design principles, Accessibility, Usability, Attention, Memory</li>
+                                <li><strong>ISTM 320 Systems Analysis &amp; Design:</strong> Requirements Gathering, Data Modeling (ERDs, Data Flow Diagrams, UML)</li>
+                                <li><strong>SCMT 468 Enterprise Resource Planning:</strong> SAP, Sales &amp; Distribution, Materials Management, Warehouse Management, Inventory Management</li>
+                                <li>Mentored 245+ students across 4 courses through labs and office hours, clarifying requirements, debugging, and coaching presentations</li>
+                            </ul>
                         </div>
-                        <ul class="chapter-bullets">
-                            <li>Semi Finalist (Top 20 of 800+ teams) at IICDC-2019, national innovation hackathon by Texas Instruments &amp; Dept. of Science &amp; Technology, Govt. of India — affordable non-invasive flow meter</li>
-                            <li>Winner — Case Study Presentation by Fire &amp; Security Association of India (FSAI)</li>
-                        </ul>
                     </div>
-                </div>
 
+                    <!-- Texas A&M MS -->
+                    <div class="journey-chapter" id="chapter-2023">
+                        <div class="chapter-node" aria-hidden="true"></div>
+                        <div class="chapter-content">
+                            <div class="chapter-header">
+                                <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="chapter-logo">
+                                <div class="chapter-id">
+                                    <h3 class="chapter-org">Mays Business School, Texas A&amp;M University</h3>
+                                    <h4 class="chapter-role">Master of Science — Management Information Systems</h4>
+                                </div>
+                                <time class="chapter-date">Aug 2023 – May 2025</time>
+                                <span class="chapter-type chapter-type--edu">MS</span>
+                            </div>
+                            <p class="chapter-skills">GPA: 3.83 · Head of Marketing &amp; Comms, BITS</p>
+                            <ul class="chapter-bullets">
+                                <li>ISTM 622 – Advanced Data Management</li>
+                                <li>ISTM 637 – Data Warehousing</li>
+                                <li>ECEN 758 – Data Mining</li>
+                                <li>CSCE 679 – Data Visualization</li>
+                                <li>STAT 650 – Statistics &amp; Foundations of Big Data</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- LTIMindtree -->
+                    <div class="journey-chapter" id="chapter-2021">
+                        <div class="chapter-node" aria-hidden="true"></div>
+                        <div class="chapter-content">
+                            <div class="chapter-header">
+                                <img src="/assets/images/ltimindtree-logo-blue.png" alt="LTIMindtree" class="chapter-logo">
+                                <div class="chapter-id">
+                                    <h3 class="chapter-org">LTIMindtree</h3>
+                                    <h4 class="chapter-role">Software Engineer</h4>
+                                </div>
+                                <time class="chapter-date">Jan 2021 – Jun 2023</time>
+                                <span class="chapter-type chapter-type--work">Work</span>
+                            </div>
+                            <p class="chapter-skills">SQL · Python · ETL · AWS · S3 · Glue · ABAP · Data Modeling</p>
+                            <ul class="chapter-bullets">
+                                <li>Developed 45+ custom ERP transactions using ABAP with SQL, improving data retrieval speed by 95% for 400+ users</li>
+                                <li>Supported SAP to AWS ETL migration by extracting ERP data, validating S3 and Glue outputs, improving Redshift load consistency across weekly cycles</li>
+                                <li>Diagnosed and resolved 30+ technical support issues via root cause analysis, cutting average resolution time by 35%</li>
+                                <li>Collaborated with global teams to optimize SDLC audits and change management practices, reducing SOX compliance issues by 84% across 52+ releases</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SPIT B.Tech -->
+                    <div class="journey-chapter" id="chapter-2017">
+                        <div class="chapter-node" aria-hidden="true"></div>
+                        <div class="chapter-content">
+                            <div class="chapter-header">
+                                <img src="/assets/images/spit-logo.png" alt="S.P.I.T." class="chapter-logo">
+                                <div class="chapter-id">
+                                    <h3 class="chapter-org">Sardar Patel Institute of Technology, University of Mumbai</h3>
+                                    <h4 class="chapter-role">Bachelor of Technology — Electronics &amp; Telecommunications</h4>
+                                </div>
+                                <time class="chapter-date">Aug 2017 – May 2021</time>
+                                <span class="chapter-type chapter-type--edu">B.Tech</span>
+                            </div>
+                            <ul class="chapter-bullets">
+                                <li>Semi Finalist (Top 20 of 800+ teams) at IICDC-2019, national innovation hackathon by Texas Instruments &amp; Dept. of Science &amp; Technology, Govt. of India — affordable non-invasive flow meter</li>
+                                <li>Winner — Case Study Presentation by Fire &amp; Security Association of India (FSAI)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
+
     </section>
+
+    <!-- Journey map data injected for JS -->
+    <script>window.JOURNEY_DATA = {{ journey | dump | safe }};</script>
 
     <!-- Skills Section -->
     <section id="skills">
