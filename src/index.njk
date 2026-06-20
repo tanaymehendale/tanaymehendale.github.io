@@ -183,9 +183,18 @@ pageTitle: "Tanay Mehendale - Portfolio"
                 <button id="jmap-mute-btn" class="jmap-ctrl-btn" aria-label="Toggle ambient audio">🔇</button>
             </div>
 
+            <!-- Ambient audio for the journey -->
+            <audio id="jmap-audio" src="/assets/audio/journey.mp3" loop preload="none"></audio>
+
             <!-- Grand finale overlay -->
             <div id="jmap-finale-overlay" aria-hidden="true">
-                <p class="jmap-finale-quote">The next chapter is unwritten.</p>
+                <p class="jmap-finale-quote">To be continued...</p>
+            </div>
+
+            <!-- Onboarding hint -->
+            <div id="jmap-hint" role="tooltip" aria-live="polite" aria-hidden="true">
+                <span class="jmap-hint-text">Use the arrows to travel between chapters</span>
+                <button class="jmap-hint-dismiss" aria-label="Dismiss tip">Got it</button>
             </div>
 
             <!-- Navigation -->

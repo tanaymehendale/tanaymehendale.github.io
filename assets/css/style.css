@@ -1451,6 +1451,61 @@ section .container {
     pointer-events: auto;
 }
 
+/* ── Onboarding hint ── */
+#jmap-hint {
+    position: absolute;
+    bottom: 5.5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(10, 10, 20, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 999px;
+    padding: 0.5rem 1rem 0.5rem 1.25rem;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 10;
+}
+
+#jmap-hint.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+
+.jmap-hint-text {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 0.01em;
+}
+
+.jmap-hint-dismiss {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.65);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.jmap-hint-dismiss:hover {
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+}
+
 /* ── Info card: progressive disclosure ── */
 
 /* Elements with data-reveal start hidden and slide in when .revealed is added */
@@ -1624,10 +1679,10 @@ section .container {
 
 .jmap-dist-label {
     display: block;
-    font-family: 'Hanken Grotesk', sans-serif;
-    font-size: 0.6rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.55rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.35);
     margin-bottom: 2px;
@@ -1640,19 +1695,20 @@ section .container {
 }
 
 #jmap-dist-val {
-    font-family: 'Bricolage Grotesque', monospace;
-    font-size: 1.6rem;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.85);
     font-variant-numeric: tabular-nums;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.05em;
 }
 
 .jmap-dist-unit {
-    font-family: 'Hanken Grotesk', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 500;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 400;
     color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.1em;
 }
 
 /* ── Skill chips inside info card ── */
@@ -1768,14 +1824,15 @@ section .container {
 }
 
 .jmap-finale-quote {
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 300;
+    font-family: 'Exo 2', sans-serif;
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    font-weight: 200;
+    font-style: italic;
     color: #fff;
     text-align: center;
-    max-width: 18ch;
-    line-height: 1.25;
-    letter-spacing: 0.03em;
+    max-width: 20ch;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
     text-shadow: 0 2px 30px rgba(0, 0, 0, 0.9), 0 0 60px rgba(0, 0, 0, 0.7);
     margin: 0;
 }

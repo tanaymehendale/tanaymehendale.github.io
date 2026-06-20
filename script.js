@@ -215,11 +215,8 @@ class JourneyMap {
         this._cumDistances = [];
         this._totalDistanceSoFar = 0;
 
-        // Web Audio API
-        this._audioCtx = null;
-        this._masterGain = null;
-        this._currentOsc = null;
-        this._currentGain = null;
+        // File-based audio
+        this._audioEl = null;
         this._muted = true; // start muted until user unmutes
     }
 
@@ -290,8 +287,13 @@ class JourneyMap {
             gate.style.pointerEvents = 'none';
         }
 
-        // AudioContext requires a user gesture — this click is the perfect moment
-        this._initAudio();
+        // Start audio on user gesture (required by browsers)
+        this._audioEl = document.getElementById('jmap-audio');
+        if (this._audioEl && !this._muted) {
+            this._audioEl.volume = 0;
+            this._audioEl.play().catch(() => {});
+            this._fadeAudio(0, 0.35, 1500);
+        }
 
         this._journeyStarted = true;
 
@@ -300,6 +302,7 @@ class JourneyMap {
         setTimeout(() => {
             this._setControlsVisible(true);
             this._showChapterCard(this.data[0].chapter, () => this._flyToHome());
+            setTimeout(() => this._showHint(), 800);
         }, d(400));
     }
 
@@ -400,7 +403,6 @@ class JourneyMap {
             this._showInfoCard(stop);
             this._updateNav();
             this._updateDots();
-            this._startAmbientAudio(this.currentIndex);
             this._isAnimating = false;
         };
         if (this._paused) {
@@ -496,30 +498,56 @@ class JourneyMap {
     // ── Path drawing ──────────────────────────────────────────────────────────
 
     _drawAnimatedPath(coords, type) {
-        const id = `path-${Date.now()}`;
-        const sourceId = `${id}-src`;
+        const base = `path-${Date.now()}`;
+        const sourceId = `${base}-src`;
+        const idBloom  = `${base}-bloom`;
+        const idGlow   = `${base}-glow`;
+        const idCore   = `${base}-core`;
+
+        const isFlight = type === 'flight';
+        const bloomColor = isFlight ? '#fff5cc' : '#e0e8ff';
+        const glowColor  = isFlight ? '#ffe066' : '#c0ccff';
+        const coreColor  = '#ffffff';
 
         this.map.addSource(sourceId, {
             type: 'geojson',
             data: { type: 'Feature', geometry: { type: 'LineString', coordinates: coords.slice(0, 2) } },
         });
 
+        // Layer 1 — diffuse outer bloom
         this.map.addLayer({
-            id,
-            type: 'line',
-            source: sourceId,
+            id: idBloom, type: 'line', source: sourceId,
+            layout: { 'line-cap': 'round', 'line-join': 'round' },
+            paint: { 'line-color': bloomColor, 'line-width': 18, 'line-blur': 14, 'line-opacity': 0.22 },
+        });
+
+        // Layer 2 — tight inner glow
+        this.map.addLayer({
+            id: idGlow, type: 'line', source: sourceId,
+            layout: { 'line-cap': 'round', 'line-join': 'round' },
+            paint: { 'line-color': glowColor, 'line-width': 7, 'line-blur': 5, 'line-opacity': 0.6 },
+        });
+
+        // Layer 3 — bright core (dashed to indicate direction)
+        this.map.addLayer({
+            id: idCore, type: 'line', source: sourceId,
             layout: { 'line-cap': 'round', 'line-join': 'round' },
             paint: {
-                'line-color': type === 'flight' ? '#ffe066' : '#ffffff',
-                'line-width': type === 'flight' ? 2.5 : 2,
-                'line-opacity': 0.9,
-                'line-dasharray': type === 'flight' ? [3, 2] : [2, 2],
+                'line-color': coreColor,
+                'line-width': isFlight ? 1.8 : 1.5,
+                'line-blur': 0,
+                'line-opacity': 1,
+                'line-dasharray': isFlight ? [3, 2] : [2, 2],
             },
         });
 
-        this._pathLayers.push({ id, sourceId });
+        this._pathLayers.push(
+            { id: idBloom, sourceId },
+            { id: idGlow,  sourceId: null },
+            { id: idCore,  sourceId: null },
+        );
 
-        const revealDuration = (type === 'flight' ? 4200 : 2000) / this._speedMultiplier;
+        const revealDuration = (isFlight ? 4200 : 2000) / this._speedMultiplier;
         const startTime = performance.now();
         const total = coords.length;
 
@@ -866,21 +894,34 @@ class JourneyMap {
             data: { type: 'Feature', geometry: { type: 'LineString', coordinates: allCoords.slice(0, 2) } },
         });
 
-        // Solid glowing trail layered above the dashed transition lines
+        // 3-layer neon glow: outer bloom → inner glow → bright core
+        const idBloom = `${id}-bloom`;
+        const idGlow  = `${id}-glow`;
+        const idCore  = `${id}-core`;
+
         this.map.addLayer({
-            id,
-            type: 'line',
-            source: sourceId,
+            id: idBloom, type: 'line', source: sourceId,
             layout: { 'line-cap': 'round', 'line-join': 'round' },
-            paint: {
-                'line-color': '#ffe066',
-                'line-width': 4,
-                'line-opacity': 0.95,
-                'line-blur': 4,
-            },
+            paint: { 'line-color': '#fff5cc', 'line-width': 22, 'line-blur': 16, 'line-opacity': 0.28 },
         });
 
-        this._pathLayers.push({ id, sourceId });
+        this.map.addLayer({
+            id: idGlow, type: 'line', source: sourceId,
+            layout: { 'line-cap': 'round', 'line-join': 'round' },
+            paint: { 'line-color': '#ffe066', 'line-width': 8, 'line-blur': 6, 'line-opacity': 0.75 },
+        });
+
+        this.map.addLayer({
+            id: idCore, type: 'line', source: sourceId,
+            layout: { 'line-cap': 'round', 'line-join': 'round' },
+            paint: { 'line-color': '#ffffff', 'line-width': 2, 'line-blur': 0, 'line-opacity': 1 },
+        });
+
+        this._pathLayers.push(
+            { id: idBloom, sourceId },
+            { id: idGlow,  sourceId: null },
+            { id: idCore,  sourceId: null },
+        );
 
         const revealDuration = 2000 / this._speedMultiplier;
         const startTime = performance.now();
@@ -900,90 +941,42 @@ class JourneyMap {
         requestAnimationFrame(reveal);
     }
 
-    // ── Ambient audio (Web Audio API) ─────────────────────────────────────────
+    // ── Ambient audio (file-based) ────────────────────────────────────────────
 
-    _initAudio() {
-        if (this._audioCtx) return;
-        try {
-            this._audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            this._masterGain = this._audioCtx.createGain();
-            this._masterGain.gain.value = 1; // muting is handled by the _muted flag gating _startAmbientAudio
-            this._masterGain.connect(this._audioCtx.destination);
-        } catch (e) {
-            // AudioContext not supported
-            this._audioCtx = null;
-        }
-    }
-
-    // Each stop has a distinct ambient character via oscillator + filter
-    _getAudioProfile(index) {
-        const profiles = [
-            { type: 'sine',     freq: 55,  filterType: 'lowpass',  filterFreq: 180, q: 0.8, vol: 0.25 }, // home: warm drone
-            { type: 'sine',     freq: 70,  filterType: 'lowpass',  filterFreq: 280, q: 1.0, vol: 0.22 }, // spit: slightly brighter
-            { type: 'triangle', freq: 110, filterType: 'bandpass', filterFreq: 380, q: 1.5, vol: 0.18 }, // ltimindtree: city pulse
-            { type: 'sine',     freq: 82,  filterType: 'lowpass',  filterFreq: 450, q: 0.7, vol: 0.20 }, // tamu ms: calm, open
-            { type: 'sine',     freq: 165, filterType: 'highpass', filterFreq: 100, q: 1.0, vol: 0.14 }, // san jose: clean, bright
-            { type: 'sine',     freq: 110, filterType: 'lowpass',  filterFreq: 700, q: 0.5, vol: 0.14 }, // hcltech: airy, wide
-        ];
-        return profiles[index] || profiles[0];
-    }
-
-    _startAmbientAudio(index) {
-        if (!this._audioCtx || this._muted) return;
-        this._stopAmbientAudio(300);
-
-        const profile = this._getAudioProfile(index);
-        const osc = this._audioCtx.createOscillator();
-        const filter = this._audioCtx.createBiquadFilter();
-        const gain = this._audioCtx.createGain();
-
-        osc.type = profile.type;
-        osc.frequency.value = profile.freq;
-        filter.type = profile.filterType;
-        filter.frequency.value = profile.filterFreq;
-        filter.Q.value = profile.q;
-        gain.gain.value = 0;
-        gain.gain.linearRampToValueAtTime(profile.vol, this._audioCtx.currentTime + 1.0);
-
-        osc.connect(filter);
-        filter.connect(gain);
-        gain.connect(this._masterGain);
-        osc.start();
-
-        this._currentOsc = osc;
-        this._currentGain = gain;
-    }
-
-    _stopAmbientAudio(fadeMs = 500) {
-        if (!this._currentOsc || !this._currentGain || !this._audioCtx) return;
-        const now = this._audioCtx.currentTime;
-        this._currentGain.gain.cancelScheduledValues(now);
-        this._currentGain.gain.setValueAtTime(this._currentGain.gain.value, now);
-        this._currentGain.gain.linearRampToValueAtTime(0, now + fadeMs / 1000);
-        const osc = this._currentOsc;
-        const gain = this._currentGain;
-        setTimeout(() => {
-            try { osc.stop(); } catch (_) {}
-            try { osc.disconnect(); gain.disconnect(); } catch (_) {}
-        }, fadeMs + 100);
-        this._currentOsc = null;
-        this._currentGain = null;
+    _fadeAudio(fromVol, toVol, durationMs) {
+        if (!this._audioEl) return;
+        const steps = 30;
+        const interval = durationMs / steps;
+        const delta = (toVol - fromVol) / steps;
+        let step = 0;
+        const tick = () => {
+            step++;
+            if (!this._audioEl) return;
+            this._audioEl.volume = Math.max(0, Math.min(1, fromVol + delta * step));
+            if (step < steps) setTimeout(tick, interval);
+        };
+        setTimeout(tick, interval);
     }
 
     _toggleMute() {
-        if (!this._audioCtx) { this._initAudio(); }
         this._muted = !this._muted;
         const btn = document.getElementById('jmap-mute-btn');
 
         if (this._muted) {
-            this._stopAmbientAudio(300);
+            if (this._audioEl) this._fadeAudio(this._audioEl.volume, 0, 400);
             if (btn) btn.textContent = '🔇';
             if (btn) btn.classList.remove('active');
         } else {
+            if (!this._audioEl) {
+                this._audioEl = document.getElementById('jmap-audio');
+            }
+            if (this._audioEl) {
+                this._audioEl.volume = 0;
+                this._audioEl.play().catch(() => {});
+                this._fadeAudio(0, 0.35, 1000);
+            }
             if (btn) btn.textContent = '🔊';
             if (btn) btn.classList.add('active');
-            // Resume audio for current stop
-            this._startAmbientAudio(this.currentIndex);
         }
     }
 
@@ -1025,10 +1018,12 @@ class JourneyMap {
 
         if (prev) prev.addEventListener('click', () => {
             if (!this._journeyStarted) return;
+            this._hideHint();
             this.goTo(this.currentIndex - 1);
         });
         if (next) next.addEventListener('click', () => {
             if (!this._journeyStarted) return;
+            this._hideHint();
             this.goTo(this.currentIndex + 1);
         });
 
@@ -1048,9 +1043,33 @@ class JourneyMap {
             const rect = section.getBoundingClientRect();
             const inView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
             if (!inView) return;
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') this._hideHint();
             if (e.key === 'ArrowRight') this.goTo(this.currentIndex + 1);
             if (e.key === 'ArrowLeft') this.goTo(this.currentIndex - 1);
         });
+
+        const hintDismiss = document.querySelector('.jmap-hint-dismiss');
+        if (hintDismiss) hintDismiss.addEventListener('click', () => this._hideHint());
+    }
+
+    // ── Onboarding hint ───────────────────────────────────────────────────────
+
+    _showHint() {
+        if (sessionStorage.getItem('jmapHintSeen')) return;
+        const el = document.getElementById('jmap-hint');
+        if (!el) return;
+        el.setAttribute('aria-hidden', 'false');
+        el.classList.add('visible');
+        this._hintTimer = setTimeout(() => this._hideHint(), 6000);
+    }
+
+    _hideHint() {
+        clearTimeout(this._hintTimer);
+        const el = document.getElementById('jmap-hint');
+        if (!el) return;
+        el.classList.remove('visible');
+        el.setAttribute('aria-hidden', 'true');
+        sessionStorage.setItem('jmapHintSeen', '1');
     }
 
     // ── Utilities ─────────────────────────────────────────────────────────────
