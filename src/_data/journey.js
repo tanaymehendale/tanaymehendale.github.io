@@ -42,7 +42,7 @@ module.exports = [
     role: 'Software Engineer',
     dateRange: 'Jan 2021 – Jun 2023',
     type: 'work',
-    coordinates: [72.89190676588217, 19.157388652699623],
+    coordinates: [72.89386, 19.12544],
     location: 'Powai, Mumbai, India',
     logo: '/assets/images/ltimindtree-logo-blue.png',
     skills: ['Python', 'SQL', 'ETL', 'Azure', 'Spark', 'Data Pipelines'],

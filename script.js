@@ -405,7 +405,13 @@ class JourneyMap {
 
         const el = document.createElement('div');
         el.className = 'jmap-plane';
-        el.textContent = '✈';
+
+        // Rotate a CHILD element, not `el` itself — Mapbox sets translate() on `el` for
+        // positioning and overwriting it with rotate() would pin the marker to the origin.
+        const icon = document.createElement('div');
+        icon.className = 'jmap-plane-icon';
+        icon.textContent = '✈';
+        el.appendChild(icon);
 
         this._planeMarker = new mapboxgl.Marker({ element: el, anchor: 'center' })
             .setLngLat(arcCoords[0])
@@ -424,7 +430,7 @@ class JourneyMap {
             if (idx < total - 1) {
                 const bearing = this._bearing(arcCoords[idx], arcCoords[Math.min(idx + 1, total - 1)]);
                 // ✈ emoji faces east by default; bearing is clockwise from north; subtract 90 to align
-                el.style.transform = `rotate(${bearing - 90}deg)`;
+                icon.style.transform = `rotate(${bearing - 90}deg)`;
             }
 
             if (t < 1) {

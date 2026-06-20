@@ -1428,11 +1428,15 @@ section .container {
 
 /* ── Plane marker ── */
 .jmap-plane {
+    pointer-events: none;
+    /* Mapbox sets translate() here for positioning — do NOT set transform on this element */
+}
+.jmap-plane-icon {
     font-size: 1.4rem;
     line-height: 1;
     filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
     transform-origin: center;
-    pointer-events: none;
+    display: block;
 }
 
 /* Projects Section */
