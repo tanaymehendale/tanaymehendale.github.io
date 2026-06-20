@@ -1439,6 +1439,356 @@ section .container {
     display: block;
 }
 
+/* ── Journey nav: hidden until journey starts ── */
+.jmap-nav {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.35s ease;
+}
+
+.jmap-nav.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ── Info card: progressive disclosure ── */
+
+/* Elements with data-reveal start hidden and slide in when .revealed is added */
+.jmap-info-card [data-reveal] {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.jmap-info-card [data-reveal].revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Individual bullet items also use data-reveal (added dynamically via JS) */
+.jmap-bullets li[data-reveal] {
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: list-item;
+}
+
+.jmap-bullets li[data-reveal].revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Quote block */
+.jmap-quote {
+    font-style: italic;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55);
+    border-left: 2px solid rgba(255, 255, 255, 0.25);
+    margin: 0.6rem 0 0;
+    padding: 0.3rem 0 0.3rem 0.75rem;
+    quotes: none;
+}
+
+/* Reduced motion: reveal everything immediately, no transforms */
+@media (prefers-reduced-motion: reduce) {
+    .jmap-info-card [data-reveal],
+    .jmap-bullets li[data-reveal] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
+
+/* ── Start gate ── */
+#jmap-start-gate {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    background: rgba(5, 5, 14, 0.72);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+#jmap-start-gate.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.jmap-start-tagline {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.03em;
+    margin: 0;
+    text-align: center;
+}
+
+#jmap-start-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    background: oklch(0.55 0.18 250 / 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    padding: 0.85rem 2.2rem;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+    box-shadow: 0 0 0 0 oklch(0.55 0.18 250 / 0.5);
+}
+
+#jmap-start-btn:hover {
+    background: oklch(0.6 0.2 250 / 0.95);
+    transform: scale(1.04);
+    box-shadow: 0 0 24px 4px oklch(0.55 0.18 250 / 0.35);
+}
+
+.jmap-start-icon {
+    font-size: 0.9em;
+}
+
+/* ── Chapter title overlay ── */
+#jmap-chapter-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 25;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    background: rgba(5, 5, 14, 0.8);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#jmap-chapter-overlay.visible {
+    opacity: 1;
+}
+
+.jmap-chapter-roman {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.jmap-chapter-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.01em;
+    text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #jmap-chapter-overlay {
+        transition: none;
+    }
+}
+
+/* ── Distance counter (bottom-left) ── */
+#jmap-distance {
+    position: absolute;
+    bottom: 5.5rem;
+    left: clamp(1.5rem, 3vw, 2.5rem);
+    z-index: 10;
+    color: rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#jmap-distance.visible {
+    opacity: 1;
+}
+
+.jmap-dist-label {
+    display: block;
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    margin-bottom: 2px;
+}
+
+.jmap-dist-value-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+}
+
+#jmap-dist-val {
+    font-family: 'Bricolage Grotesque', monospace;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.85);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+}
+
+.jmap-dist-unit {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+/* ── Skill chips inside info card ── */
+.jmap-skill-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.55rem;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.jmap-skill-chips.revealed {
+    opacity: 1;
+    transform: none;
+}
+
+.jmap-skill-chip {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    padding: 2px 8px;
+    white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .jmap-skill-chips {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* ── Cinematic controls (pause / speed / mute) ── */
+#jmap-controls {
+    position: absolute;
+    bottom: 2rem;
+    right: clamp(1.5rem, 3vw, 2.5rem);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+#jmap-controls.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.jmap-ctrl-btn {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(10, 10, 18, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    padding: 0.4rem 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.jmap-ctrl-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+}
+
+.jmap-ctrl-btn.active {
+    background: oklch(0.55 0.18 250 / 0.4);
+    border-color: oklch(0.75 0.15 250 / 0.6);
+    color: #fff;
+}
+
+/* ── Grand finale overlay — Cinematic Dark Moment ── */
+#journey-map {
+    transition: filter 1.5s ease;
+}
+
+#journey-map.jmap-dim {
+    filter: brightness(0.15);
+}
+
+#journey-map.jmap-brighten {
+    filter: brightness(0.5);
+}
+
+#jmap-finale-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+#jmap-finale-overlay.visible {
+    opacity: 1;
+}
+
+.jmap-finale-quote {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    color: #fff;
+    text-align: center;
+    max-width: 18ch;
+    line-height: 1.25;
+    letter-spacing: 0.03em;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.9), 0 0 60px rgba(0, 0, 0, 0.7);
+    margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #journey-map {
+        transition: none;
+    }
+    #jmap-finale-overlay {
+        transition: none;
+    }
+}
+
 /* Projects Section */
 #projects {
     padding: clamp(48px, 8vw, 96px) 15px;

@@ -200,25 +200,56 @@ class JourneyMap {
         this._planeMarker = null;
         this._planeRafId = null;
         this._revealRafId = null;
+        this._distRafId = null;
         this._isAnimating = false;
+        this._journeyStarted = false;
+
+        // Speed control: multiplies all animation durations
+        this._speedMultiplier = 1;
+
+        // Pause state
+        this._paused = false;
+        this._pendingResume = null;
+
+        // Cumulative km to each stop (precomputed)
+        this._cumDistances = [];
+        this._totalDistanceSoFar = 0;
+
+        // Web Audio API
+        this._audioCtx = null;
+        this._masterGain = null;
+        this._currentOsc = null;
+        this._currentGain = null;
+        this._muted = true; // start muted until user unmutes
     }
+
+    // ── Initialisation ────────────────────────────────────────────────────────
 
     init() {
         mapboxgl.accessToken = MAPBOX_TOKEN;
 
         this.map = new mapboxgl.Map({
             container: this.containerId,
+            // High-res v12 imagery; non-raster layers are hidden below after style.load
             style: 'mapbox://styles/mapbox/satellite-streets-v12',
-            center: [72, 20],
-            zoom: 2,
+            center: [20, 15],
+            zoom: 1.8,
             projection: 'globe',
             attributionControl: true,
         });
 
         this.map.scrollZoom.disable();
         this.map.dragRotate.disable();
+        this.map.dragPan.disable();
 
         this.map.once('style.load', () => {
+            // Hide all vector layers (streets, labels, POIs) — keep only raster satellite imagery
+            this.map.getStyle().layers.forEach(layer => {
+                if (layer.type !== 'raster' && layer.type !== 'background') {
+                    this.map.setLayoutProperty(layer.id, 'visibility', 'none');
+                }
+            });
+
             this.map.setFog({
                 color: 'rgb(186, 210, 235)',
                 'high-color': 'rgb(36, 92, 223)',
@@ -227,21 +258,77 @@ class JourneyMap {
                 'star-intensity': 0.6,
             });
 
+            this._precomputeDistances();
             this._buildDots();
             this._bindNav();
 
-            setTimeout(() => this._flyToHome(), 600);
+            // Show start gate; nav and controls stay hidden until journey begins
+            this._setControlsVisible(false);
+            const gate = document.getElementById('jmap-start-gate');
+            if (gate) gate.classList.add('visible');
+
+            const startBtn = document.getElementById('jmap-start-btn');
+            if (startBtn) startBtn.addEventListener('click', () => this._startJourney(), { once: true });
         });
     }
 
+    _setControlsVisible(visible) {
+        const nav = document.querySelector('.jmap-nav');
+        const controls = document.getElementById('jmap-controls');
+        const dist = document.getElementById('jmap-distance');
+        [nav, controls, dist].forEach(el => {
+            if (!el) return;
+            el.classList.toggle('visible', visible);
+        });
+    }
+
+    _startJourney() {
+        const gate = document.getElementById('jmap-start-gate');
+        if (gate) {
+            gate.classList.remove('visible');
+            // Gate fades out; disable pointer events immediately to prevent double-click
+            gate.style.pointerEvents = 'none';
+        }
+
+        // AudioContext requires a user gesture — this click is the perfect moment
+        this._initAudio();
+
+        this._journeyStarted = true;
+
+        // Show chapter I overlay, then fly home
+        const d = ms => ms / this._speedMultiplier;
+        setTimeout(() => {
+            this._setControlsVisible(true);
+            this._showChapterCard(this.data[0].chapter, () => this._flyToHome());
+        }, d(400));
+    }
+
+    // ── Distances ─────────────────────────────────────────────────────────────
+
+    _precomputeDistances() {
+        this._cumDistances = [0];
+        for (let i = 1; i < this.data.length; i++) {
+            const d = turf.distance(
+                turf.point(this.data[i - 1].coordinates),
+                turf.point(this.data[i].coordinates),
+                { units: 'kilometers' }
+            );
+            this._cumDistances.push(this._cumDistances[i - 1] + Math.round(d));
+        }
+    }
+
+    // ── Core navigation ───────────────────────────────────────────────────────
+
     _flyToHome() {
         const home = this.data[0];
+        const d = ms => ms / this._speedMultiplier;
+
         this.map.flyTo({
             center: home.coordinates,
             zoom: 12,
             pitch: 50,
             bearing: -15,
-            duration: 4500,
+            duration: d(4500),
             essential: true,
         });
 
@@ -249,66 +336,112 @@ class JourneyMap {
             this._addPin(home, 0);
             this._showInfoCard(home);
             this._updateNav();
-        }, 4200);
+        }, d(4200));
     }
 
     goTo(index) {
-        if (index < 0 || index >= this.data.length || this._isAnimating) return;
+        if (this._isAnimating) return;
+
+        // Advance past the last stop → trigger finale
+        if (index >= this.data.length) {
+            this._doFinale();
+            return;
+        }
+
+        if (index < 0) return;
+
         this._isAnimating = true;
 
         const prev = this.data[this.currentIndex];
         const stop = this.data[index];
         const goingForward = index > this.currentIndex;
+        const prevChapter = this.data[this.currentIndex].chapter;
         this.currentIndex = index;
 
-        document.querySelector('.jmap-info-card').classList.remove('visible');
+        this._hideInfoCard();
 
-        if (goingForward && stop.transitionType) {
-            if (stop.transitionType === 'flight') {
-                this._doFlightTransition(prev, stop);
+        // Update distance counter
+        const targetKm = this._cumDistances[index] || 0;
+        this._animateDistanceCounter(this._totalDistanceSoFar, targetKm);
+        this._totalDistanceSoFar = targetKm;
+
+        const proceed = () => {
+            if (goingForward && stop.transitionType) {
+                if (stop.transitionType === 'flight') {
+                    this._doFlightTransition(prev, stop);
+                } else {
+                    this._doRoadTransition(prev, stop);
+                }
             } else {
-                this._doRoadTransition(prev, stop);
+                // Backward or no transition: simple fly
+                const d = ms => ms / this._speedMultiplier;
+                this.map.flyTo({
+                    center: stop.coordinates,
+                    zoom: 12,
+                    pitch: 50,
+                    duration: d(2500),
+                    essential: true,
+                });
+                setTimeout(() => this._completeStop(stop), d(2400));
             }
+        };
+
+        // Show chapter card when entering a new chapter (forward only)
+        if (goingForward && stop.chapter !== prevChapter) {
+            this._showChapterCard(stop.chapter, proceed);
         } else {
-            // Backward navigation: fly without drawing a path
-            this.map.flyTo({
-                center: stop.coordinates,
-                zoom: 12,
-                pitch: 50,
-                duration: 2500,
-                essential: true,
-            });
-            setTimeout(() => {
-                this._showInfoCard(stop);
-                this._updateNav();
-                this._updateDots();
-                this._isAnimating = false;
-            }, 2400);
+            proceed();
         }
     }
 
+    _completeStop(stop) {
+        const fn = () => {
+            this._addPin(stop, this.currentIndex);
+            this._showInfoCard(stop);
+            this._updateNav();
+            this._updateDots();
+            this._startAmbientAudio(this.currentIndex);
+            this._isAnimating = false;
+        };
+        if (this._paused) {
+            this._pendingResume = fn;
+        } else {
+            fn();
+        }
+    }
+
+    // ── Transitions ───────────────────────────────────────────────────────────
+
     _doRoadTransition(prev, stop) {
+        const d = ms => ms / this._speedMultiplier;
+        const params = this._getFlightParams(
+            turf.distance(turf.point(prev.coordinates), turf.point(stop.coordinates), { units: 'kilometers' })
+        );
+
         const coords = this._interpolate(prev.coordinates, stop.coordinates, 60);
         this._drawAnimatedPath(coords, 'road');
 
         this.map.flyTo({
             center: stop.coordinates,
-            zoom: 13,
-            pitch: 50,
-            duration: 2800,
+            zoom: params.zoom,
+            pitch: params.pitch,
+            speed: params.speed * this._speedMultiplier,
+            curve: params.curve,
             essential: true,
         });
 
-        setTimeout(() => {
-            this._addPin(stop, this.currentIndex);
-            this._showInfoCard(stop);
-            this._updateNav();
-            this._updateDots();
-            this._isAnimating = false;
-        }, 2600);
+        setTimeout(() => this._completeStop(stop), d(2600));
     }
 
     _doFlightTransition(prev, stop) {
+        const d = ms => ms / this._speedMultiplier;
+        const distKm = turf.distance(
+            turf.point(prev.coordinates),
+            turf.point(stop.coordinates),
+            { units: 'kilometers' }
+        );
+        const params = this._getFlightParams(distKm);
+
         const arcFeature = turf.greatCircle(
             turf.point(prev.coordinates),
             turf.point(stop.coordinates),
@@ -319,39 +452,48 @@ class JourneyMap {
         const midIdx = Math.floor(arcCoords.length / 2);
         const midPoint = arcCoords[midIdx];
 
-        // Zoom out to see both endpoints
+        // Zoom out to show arc
         this.map.flyTo({
             center: midPoint,
-            zoom: 2.2,
-            pitch: 20,
-            duration: 1800,
+            zoom: params.arcZoom,
+            pitch: params.arcPitch,
+            duration: d(1800),
             essential: true,
         });
 
         setTimeout(() => {
+            const planeDuration = d(3500);
             this._drawAnimatedPath(arcCoords, 'flight');
-            this._animatePlane(arcCoords, 5000);
+            this._animatePlane(arcCoords, planeDuration);
 
-            // Fly to destination while plane travels
+            // Wait for the plane to complete its full arc before moving the camera
             setTimeout(() => {
                 this.map.flyTo({
                     center: stop.coordinates,
-                    zoom: 11,
-                    pitch: 50,
-                    duration: 3500,
+                    zoom: params.zoom,
+                    pitch: params.pitch,
+                    duration: d(2500),
                     essential: true,
                 });
 
-                setTimeout(() => {
-                    this._addPin(stop, this.currentIndex);
-                    this._showInfoCard(stop);
-                    this._updateNav();
-                    this._updateDots();
-                    this._isAnimating = false;
-                }, 3300);
-            }, 1500);
-        }, 1900);
+                setTimeout(() => this._completeStop(stop), d(2300));
+            }, planeDuration + d(300));
+        }, d(1900));
     }
+
+    // Returns camera params tuned to the distance of the move
+    _getFlightParams(distKm) {
+        if (distKm < 50) {
+            return { zoom: 13, pitch: 45, arcZoom: 10, arcPitch: 30, speed: 1.2, curve: 1.0 };
+        } else if (distKm < 500) {
+            return { zoom: 11, pitch: 50, arcZoom: 5,  arcPitch: 25, speed: 0.9, curve: 1.4 };
+        } else {
+            // International — high arc shows Earth curvature
+            return { zoom: 10, pitch: 35, arcZoom: 2.2, arcPitch: 20, speed: 0.7, curve: 2.0 };
+        }
+    }
+
+    // ── Path drawing ──────────────────────────────────────────────────────────
 
     _drawAnimatedPath(coords, type) {
         const id = `path-${Date.now()}`;
@@ -377,8 +519,7 @@ class JourneyMap {
 
         this._pathLayers.push({ id, sourceId });
 
-        // Progressive coordinate reveal for "drawing" effect
-        const revealDuration = type === 'flight' ? 4200 : 2000;
+        const revealDuration = (type === 'flight' ? 4200 : 2000) / this._speedMultiplier;
         const startTime = performance.now();
         const total = coords.length;
 
@@ -388,16 +529,15 @@ class JourneyMap {
             const count = Math.max(2, Math.floor(eased * total));
             const src = this.map.getSource(sourceId);
             if (src) {
-                src.setData({
-                    type: 'Feature',
-                    geometry: { type: 'LineString', coordinates: coords.slice(0, count) },
-                });
+                src.setData({ type: 'Feature', geometry: { type: 'LineString', coordinates: coords.slice(0, count) } });
             }
             if (t < 1) this._revealRafId = requestAnimationFrame(reveal);
         };
 
         this._revealRafId = requestAnimationFrame(reveal);
     }
+
+    // ── Plane animation ───────────────────────────────────────────────────────
 
     _animatePlane(arcCoords, durationMs) {
         if (this._planeMarker) { this._planeMarker.remove(); this._planeMarker = null; }
@@ -406,8 +546,7 @@ class JourneyMap {
         const el = document.createElement('div');
         el.className = 'jmap-plane';
 
-        // Rotate a CHILD element, not `el` itself — Mapbox sets translate() on `el` for
-        // positioning and overwriting it with rotate() would pin the marker to the origin.
+        // Rotate child only — Mapbox owns translate() on the wrapper element
         const icon = document.createElement('div');
         icon.className = 'jmap-plane-icon';
         icon.textContent = '✈';
@@ -429,7 +568,6 @@ class JourneyMap {
 
             if (idx < total - 1) {
                 const bearing = this._bearing(arcCoords[idx], arcCoords[Math.min(idx + 1, total - 1)]);
-                // ✈ emoji faces east by default; bearing is clockwise from north; subtract 90 to align
                 icon.style.transform = `rotate(${bearing - 90}deg)`;
             }
 
@@ -438,12 +576,14 @@ class JourneyMap {
             } else {
                 setTimeout(() => {
                     if (this._planeMarker) { this._planeMarker.remove(); this._planeMarker = null; }
-                }, 500);
+                }, 500 / this._speedMultiplier);
             }
         };
 
         this._planeRafId = requestAnimationFrame(fly);
     }
+
+    // ── Map pins ──────────────────────────────────────────────────────────────
 
     _addPin(stop, index) {
         const el = document.createElement('div');
@@ -474,45 +614,380 @@ class JourneyMap {
         this._pinMarkers.push(marker);
     }
 
+    // ── Info card: staggered progressive reveal ───────────────────────────────
+
+    _hideInfoCard() {
+        const card = document.querySelector('.jmap-info-card');
+        if (!card) return;
+        card.classList.remove('visible');
+        card.querySelectorAll('[data-reveal]').forEach(el => el.classList.remove('revealed'));
+        card.querySelectorAll('.jmap-bullets li').forEach(li => li.classList.remove('revealed'));
+        card.querySelectorAll('.jmap-skill-chip').forEach(c => c.remove());
+    }
+
     _showInfoCard(stop) {
         const card = document.querySelector('.jmap-info-card');
-        card.classList.remove('visible');
+        if (!card) return;
+
+        // Populate content
+        const logo = card.querySelector('.jmap-logo');
+        if (stop.logo) {
+            logo.src = stop.logo;
+            logo.alt = stop.org;
+            logo.style.display = '';
+        } else {
+            logo.src = '';
+            logo.style.display = 'none';
+        }
+
+        const badge = card.querySelector('.jmap-type-badge');
+        badge.textContent = { work: 'Work', education: 'Education', home: 'Home' }[stop.type] || stop.type;
+        badge.dataset.type = stop.type;
+
+        card.querySelector('.jmap-org').textContent = stop.org;
+        card.querySelector('.jmap-role').textContent = stop.role;
+        card.querySelector('.jmap-date').textContent = stop.dateRange;
+        card.querySelector('.jmap-location').textContent = stop.location;
+
+        // Each bullet gets data-reveal so it can be staggered
+        card.querySelector('.jmap-bullets').innerHTML =
+            (stop.bullets || []).map(b => `<li data-reveal>${b}</li>`).join('');
+
+        // Skill chips inside the card
+        const chipsEl = card.querySelector('.jmap-skill-chips');
+        if (chipsEl) {
+            chipsEl.innerHTML = (stop.skills || [])
+                .map(s => `<span class="jmap-skill-chip">${s}</span>`).join('');
+        }
+
+        const quoteEl = card.querySelector('.jmap-quote');
+        if (quoteEl) quoteEl.textContent = stop.quote || '';
+
+        const photosEl = card.querySelector('.jmap-photos');
+        if (stop.photos && stop.photos.length) {
+            photosEl.innerHTML = stop.photos
+                .map(p => `<figure class="jmap-photo"><img src="${p.src}" alt="${p.caption || ''}"><figcaption>${p.caption || ''}</figcaption></figure>`)
+                .join('');
+            photosEl.style.display = '';
+        } else {
+            photosEl.style.display = 'none';
+        }
+
+        // Show card shell immediately (glassmorphic container)
+        card.classList.add('visible');
+
+        // Check reduced-motion preference: if so, reveal everything at once
+        const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (noMotion) {
+            card.querySelectorAll('[data-reveal]').forEach(el => el.classList.add('revealed'));
+            return;
+        }
+
+        // Staggered reveal
+        const d = ms => ms / this._speedMultiplier;
+        const bullets = Array.from(card.querySelectorAll('.jmap-bullets li[data-reveal]'));
+
+        setTimeout(() => card.querySelector('.jmap-card-top[data-reveal]')?.classList.add('revealed'), d(60));
+        bullets.forEach((li, i) => {
+            setTimeout(() => li.classList.add('revealed'), d(200 + i * 140));
+        });
+        // Chips after bullets
+        const chipsDelay = d(200 + bullets.length * 140 + 80);
+        setTimeout(() => chipsEl?.classList.add('revealed'), chipsDelay);
+        // Quote after chips
+        const quoteDelay = chipsDelay + d(100);
+        setTimeout(() => quoteEl?.classList.add('revealed'), quoteDelay);
+    }
+
+    // ── Chapter title overlay ─────────────────────────────────────────────────
+
+    _showChapterCard(chapterText, callback) {
+        const overlay = document.getElementById('jmap-chapter-overlay');
+        if (!overlay) { callback && callback(); return; }
+
+        // Parse "Chapter I: Roots" → roman="Chapter I", title="Roots"
+        const colonIdx = chapterText.indexOf(':');
+        const roman = colonIdx >= 0 ? chapterText.slice(0, colonIdx).trim() : chapterText;
+        const title = colonIdx >= 0 ? chapterText.slice(colonIdx + 1).trim() : '';
+
+        overlay.querySelector('.jmap-chapter-roman').textContent = roman;
+        overlay.querySelector('.jmap-chapter-title').textContent = title;
+        overlay.setAttribute('aria-hidden', 'false');
+        overlay.classList.add('visible');
+
+        const d = ms => ms / this._speedMultiplier;
+        const holdTime = d(1800);
+        const fadeTime = d(500);
 
         setTimeout(() => {
-            const logo = card.querySelector('.jmap-logo');
-            if (stop.logo) {
-                logo.src = stop.logo;
-                logo.alt = stop.org;
-                logo.style.display = '';
-            } else {
-                logo.src = '';
-                logo.style.display = 'none';
-            }
-
-            const badge = card.querySelector('.jmap-type-badge');
-            badge.textContent = { work: 'Work', education: 'Education', home: 'Home' }[stop.type] || stop.type;
-            badge.dataset.type = stop.type;
-
-            card.querySelector('.jmap-org').textContent = stop.org;
-            card.querySelector('.jmap-role').textContent = stop.role;
-            card.querySelector('.jmap-date').textContent = stop.dateRange;
-            card.querySelector('.jmap-location').textContent = stop.location;
-
-            card.querySelector('.jmap-bullets').innerHTML = stop.bullets.map(b => `<li>${b}</li>`).join('');
-
-            const photosEl = card.querySelector('.jmap-photos');
-            if (stop.photos && stop.photos.length) {
-                photosEl.innerHTML = stop.photos
-                    .map(p => `<figure class="jmap-photo"><img src="${p.src}" alt="${p.caption || ''}"><figcaption>${p.caption || ''}</figcaption></figure>`)
-                    .join('');
-                photosEl.style.display = '';
-            } else {
-                photosEl.style.display = 'none';
-            }
-
-            card.classList.add('visible');
-        }, 150);
+            overlay.classList.remove('visible');
+            overlay.setAttribute('aria-hidden', 'true');
+            setTimeout(() => { callback && callback(); }, fadeTime);
+        }, holdTime);
     }
+
+    // ── Distance counter ──────────────────────────────────────────────────────
+
+    _animateDistanceCounter(fromKm, toKm) {
+        if (this._distRafId) cancelAnimationFrame(this._distRafId);
+        const valEl = document.getElementById('jmap-dist-val');
+        if (!valEl) return;
+
+        const duration = 2000 / this._speedMultiplier;
+        const start = performance.now();
+
+        const tick = (now) => {
+            const t = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - t, 3);
+            valEl.textContent = Math.round(fromKm + (toKm - fromKm) * eased).toLocaleString();
+            if (t < 1) {
+                this._distRafId = requestAnimationFrame(tick);
+            } else {
+                this._distRafId = null;
+            }
+        };
+
+        this._distRafId = requestAnimationFrame(tick);
+    }
+
+    // ── Pause / Explore mode ──────────────────────────────────────────────────
+
+    _togglePause() {
+        this._paused = !this._paused;
+        const btn = document.getElementById('jmap-pause-btn');
+
+        if (this._paused) {
+            this.map.stop();
+            this.map.dragPan.enable();
+            this.map.scrollZoom.enable();
+            this.map.dragRotate.enable();
+            if (btn) { btn.textContent = '▶ Resume'; btn.setAttribute('aria-label', 'Resume journey'); btn.classList.add('active'); }
+        } else {
+            this.map.dragPan.disable();
+            this.map.scrollZoom.disable();
+            this.map.dragRotate.disable();
+            if (btn) { btn.textContent = '⏸ Pause'; btn.setAttribute('aria-label', 'Pause journey'); btn.classList.remove('active'); }
+
+            if (this._pendingResume) {
+                const fn = this._pendingResume;
+                this._pendingResume = null;
+                fn();
+            } else {
+                // No pending step — re-show current stop
+                this._showInfoCard(this.data[this.currentIndex]);
+                this._isAnimating = false;
+            }
+        }
+    }
+
+    // ── Speed control ─────────────────────────────────────────────────────────
+
+    _toggleSpeed() {
+        this._speedMultiplier = this._speedMultiplier === 1 ? 2 : 1;
+        const btn = document.getElementById('jmap-speed-btn');
+        if (btn) {
+            const fast = this._speedMultiplier === 2;
+            btn.textContent = fast ? '2×' : '1×';
+            btn.classList.toggle('active', fast);
+        }
+    }
+
+    // ── Grand finale ──────────────────────────────────────────────────────────
+
+    _doFinale() {
+        if (this._isAnimating) return;
+        this._isAnimating = true;
+
+        this._hideInfoCard();
+
+        const pauseBtn = document.getElementById('jmap-pause-btn');
+        if (pauseBtn) pauseBtn.disabled = true;
+
+        const d = ms => ms / this._speedMultiplier;
+        const mapEl = document.getElementById('journey-map');
+
+        // Pull back to center on the mid-Atlantic — shows full India→US arc on both horizons
+        this.map.flyTo({
+            center: [-20, 35],
+            zoom: 1.3,
+            pitch: 0,
+            bearing: 0,
+            duration: d(3000),
+            essential: true,
+        });
+
+        setTimeout(() => {
+            this._drawFinaleTrail();
+
+            // Step 1: dim the map to near-black
+            setTimeout(() => {
+                if (mapEl) mapEl.classList.add('jmap-dim');
+
+                // Step 2: fade in the quote over the darkness
+                setTimeout(() => {
+                    const overlay = document.getElementById('jmap-finale-overlay');
+                    if (overlay) {
+                        overlay.setAttribute('aria-hidden', 'false');
+                        overlay.classList.add('visible');
+                    }
+
+                    // Step 3: after 3s on dark, brighten back to reveal globe + trail beneath
+                    setTimeout(() => {
+                        if (mapEl) {
+                            mapEl.classList.remove('jmap-dim');
+                            mapEl.classList.add('jmap-brighten');
+                        }
+                        this._isAnimating = false;
+                    }, d(3000));
+                }, d(1500));
+            }, d(600));
+        }, d(3000));
+    }
+
+    _drawFinaleTrail() {
+        // Build one continuous great-circle path through all stops
+        const allCoords = [];
+        for (let i = 0; i < this.data.length - 1; i++) {
+            const arc = turf.greatCircle(
+                turf.point(this.data[i].coordinates),
+                turf.point(this.data[i + 1].coordinates),
+                { npoints: 60 }
+            );
+            const seg = arc.geometry.coordinates;
+            // Skip first point on all segments after the first to avoid duplicates
+            allCoords.push(...(i === 0 ? seg : seg.slice(1)));
+        }
+
+        const id = `finale-trail-${Date.now()}`;
+        const sourceId = `${id}-src`;
+
+        this.map.addSource(sourceId, {
+            type: 'geojson',
+            data: { type: 'Feature', geometry: { type: 'LineString', coordinates: allCoords.slice(0, 2) } },
+        });
+
+        // Solid glowing trail layered above the dashed transition lines
+        this.map.addLayer({
+            id,
+            type: 'line',
+            source: sourceId,
+            layout: { 'line-cap': 'round', 'line-join': 'round' },
+            paint: {
+                'line-color': '#ffe066',
+                'line-width': 4,
+                'line-opacity': 0.95,
+                'line-blur': 4,
+            },
+        });
+
+        this._pathLayers.push({ id, sourceId });
+
+        const revealDuration = 2000 / this._speedMultiplier;
+        const startTime = performance.now();
+        const total = allCoords.length;
+
+        const reveal = (now) => {
+            const t = Math.min((now - startTime) / revealDuration, 1);
+            const eased = 1 - Math.pow(1 - t, 2);
+            const count = Math.max(2, Math.floor(eased * total));
+            const src = this.map.getSource(sourceId);
+            if (src) {
+                src.setData({ type: 'Feature', geometry: { type: 'LineString', coordinates: allCoords.slice(0, count) } });
+            }
+            if (t < 1) requestAnimationFrame(reveal);
+        };
+
+        requestAnimationFrame(reveal);
+    }
+
+    // ── Ambient audio (Web Audio API) ─────────────────────────────────────────
+
+    _initAudio() {
+        if (this._audioCtx) return;
+        try {
+            this._audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            this._masterGain = this._audioCtx.createGain();
+            this._masterGain.gain.value = 1; // muting is handled by the _muted flag gating _startAmbientAudio
+            this._masterGain.connect(this._audioCtx.destination);
+        } catch (e) {
+            // AudioContext not supported
+            this._audioCtx = null;
+        }
+    }
+
+    // Each stop has a distinct ambient character via oscillator + filter
+    _getAudioProfile(index) {
+        const profiles = [
+            { type: 'sine',     freq: 55,  filterType: 'lowpass',  filterFreq: 180, q: 0.8, vol: 0.25 }, // home: warm drone
+            { type: 'sine',     freq: 70,  filterType: 'lowpass',  filterFreq: 280, q: 1.0, vol: 0.22 }, // spit: slightly brighter
+            { type: 'triangle', freq: 110, filterType: 'bandpass', filterFreq: 380, q: 1.5, vol: 0.18 }, // ltimindtree: city pulse
+            { type: 'sine',     freq: 82,  filterType: 'lowpass',  filterFreq: 450, q: 0.7, vol: 0.20 }, // tamu ms: calm, open
+            { type: 'sine',     freq: 165, filterType: 'highpass', filterFreq: 100, q: 1.0, vol: 0.14 }, // san jose: clean, bright
+            { type: 'sine',     freq: 110, filterType: 'lowpass',  filterFreq: 700, q: 0.5, vol: 0.14 }, // hcltech: airy, wide
+        ];
+        return profiles[index] || profiles[0];
+    }
+
+    _startAmbientAudio(index) {
+        if (!this._audioCtx || this._muted) return;
+        this._stopAmbientAudio(300);
+
+        const profile = this._getAudioProfile(index);
+        const osc = this._audioCtx.createOscillator();
+        const filter = this._audioCtx.createBiquadFilter();
+        const gain = this._audioCtx.createGain();
+
+        osc.type = profile.type;
+        osc.frequency.value = profile.freq;
+        filter.type = profile.filterType;
+        filter.frequency.value = profile.filterFreq;
+        filter.Q.value = profile.q;
+        gain.gain.value = 0;
+        gain.gain.linearRampToValueAtTime(profile.vol, this._audioCtx.currentTime + 1.0);
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(this._masterGain);
+        osc.start();
+
+        this._currentOsc = osc;
+        this._currentGain = gain;
+    }
+
+    _stopAmbientAudio(fadeMs = 500) {
+        if (!this._currentOsc || !this._currentGain || !this._audioCtx) return;
+        const now = this._audioCtx.currentTime;
+        this._currentGain.gain.cancelScheduledValues(now);
+        this._currentGain.gain.setValueAtTime(this._currentGain.gain.value, now);
+        this._currentGain.gain.linearRampToValueAtTime(0, now + fadeMs / 1000);
+        const osc = this._currentOsc;
+        const gain = this._currentGain;
+        setTimeout(() => {
+            try { osc.stop(); } catch (_) {}
+            try { osc.disconnect(); gain.disconnect(); } catch (_) {}
+        }, fadeMs + 100);
+        this._currentOsc = null;
+        this._currentGain = null;
+    }
+
+    _toggleMute() {
+        if (!this._audioCtx) { this._initAudio(); }
+        this._muted = !this._muted;
+        const btn = document.getElementById('jmap-mute-btn');
+
+        if (this._muted) {
+            this._stopAmbientAudio(300);
+            if (btn) btn.textContent = '🔇';
+            if (btn) btn.classList.remove('active');
+        } else {
+            if (btn) btn.textContent = '🔊';
+            if (btn) btn.classList.add('active');
+            // Resume audio for current stop
+            this._startAmbientAudio(this.currentIndex);
+        }
+    }
+
+    // ── Dots / nav ────────────────────────────────────────────────────────────
 
     _buildDots() {
         const container = document.querySelector('.jmap-progress');
@@ -539,17 +1014,35 @@ class JourneyMap {
         const prev = document.querySelector('.jmap-prev');
         const next = document.querySelector('.jmap-next');
         if (prev) prev.disabled = this.currentIndex === 0;
-        if (next) next.disabled = this.currentIndex === this.data.length - 1;
+        // Next is never disabled — at last stop it triggers the finale
+        if (next) next.disabled = false;
         this._updateDots();
     }
 
     _bindNav() {
         const prev = document.querySelector('.jmap-prev');
         const next = document.querySelector('.jmap-next');
-        if (prev) prev.addEventListener('click', () => this.goTo(this.currentIndex - 1));
-        if (next) next.addEventListener('click', () => this.goTo(this.currentIndex + 1));
+
+        if (prev) prev.addEventListener('click', () => {
+            if (!this._journeyStarted) return;
+            this.goTo(this.currentIndex - 1);
+        });
+        if (next) next.addEventListener('click', () => {
+            if (!this._journeyStarted) return;
+            this.goTo(this.currentIndex + 1);
+        });
+
+        const pauseBtn = document.getElementById('jmap-pause-btn');
+        if (pauseBtn) pauseBtn.addEventListener('click', () => this._togglePause());
+
+        const speedBtn = document.getElementById('jmap-speed-btn');
+        if (speedBtn) speedBtn.addEventListener('click', () => this._toggleSpeed());
+
+        const muteBtn = document.getElementById('jmap-mute-btn');
+        if (muteBtn) muteBtn.addEventListener('click', () => this._toggleMute());
 
         document.addEventListener('keydown', e => {
+            if (!this._journeyStarted) return;
             const section = document.getElementById('journey');
             if (!section) return;
             const rect = section.getBoundingClientRect();
@@ -559,6 +1052,8 @@ class JourneyMap {
             if (e.key === 'ArrowLeft') this.goTo(this.currentIndex - 1);
         });
     }
+
+    // ── Utilities ─────────────────────────────────────────────────────────────
 
     _interpolate(from, to, steps) {
         const coords = [];

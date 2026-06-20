@@ -134,9 +134,33 @@ pageTitle: "Tanay Mehendale - Portfolio"
             <!-- Mapbox canvas -->
             <div id="journey-map"></div>
 
+            <!-- Start gate: shown before journey begins -->
+            <div id="jmap-start-gate" role="dialog" aria-modal="true" aria-label="Begin the journey">
+                <p class="jmap-start-tagline">A cinematic tour of where I've been.</p>
+                <button id="jmap-start-btn">
+                    <span class="jmap-start-icon">▶</span>
+                    Begin the Journey
+                </button>
+            </div>
+
+            <!-- Chapter title overlay: appears before each new chapter -->
+            <div id="jmap-chapter-overlay" aria-live="assertive" aria-hidden="true">
+                <span class="jmap-chapter-roman"></span>
+                <span class="jmap-chapter-title"></span>
+            </div>
+
+            <!-- Distance counter (bottom-left) -->
+            <div id="jmap-distance" aria-live="polite" aria-label="Distance traveled">
+                <span class="jmap-dist-label">Distance traveled</span>
+                <div class="jmap-dist-value-row">
+                    <span id="jmap-dist-val">0</span>
+                    <span class="jmap-dist-unit">km</span>
+                </div>
+            </div>
+
             <!-- Info card: right panel -->
             <div class="jmap-info-card" aria-live="polite">
-                <div class="jmap-card-top">
+                <div class="jmap-card-top" data-reveal>
                     <img class="jmap-logo" src="" alt="">
                     <div class="jmap-meta">
                         <span class="jmap-type-badge"></span>
@@ -147,7 +171,21 @@ pageTitle: "Tanay Mehendale - Portfolio"
                     </div>
                 </div>
                 <ul class="jmap-bullets"></ul>
+                <div class="jmap-skill-chips" data-reveal></div>
+                <blockquote class="jmap-quote" data-reveal></blockquote>
                 <div class="jmap-photos"></div>
+            </div>
+
+            <!-- Cinematic controls (pause, speed, mute) -->
+            <div id="jmap-controls" aria-label="Journey controls">
+                <button id="jmap-pause-btn" class="jmap-ctrl-btn" aria-label="Pause journey">⏸ Pause</button>
+                <button id="jmap-speed-btn" class="jmap-ctrl-btn" aria-label="Toggle playback speed">1×</button>
+                <button id="jmap-mute-btn" class="jmap-ctrl-btn" aria-label="Toggle ambient audio">🔇</button>
+            </div>
+
+            <!-- Grand finale overlay -->
+            <div id="jmap-finale-overlay" aria-hidden="true">
+                <p class="jmap-finale-quote">The next chapter is unwritten.</p>
             </div>
 
             <!-- Navigation -->
