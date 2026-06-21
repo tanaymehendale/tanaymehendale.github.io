@@ -1,3 +1,7 @@
+document.addEventListener('contextmenu', e => {
+    if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') e.preventDefault();
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     const backTop = document.querySelector('.back-to-top a');
     if (backTop) {
@@ -192,7 +196,11 @@ document.addEventListener('DOMContentLoaded', () => {
 class JourneyMap {
     constructor(containerId, data) {
         this.containerId = containerId;
-        this.data = data;
+        // Split data by type: experience stops drive the tour, others are extras
+        this.data         = data.filter(s => ['home','work','education'].includes(s.type));
+        this.personalPins = data.filter(s => s.type === 'personal');
+        this.wishlistPins = data.filter(s => s.type === 'wishlist');
+
         this.currentIndex = 0;
         this.map = null;
         this._pathLayers = [];
@@ -217,7 +225,12 @@ class JourneyMap {
 
         // File-based audio
         this._audioEl = null;
-        this._muted = true; // start muted until user unmutes
+        this._muted = false; // audio plays on journey start; user can mute
+
+        // Free explore mode
+        this._freeExploreActive = false;
+        this._personalMarkers = [];
+        this._wishlistMarkers = [];
     }
 
     // ── Initialisation ────────────────────────────────────────────────────────
@@ -257,6 +270,8 @@ class JourneyMap {
 
             this._precomputeDistances();
             this._buildDots();
+            this._buildPersonalPins();
+            this._buildWishlistPins();
             this._bindNav();
 
             // Show start gate; nav and controls stay hidden until journey begins
@@ -293,15 +308,17 @@ class JourneyMap {
             this._audioEl.volume = 0;
             this._audioEl.play().catch(() => {});
             this._fadeAudio(0, 0.35, 1500);
+            // Update mute button to reflect audio is now playing
+            const muteBtn = document.getElementById('jmap-mute-btn');
+            if (muteBtn) { muteBtn.textContent = '🔊'; muteBtn.classList.add('active'); }
         }
 
         this._journeyStarted = true;
 
-        // Show chapter I overlay, then fly home
         const d = ms => ms / this._speedMultiplier;
         setTimeout(() => {
             this._setControlsVisible(true);
-            this._showChapterCard(this.data[0].chapter, () => this._flyToHome());
+            this._flyToHome();
             setTimeout(() => this._showHint(), 800);
         }, d(400));
     }
@@ -358,7 +375,6 @@ class JourneyMap {
         const prev = this.data[this.currentIndex];
         const stop = this.data[index];
         const goingForward = index > this.currentIndex;
-        const prevChapter = this.data[this.currentIndex].chapter;
         this.currentIndex = index;
 
         this._hideInfoCard();
@@ -389,12 +405,7 @@ class JourneyMap {
             }
         };
 
-        // Show chapter card when entering a new chapter (forward only)
-        if (goingForward && stop.chapter !== prevChapter) {
-            this._showChapterCard(stop.chapter, proceed);
-        } else {
-            proceed();
-        }
+        proceed();
     }
 
     _completeStop(stop) {
@@ -691,14 +702,11 @@ class JourneyMap {
         const quoteEl = card.querySelector('.jmap-quote');
         if (quoteEl) quoteEl.textContent = stop.quote || '';
 
-        const photosEl = card.querySelector('.jmap-photos');
-        if (stop.photos && stop.photos.length) {
-            photosEl.innerHTML = stop.photos
-                .map(p => `<figure class="jmap-photo"><img src="${p.src}" alt="${p.caption || ''}"><figcaption>${p.caption || ''}</figcaption></figure>`)
-                .join('');
-            photosEl.style.display = '';
-        } else {
-            photosEl.style.display = 'none';
+        const storyBtn = card.querySelector('.jmap-story-btn');
+        if (storyBtn) {
+            const hasContent = (stop.story && stop.story.trim()) || (stop.photos && stop.photos.length);
+            storyBtn.style.display = hasContent ? '' : 'none';
+            storyBtn.onclick = () => this._showExpandedPanel(stop);
         }
 
         // Show card shell immediately (glassmorphic container)
@@ -725,33 +733,6 @@ class JourneyMap {
         // Quote after chips
         const quoteDelay = chipsDelay + d(100);
         setTimeout(() => quoteEl?.classList.add('revealed'), quoteDelay);
-    }
-
-    // ── Chapter title overlay ─────────────────────────────────────────────────
-
-    _showChapterCard(chapterText, callback) {
-        const overlay = document.getElementById('jmap-chapter-overlay');
-        if (!overlay) { callback && callback(); return; }
-
-        // Parse "Chapter I: Roots" → roman="Chapter I", title="Roots"
-        const colonIdx = chapterText.indexOf(':');
-        const roman = colonIdx >= 0 ? chapterText.slice(0, colonIdx).trim() : chapterText;
-        const title = colonIdx >= 0 ? chapterText.slice(colonIdx + 1).trim() : '';
-
-        overlay.querySelector('.jmap-chapter-roman').textContent = roman;
-        overlay.querySelector('.jmap-chapter-title').textContent = title;
-        overlay.setAttribute('aria-hidden', 'false');
-        overlay.classList.add('visible');
-
-        const d = ms => ms / this._speedMultiplier;
-        const holdTime = d(1800);
-        const fadeTime = d(500);
-
-        setTimeout(() => {
-            overlay.classList.remove('visible');
-            overlay.setAttribute('aria-hidden', 'true');
-            setTimeout(() => { callback && callback(); }, fadeTime);
-        }, holdTime);
     }
 
     // ── Distance counter ──────────────────────────────────────────────────────
@@ -834,13 +815,13 @@ class JourneyMap {
         const d = ms => ms / this._speedMultiplier;
         const mapEl = document.getElementById('journey-map');
 
-        // Pull back to center on the mid-Atlantic — shows full India→US arc on both horizons
+        // Pull back to arc vantage point — North Atlantic/Greenland view shows full India→US trail
         this.map.flyTo({
-            center: [-20, 35],
-            zoom: 1.3,
-            pitch: 0,
+            center: [-20, 55],
+            zoom: 1.7,
+            pitch: 15,
             bearing: 0,
-            duration: d(3000),
+            duration: d(3500),
             essential: true,
         });
 
@@ -865,6 +846,15 @@ class JourneyMap {
                             mapEl.classList.remove('jmap-dim');
                             mapEl.classList.add('jmap-brighten');
                         }
+                        // Wire finale action buttons (done here so they only activate after reveal)
+                        const restartBtn = document.getElementById('jmap-restart-btn');
+                        if (restartBtn) restartBtn.onclick = () => this._resetJourney();
+                        const freeExploreFinaleBtn = document.getElementById('jmap-freeexplore-btn');
+                        if (freeExploreFinaleBtn) freeExploreFinaleBtn.onclick = () => {
+                            const overlay = document.getElementById('jmap-finale-overlay');
+                            if (overlay) { overlay.classList.remove('visible'); overlay.setAttribute('aria-hidden','true'); }
+                            this._enterFreeExplore();
+                        };
                         this._isAnimating = false;
                     }, d(3000));
                 }, d(1500));
@@ -1036,7 +1026,18 @@ class JourneyMap {
         const muteBtn = document.getElementById('jmap-mute-btn');
         if (muteBtn) muteBtn.addEventListener('click', () => this._toggleMute());
 
+        const exploreBtn = document.getElementById('jmap-explore-btn');
+        if (exploreBtn) exploreBtn.addEventListener('click', () => {
+            this._freeExploreActive ? this._exitFreeExplore() : this._enterFreeExplore();
+        });
+
+        const panelClose = document.getElementById('jmap-panel-close');
+        if (panelClose) panelClose.addEventListener('click', () => this._hideExpandedPanel());
+
         document.addEventListener('keydown', e => {
+            // ESC closes the expanded panel
+            if (e.key === 'Escape') { this._hideExpandedPanel(); return; }
+
             if (!this._journeyStarted) return;
             const section = document.getElementById('journey');
             if (!section) return;
@@ -1044,8 +1045,10 @@ class JourneyMap {
             const inView = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
             if (!inView) return;
             if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') this._hideHint();
-            if (e.key === 'ArrowRight') this.goTo(this.currentIndex + 1);
-            if (e.key === 'ArrowLeft') this.goTo(this.currentIndex - 1);
+            if (!this._freeExploreActive) {
+                if (e.key === 'ArrowRight') this.goTo(this.currentIndex + 1);
+                if (e.key === 'ArrowLeft') this.goTo(this.currentIndex - 1);
+            }
         });
 
         const hintDismiss = document.querySelector('.jmap-hint-dismiss');
@@ -1055,21 +1058,237 @@ class JourneyMap {
     // ── Onboarding hint ───────────────────────────────────────────────────────
 
     _showHint() {
-        if (sessionStorage.getItem('jmapHintSeen')) return;
+        if (localStorage.getItem('jmapHintDismissed')) return;
         const el = document.getElementById('jmap-hint');
         if (!el) return;
         el.setAttribute('aria-hidden', 'false');
         el.classList.add('visible');
-        this._hintTimer = setTimeout(() => this._hideHint(), 6000);
     }
 
     _hideHint() {
-        clearTimeout(this._hintTimer);
         const el = document.getElementById('jmap-hint');
         if (!el) return;
         el.classList.remove('visible');
         el.setAttribute('aria-hidden', 'true');
-        sessionStorage.setItem('jmapHintSeen', '1');
+        localStorage.setItem('jmapHintDismissed', '1');
+    }
+
+    // ── Free explore mode ─────────────────────────────────────────────────────
+
+    _enterFreeExplore() {
+        this._freeExploreActive = true;
+        this.map.dragPan.enable();
+        this.map.scrollZoom.enable();
+        this.map.dragRotate.enable();
+        this.map.touchZoomRotate.enable();
+
+        // Remove any brightness filters left over from the finale
+        const mapEl = document.getElementById('journey-map');
+        if (mapEl) { mapEl.classList.remove('jmap-dim', 'jmap-brighten'); }
+
+        // Show extra pins
+        this._personalMarkers.forEach(m => m.getElement().classList.remove('jmap-pin-hidden'));
+        this._wishlistMarkers.forEach(m => m.getElement().classList.remove('jmap-pin-hidden'));
+
+        // Fly to a global overview that shows both hemispheres (India on right, Americas on left)
+        this.map.flyTo({ center: [-20, 25], zoom: 1.3, pitch: 0, bearing: 0, duration: 1800, essential: true });
+
+        // Update controls UI
+        const controls = document.getElementById('jmap-controls');
+        if (controls) controls.classList.add('explore-active');
+        const btn = document.getElementById('jmap-explore-btn');
+        if (btn) { btn.textContent = '✕ Exit'; btn.classList.add('active'); btn.setAttribute('aria-label','Exit free explore mode'); }
+
+        // Hide info card and expanded panel during explore
+        const card = document.querySelector('.jmap-info-card');
+        if (card) { card.classList.remove('visible'); }
+        this._hideExpandedPanel();
+
+        // Show legend — persists until the user exits explore mode
+        const hint = document.getElementById('jmap-explore-hint');
+        if (hint) {
+            hint.classList.add('visible');
+            hint.setAttribute('aria-hidden', 'false');
+        }
+    }
+
+    _exitFreeExplore() {
+        this._freeExploreActive = false;
+        this.map.dragPan.disable();
+        this.map.scrollZoom.disable();
+        this.map.dragRotate.disable();
+        this.map.touchZoomRotate.disable();
+
+        // Hide extra pins
+        this._personalMarkers.forEach(m => m.getElement().classList.add('jmap-pin-hidden'));
+        this._wishlistMarkers.forEach(m => m.getElement().classList.add('jmap-pin-hidden'));
+
+        // Reset controls UI
+        const controls = document.getElementById('jmap-controls');
+        if (controls) controls.classList.remove('explore-active');
+        const btn = document.getElementById('jmap-explore-btn');
+        if (btn) { btn.textContent = '🗺 Explore'; btn.classList.remove('active'); btn.setAttribute('aria-label','Enter free explore mode'); }
+
+        // Hide explore hint
+        const hint = document.getElementById('jmap-explore-hint');
+        if (hint) { hint.classList.remove('visible'); hint.setAttribute('aria-hidden', 'true'); }
+
+        // Re-show info card for current stop
+        if (this._journeyStarted && this.data[this.currentIndex]) {
+            this._showInfoCard(this.data[this.currentIndex]);
+        }
+    }
+
+    // ── Personal & wishlist pin builders ─────────────────────────────────────
+
+    _buildPersonalPins() {
+        this.personalPins.forEach(pin => {
+            const el = document.createElement('div');
+            el.className = 'jmap-pin jmap-pin-hidden';
+            el.dataset.type = 'personal';
+
+            const inner = document.createElement('div');
+            inner.className = 'jmap-pin-inner';
+
+            const icon = document.createElement('span');
+            icon.textContent = pin.emoji || '★';
+            inner.appendChild(icon);
+            el.appendChild(inner);
+
+            el.addEventListener('click', () => this._showExpandedPanel(pin));
+
+            const marker = new mapboxgl.Marker({ element: el, anchor: 'bottom' })
+                .setLngLat(pin.coordinates)
+                .addTo(this.map);
+
+            this._personalMarkers.push(marker);
+        });
+    }
+
+    _buildWishlistPins() {
+        this.wishlistPins.forEach(pin => {
+            const el = document.createElement('div');
+            el.className = 'jmap-pin jmap-pin-hidden';
+            el.dataset.type = 'wishlist';
+
+            const inner = document.createElement('div');
+            inner.className = 'jmap-pin-inner';
+
+            const icon = document.createElement('span');
+            icon.textContent = '📍';
+            inner.appendChild(icon);
+
+            // Tooltip
+            const tooltip = document.createElement('div');
+            tooltip.className = 'jmap-wishlist-tooltip';
+            tooltip.innerHTML = `<span class="jmap-wishlist-label">📍 ${pin.label}</span><span class="jmap-wishlist-note">${pin.note || pin.location}</span>`;
+
+            el.appendChild(inner);
+            el.appendChild(tooltip);
+
+            el.addEventListener('mouseenter', () => tooltip.classList.add('visible'));
+            el.addEventListener('mouseleave', () => tooltip.classList.remove('visible'));
+            el.addEventListener('click',      () => tooltip.classList.toggle('visible'));
+
+            const marker = new mapboxgl.Marker({ element: el, anchor: 'bottom' })
+                .setLngLat(pin.coordinates)
+                .addTo(this.map);
+
+            this._wishlistMarkers.push(marker);
+        });
+    }
+
+    // ── Expanded story panel ──────────────────────────────────────────────────
+
+    _showExpandedPanel(stop) {
+        const panel = document.getElementById('jmap-expanded-panel');
+        if (!panel) return;
+
+        // Populate header
+        const badge = panel.querySelector('.jmap-panel-badge');
+        if (badge) {
+            const labels = { work: 'Work', education: 'Education', home: 'Home', personal: 'Personal' };
+            badge.textContent = labels[stop.type] || stop.type;
+            badge.dataset.type = stop.type;
+        }
+        const orgEl = panel.querySelector('.jmap-panel-org');
+        if (orgEl) orgEl.textContent = stop.org || stop.label || '';
+
+        const dateEl = panel.querySelector('.jmap-panel-date');
+        if (dateEl) dateEl.textContent = stop.dateRange || stop.location || '';
+
+        // Story
+        const storyEl = panel.querySelector('.jmap-panel-story');
+        if (storyEl) storyEl.textContent = stop.story || '';
+
+        // Photos / videos
+        const photosEl = panel.querySelector('.jmap-panel-photos');
+        if (photosEl) {
+            if (stop.photos && stop.photos.length) {
+                photosEl.innerHTML = stop.photos.map(p => {
+                    const isVideo = /\.(mp4|webm|mov)(\?.*)?$/i.test(p.src);
+                    const media = isVideo
+                        ? `<video src="${p.src}" autoplay loop muted playsinline preload="metadata"></video>`
+                        : `<img src="${p.src}" alt="${p.caption || ''}" loading="lazy">`;
+                    return `<figure class="jmap-panel-photo${isVideo ? ' jmap-panel-photo--video' : ''}">
+                        ${media}
+                        ${p.caption ? `<figcaption>${p.caption}</figcaption>` : ''}
+                    </figure>`;
+                }).join('');
+            } else {
+                photosEl.innerHTML = '';
+            }
+        }
+
+        panel.setAttribute('aria-hidden', 'false');
+        panel.classList.add('visible');
+    }
+
+    _hideExpandedPanel() {
+        const panel = document.getElementById('jmap-expanded-panel');
+        if (!panel) return;
+        panel.classList.remove('visible');
+        panel.setAttribute('aria-hidden', 'true');
+    }
+
+    // ── Reset journey ─────────────────────────────────────────────────────────
+
+    _resetJourney() {
+        // Hide finale overlay
+        const overlay = document.getElementById('jmap-finale-overlay');
+        if (overlay) { overlay.classList.remove('visible'); overlay.setAttribute('aria-hidden','true'); }
+
+        // Brighten map back to normal
+        const mapEl = document.getElementById('journey-map');
+        if (mapEl) { mapEl.classList.remove('jmap-dim','jmap-brighten'); }
+
+        // Reset pause button state
+        const pauseBtn = document.getElementById('jmap-pause-btn');
+        if (pauseBtn) { pauseBtn.disabled = false; pauseBtn.textContent = '⏸ Pause'; pauseBtn.classList.remove('active'); }
+
+        // Reset state
+        this.currentIndex = 0;
+        this._isAnimating = false;
+        this._paused = false;
+        this._pendingResume = null;
+        this._totalDistanceSoFar = 0;
+        this._hideInfoCard();
+        this._hideExpandedPanel();
+
+        // Remove existing path layers
+        this._pathLayers.forEach(({ id, sourceId }) => {
+            try { this.map.removeLayer(id); } catch(e) {}
+            if (sourceId) { try { this.map.removeSource(sourceId); } catch(e) {} }
+        });
+        this._pathLayers = [];
+
+        // Remove existing pins
+        this._pinMarkers.forEach(m => m.remove());
+        this._pinMarkers = [];
+
+        // Re-show gate or start directly from home (skip gate on restart)
+        this._setControlsVisible(true);
+        this._flyToHome();
     }
 
     // ── Utilities ─────────────────────────────────────────────────────────────

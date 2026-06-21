@@ -22,13 +22,18 @@ Never edit files inside `_site/` directly — it is generated and overwritten on
 - **`src/`** — all editable source files (Nunjucks templates, data, pages)
 - **`_site/`** — generated output; committed and served by GitHub Pages
 - **`assets/`** — static assets (CSS, images, docs); passed through to `_site/` unchanged
-- **`script.js`**, **`emailjs_config.js`** — root-level JS, also passed through
+- **`script.js`**, **`emailjs_config.js`**, **`mapbox_config.js`** — root-level JS, passed through unchanged
+- **`assets/docs/`** — five resume PDF variants: `_AI`, `_SE`, `_DE`, `_DA`, `_PM`. Nav and hero both link to the `_AI` version.
 
 ### Data Layer
 
-`src/_data/projects.js` is the single source of truth for all project content. Eleventy reads it at build time and makes it available to all templates as `projects`. Adding a new project means adding an object to this array — Eleventy auto-generates the detail page at `/projects/<slug>/`.
+Two data files in `src/_data/`:
 
-Key fields per project object: `slug`, `title`, `shortDesc`, `tags`, `featured`, `category`, `image`, `sections[]`, `links[]`, `isComingSoon`, `isAcademicRestricted`.
+**`projects.js`** — single source of truth for all project cards and detail pages. Eleventy reads it at build time as `projects`. Adding a new project means adding an object here — Eleventy auto-generates the detail page at `/projects/<slug>/`.
+
+Key fields: `slug`, `title`, `shortDesc`, `tags`, `featured`, `category`, `image`, `sections[]`, `links[]`, `isComingSoon`, `isAcademicRestricted`.
+
+**`journey.js`** — drives the interactive journey map section. Each entry is a stop on the globe tour with fields: `id`, `label`, `org`, `role`, `dateRange`, `type` (`home`/`work`/`education`), `coordinates` (lng/lat), `location`, `logo`, `chapter`, `quote`, `skills[]`, `bullets[]`, `transitionType` (`road`/`flight`/`null`).
 
 ### Template Hierarchy
 
@@ -57,17 +62,24 @@ CSS variables defined in `assets/css/style.css`. Light theme at `:root`, dark at
 `#lead` → `#about` → `#projects` → `#journey` → `#skills` → `#certifications` → `#contact`
 
 - **`#projects`**: Featured hero card (left 60%) + secondary stack (right 40%) driven by `projects | featuredOnly`
-- **`#journey`**: Unified experience + education timeline. Sticky year-strip navigator, animated spine, chapter cards with IntersectionObserver fade-in.
+- **`#journey`**: Two parallel implementations, CSS-toggled by viewport:
+  - **Desktop** (`.journey-map-desktop`): Mapbox GL JS globe tour driven by `journey.js`. Requires `mapbox_config.js` (contains the Mapbox public token). Has start gate, chapter overlay, info card, cinematic controls (pause/speed/mute), ambient audio (`assets/audio/journey.mp3`), and arc animations between stops.
+  - **Mobile** (`.journey-timeline-mobile`): Static HTML timeline with sticky year-strip navigator, animated spine, and chapter cards with IntersectionObserver fade-in. Hard-coded in `index.njk` (not data-driven from `journey.js`).
 - **`#skills`**: 6 "mixer channels" layout. Each channel has a CSS `--peak-w` variable (0–100%) controlling the visual weight bar, plus tagged skill lists (`sk-core`, `sk-mid`, `sk-low`).
 
-### Script.js Responsibilities
+### JS Responsibilities
 
+**`script.js`** (root-level, minimal):
+- Theme toggle: toggles `dark-mode` class on `<body>`, persists to `localStorage`
+- Back-to-top smooth scroll
+- Floating buttons hidden on mobile
+
+**Inline `<script>` blocks in `src/_layouts/base.njk` and `src/index.njk`**:
 - Header morphing: transparent → frosted-glass pill → full-width strip (scroll thresholds)
 - Active nav link highlighting via IntersectionObserver on sections
 - Mobile menu: full-screen overlay toggled by hamburger, closed by ESC or link click
-- Journey spine animation: fires on IntersectionObserver entry, fills spine gradient over 1.4s
-- Theme toggle + localStorage persistence
-- Floating back-to-top button (appears after 300px scroll)
+- Mobile journey spine animation: fills spine gradient over 1.4s on IntersectionObserver entry
+- Desktop journey map: full Mapbox GL JS tour logic — fly-to animations, arc lines, info card updates, pause/speed/mute controls, distance counter, chapter overlays
 
 ---
 

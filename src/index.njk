@@ -136,17 +136,13 @@ pageTitle: "Tanay Mehendale - Portfolio"
 
             <!-- Start gate: shown before journey begins -->
             <div id="jmap-start-gate" role="dialog" aria-modal="true" aria-label="Begin the journey">
+                <span class="jmap-gate-eyebrow">End to End</span>
+                <h2 class="jmap-gate-title">The Arc</h2>
                 <p class="jmap-start-tagline">A cinematic tour of where I've been.</p>
                 <button id="jmap-start-btn">
                     <span class="jmap-start-icon">▶</span>
                     Begin the Journey
                 </button>
-            </div>
-
-            <!-- Chapter title overlay: appears before each new chapter -->
-            <div id="jmap-chapter-overlay" aria-live="assertive" aria-hidden="true">
-                <span class="jmap-chapter-roman"></span>
-                <span class="jmap-chapter-title"></span>
             </div>
 
             <!-- Distance counter (bottom-left) -->
@@ -160,27 +156,30 @@ pageTitle: "Tanay Mehendale - Portfolio"
 
             <!-- Info card: right panel -->
             <div class="jmap-info-card" aria-live="polite">
-                <div class="jmap-card-top" data-reveal>
-                    <img class="jmap-logo" src="" alt="">
-                    <div class="jmap-meta">
-                        <span class="jmap-type-badge"></span>
-                        <h3 class="jmap-org"></h3>
-                        <h4 class="jmap-role"></h4>
-                        <time class="jmap-date"></time>
-                        <span class="jmap-location"></span>
+                <div class="jmap-card-body">
+                    <div class="jmap-card-top" data-reveal>
+                        <img class="jmap-logo" src="" alt="">
+                        <div class="jmap-meta">
+                            <span class="jmap-type-badge"></span>
+                            <h3 class="jmap-org"></h3>
+                            <h4 class="jmap-role"></h4>
+                            <time class="jmap-date"></time>
+                            <span class="jmap-location"></span>
+                        </div>
                     </div>
+                    <ul class="jmap-bullets"></ul>
+                    <div class="jmap-skill-chips" data-reveal></div>
+                    <blockquote class="jmap-quote" data-reveal></blockquote>
                 </div>
-                <ul class="jmap-bullets"></ul>
-                <div class="jmap-skill-chips" data-reveal></div>
-                <blockquote class="jmap-quote" data-reveal></blockquote>
-                <div class="jmap-photos"></div>
+                <button class="jmap-story-btn" aria-label="Open full story and photos" style="display:none">Full story ↗</button>
             </div>
 
-            <!-- Cinematic controls (pause, speed, mute) -->
+            <!-- Cinematic controls (pause, speed, mute, explore) -->
             <div id="jmap-controls" aria-label="Journey controls">
                 <button id="jmap-pause-btn" class="jmap-ctrl-btn" aria-label="Pause journey">⏸ Pause</button>
                 <button id="jmap-speed-btn" class="jmap-ctrl-btn" aria-label="Toggle playback speed">1×</button>
-                <button id="jmap-mute-btn" class="jmap-ctrl-btn" aria-label="Toggle ambient audio">🔇</button>
+                <button id="jmap-mute-btn" class="jmap-ctrl-btn" aria-label="Toggle ambient audio">🔊</button>
+                <button id="jmap-explore-btn" class="jmap-ctrl-btn" aria-label="Enter free explore mode">🗺 Explore</button>
             </div>
 
             <!-- Ambient audio for the journey -->
@@ -189,12 +188,46 @@ pageTitle: "Tanay Mehendale - Portfolio"
             <!-- Grand finale overlay -->
             <div id="jmap-finale-overlay" aria-hidden="true">
                 <p class="jmap-finale-quote">To be continued...</p>
+                <div class="jmap-finale-actions" aria-hidden="true">
+                    <button id="jmap-restart-btn" class="jmap-finale-btn jmap-finale-btn--secondary" aria-label="Start the journey again">↺ Start Again</button>
+                    <button id="jmap-freeexplore-btn" class="jmap-finale-btn jmap-finale-btn--primary" aria-label="Enter free explore mode">🗺 Free Explore</button>
+                </div>
             </div>
 
             <!-- Onboarding hint -->
             <div id="jmap-hint" role="tooltip" aria-live="polite" aria-hidden="true">
-                <span class="jmap-hint-text">Use the arrows to travel between chapters</span>
-                <button class="jmap-hint-dismiss" aria-label="Dismiss tip">Got it</button>
+                <div class="jmap-hint-controls">
+                    <div class="jmap-hint-row"><span class="jmap-hint-key">← →</span><span class="jmap-hint-desc">Navigate between stops</span></div>
+                    <div class="jmap-hint-row"><span class="jmap-hint-key">🔇</span><span class="jmap-hint-desc">Toggle music on / off</span></div>
+                    <div class="jmap-hint-row"><span class="jmap-hint-key">1×</span><span class="jmap-hint-desc">Cycle playback speed</span></div>
+                    <div class="jmap-hint-row"><span class="jmap-hint-key">🗺</span><span class="jmap-hint-desc">Free-roam the globe</span></div>
+                </div>
+                <button class="jmap-hint-dismiss" aria-label="Dismiss controls guide">Got it</button>
+            </div>
+
+            <!-- Free explore pin legend hint -->
+            <div id="jmap-explore-hint" aria-hidden="true" role="status">
+                <span class="jmap-explore-legend">
+                    <span class="jmap-explore-legend-item"><span class="jmap-legend-dot jmap-legend-dot--personal"></span>Memories that I have</span>
+                    <span class="jmap-explore-legend-item"><span class="jmap-legend-dot jmap-legend-dot--wishlist"></span>Places I want to visit once</span>
+                </span>
+                <span class="jmap-explore-sub">Pan &amp; zoom the globe to discover</span>
+            </div>
+
+            <!-- Expanded story panel: slides in from right on "Full story" click -->
+            <div id="jmap-expanded-panel" aria-hidden="true" role="dialog" aria-label="Full story">
+                <div class="jmap-panel-inner">
+                    <div class="jmap-panel-header">
+                        <div class="jmap-panel-id">
+                            <span class="jmap-panel-badge"></span>
+                            <h3 class="jmap-panel-org"></h3>
+                            <span class="jmap-panel-date"></span>
+                        </div>
+                        <button id="jmap-panel-close" aria-label="Close panel">✕</button>
+                    </div>
+                    <p class="jmap-panel-story"></p>
+                    <div class="jmap-panel-photos"></div>
+                </div>
             </div>
 
             <!-- Navigation -->
