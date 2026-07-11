@@ -143,6 +143,10 @@ pageTitle: "Tanay Mehendale - Portfolio"
                     <span class="jmap-start-icon">▶</span>
                     Begin the Journey
                 </button>
+                <button id="jmap-gate-music-toggle" aria-pressed="false" aria-label="Toggle ambient music">
+                    <span class="jmap-gate-music-icon">🔇</span>
+                    <span class="jmap-gate-music-label">Music: Off</span>
+                </button>
             </div>
 
             <!-- Distance counter (bottom-left) -->
@@ -176,10 +180,21 @@ pageTitle: "Tanay Mehendale - Portfolio"
 
             <!-- Cinematic controls (pause, speed, mute, explore) -->
             <div id="jmap-controls" aria-label="Journey controls">
-                <button id="jmap-pause-btn" class="jmap-ctrl-btn" aria-label="Pause journey">⏸ Pause</button>
-                <button id="jmap-speed-btn" class="jmap-ctrl-btn" aria-label="Toggle playback speed">1×</button>
-                <button id="jmap-mute-btn" class="jmap-ctrl-btn" aria-label="Toggle ambient audio">🔊</button>
-                <button id="jmap-explore-btn" class="jmap-ctrl-btn" aria-label="Enter free explore mode">🗺 Explore</button>
+                <span class="jmap-controls-label">Controls</span>
+                <div class="jmap-controls-row">
+                    <button id="jmap-pause-btn" class="jmap-ctrl-btn" aria-label="Pause journey">
+                        <span class="jmap-ctrl-icon">⏸</span><span class="jmap-ctrl-label">Pause</span>
+                    </button>
+                    <button id="jmap-speed-btn" class="jmap-ctrl-btn" aria-label="Toggle playback speed">
+                        <span class="jmap-ctrl-icon">1×</span><span class="jmap-ctrl-label">Speed</span>
+                    </button>
+                    <button id="jmap-mute-btn" class="jmap-ctrl-btn" aria-label="Unmute ambient audio" aria-pressed="false">
+                        <span class="jmap-ctrl-icon">🔇</span><span class="jmap-ctrl-label">Sound</span>
+                    </button>
+                    <button id="jmap-explore-btn" class="jmap-ctrl-btn" aria-label="Enter free explore mode">
+                        <span class="jmap-ctrl-icon">🗺</span><span class="jmap-ctrl-label">Explore</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Ambient audio for the journey -->
@@ -207,14 +222,21 @@ pageTitle: "Tanay Mehendale - Portfolio"
 
             <!-- Free explore pin legend hint -->
             <div id="jmap-explore-hint" aria-hidden="true" role="status">
-                <span class="jmap-explore-legend">
-                    <span class="jmap-explore-legend-item"><span class="jmap-legend-dot jmap-legend-dot--personal"></span>Memories that I have</span>
-                    <span class="jmap-explore-legend-item"><span class="jmap-legend-dot jmap-legend-dot--wishlist"></span>Places I want to visit once</span>
-                </span>
+                <span class="jmap-explore-legend-label">Legend</span>
+                <div class="jmap-explore-legend">
+                    <span class="jmap-explore-legend-item">
+                        <span class="jmap-legend-swatch jmap-legend-swatch--personal">★</span>
+                        Memories that I have
+                    </span>
+                    <span class="jmap-explore-legend-item">
+                        <span class="jmap-legend-swatch jmap-legend-swatch--wishlist">📍</span>
+                        Places I want to visit
+                    </span>
+                </div>
                 <span class="jmap-explore-sub">Pan &amp; zoom the globe to discover</span>
             </div>
 
-            <!-- Expanded story panel: slides in from right on "Full story" click -->
+            <!-- Expanded story panel: centered reading takeover on "Full story" click -->
             <div id="jmap-expanded-panel" aria-hidden="true" role="dialog" aria-label="Full story">
                 <div class="jmap-panel-inner">
                     <div class="jmap-panel-header">
@@ -225,8 +247,10 @@ pageTitle: "Tanay Mehendale - Portfolio"
                         </div>
                         <button id="jmap-panel-close" aria-label="Close panel">✕</button>
                     </div>
-                    <p class="jmap-panel-story"></p>
-                    <div class="jmap-panel-photos"></div>
+                    <div class="jmap-panel-body">
+                        <div class="jmap-panel-story"></div>
+                        <div class="jmap-panel-photos"></div>
+                    </div>
                 </div>
             </div>
 

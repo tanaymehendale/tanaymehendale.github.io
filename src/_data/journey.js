@@ -17,7 +17,7 @@ module.exports = [
       'Grew up in the northern suburbs of Mumbai.',
       'The city of hustle, monsoons, and vada pav — where curiosity about tech first sparked.',
     ],
-    story: 'I grew up in Mumbai - a city that has never stopped moving, and it quietly taught me that momentum is a mindset. The curiosity about tech started here, while being curious and watching Discovery Channel, science documentaries, and time-travel shows a little too much.',
+    story: 'I grew up in Mumbai — a city that has never stopped moving, and it quietly taught me that momentum is a mindset.\n\nThe curiosity about tech started here, while being curious and watching Discovery Channel, science documentaries, and time-travel shows a little too much.',
     photos: [
       // { src: '/assets/images/journey/home/childhood.jpg', caption: 'Borivali — the building and the street that started everything.' },
     ],
@@ -40,7 +40,7 @@ module.exports = [
       'Graduated with a B.Tech in Electronics & Telecommunication Engineering.',
       'Built a strong foundation in systems, algorithms, and software design.',
     ],
-    story: 'It’s one thing to study a subject; it’s another to find your actual calling. While my degree was in Electronics & Telecommunication, I couldn’t quite see myself working in core electronics long-term. The real turning point came when I started exploring beyond my major. I dove into Data Structures and Database Management, and an intensive bootcamp gave me hands-on experience with Web Dev, Data Analytics, and Machine Learning. The IICDC 2019 hackathon was the turning point: semi-finalists out of 800+ teams, presenting an affordable non-invasive flow meter to Texas Instruments and the Dept. of Science & Technology, Govt. of India. That was the moment I realised I liked solving real problems more than textbook ones. Overall, SPIT taught me the discipline of building things properly — not just making them work, but understanding why they work.',
+    story: 'It’s one thing to study a subject; it’s another to find your actual calling. While my degree was in Electronics & Telecommunication, I couldn’t quite see myself working in core electronics long-term.\n\nThe real turning point came when I started exploring beyond my major. I dove into Data Structures and Database Management, and an intensive bootcamp gave me hands-on experience with Web Dev, Data Analytics, and Machine Learning.\n\nThe IICDC 2019 hackathon was the turning point: semi-finalists out of 800+ teams, presenting an affordable non-invasive flow meter to Texas Instruments and the Dept. of Science & Technology, Govt. of India. That was the moment I realised I liked solving real problems more than textbook ones.\n\nOverall, SPIT taught me the discipline of building things properly — not just making them work, but understanding why they work.',
     photos: [
       { src: '/assets/images/journey/spit/graduation.jpg', caption: 'Graduation day at SPIT — the 4 years that quietly shaped everything.' },
       { src: '/assets/images/journey/spit/iicdc.png', caption: 'IICDC 2019 — Semi-finalists out of 800+ teams, presenting to Texas Instruments and the Dept. of Science & Technology, Govt. of India.' },
@@ -65,7 +65,7 @@ module.exports = [
       'Worked extensively with SAP ABAP, quickly adapting to enterprise software development.',
       'Took ownership of SAP Release Management for a major client\'s North America and EMEA regions, implementing a structured framework that reduced release incidents by 84%.'
     ],
-    story: 'Landing my first Software Engineer role felt like the ultimate dream realized—until I was placed in the SAP practice working entirely with ABAP. It was a complete departure from the tech stack I had anticipated, but I leaned into the challenge. I leveraged my foundational programming knowledge to rapidly decode how massive enterprise systems operated. Within a few months, I took ownership of SAP Release Management for a major client\'s North America and EMEA regions, implementing a structured framework that slashed release incidents by 84%. While I excelled in the role and gained invaluable insight into global project operations, I knew I didn\'t want my impact to be confined to a single, niche technology. I wanted to deeply understand software systems at an architectural level without boundaries. That hunger for broader, unconstrained engineering was the exact push I needed to take a leap and pursue my Masters degree in the United States.',
+    story: 'Landing my first Software Engineer role felt like the ultimate dream realized — until I was placed in the SAP practice working entirely with ABAP. It was a complete departure from the tech stack I had anticipated, but I leaned into the challenge.\n\nI leveraged my foundational programming knowledge to rapidly decode how massive enterprise systems operated. Within a few months, I took ownership of SAP Release Management for a major client\'s North America and EMEA regions, implementing a structured framework that slashed release incidents by 84%.\n\nWhile I excelled in the role and gained invaluable insight into global project operations, I knew I didn\'t want my impact to be confined to a single, niche technology. I wanted to deeply understand software systems at an architectural level without boundaries.\n\nThat hunger for broader, unconstrained engineering was the exact push I needed to take a leap and pursue my Masters degree in the United States.',
     photos: [
       { src: '/assets/images/journey/ltimindtree/work.jpg', caption: 'Powai, Mumbai — where I first stepped into the world of enterprise software engineering.' },
     ],
@@ -88,7 +88,7 @@ module.exports = [
       'Pursued graduate studies at Texas A&M — a 14,000 km flight from home.',
       'Focused on data systems, AI applications, and the intersection of tech and management.',
     ],
-    story: 'I crossed twelve time zones for this — 14,000 km from home, into a world I\'d only hear about. Leaving behind the comfort and safety net of Mumbai for a Masters degree in Texas was the biggest risk I\’ve ever taken. I didn\’t have all the answers, but I knew my calling wasn\'t in the IT services industry—I wanted to unbox complex systems and build truly impactful software. College Station became my proving ground, both for learning to navigate life entirely on my own and for rebuilding my technical foundation. Sitting in lectures covering Databases, Agile Development, and Data Mining, I constantly had those "this is exactly why I came here" moments. Beyond the rigorous coursework, I was relentlessly tinkering. I kept a close eye on the rapidly evolving AI landscape, building small projects to understand the mechanics behind the hype — early experimentation that would ultimately shape my entire career trajectory. It was a defining period of intense growth, late-night coding, and thanks to my roommates - discovering a serious passion for Formula 1.',
+    story: 'I crossed twelve time zones for this — 14,000 km from home, into a world I\'d only hear about. Leaving behind the comfort and safety net of Mumbai for a Masters degree in Texas was the biggest risk I\’ve ever taken.\n\nI didn\’t have all the answers, but I knew my calling wasn\'t in the IT services industry — I wanted to unbox complex systems and build truly impactful software. College Station became my proving ground, both for learning to navigate life entirely on my own and for rebuilding my technical foundation.\n\nSitting in lectures covering Databases, Agile Development, and Data Mining, I constantly had those "this is exactly why I came here" moments. Beyond the rigorous coursework, I was relentlessly tinkering — keeping a close eye on the rapidly evolving AI landscape and building small projects to understand the mechanics behind the hype, early experimentation that would ultimately shape my entire career trajectory.\n\nIt was a defining period of intense growth, late-night coding, and — thanks to my roommates — discovering a serious passion for Formula 1.',
     photos: [
       { src: '/assets/images/journey/tamu-ms/kyle-field.jpg', caption: 'Kyle Field, Texas A&M — College Station in all its Aggie glory.' },
       { src: '/assets/images/journey/tamu-ms/campus1.jpg', caption: 'Memorial Student Center and Simpson Drill Field, Texas A&M.' },
@@ -115,7 +115,7 @@ module.exports = [
       'Volunteered as a data engineer intern while navigating the challenging post-graduation job market.',
       'The biggest toll was balancing the volunteer work with the uncertainty of the job market and the personal effort required to stay motivated and productive.',
     ],
-    story: 'Graduating into the brutal 2025 job market - a landscape defined by mass layoffs, AI disruption, and relentless immigration hurdles for international students was a harsh reality check. Without a full-time role lined up, I refused to stay stagnant. I flew out to San Jose to experience Silicon Valley. The density of ambition in that place is unlike anything I\'d encountered before — everyone is building something, and the bar for \'good enough\' is permanently higher here. To keep my engineering skills sharp and meet that standard, I reached out to my Texas A&M professors and secured a volunteer research role, scoping problem statements, building data pipelines, and delivering data-driven analytics. My days became a relentless, dual-track grind of academic research, certifications, hackathons, and complex side projects. It was also during this period that I built my own multi-agent AI system for a Google Hackathon - a project that would eventually become a defining talking point in my interviews. But a hustle like that takes a toll. Amidst the uncertain days, sleepless nights, and the daily sting of 9 AM rejection emails, I had to learn how to manage myself to keep my hope alive. I started taking long walks, exploring the Bay Area, and making intentional time to clear my mind. It was a grueling season, but it taught me how to sustain my own momentum, protect my mental bandwidth, and never lose faith in my abilities.',
+    story: 'Graduating into the brutal 2025 job market - a landscape defined by mass layoffs, AI disruption, and relentless immigration hurdles for international students was a harsh reality check. Without a full-time role lined up, I flew out to San Jose to experience Silicon Valley.\n\nThe density of ambition in that place is unlike anything I\'d encountered before — everyone is building something, and the bar for \'good enough\' is permanently higher here. To keep my skills sharp and meet that standard, I secured a volunteer role under one of my professors at Texas A&M.\n\nMy days became a relentless, dual-track grind of academic research, certifications, hackathons, and complex side projects. It was also during this period that I built my own multi-agent AI system for a Google Hackathon - a project that would eventually become a defining talking point in my interviews.\n\nBut a hustle like that takes a toll. Amidst the uncertain days, sleepless nights, and the daily sting of 9 AM rejection emails, I had to learn how to manage myself to keep my hope alive. I started taking long walks, exploring the Bay Area, and making intentional time to clear my mind.\n\nIt was a grueling season, but it taught me how to sustain my own momentum, protect my mental bandwidth, and never lose faith in my abilities.',
     photos: [
       { src: '/assets/images/journey/tamu-intern/sv-sunset.jpg', caption: 'Silicon Valley sunset — the one that made the long flight worth it.' },
     ],
@@ -138,7 +138,7 @@ module.exports = [
       'Based in Redmond, Washington — the Pacific Northwest.',
       'Building large-scale enterprise AI solutions with a focus on agentic systems.',
     ],
-    story: 'Redmond, WA — where the mountains meet the rain and the rain meets the coffee. The Pacific Northwest has a way of making you feel small in the best possible way. Professionaly, landing the Agentic AI Engineer role felt like a hard-fought victory. Stationed right in the backyard of tech giants like Microsoft, I finally found myself working with the exact cutting-edge stack I had been chasing. My day-to-day involves architecting advanced multi-agent AI systems, but what excites me just as much is the exposure to the strategic side of the business—making critical decisions about what to build, when to pivot, and how to position these solutions for the market. During my Master’s, I developed a deep fascination with Product Management, and this role has allowed me to flex those muscles by bridging the gap between raw AI capabilities and tangible business value. While I’m proud of the enterprise systems I’m architecting today, my long-term ambition is scale. I want to sit at the heart of a product team, translating complex AI agents into intuitive, consumer-facing applications. The journey so far has been about mastering the technology; the next frontier is using it to build core products that directly shape the user\'s everyday life.',
+    story: 'Redmond, WA - where the mountains meet the rain and the rain meets the coffee. The Pacific Northwest has a way of making you feel small in the best possible way.\n\nProfessionally, landing the Agentic AI Engineer role felt like a hard-fought victory. Stationed right in the backyard of tech giants like Microsoft, I finally found myself working with the exact cutting-edge stack I had been chasing. My day-to-day involves architecting advanced multi-agent AI systems, but what excites me just as much is the exposure to the strategic side of the business — making critical decisions about what to build, when to pivot, and how to position these solutions for the market.\n\nWhile I’m proud of the enterprise systems I’m architecting today, my long-term ambition is scale. I want to sit at the heart of a product team, translating complex AI agents into intuitive, consumer-facing applications. The journey so far has been about mastering the technology; the next frontier is using it to build core products that directly shape the user\'s everyday life.',
     photos: [
       { src: '/assets/images/journey/hcltech/pike-place.jpg', caption: 'Pike Place Market, Seattle — the Pacific Northwest welcomed me right.' },
     ],
@@ -153,7 +153,7 @@ module.exports = [
     coordinates: [72.8252, 18.9389],
     location: 'Wankhede Stadium, Mumbai',
     emoji: '🏏',
-    story: 'My first time watching cricket in a stadium — and it happened to be Sachin Tendulkar. Wankhede holds 33,000 people and every single one of them was there for one man. I understood that this was something you don\'t forget. That\'s still true.',
+    story: 'My first time watching cricket in a stadium — and it happened to be Sachin Tendulkar. Wankhede holds 33,000 people and every single one of them was there for one man.\n\nI understood that this was something you don\'t forget. That\'s still true.',
     photos: [
       { src: '/assets/images/journey/personal/wankhede.mp4', caption: 'Wankhede Stadium — the day cricket became something I understood differently.' },
     ],
@@ -165,7 +165,7 @@ module.exports = [
     coordinates: [72.8201, 18.9845],
     location: 'Mahalaxmi Racecourse, Mumbai',
     emoji: '🎧',
-    story: 'My first Martin Garrix concert - at Mahalaxmi Racecourse. Before this night, EDM was something I listened to through headphones. After it, it was something I felt in my chest. The drop hit different at 130 dB with 15,000 people who all felt exactly the same thing at exactly the same moment.',
+    story: 'My first Martin Garrix concert — at Mahalaxmi Racecourse. Before this night, EDM was something I listened to through headphones. After it, it was something I felt in my chest.\n\nThe drop hit different at 130 dB with 15,000 people who all felt exactly the same thing at exactly the same moment.',
     photos: [
       { src: '/assets/images/journey/personal/martin-garrix.jpg', caption: 'Martin Garrix at Mahalaxmi. The night EDM went from headphones to everything.' },
     ],
@@ -177,7 +177,7 @@ module.exports = [
     coordinates: [72.8234, 18.9336],
     location: 'Marine Drive, Mumbai',
     emoji: '🏆',
-    story: 'June 29, 2024. India wins the T20 World Cup. I was on Marine Drive with 10,000 other people for the victory parade — the kind of crowd that turns a street into a memory. There\'s a video of this, and it still doesn\'t capture what it actually felt like to be standing in it.',
+    story: 'June 29, 2024. India wins the T20 World Cup. I was on Marine Drive with 10,000 other people for the victory parade — the kind of crowd that turns a street into a memory.\n\nThere\'s a video of this, and it still doesn\'t capture what it actually felt like to be standing in it.',
     photos: [
       { src: '/assets/images/journey/personal/marine-drive-t20.mov', caption: 'Marine Drive victory parade — India wins the 2024 T20 World Cup.' },
     ],
@@ -189,7 +189,7 @@ module.exports = [
     coordinates: [-122.4784, 37.8197],
     location: 'Golden Gate Bridge, San Francisco, CA',
     emoji: '🌉',
-    story: 'San Francisco was a day trip from San Jose. The fog, the bridge, the cold in June that nobody warns you about, the hills that make you question every transport decision you\'ve made. Sometimes the best things aren\'t on the itinerary. This was one of those days.',
+    story: 'San Francisco was a day trip from San Jose. The fog, the bridge, the cold in June that nobody warns you about, the hills that make you question every transport decision you\'ve made.\n\nSometimes the best things aren\'t on the itinerary. This was one of those days.',
     photos: [
       { src: '/assets/images/journey/personal/golden-gate.jpg', caption: 'Golden Gate at dusk. SF taught me that the best things are rarely on the plan.' },
     ],
@@ -201,7 +201,7 @@ module.exports = [
     coordinates: [4.9003, 52.3676],
     location: 'Amsterdam, The Netherlands',
     emoji: '🌷',
-    story: 'Haven\'t been here yet — but the connection runs deep. More world-class EDM artists come from the Netherlands than anywhere else on earth: Hardwell, Martin Garrix, Armin van Buuren, Tiësto, Afrojack. The country that gave the world the best music also gave it the best driver. Max Verstappen is Dutch. Enough said. This is also very much on the list.',
+    story: 'Haven\'t been here yet — but the connection runs deep. More world-class EDM artists come from the Netherlands than anywhere else on earth: Hardwell, Martin Garrix, Armin van Buuren, Tiësto, Afrojack.\n\nThe country that gave the world the best music also gave it the best driver. Max Verstappen is Dutch. Enough said. This is also very much on the list.',
     photos: [
       { src: '/assets/images/journey/personal/amsterdam.jpg', caption: 'Amsterdam — EDM capital of the world and home of the GOAT.' },
     ],
@@ -213,7 +213,7 @@ module.exports = [
     coordinates: [-11.6076, 60.8594],
     location: 'Somewhere over the Arctic Circle',
     emoji: '🌌',
-    story: 'I captured Northern Lights from my flight back to India. Seeing the Northern Lights was a dream come true. The sky danced with colors in a way that felt almost magical. It was a reminder of how vast and beautiful our world is.',
+    story: 'I captured Northern Lights from my flight back to India. Seeing the Northern Lights was a dream come true.\n\nThe sky danced with colors in a way that felt almost magical. It was a reminder of how vast and beautiful our world is.',
     photos: [
       { src: '/assets/images/journey/personal/northern-lights.jpg', caption: 'Northern Lights — a dream come true.' },
     ],

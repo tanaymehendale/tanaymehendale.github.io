@@ -223,9 +223,9 @@ class JourneyMap {
         this._cumDistances = [];
         this._totalDistanceSoFar = 0;
 
-        // File-based audio
+        // File-based audio — off by default; user opts in via the start gate or mute button
         this._audioEl = null;
-        this._muted = false; // audio plays on journey start; user can mute
+        this._muted = true;
 
         // Free explore mode
         this._freeExploreActive = false;
@@ -281,6 +281,13 @@ class JourneyMap {
 
             const startBtn = document.getElementById('jmap-start-btn');
             if (startBtn) startBtn.addEventListener('click', () => this._startJourney(), { once: true });
+
+            const gateMusicBtn = document.getElementById('jmap-gate-music-toggle');
+            if (gateMusicBtn) gateMusicBtn.addEventListener('click', () => {
+                this._muted = !this._muted;
+                this._syncMuteUI();
+            });
+            this._syncMuteUI();
         });
     }
 
@@ -302,16 +309,14 @@ class JourneyMap {
             gate.style.pointerEvents = 'none';
         }
 
-        // Start audio on user gesture (required by browsers)
+        // Start audio on user gesture (required by browsers) — only if opted in via the gate toggle
         this._audioEl = document.getElementById('jmap-audio');
         if (this._audioEl && !this._muted) {
             this._audioEl.volume = 0;
             this._audioEl.play().catch(() => {});
             this._fadeAudio(0, 0.35, 1500);
-            // Update mute button to reflect audio is now playing
-            const muteBtn = document.getElementById('jmap-mute-btn');
-            if (muteBtn) { muteBtn.textContent = '🔊'; muteBtn.classList.add('active'); }
         }
+        this._syncMuteUI();
 
         this._journeyStarted = true;
 
@@ -770,12 +775,12 @@ class JourneyMap {
             this.map.dragPan.enable();
             this.map.scrollZoom.enable();
             this.map.dragRotate.enable();
-            if (btn) { btn.textContent = '▶ Resume'; btn.setAttribute('aria-label', 'Resume journey'); btn.classList.add('active'); }
+            if (btn) { this._setCtrlBtn(btn, '▶', 'Resume'); btn.setAttribute('aria-label', 'Resume journey'); btn.classList.add('active'); }
         } else {
             this.map.dragPan.disable();
             this.map.scrollZoom.disable();
             this.map.dragRotate.disable();
-            if (btn) { btn.textContent = '⏸ Pause'; btn.setAttribute('aria-label', 'Pause journey'); btn.classList.remove('active'); }
+            if (btn) { this._setCtrlBtn(btn, '⏸', 'Pause'); btn.setAttribute('aria-label', 'Pause journey'); btn.classList.remove('active'); }
 
             if (this._pendingResume) {
                 const fn = this._pendingResume;
@@ -796,9 +801,17 @@ class JourneyMap {
         const btn = document.getElementById('jmap-speed-btn');
         if (btn) {
             const fast = this._speedMultiplier === 2;
-            btn.textContent = fast ? '2×' : '1×';
+            this._setCtrlBtn(btn, fast ? '2×' : '1×', 'Speed');
             btn.classList.toggle('active', fast);
         }
+    }
+
+    // Set icon + label sub-elements on a mixer-style control button
+    _setCtrlBtn(btn, icon, label) {
+        const iconEl = btn.querySelector('.jmap-ctrl-icon');
+        const labelEl = btn.querySelector('.jmap-ctrl-label');
+        if (iconEl) iconEl.textContent = icon;
+        if (labelEl) labelEl.textContent = label;
     }
 
     // ── Grand finale ──────────────────────────────────────────────────────────
@@ -950,12 +963,9 @@ class JourneyMap {
 
     _toggleMute() {
         this._muted = !this._muted;
-        const btn = document.getElementById('jmap-mute-btn');
 
         if (this._muted) {
             if (this._audioEl) this._fadeAudio(this._audioEl.volume, 0, 400);
-            if (btn) btn.textContent = '🔇';
-            if (btn) btn.classList.remove('active');
         } else {
             if (!this._audioEl) {
                 this._audioEl = document.getElementById('jmap-audio');
@@ -965,8 +975,30 @@ class JourneyMap {
                 this._audioEl.play().catch(() => {});
                 this._fadeAudio(0, 0.35, 1000);
             }
-            if (btn) btn.textContent = '🔊';
-            if (btn) btn.classList.add('active');
+        }
+        this._syncMuteUI();
+    }
+
+    // Keep the gate toggle and the in-journey mute button in lockstep
+    _syncMuteUI() {
+        const on = !this._muted;
+
+        const gateBtn = document.getElementById('jmap-gate-music-toggle');
+        if (gateBtn) {
+            gateBtn.setAttribute('aria-pressed', String(on));
+            gateBtn.classList.toggle('active', on);
+            const icon = gateBtn.querySelector('.jmap-gate-music-icon');
+            const label = gateBtn.querySelector('.jmap-gate-music-label');
+            if (icon) icon.textContent = on ? '🔊' : '🔇';
+            if (label) label.textContent = on ? 'Music: On' : 'Music: Off';
+        }
+
+        const ctrlBtn = document.getElementById('jmap-mute-btn');
+        if (ctrlBtn) {
+            this._setCtrlBtn(ctrlBtn, on ? '🔊' : '🔇', 'Sound');
+            ctrlBtn.classList.toggle('active', on);
+            ctrlBtn.setAttribute('aria-pressed', String(on));
+            ctrlBtn.setAttribute('aria-label', on ? 'Mute ambient audio' : 'Unmute ambient audio');
         }
     }
 
@@ -1034,6 +1066,10 @@ class JourneyMap {
         const panelClose = document.getElementById('jmap-panel-close');
         if (panelClose) panelClose.addEventListener('click', () => this._hideExpandedPanel());
 
+        // Light-dismiss: click the backdrop (not the card itself) to close
+        const panel = document.getElementById('jmap-expanded-panel');
+        if (panel) panel.addEventListener('click', e => { if (e.target === panel) this._hideExpandedPanel(); });
+
         document.addEventListener('keydown', e => {
             // ESC closes the expanded panel
             if (e.key === 'Escape') { this._hideExpandedPanel(); return; }
@@ -1097,7 +1133,7 @@ class JourneyMap {
         const controls = document.getElementById('jmap-controls');
         if (controls) controls.classList.add('explore-active');
         const btn = document.getElementById('jmap-explore-btn');
-        if (btn) { btn.textContent = '✕ Exit'; btn.classList.add('active'); btn.setAttribute('aria-label','Exit free explore mode'); }
+        if (btn) { this._setCtrlBtn(btn, '✕', 'Exit'); btn.classList.add('active'); btn.setAttribute('aria-label','Exit free explore mode'); }
 
         // Hide info card and expanded panel during explore
         const card = document.querySelector('.jmap-info-card');
@@ -1127,7 +1163,7 @@ class JourneyMap {
         const controls = document.getElementById('jmap-controls');
         if (controls) controls.classList.remove('explore-active');
         const btn = document.getElementById('jmap-explore-btn');
-        if (btn) { btn.textContent = '🗺 Explore'; btn.classList.remove('active'); btn.setAttribute('aria-label','Enter free explore mode'); }
+        if (btn) { this._setCtrlBtn(btn, '🗺', 'Explore'); btn.classList.remove('active'); btn.setAttribute('aria-label','Enter free explore mode'); }
 
         // Hide explore hint
         const hint = document.getElementById('jmap-explore-hint');
@@ -1217,31 +1253,41 @@ class JourneyMap {
         const dateEl = panel.querySelector('.jmap-panel-date');
         if (dateEl) dateEl.textContent = stop.dateRange || stop.location || '';
 
-        // Story
+        // Story — rendered as separate paragraphs, not one dense block
         const storyEl = panel.querySelector('.jmap-panel-story');
-        if (storyEl) storyEl.textContent = stop.story || '';
+        const paragraphs = (stop.story || '').split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
+        if (storyEl) {
+            storyEl.innerHTML = '';
+            paragraphs.forEach(text => {
+                const p = document.createElement('p');
+                p.textContent = text;
+                storyEl.appendChild(p);
+            });
+        }
 
         // Photos / videos
         const photosEl = panel.querySelector('.jmap-panel-photos');
+        const hasPhotos = !!(stop.photos && stop.photos.length);
         if (photosEl) {
-            if (stop.photos && stop.photos.length) {
-                photosEl.innerHTML = stop.photos.map(p => {
-                    const isVideo = /\.(mp4|webm|mov)(\?.*)?$/i.test(p.src);
-                    const media = isVideo
-                        ? `<video src="${p.src}" autoplay loop muted playsinline preload="metadata"></video>`
-                        : `<img src="${p.src}" alt="${p.caption || ''}" loading="lazy">`;
-                    return `<figure class="jmap-panel-photo${isVideo ? ' jmap-panel-photo--video' : ''}">
-                        ${media}
-                        ${p.caption ? `<figcaption>${p.caption}</figcaption>` : ''}
-                    </figure>`;
-                }).join('');
-            } else {
-                photosEl.innerHTML = '';
-            }
+            photosEl.innerHTML = hasPhotos ? stop.photos.map(p => {
+                const isVideo = /\.(mp4|webm|mov)(\?.*)?$/i.test(p.src);
+                const media = isVideo
+                    ? `<video src="${p.src}" autoplay loop muted playsinline preload="metadata"></video>`
+                    : `<img src="${p.src}" alt="${p.caption || ''}" loading="lazy">`;
+                return `<figure class="jmap-panel-photo${isVideo ? ' jmap-panel-photo--video' : ''}">
+                    ${media}
+                    ${p.caption ? `<figcaption>${p.caption}</figcaption>` : ''}
+                </figure>`;
+            }).join('') : '';
         }
+
+        // Single-column, centered reading width when there are no photos to rail alongside
+        const bodyEl = panel.querySelector('.jmap-panel-body');
+        if (bodyEl) bodyEl.classList.toggle('jmap-panel-body--no-photos', !hasPhotos);
 
         panel.setAttribute('aria-hidden', 'false');
         panel.classList.add('visible');
+        this._setMapOverlaysInert(true);
     }
 
     _hideExpandedPanel() {
@@ -1249,6 +1295,14 @@ class JourneyMap {
         if (!panel) return;
         panel.classList.remove('visible');
         panel.setAttribute('aria-hidden', 'true');
+        this._setMapOverlaysInert(false);
+    }
+
+    // While the story takeover is open, keep focus from leaking into the map's other overlays
+    _setMapOverlaysInert(inert) {
+        document.querySelectorAll('.journey-map-desktop > *:not(#jmap-expanded-panel)').forEach(el => {
+            if (inert) el.setAttribute('inert', ''); else el.removeAttribute('inert');
+        });
     }
 
     // ── Reset journey ─────────────────────────────────────────────────────────
@@ -1264,7 +1318,7 @@ class JourneyMap {
 
         // Reset pause button state
         const pauseBtn = document.getElementById('jmap-pause-btn');
-        if (pauseBtn) { pauseBtn.disabled = false; pauseBtn.textContent = '⏸ Pause'; pauseBtn.classList.remove('active'); }
+        if (pauseBtn) { pauseBtn.disabled = false; this._setCtrlBtn(pauseBtn, '⏸', 'Pause'); pauseBtn.classList.remove('active'); }
 
         // Reset state
         this.currentIndex = 0;

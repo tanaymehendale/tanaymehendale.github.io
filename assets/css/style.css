@@ -1677,32 +1677,69 @@ section .container {
     font-size: 0.9em;
 }
 
+#jmap-gate-music-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+#jmap-gate-music-toggle:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.28);
+    color: #fff;
+}
+
+#jmap-gate-music-toggle.active {
+    color: #fff;
+    background: color-mix(in oklch, var(--accent-color) 30%, transparent);
+    border-color: color-mix(in oklch, var(--accent-color) 65%, transparent);
+}
+
+.jmap-gate-music-icon {
+    font-size: 0.9em;
+}
+
 /* ── Chapter title overlay ── */
-/* ── Distance counter (bottom-left) ── */
+/* ── Distance counter (top-center) — plain text over the map, no container,
+   distinguished by weight/size/shadow the same way the section header is ── */
 #jmap-distance {
     position: absolute;
-    bottom: 5.5rem;
-    left: clamp(1.5rem, 3vw, 2.5rem);
+    top: clamp(1.25rem, 3vw, 2rem);
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
     z-index: 10;
-    color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 #jmap-distance.visible {
     opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
 
 .jmap-dist-label {
-    display: block;
     font-family: 'Orbitron', sans-serif;
     font-size: 0.55rem;
     font-weight: 400;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.35);
-    margin-bottom: 2px;
+    color: rgba(255, 255, 255, 0.6);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7), 0 0 18px rgba(0, 0, 0, 0.5);
 }
 
 .jmap-dist-value-row {
@@ -1713,19 +1750,21 @@ section .container {
 
 #jmap-dist-val {
     font-family: 'Orbitron', monospace;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    color: rgba(255, 255, 255, 0.85);
+    color: #fff;
     font-variant-numeric: tabular-nums;
     letter-spacing: 0.05em;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 0 24px rgba(0, 0, 0, 0.6);
 }
 
 .jmap-dist-unit {
     font-family: 'Orbitron', sans-serif;
-    font-size: 0.6rem;
+    font-size: 0.62rem;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.6);
     letter-spacing: 0.1em;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7), 0 0 18px rgba(0, 0, 0, 0.5);
 }
 
 /* ── Skill chips inside info card ── */
@@ -1764,50 +1803,105 @@ section .container {
     }
 }
 
-/* ── Cinematic controls (pause / speed / mute) ── */
+/* ── Cinematic controls (pause / speed / mute / explore) — mixer-console motif ── */
 #jmap-controls {
     position: absolute;
-    bottom: 2rem;
-    right: clamp(1.5rem, 3vw, 2.5rem);
+    bottom: clamp(1.5rem, 3vw, 2.5rem);
+    left: clamp(1.5rem, 3vw, 2.5rem);
     z-index: 10;
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.4s ease;
+    transform: translateY(8px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 #jmap-controls.visible {
     opacity: 1;
     pointer-events: auto;
+    transform: translateY(0);
+}
+
+.jmap-controls-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.55rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    padding-left: 0.35rem;
+}
+
+.jmap-controls-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0.4rem;
+    background: rgba(10, 10, 18, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 14px;
+    padding: 0.45rem;
+    box-shadow: 0 10px 34px rgba(0, 0, 0, 0.35);
 }
 
 .jmap-ctrl-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-width: 54px;
     font-family: 'Hanken Grotesk', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.75);
-    background: rgba(10, 10, 18, 0.65);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 50px;
-    padding: 0.4rem 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9px;
+    padding: 0.45rem 0.6rem;
     cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.jmap-ctrl-icon {
+    font-size: 0.95rem;
+    line-height: 1;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.jmap-ctrl-label {
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .jmap-ctrl-btn:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.28);
     color: #fff;
+    transform: translateY(-2px);
+}
+
+.jmap-ctrl-btn:hover .jmap-ctrl-label {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.jmap-ctrl-btn:focus-visible {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
 .jmap-ctrl-btn.active {
-    background: color-mix(in oklch, var(--accent-color) 35%, transparent);
+    background: color-mix(in oklch, var(--accent-color) 32%, transparent);
     border-color: color-mix(in oklch, var(--accent-color) 70%, transparent);
+    color: #fff;
+}
+
+.jmap-ctrl-btn.active .jmap-ctrl-label {
     color: #fff;
 }
 
@@ -1951,38 +2045,50 @@ section .container {
     color: #fff;
 }
 
-/* ── Expanded story panel ── */
+/* ── Expanded story panel: centered reading takeover ── */
 #jmap-expanded-panel {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: min(420px, 45vw);
-    z-index: 15;
-    background: rgba(6, 6, 16, 0.92);
-    backdrop-filter: blur(24px) saturate(1.5);
-    -webkit-backdrop-filter: blur(24px) saturate(1.5);
-    border-left: 1px solid rgba(255,255,255,0.1);
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    inset: 0;
+    z-index: 25;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    background: rgba(4, 4, 10, 0.72);
+    backdrop-filter: blur(20px) saturate(1.3);
+    -webkit-backdrop-filter: blur(20px) saturate(1.3);
+    opacity: 0;
     pointer-events: none;
-    overflow: hidden;
+    transition: opacity 0.45s ease;
 }
 
 #jmap-expanded-panel.visible {
-    transform: translateX(0);
+    opacity: 1;
     pointer-events: auto;
 }
 
 .jmap-panel-inner {
-    height: 100%;
+    container-type: inline-size;
+    width: min(920px, 100%);
+    max-height: min(720px, 88vh);
     overflow-y: auto;
-    padding: 2rem 1.75rem 3rem;
+    background:
+        radial-gradient(120% 60% at 100% 0%, color-mix(in oklch, var(--accent-color) 10%, transparent), transparent 60%),
+        rgba(10, 10, 18, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
+    padding: clamp(1.75rem, 3vw, 2.75rem);
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.5rem;
     scrollbar-width: thin;
     scrollbar-color: rgba(255,255,255,0.15) transparent;
+    transform: translateY(16px) scale(0.98);
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#jmap-expanded-panel.visible .jmap-panel-inner {
+    transform: translateY(0) scale(1);
 }
 
 .jmap-panel-header {
@@ -1990,7 +2096,7 @@ section .container {
     align-items: flex-start;
     justify-content: space-between;
     gap: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: 1.25rem;
     border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
@@ -2019,7 +2125,7 @@ section .container {
 
 .jmap-panel-org {
     font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 1.15rem;
+    font-size: 1.4rem;
     font-weight: 700;
     color: #fff;
     margin: 0;
@@ -2054,11 +2160,37 @@ section .container {
     color: #fff;
 }
 
+/* Body: editorial two-column layout — prose left, photo rail right. Collapses to one
+   column at narrow widths via a container query, and when a stop has no photos. */
+.jmap-panel-body {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2rem;
+}
+
+.jmap-panel-body--no-photos {
+    grid-template-columns: 1fr;
+    max-width: 65ch;
+    margin: 0 auto;
+}
+
+@container (max-width: 640px) {
+    .jmap-panel-body {
+        grid-template-columns: 1fr;
+    }
+}
+
 .jmap-panel-story {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.jmap-panel-story p {
     font-family: 'Hanken Grotesk', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     font-weight: 400;
-    line-height: 1.75;
+    line-height: 1.8;
     color: rgba(255,255,255,0.78);
     margin: 0;
 }
@@ -2190,66 +2322,88 @@ section .container {
 /* ── Explore mode legend hint ── */
 #jmap-explore-hint {
     position: absolute;
-    bottom: 5rem;
+    bottom: 6.5rem;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(6px);
     z-index: 12;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.4rem;
-    background: rgba(8, 8, 20, 0.82);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 12px;
-    padding: 0.75rem 1.25rem;
+    gap: 0.6rem;
+    background: rgba(8, 8, 20, 0.78);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    padding: 0.85rem 1.5rem 0.9rem;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 #jmap-explore-hint.visible {
     opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.jmap-explore-legend-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.55rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .jmap-explore-legend {
     display: flex;
-    gap: 1.25rem;
+    gap: 1.75rem;
 }
 
 .jmap-explore-legend-item {
     display: flex;
     align-items: center;
-    gap: 0.45rem;
-    font-size: 0.68rem;
+    gap: 0.6rem;
+    font-size: 0.72rem;
     font-family: 'Hanken Grotesk', sans-serif;
     font-weight: 500;
     letter-spacing: 0.02em;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255, 255, 255, 0.85);
+    white-space: nowrap;
 }
 
-.jmap-legend-dot {
-    width: 10px;
-    height: 10px;
+/* Swatches mirror the actual pin styling on the globe, so the legend reads as a key, not decoration */
+.jmap-legend-swatch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
+    font-size: 0.72rem;
     flex-shrink: 0;
 }
 
-.jmap-legend-dot--personal {
-    background: var(--accent-color);
-    box-shadow: 0 0 6px 2px color-mix(in oklch, var(--accent-color) 60%, transparent);
+.jmap-legend-swatch--personal {
+    background: rgba(10, 6, 20, 0.9);
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    box-shadow: 0 0 8px 1px color-mix(in oklch, var(--accent-color) 45%, transparent);
 }
 
-.jmap-legend-dot--wishlist {
+.jmap-legend-swatch--wishlist {
     background: transparent;
-    border: 2px dashed rgba(255,200,60,0.8);
+    border: 2px dashed rgba(255, 200, 60, 0.75);
 }
 
 .jmap-explore-sub {
+    align-self: stretch;
     font-size: 0.62rem;
-    color: rgba(255,255,255,0.45);
+    color: rgba(255, 255, 255, 0.4);
     letter-spacing: 0.06em;
     text-align: center;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Projects Section */

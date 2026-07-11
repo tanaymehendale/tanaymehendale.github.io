@@ -4,6 +4,25 @@ _This file is auto-maintained by Claude Code. Each entry represents a batch of c
 
 ---
 
+## [2026-07-11 01:37] — Journey map polish: opt-in music, mixer-style controls, and a redesigned story takeover
+
+### Changes
+
+| File | What Changed | Why (Plain English) |
+|------|-------------|---------------------|
+| `src/index.njk` | Added a music on/off toggle (`#jmap-gate-music-toggle`) to the start gate; restructured the cinematic controls bar into a labeled "Controls" group where each button has separate icon/label sub-elements; restyled the free-explore legend with a "Legend" label and swatches; replaced the story panel's single `<p>`/divider/signoff markup with a `.jmap-panel-body` wrapper around `.jmap-panel-story` and `.jmap-panel-photos` | Music used to autoplay with no way to opt in first; the icon-only control buttons weren't self-explanatory; the legend's plain dots didn't visually match the actual map pins; and the story needed a container that could hold a two-column reading layout instead of one long paragraph. |
+| `assets/css/style.css` | Distance counter moved from a bottom-left glass pill to plain top-center text (legibility via `text-shadow` instead of a background chip); cinematic controls redesigned as a bottom-left "mixer console" (label + icon/label buttons); free-explore legend restyled with swatches that mirror the real pin styling; story panel rebuilt as a centered full-screen "reading takeover" — a dimmed/blurred backdrop behind a card with an editorial two-column layout (prose + photo rail), collapsing to one column via a `@container` query when a stop has no photos or the card is narrow | Gives all the map's floating UI a shared visual language — legible over the satellite imagery without boxy containers everywhere — and swaps the old cramped 420px side panel for a layout with enough room for both long-form text and photos. |
+| `script.js` | Music now defaults to muted; the start-gate toggle and the existing in-journey mute button share one `_syncMuteUI()` helper; pause/speed/mute/explore buttons now update through a `_setCtrlBtn(btn, icon, label)` helper instead of overwriting `textContent`; `_showExpandedPanel()` now splits each `story` string on blank lines into separate `<p>` elements, toggles a "no photos" class for the centered single-column state, closes on a backdrop click, and applies `inert` to the rest of the map UI while open | Keeps the two music controls from drifting out of sync; supports buttons that now have icon+label sub-elements without duplicating that logic four times; and makes the new full-screen story takeover behave like a proper overlay — dismissible by clicking outside it, and unreachable by keyboard tab while it's covering the screen. |
+| `src/_data/journey.js` | Split every `story` field into 2–4 paragraphs using blank-line breaks, plus light copy-editing (em-dash consistency, tightened phrasing) on the SPIT, LTIMindtree, TAMU MS, TAMU internship, and HCLTech entries | The story text needed real paragraph breaks so it wouldn't render as one dense block in the new takeover; the wording was tightened at the same time since it was already being touched. |
+
+### Decisions & Assumptions
+- **Story panel container was iterated twice in this session.** The first pass gave it a "letter/diary" treatment (drop cap, ornamental divider, "— Tanay" signoff). The user then clarified "letter" meant well-formatted prose, not an actual letter to someone, so that treatment was removed entirely in favor of plain paragraphs.
+- **Centered reading takeover chosen over two other brainstormed layouts** (a bottom drawer with a photo filmstrip, and an in-place-expanding info card) — presented as three mocked-up options via `/impeccable`, and the user picked the centered takeover directly.
+- **Distance counter intentionally has no background container.** Legibility comes purely from `text-shadow`, matching the treatment already used for the section header and the finale quote, per the user's request that it "not be like a tab."
+- **Music now defaults off.** Autoplaying audio on page load was judged disruptive; the new gate toggle lets visitors opt in before the tour starts instead of being surprised by sound.
+
+---
+
 ## [2026-04-21 14:40] — Skills section redesigned as DJ mixer channels; Certifications spun out as its own section with brand logos
 
 ### Changes
