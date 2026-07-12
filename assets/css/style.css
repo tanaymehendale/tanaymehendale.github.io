@@ -2160,24 +2160,12 @@ section .container {
     color: #fff;
 }
 
-/* Body: editorial two-column layout — prose left, photo rail right. Collapses to one
-   column at narrow widths via a container query, and when a stop has no photos. */
-.jmap-panel-body {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 2rem;
-}
-
-.jmap-panel-body--no-photos {
-    grid-template-columns: 1fr;
+/* Body: the first photo(s) are locked to their paragraph as a flex row — image and text
+   as one unit — so the image always starts exactly at that paragraph's edge and never
+   drifts into an unrelated paragraph. Text-only stops get a centered, narrower column. */
+.jmap-panel-body--no-photos .jmap-panel-story {
     max-width: 65ch;
     margin: 0 auto;
-}
-
-@container (max-width: 640px) {
-    .jmap-panel-body {
-        grid-template-columns: 1fr;
-    }
 }
 
 .jmap-panel-story {
@@ -2193,12 +2181,6 @@ section .container {
     line-height: 1.8;
     color: rgba(255,255,255,0.78);
     margin: 0;
-}
-
-.jmap-panel-photos {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
 }
 
 .jmap-panel-photo {
@@ -2228,6 +2210,50 @@ section .container {
     padding: 0.55rem 0.75rem;
     line-height: 1.4;
     background: rgba(255,255,255,0.04);
+}
+
+/* A photo paired with the paragraph beside it, alternating sides for an editorial
+   rhythm. Locked together in one flex row instead of floated, so the pairing is exact. */
+.jmap-story-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.jmap-story-row--reverse {
+    flex-direction: row-reverse;
+}
+
+.jmap-story-row .jmap-panel-photo {
+    flex: 0 0 38%;
+}
+
+.jmap-story-row p {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Photos beyond one-per-paragraph land here — a compact grid instead of another
+   tall column, so a story with many more photos than text stays visually dense. */
+.jmap-panel-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+}
+
+.jmap-panel-photo-grid .jmap-panel-photo img,
+.jmap-panel-photo-grid .jmap-panel-photo video {
+    max-height: 180px;
+}
+
+@container (max-width: 640px) {
+    .jmap-story-row {
+        flex-direction: column;
+    }
+    .jmap-story-row .jmap-panel-photo {
+        flex: none;
+        width: 100%;
+    }
 }
 
 /* ── Personal memory pins ── */

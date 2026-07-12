@@ -1236,6 +1236,31 @@ class JourneyMap {
 
     // ── Expanded story panel ──────────────────────────────────────────────────
 
+    // Builds a single photo/video <figure>
+    _buildPhotoFigure(photo) {
+        const isVideo = /\.(mp4|webm|mov)(\?.*)?$/i.test(photo.src);
+        const fig = document.createElement('figure');
+        fig.className = `jmap-panel-photo${isVideo ? ' jmap-panel-photo--video' : ''}`;
+
+        const media = isVideo ? document.createElement('video') : document.createElement('img');
+        media.src = photo.src;
+        if (isVideo) {
+            Object.assign(media, { autoplay: true, loop: true, muted: true, playsInline: true, preload: 'metadata' });
+        } else {
+            media.alt = photo.caption || '';
+            media.loading = 'lazy';
+        }
+        fig.appendChild(media);
+
+        if (photo.caption) {
+            const caption = document.createElement('figcaption');
+            caption.textContent = photo.caption;
+            fig.appendChild(caption);
+        }
+
+        return fig;
+    }
+
     _showExpandedPanel(stop) {
         const panel = document.getElementById('jmap-expanded-panel');
         if (!panel) return;
@@ -1253,35 +1278,46 @@ class JourneyMap {
         const dateEl = panel.querySelector('.jmap-panel-date');
         if (dateEl) dateEl.textContent = stop.dateRange || stop.location || '';
 
-        // Story — rendered as separate paragraphs, not one dense block
+        // Story — the first couple of photos pair with the opening paragraphs as locked
+        // photo+text rows (flex, not floats), so the image always starts exactly at that
+        // paragraph's edge instead of drifting into whichever paragraph happens to be
+        // rendering once a float clears — that's what caused images to land mid-sentence.
+        // Anything beyond two photos spills into a compact grid after the text, instead
+        // of a tall filmstrip that can dwarf a short story.
         const storyEl = panel.querySelector('.jmap-panel-story');
         const paragraphs = (stop.story || '').split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
+        const photos = stop.photos || [];
+        const hasPhotos = photos.length > 0;
+
         if (storyEl) {
             storyEl.innerHTML = '';
-            paragraphs.forEach(text => {
+            const inlineCount = Math.min(photos.length, paragraphs.length, 2);
+
+            paragraphs.forEach((text, i) => {
                 const p = document.createElement('p');
                 p.textContent = text;
-                storyEl.appendChild(p);
+
+                if (i < inlineCount) {
+                    const row = document.createElement('div');
+                    row.className = 'jmap-story-row' + (i % 2 === 1 ? ' jmap-story-row--reverse' : '');
+                    row.appendChild(this._buildPhotoFigure(photos[i]));
+                    row.appendChild(p);
+                    storyEl.appendChild(row);
+                } else {
+                    storyEl.appendChild(p);
+                }
             });
+
+            const overflowPhotos = photos.slice(inlineCount);
+            if (overflowPhotos.length) {
+                const grid = document.createElement('div');
+                grid.className = 'jmap-panel-photo-grid';
+                overflowPhotos.forEach(p => grid.appendChild(this._buildPhotoFigure(p)));
+                storyEl.appendChild(grid);
+            }
         }
 
-        // Photos / videos
-        const photosEl = panel.querySelector('.jmap-panel-photos');
-        const hasPhotos = !!(stop.photos && stop.photos.length);
-        if (photosEl) {
-            photosEl.innerHTML = hasPhotos ? stop.photos.map(p => {
-                const isVideo = /\.(mp4|webm|mov)(\?.*)?$/i.test(p.src);
-                const media = isVideo
-                    ? `<video src="${p.src}" autoplay loop muted playsinline preload="metadata"></video>`
-                    : `<img src="${p.src}" alt="${p.caption || ''}" loading="lazy">`;
-                return `<figure class="jmap-panel-photo${isVideo ? ' jmap-panel-photo--video' : ''}">
-                    ${media}
-                    ${p.caption ? `<figcaption>${p.caption}</figcaption>` : ''}
-                </figure>`;
-            }).join('') : '';
-        }
-
-        // Single-column, centered reading width when there are no photos to rail alongside
+        // Centered, narrower reading width when there are no photos to wrap around
         const bodyEl = panel.querySelector('.jmap-panel-body');
         if (bodyEl) bodyEl.classList.toggle('jmap-panel-body--no-photos', !hasPhotos);
 

@@ -117,7 +117,8 @@ module.exports = [
     ],
     story: 'Graduating into the brutal 2025 job market - a landscape defined by mass layoffs, AI disruption, and relentless immigration hurdles for international students was a harsh reality check. Without a full-time role lined up, I flew out to San Jose to experience Silicon Valley.\n\nThe density of ambition in that place is unlike anything I\'d encountered before — everyone is building something, and the bar for \'good enough\' is permanently higher here. To keep my skills sharp and meet that standard, I secured a volunteer role under one of my professors at Texas A&M.\n\nMy days became a relentless, dual-track grind of academic research, certifications, hackathons, and complex side projects. It was also during this period that I built my own multi-agent AI system for a Google Hackathon - a project that would eventually become a defining talking point in my interviews.\n\nBut a hustle like that takes a toll. Amidst the uncertain days, sleepless nights, and the daily sting of 9 AM rejection emails, I had to learn how to manage myself to keep my hope alive. I started taking long walks, exploring the Bay Area, and making intentional time to clear my mind.\n\nIt was a grueling season, but it taught me how to sustain my own momentum, protect my mental bandwidth, and never lose faith in my abilities.',
     photos: [
-      { src: '/assets/images/journey/tamu-intern/sv-sunset.jpg', caption: 'Silicon Valley sunset — the one that made the long flight worth it.' },
+      { src: '/assets/images/journey/tamu-intern/sv-sunset.jpg', caption: 'Silicon Valley sunset — the one that made the flight worth it.' },
+      { src: '/assets/images/journey/tamu-intern/christmas-in-sjc.jpg', caption: 'Christmas in San Jose — experiencing the holiday season away from home.' },
     ],
     transitionType: 'flight',
   },
@@ -141,6 +142,7 @@ module.exports = [
     story: 'Redmond, WA - where the mountains meet the rain and the rain meets the coffee. The Pacific Northwest has a way of making you feel small in the best possible way.\n\nProfessionally, landing the Agentic AI Engineer role felt like a hard-fought victory. Stationed right in the backyard of tech giants like Microsoft, I finally found myself working with the exact cutting-edge stack I had been chasing. My day-to-day involves architecting advanced multi-agent AI systems, but what excites me just as much is the exposure to the strategic side of the business — making critical decisions about what to build, when to pivot, and how to position these solutions for the market.\n\nWhile I’m proud of the enterprise systems I’m architecting today, my long-term ambition is scale. I want to sit at the heart of a product team, translating complex AI agents into intuitive, consumer-facing applications. The journey so far has been about mastering the technology; the next frontier is using it to build core products that directly shape the user\'s everyday life.',
     photos: [
       { src: '/assets/images/journey/hcltech/pike-place.jpg', caption: 'Pike Place Market, Seattle — the Pacific Northwest welcomed me right.' },
+      { src: '/assets/images/journey/hcltech/sea-waterfront.jpg', caption: 'Seattle Waterfront — under the cloudy sky.' },
     ],
     transitionType: 'flight',
   },
@@ -153,7 +155,7 @@ module.exports = [
     coordinates: [72.8252, 18.9389],
     location: 'Wankhede Stadium, Mumbai',
     emoji: '🏏',
-    story: 'My first time watching cricket in a stadium — and it happened to be Sachin Tendulkar. Wankhede holds 33,000 people and every single one of them was there for one man.\n\nI understood that this was something you don\'t forget. That\'s still true.',
+    story: 'My first time watching cricket in a stadium — and it happened to be Sachin Tendulkar. Wankhede holds 33,000 people and every single one of them was there for one man. I understood that this was something you don\'t forget. That\'s still true.',
     photos: [
       { src: '/assets/images/journey/personal/wankhede.mp4', caption: 'Wankhede Stadium — the day cricket became something I understood differently.' },
     ],
@@ -167,7 +169,7 @@ module.exports = [
     emoji: '🎧',
     story: 'My first Martin Garrix concert — at Mahalaxmi Racecourse. Before this night, EDM was something I listened to through headphones. After it, it was something I felt in my chest.\n\nThe drop hit different at 130 dB with 15,000 people who all felt exactly the same thing at exactly the same moment.',
     photos: [
-      { src: '/assets/images/journey/personal/martin-garrix.jpg', caption: 'Martin Garrix at Mahalaxmi. The night EDM went from headphones to everything.' },
+      { src: '/assets/images/journey/personal/martin-garrix.mp4', caption: 'Martin Garrix at Mahalaxmi. The night EDM went from headphones to everything.' },
     ],
   },
   {
@@ -177,7 +179,7 @@ module.exports = [
     coordinates: [72.8234, 18.9336],
     location: 'Marine Drive, Mumbai',
     emoji: '🏆',
-    story: 'June 29, 2024. India wins the T20 World Cup. I was on Marine Drive with 10,000 other people for the victory parade — the kind of crowd that turns a street into a memory.\n\nThere\'s a video of this, and it still doesn\'t capture what it actually felt like to be standing in it.',
+    story: 'June 29, 2024. India wins the T20 World Cup. I was on Marine Drive with 10,000 other people for the victory parade — the kind of crowd that turns a street into a memory. There\'s a video of this, and it still doesn\'t capture what it actually felt like to be standing in it.',
     photos: [
       { src: '/assets/images/journey/personal/marine-drive-t20.mov', caption: 'Marine Drive victory parade — India wins the 2024 T20 World Cup.' },
     ],
@@ -192,6 +194,7 @@ module.exports = [
     story: 'San Francisco was a day trip from San Jose. The fog, the bridge, the cold in June that nobody warns you about, the hills that make you question every transport decision you\'ve made.\n\nSometimes the best things aren\'t on the itinerary. This was one of those days.',
     photos: [
       { src: '/assets/images/journey/personal/golden-gate.jpg', caption: 'Golden Gate at dusk. SF taught me that the best things are rarely on the plan.' },
+      { src: '/assets/images/journey/personal/sf-skyline.jpg', caption: 'The San Francisco skyline — the view that made the detour worth it.' },
     ],
   },
   {
@@ -218,6 +221,43 @@ module.exports = [
       { src: '/assets/images/journey/personal/northern-lights.jpg', caption: 'Northern Lights — a dream come true.' },
     ],
   },
+  {
+    id: 'rialto-beach',
+    label: 'Rialto Beach',
+    type: 'personal',
+    coordinates: [-124.648361, 47.939667],
+    location: 'Rialto Beach, Olympic National Park, WA',
+    emoji: '🌊',
+    story: 'Driftwood the size of buildings, sea stacks disappearing into fog, and the Pacific hitting the coast like it means it. Rialto Beach felt like the edge of the world — in the best way.',
+    photos: [
+      { src: '/assets/images/journey/personal/rialto-beach.MOV', caption: 'Rialto Beach — the edge of the world, Olympic Peninsula.' },
+    ],
+  },
+  {
+    id: 'hurricane-ridge',
+    label: 'Hurricane Ridge',
+    type: 'personal',
+    coordinates: [-123.487417, 47.983694],
+    location: 'Hurricane Ridge, Olympic National Park, WA',
+    emoji: '🏔️',
+    story: 'Snow-capped peaks in the middle of summer and a view that stretches across the entire Olympic range. Hurricane Ridge is proof that Washington hides mountains as good as anywhere in the world.',
+    photos: [
+      { src: '/assets/images/journey/personal/hurricane-ridge.jpg', caption: 'Hurricane Ridge — the Olympic Mountains on a clear day.' },
+    ],
+  },
+  {
+    id: 'crater-lake',
+    label: 'Crater Lake',
+    type: 'personal',
+    coordinates: [-122.14675, 42.912111],
+    location: 'Crater Lake National Park, OR',
+    emoji: '🌋',
+    story: 'The bluest water I\'ve ever seen — deeper and more saturated than any photo can capture. Crater Lake is a volcano that collapsed into itself and spent centuries filling with rain and snowmelt. Standing at the rim, it barely looks real.',
+    photos: [
+      { src: '/assets/images/journey/personal/crater-lake.MOV', caption: 'Crater Lake — a collapsed volcano filled with the bluest water on earth.' },
+    ],
+  },
+
 
   // ── Wishlist pins (visible in free explore mode) ──────────────────────────
   {
