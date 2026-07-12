@@ -61,9 +61,9 @@ module.exports = [
     quote: 'My first taste of real systems — where theory finally met production traffic.',
     skills: ['SAP', 'SQL', 'ABAP', 'Stakeholder Management'],
     bullets: [
-      'Landed my first job as a Software Engineer, but not the kind I imagined.',
-      'Worked extensively with SAP ABAP, quickly adapting to enterprise software development.',
-      'Took ownership of SAP Release Management for a major client\'s North America and EMEA regions, implementing a structured framework that reduced release incidents by 84%.'
+      'Developed 45+ custom ERP transactions using ABAP with SQL, improving data retrieval efficiency for 400+ users.',
+      'Redesigned an SAP inbound message monitoring tool to support 25+ business-driven filter combinations, reducing a 10-step manual process to a single-click workflow.',
+      'Led SDLC release audits across 7 global teams, coordinating between developers, change managers, and the change governance team to enforce release standards and eliminate undocumented production changes across 52+ releases'
     ],
     story: 'Landing my first Software Engineer role felt like the ultimate dream realized — until I was placed in the SAP practice working entirely with ABAP. It was a complete departure from the tech stack I had anticipated, but I leaned into the challenge.\n\nI leveraged my foundational programming knowledge to rapidly decode how massive enterprise systems operated. Within a few months, I took ownership of SAP Release Management for a major client\'s North America and EMEA regions, implementing a structured framework that slashed release incidents by 84%.\n\nWhile I excelled in the role and gained invaluable insight into global project operations, I knew I didn\'t want my impact to be confined to a single, niche technology. I wanted to deeply understand software systems at an architectural level without boundaries.\n\nThat hunger for broader, unconstrained engineering was the exact push I needed to take a leap and pursue my Masters degree in the United States.',
     photos: [
@@ -112,8 +112,9 @@ module.exports = [
     quote: 'The valley taught me that the best engineers are still the ones asking why.',
     skills: ['Python', 'SQL', 'AWS', 'Google ADK', 'AI Agents'],
     bullets: [
-      'Volunteered as a data engineer intern while navigating the challenging post-graduation job market.',
-      'The biggest toll was balancing the volunteer work with the uncertainty of the job market and the personal effort required to stay motivated and productive.',
+      'Designed a medallion architecture data lake on AWS S3, building dual ingestion pipelines from Bright Data and Reddit PRAW API to consolidate research data across two datasets into a unified bronze-to-silver layer.',
+      'Built a Reddit scraper with company alias and keyword matching across 25+ subreddits, implementing a checkpointing mechanism to resume from failed fetches, ensuring pipeline stability under rate limits',
+      'Enriched subreddits of unstructured text with VADER lexicon-based sentiment scoring and GPT/Gemini LLM tagging to derive thematic and demographic features for time-series analysis',
     ],
     story: 'Graduating into the brutal 2025 job market - a landscape defined by mass layoffs, AI disruption, and relentless immigration hurdles for international students was a harsh reality check. Without a full-time role lined up, I flew out to San Jose to experience Silicon Valley.\n\nThe density of ambition in that place is unlike anything I\'d encountered before — everyone is building something, and the bar for \'good enough\' is permanently higher here. To keep my skills sharp and meet that standard, I secured a volunteer role under one of my professors at Texas A&M.\n\nMy days became a relentless, dual-track grind of academic research, certifications, hackathons, and complex side projects. It was also during this period that I built my own multi-agent AI system for a Google Hackathon - a project that would eventually become a defining talking point in my interviews.\n\nBut a hustle like that takes a toll. Amidst the uncertain days, sleepless nights, and the daily sting of 9 AM rejection emails, I had to learn how to manage myself to keep my hope alive. I started taking long walks, exploring the Bay Area, and making intentional time to clear my mind.\n\nIt was a grueling season, but it taught me how to sustain my own momentum, protect my mental bandwidth, and never lose faith in my abilities.',
     photos: [

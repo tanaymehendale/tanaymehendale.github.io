@@ -22,103 +22,6 @@ pageTitle: "Tanay Mehendale - Portfolio"
         </div>
     </div>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container about-container">
-            <div class="about-left">
-                <span class="section-eyebrow">The Person</span>
-                <h2 class="section-display-title">Curious<br>Builder</h2>
-                <div class="about-interests">
-                    <span class="interest-tag">EDM</span>
-                    <span class="interest-tag">Formula 1</span>
-                    <span class="interest-tag">Sci-Fi</span>
-                    <span class="interest-tag">Data Systems</span>
-                    <span class="interest-tag">AI Pipelines</span>
-                </div>
-            </div>
-            <div class="about-right">
-                <img src="/assets/images/profile.jpg" alt="Tanay Mehendale" class="about-image">
-                <p class="about-bio">I build data and backend systems that power analytics and AI products — Python, SQL, AWS, streaming pipelines, LLM-based agents. I enjoy breaking systems, fixing them, and making them scale.</p>
-                <p class="about-bio">When I'm not building: EDM on the decks, F1 on the screen, sci-fi on the nightstand.</p>
-                <div class="about-social-row">
-                    <a href="https://github.com/tanaymehendale" target="_blank" class="about-social-link">
-                        <i class="fa fa-github"></i> GitHub
-                    </a>
-                    <a href="https://linkedin.com/in/tanay-mehendale" target="_blank" class="about-social-link">
-                        <i class="fa fa-linkedin"></i> LinkedIn
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="container projects-container">
-            <div class="section-header-block">
-                <span class="section-eyebrow">Selected Work</span>
-                <h2 class="section-display-title">The<br>Work</h2>
-            </div>
-
-            {% set featured = projects | featuredOnly %}
-            {% set hero = featured[0] %}
-
-            <div class="featured-projects-grid">
-
-                <!-- Hero card -->
-                <a href="/projects/{{ hero.slug }}/" class="proj-card proj-hero">
-                    <div class="proj-card-top">
-                        <span class="proj-category-label">{{ hero.category | categoryLabel }}</span>
-                        <span class="proj-arrow">↗</span>
-                    </div>
-                    {% if hero.image %}
-                    <div class="proj-hero-image">
-                        <img src="{{ hero.image }}" alt="{{ hero.title }} — architecture diagram" loading="lazy">
-                    </div>
-                    {% endif %}
-                    <div class="proj-card-body">
-                        <h3 class="proj-card-title">{{ hero.title }}</h3>
-                        <p class="proj-card-desc">{{ hero.shortDesc }}</p>
-                        <div class="proj-tags">
-                            {% for tag in hero.tags %}
-                            <span class="proj-tag">{{ tag }}</span>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Secondary cards -->
-                <div class="proj-secondary-stack">
-                    {% for project in featured %}
-                    {% if loop.index > 1 %}
-                    <a href="/projects/{{ project.slug }}/" class="proj-card proj-secondary">
-                        <div class="proj-card-top">
-                            <span class="proj-category-label">{{ project.category | categoryLabel }}</span>
-                        </div>
-                        <div class="proj-card-body">
-                            <h3 class="proj-card-title">{{ project.title }}</h3>
-                            <p class="proj-card-desc">{{ project.shortDesc }}</p>
-                            <div class="proj-tags">
-                                {% for tag in project.tags %}
-                                <span class="proj-tag">{{ tag }}</span>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <span class="proj-arrow">↗</span>
-                    </a>
-                    {% endif %}
-                    {% endfor %}
-                </div>
-
-            </div>
-
-            <div class="proj-view-all">
-                <a href="/projects/" class="proj-view-all-link">View All {{ projects | length }} projects <span class="proj-arrow-inline">↗</span></a>
-            </div>
-
-        </div>
-    </section>
-
     <!-- Journey Section -->
     <section id="journey">
 
@@ -129,6 +32,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
             <div class="jmap-section-header">
                 <span class="section-eyebrow">End to End</span>
                 <h2 class="section-display-title">The<br>Arc</h2>
+                <p class="jmap-section-intro">This is the path that got me here — Mumbai to College Station to Redmond, ERP tickets to AI agent prototypes. Scroll through it, or skip to the work.</p>
             </div>
 
             <!-- Mapbox canvas -->
@@ -272,6 +176,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
                 <div class="section-header-block">
                     <span class="section-eyebrow">End to End</span>
                     <h2 class="section-display-title">The<br>Arc</h2>
+                    <p class="jmap-section-intro">This is the path that got me here — Mumbai to College Station to Redmond, ERP tickets to AI agent prototypes. Scroll through it, or skip to the work.</p>
                 </div>
 
                 <!-- Sticky year-strip navigator -->
@@ -433,6 +338,73 @@ pageTitle: "Tanay Mehendale - Portfolio"
 
     <!-- Journey map data injected for JS -->
     <script>window.JOURNEY_DATA = {{ journey | dump | safe }};</script>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container projects-container">
+            <div class="section-header-block">
+                <span class="section-eyebrow">Selected Work</span>
+                <h2 class="section-display-title">The<br>Work</h2>
+            </div>
+
+            {% set featured = projects | featuredOnly %}
+            {% set hero = featured[0] %}
+
+            <div class="featured-projects-grid">
+
+                <!-- Hero card -->
+                <a href="/projects/{{ hero.slug }}/" class="proj-card proj-hero">
+                    <div class="proj-card-top">
+                        <span class="proj-category-label">{{ hero.category | categoryLabel }}</span>
+                        <span class="proj-arrow">↗</span>
+                    </div>
+                    {% if hero.image %}
+                    <div class="proj-hero-image">
+                        <img src="{{ hero.image }}" alt="{{ hero.title }} — architecture diagram" loading="lazy">
+                    </div>
+                    {% endif %}
+                    <div class="proj-card-body">
+                        <h3 class="proj-card-title">{{ hero.title }}</h3>
+                        <p class="proj-card-desc">{{ hero.shortDesc }}</p>
+                        <div class="proj-tags">
+                            {% for tag in hero.tags %}
+                            <span class="proj-tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Secondary cards -->
+                <div class="proj-secondary-stack">
+                    {% for project in featured %}
+                    {% if loop.index > 1 %}
+                    <a href="/projects/{{ project.slug }}/" class="proj-card proj-secondary">
+                        <div class="proj-card-top">
+                            <span class="proj-category-label">{{ project.category | categoryLabel }}</span>
+                        </div>
+                        <div class="proj-card-body">
+                            <h3 class="proj-card-title">{{ project.title }}</h3>
+                            <p class="proj-card-desc">{{ project.shortDesc }}</p>
+                            <div class="proj-tags">
+                                {% for tag in project.tags %}
+                                <span class="proj-tag">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <span class="proj-arrow">↗</span>
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            <div class="proj-view-all">
+                <a href="/projects/" class="proj-view-all-link">View All {{ projects | length }} projects <span class="proj-arrow-inline">↗</span></a>
+            </div>
+
+        </div>
+    </section>
 
     <!-- Skills Section -->
     <section id="skills">
