@@ -1,0 +1,601 @@
+---
+layout: base.njk
+pageTitle: "Tanay Mehendale - Portfolio"
+---
+
+    <!-- Lead Section -->
+    <div id="lead">
+        <img src="/assets/images/hero-bg.jpg" id="lead-bg-img" alt="" aria-hidden="true">
+        <div id="lead-content">
+            <h1 class="lead-name">Tanay<br>Mehendale</h1>
+            <p class="lead-eyebrow">AI Engineer - Agentic AI</p>
+            <div class="lead-meta">
+                <span class="lead-fact">HCLTech</span>
+                <span class="lead-sep">·</span>
+                <span class="lead-fact">MS-MIS @ Texas A&amp;M</span>
+                <span class="lead-sep">·</span>
+                <span class="lead-fact">DJ &amp; Producer</span>
+            </div>
+            <a href="/assets/docs/Tanay Mehendale_Resume_AI.pdf" class="lead-resume-link" target="_blank" rel="noreferrer noopener">
+                View Resume <span class="lead-arrow">↗</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Journey Section -->
+    <section id="journey">
+
+        <!-- ── Desktop: Immersive Map (hidden on mobile) ── -->
+        <div class="journey-map-desktop">
+
+            <!-- Section header overlaid top-left -->
+            <div class="jmap-section-header">
+                <span class="section-eyebrow">End to End</span>
+                <h2 class="section-display-title">The<br>Arc</h2>
+                <p class="jmap-section-intro">This is the path that got me here — Mumbai to College Station to Redmond, ERP tickets to AI agent prototypes. Scroll through it, or skip to the work.</p>
+            </div>
+
+            <!-- Mapbox canvas -->
+            <div id="journey-map"></div>
+
+            <!-- Start gate: shown before journey begins -->
+            <div id="jmap-start-gate" role="dialog" aria-modal="true" aria-label="Begin the journey">
+                <span class="jmap-gate-eyebrow">End to End</span>
+                <h2 class="jmap-gate-title">The Arc</h2>
+                <p class="jmap-start-tagline">A cinematic tour of where I've been.</p>
+                <button id="jmap-start-btn">
+                    <span class="jmap-start-icon">▶</span>
+                    Begin the Journey
+                </button>
+                <button id="jmap-gate-music-toggle" aria-pressed="false" aria-label="Toggle ambient music">
+                    <span class="jmap-gate-music-icon">🔇</span>
+                    <span class="jmap-gate-music-label">Music: Off</span>
+                </button>
+            </div>
+
+            <!-- Distance counter (bottom-left) -->
+            <div id="jmap-distance" aria-live="polite" aria-label="Distance traveled">
+                <span class="jmap-dist-label">Distance traveled</span>
+                <div class="jmap-dist-value-row">
+                    <span id="jmap-dist-val">0</span>
+                    <span class="jmap-dist-unit">km</span>
+                </div>
+            </div>
+
+            <!-- Info card: right panel -->
+            <div class="jmap-info-card" aria-live="polite">
+                <div class="jmap-card-body">
+                    <div class="jmap-card-top" data-reveal>
+                        <img class="jmap-logo" src="" alt="">
+                        <div class="jmap-meta">
+                            <span class="jmap-type-badge"></span>
+                            <h3 class="jmap-org"></h3>
+                            <h4 class="jmap-role"></h4>
+                            <time class="jmap-date"></time>
+                            <span class="jmap-location"></span>
+                        </div>
+                    </div>
+                    <ul class="jmap-bullets"></ul>
+                    <div class="jmap-skill-chips" data-reveal></div>
+                    <blockquote class="jmap-quote" data-reveal></blockquote>
+                </div>
+                <button class="jmap-story-btn" aria-label="Open full story and photos" style="display:none">Full story ↗</button>
+            </div>
+
+            <!-- Cinematic controls (pause, speed, mute, explore) -->
+            <div id="jmap-controls" aria-label="Journey controls">
+                <span class="jmap-controls-label">Controls</span>
+                <div class="jmap-controls-row">
+                    <button id="jmap-pause-btn" class="jmap-ctrl-btn" aria-label="Pause journey">
+                        <span class="jmap-ctrl-icon">⏸</span><span class="jmap-ctrl-label">Pause</span>
+                    </button>
+                    <button id="jmap-speed-btn" class="jmap-ctrl-btn" aria-label="Toggle playback speed">
+                        <span class="jmap-ctrl-icon">1×</span><span class="jmap-ctrl-label">Speed</span>
+                    </button>
+                    <button id="jmap-mute-btn" class="jmap-ctrl-btn" aria-label="Unmute ambient audio" aria-pressed="false">
+                        <span class="jmap-ctrl-icon">🔇</span><span class="jmap-ctrl-label">Sound</span>
+                    </button>
+                    <button id="jmap-explore-btn" class="jmap-ctrl-btn" aria-label="Enter free explore mode">
+                        <span class="jmap-ctrl-icon">🗺</span><span class="jmap-ctrl-label">Explore</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Ambient audio for the journey -->
+            <audio id="jmap-audio" src="/assets/audio/journey.mp3" loop preload="none"></audio>
+
+            <!-- Grand finale overlay -->
+            <div id="jmap-finale-overlay" aria-hidden="true">
+                <p class="jmap-finale-quote">To be continued...</p>
+                <div class="jmap-finale-actions" aria-hidden="true">
+                    <button id="jmap-restart-btn" class="jmap-finale-btn jmap-finale-btn--secondary" aria-label="Start the journey again">↺ Start Again</button>
+                    <button id="jmap-freeexplore-btn" class="jmap-finale-btn jmap-finale-btn--primary" aria-label="Enter free explore mode">🗺 Free Explore</button>
+                </div>
+            </div>
+
+            <!-- Onboarding hint -->
+            <div id="jmap-hint" role="tooltip" aria-live="polite" aria-hidden="true">
+                <div class="jmap-hint-controls">
+                    <div class="jmap-hint-row"><span class="jmap-hint-key">← →</span><span class="jmap-hint-desc">Navigate between stops</span></div>
+                    <div class="jmap-hint-row"><span class="jmap-hint-key">🔇</span><span class="jmap-hint-desc">Toggle music on / off</span></div>
+                    <div class="jmap-hint-row"><span class="jmap-hint-key">1×</span><span class="jmap-hint-desc">Cycle playback speed</span></div>
+                    <div class="jmap-hint-row"><span class="jmap-hint-key">🗺</span><span class="jmap-hint-desc">Free-roam the globe</span></div>
+                </div>
+                <button class="jmap-hint-dismiss" aria-label="Dismiss controls guide">Got it</button>
+            </div>
+
+            <!-- Free explore pin legend hint -->
+            <div id="jmap-explore-hint" aria-hidden="true" role="status">
+                <span class="jmap-explore-legend-label">Legend</span>
+                <div class="jmap-explore-legend">
+                    <span class="jmap-explore-legend-item">
+                        <span class="jmap-legend-swatch jmap-legend-swatch--personal">★</span>
+                        Memories that I have
+                    </span>
+                    <span class="jmap-explore-legend-item">
+                        <span class="jmap-legend-swatch jmap-legend-swatch--wishlist">📍</span>
+                        Places I want to visit
+                    </span>
+                </div>
+                <span class="jmap-explore-sub">Pan &amp; zoom the globe to discover</span>
+            </div>
+
+            <!-- Expanded story panel: centered reading takeover on "Full story" click -->
+            <div id="jmap-expanded-panel" aria-hidden="true" role="dialog" aria-label="Full story">
+                <div class="jmap-panel-inner">
+                    <div class="jmap-panel-header">
+                        <div class="jmap-panel-id">
+                            <span class="jmap-panel-badge"></span>
+                            <h3 class="jmap-panel-org"></h3>
+                            <span class="jmap-panel-date"></span>
+                        </div>
+                        <button id="jmap-panel-close" aria-label="Close panel">✕</button>
+                    </div>
+                    <div class="jmap-panel-body">
+                        <div class="jmap-panel-story"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="jmap-nav" aria-label="Journey navigation">
+                <button class="jmap-btn jmap-prev" aria-label="Previous stop" disabled>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <div class="jmap-progress" role="tablist" aria-label="Journey stops"></div>
+                <button class="jmap-btn jmap-next" aria-label="Next stop">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+            </nav>
+
+        </div>
+
+        <!-- ── Mobile: Animated timeline (hidden on desktop) ── -->
+        <div class="journey-timeline-mobile">
+            <div class="container">
+                <div class="section-header-block">
+                    <span class="section-eyebrow">End to End</span>
+                    <h2 class="section-display-title">The<br>Arc</h2>
+                    <p class="jmap-section-intro">This is the path that got me here — Mumbai to College Station to Redmond, ERP tickets to AI agent prototypes. Scroll through it, or skip to the work.</p>
+                </div>
+
+                <!-- Sticky year-strip navigator -->
+                <div class="journey-strip-wrap">
+                    <nav class="journey-strip" aria-label="Jump to year">
+                        <button class="strip-year" data-target="chapter-2026">2026</button>
+                        <button class="strip-year" data-target="chapter-2025">2025</button>
+                        <button class="strip-year" data-target="chapter-2024">2024</button>
+                        <button class="strip-year" data-target="chapter-2023">2023</button>
+                        <button class="strip-year" data-target="chapter-2021">2021</button>
+                        <button class="strip-year" data-target="chapter-2017">2017</button>
+                    </nav>
+                </div>
+
+                <!-- Spine + chapters -->
+                <div class="journey-log">
+                    <div class="journey-spine" aria-hidden="true"></div>
+
+                    <!-- HCLTech -->
+                    <div class="journey-chapter" id="chapter-2026">
+                        <div class="chapter-node" aria-hidden="true"></div>
+                        <div class="chapter-content">
+                            <div class="chapter-header">
+                                <img src="/assets/images/HCLT-logo.png" alt="HCLTech" class="chapter-logo">
+                                <div class="chapter-id">
+                                    <h3 class="chapter-org">HCLTech</h3>
+                                    <h4 class="chapter-role">AI Engineer — Agentic AI · Strategic Accounts</h4>
+                                </div>
+                                <time class="chapter-date">Feb 2026 – Present</time>
+                                <span class="chapter-type chapter-type--work">Work</span>
+                            </div>
+                            <p class="chapter-skills">Microsoft Agent Framework · AI Agents · LLMs</p>
+                            <ul class="chapter-bullets">
+                                <li>Supporting a strategic enterprise tech account as an AI Engineer at HCLTech</li>
+                                <li>Contribute to AI‑led proposal development, solution narratives, and executive‑ready responses aligned with enterprise cloud, data, and responsible AI principles</li>
+                                <li>Collaborate across technical, commercial, and stakeholder teams to deliver compliant, high‑quality submissions for complex, large‑scale engagements</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- TAMU Data Engineer -->
+                    <div class="journey-chapter" id="chapter-2025">
+                        <div class="chapter-node" aria-hidden="true"></div>
+                        <div class="chapter-content">
+                            <div class="chapter-header">
+                                <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="chapter-logo">
+                                <div class="chapter-id">
+                                    <h3 class="chapter-org">Texas A&amp;M University</h3>
+                                    <h4 class="chapter-role">Data Engineer Intern — Research</h4>
+                                </div>
+                                <time class="chapter-date">Aug 2025 – Feb 2026</time>
+                                <span class="chapter-type chapter-type--work">Work</span>
+                            </div>
+                            <p class="chapter-skills">Python · ETL · AWS · Data Pipelines · Pandas · Medallion Architecture</p>
+                            <ul class="chapter-bullets">
+                                <li>Architected a Python based ETL pipeline to consolidate 3 data sources into a multi-layer data lake on Amazon S3, reducing data preparation time by 40% and aiding time series analysis</li>
+                                <li>Developed scalable logic to ingest 2M+ unstructured raw text via Reddit API, implementing regex-based alias matching across 25+ subreddits to expand data coverage by 300%</li>
+                                <li>Optimized performance by resolving API failures, resulting in 100% data capture reliability and a 34% increase in speed</li>
+                                <li>Integrated LLM based sentiment analysis to derive 12 distinct themes, creating high-value categorical features to improve segmentation and trend modeling</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- TAMU Teaching Assistant -->
+                    <div class="journey-chapter" id="chapter-2024">
+                        <div class="chapter-node" aria-hidden="true"></div>
+                        <div class="chapter-content">
+                            <div class="chapter-header">
+                                <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="chapter-logo">
+                                <div class="chapter-id">
+                                    <h3 class="chapter-org">Texas A&amp;M University</h3>
+                                    <h4 class="chapter-role">Graduate Teaching Assistant</h4>
+                                </div>
+                                <time class="chapter-date">Apr 2024 – May 2025</time>
+                                <span class="chapter-type chapter-type--work">Work</span>
+                            </div>
+                            <p class="chapter-skills">HCI · Systems Analysis &amp; Design · ERP · SAP</p>
+                            <ul class="chapter-bullets">
+                                <li><strong>ISTM 380 Human-Computer Interaction:</strong> User Experience, UI/UX, Design principles, Accessibility, Usability, Attention, Memory</li>
+                                <li><strong>ISTM 320 Systems Analysis &amp; Design:</strong> Requirements Gathering, Data Modeling (ERDs, Data Flow Diagrams, UML)</li>
+                                <li><strong>SCMT 468 Enterprise Resource Planning:</strong> SAP, Sales &amp; Distribution, Materials Management, Warehouse Management, Inventory Management</li>
+                                <li>Mentored 245+ students across 4 courses through labs and office hours, clarifying requirements, debugging, and coaching presentations</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Texas A&M MS -->
+                    <div class="journey-chapter" id="chapter-2023">
+                        <div class="chapter-node" aria-hidden="true"></div>
+                        <div class="chapter-content">
+                            <div class="chapter-header">
+                                <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="chapter-logo">
+                                <div class="chapter-id">
+                                    <h3 class="chapter-org">Mays Business School, Texas A&amp;M University</h3>
+                                    <h4 class="chapter-role">Master of Science — Management Information Systems</h4>
+                                </div>
+                                <time class="chapter-date">Aug 2023 – May 2025</time>
+                                <span class="chapter-type chapter-type--edu">MS</span>
+                            </div>
+                            <p class="chapter-skills">GPA: 3.83 · Head of Marketing &amp; Comms, BITS</p>
+                            <ul class="chapter-bullets">
+                                <li>ISTM 622 – Advanced Data Management</li>
+                                <li>ISTM 637 – Data Warehousing</li>
+                                <li>ECEN 758 – Data Mining</li>
+                                <li>CSCE 679 – Data Visualization</li>
+                                <li>STAT 650 – Statistics &amp; Foundations of Big Data</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- LTIMindtree -->
+                    <div class="journey-chapter" id="chapter-2021">
+                        <div class="chapter-node" aria-hidden="true"></div>
+                        <div class="chapter-content">
+                            <div class="chapter-header">
+                                <img src="/assets/images/ltimindtree-logo-blue.png" alt="LTIMindtree" class="chapter-logo">
+                                <div class="chapter-id">
+                                    <h3 class="chapter-org">LTIMindtree</h3>
+                                    <h4 class="chapter-role">Software Engineer</h4>
+                                </div>
+                                <time class="chapter-date">Jan 2021 – Jun 2023</time>
+                                <span class="chapter-type chapter-type--work">Work</span>
+                            </div>
+                            <p class="chapter-skills">SQL · Python · ETL · AWS · S3 · Glue · ABAP · Data Modeling</p>
+                            <ul class="chapter-bullets">
+                                <li>Developed 45+ custom ERP transactions using ABAP with SQL, improving data retrieval speed by 95% for 400+ users</li>
+                                <li>Supported SAP to AWS ETL migration by extracting ERP data, validating S3 and Glue outputs, improving Redshift load consistency across weekly cycles</li>
+                                <li>Diagnosed and resolved 30+ technical support issues via root cause analysis, cutting average resolution time by 35%</li>
+                                <li>Collaborated with global teams to optimize SDLC audits and change management practices, reducing SOX compliance issues by 84% across 52+ releases</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SPIT B.Tech -->
+                    <div class="journey-chapter" id="chapter-2017">
+                        <div class="chapter-node" aria-hidden="true"></div>
+                        <div class="chapter-content">
+                            <div class="chapter-header">
+                                <img src="/assets/images/spit-logo.png" alt="S.P.I.T." class="chapter-logo">
+                                <div class="chapter-id">
+                                    <h3 class="chapter-org">Sardar Patel Institute of Technology, University of Mumbai</h3>
+                                    <h4 class="chapter-role">Bachelor of Technology — Electronics &amp; Telecommunications</h4>
+                                </div>
+                                <time class="chapter-date">Aug 2017 – May 2021</time>
+                                <span class="chapter-type chapter-type--edu">B.Tech</span>
+                            </div>
+                            <ul class="chapter-bullets">
+                                <li>Semi Finalist (Top 20 of 800+ teams) at IICDC-2019, national innovation hackathon by Texas Instruments &amp; Dept. of Science &amp; Technology, Govt. of India — affordable non-invasive flow meter</li>
+                                <li>Winner — Case Study Presentation by Fire &amp; Security Association of India (FSAI)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Journey map data injected for JS -->
+    <script>window.JOURNEY_DATA = {{ journey | dump | safe }};</script>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container projects-container">
+            <div class="section-header-block">
+                <span class="section-eyebrow">Selected Work</span>
+                <h2 class="section-display-title">The<br>Work</h2>
+            </div>
+
+            {% set featured = projects | featuredOnly %}
+            {% set hero = featured[0] %}
+
+            <div class="featured-projects-grid">
+
+                <!-- Hero card -->
+                <a href="/projects/{{ hero.slug }}/" class="proj-card proj-hero">
+                    <div class="proj-card-top">
+                        <span class="proj-category-label">{{ hero.category | categoryLabel }}</span>
+                        <span class="proj-arrow">↗</span>
+                    </div>
+                    {% if hero.image %}
+                    <div class="proj-hero-image">
+                        <img src="{{ hero.image }}" alt="{{ hero.title }} — architecture diagram" loading="lazy">
+                    </div>
+                    {% endif %}
+                    <div class="proj-card-body">
+                        <h3 class="proj-card-title">{{ hero.title }}</h3>
+                        <p class="proj-card-desc">{{ hero.shortDesc }}</p>
+                        <div class="proj-tags">
+                            {% for tag in hero.tags %}
+                            <span class="proj-tag">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Secondary cards -->
+                <div class="proj-secondary-stack">
+                    {% for project in featured %}
+                    {% if loop.index > 1 %}
+                    <a href="/projects/{{ project.slug }}/" class="proj-card proj-secondary">
+                        <div class="proj-card-top">
+                            <span class="proj-category-label">{{ project.category | categoryLabel }}</span>
+                        </div>
+                        <div class="proj-card-body">
+                            <h3 class="proj-card-title">{{ project.title }}</h3>
+                            <p class="proj-card-desc">{{ project.shortDesc }}</p>
+                            <div class="proj-tags">
+                                {% for tag in project.tags %}
+                                <span class="proj-tag">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <span class="proj-arrow">↗</span>
+                    </a>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            <div class="proj-view-all">
+                <a href="/projects/" class="proj-view-all-link">View All {{ projects | length }} projects <span class="proj-arrow-inline">↗</span></a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <div class="skills-header-row">
+                <div class="skills-header-left">
+                    <span class="skills-eyebrow">What I reach for</span>
+                    <h2 class="skills-title">The<br>Stack</h2>
+                </div>
+                <div class="skills-header-right">
+                    <p class="skills-sub">Tools I've shipped real things with — weighted by how often I'd reach for them under pressure.</p>
+                    <div class="skills-legend">
+                        <span class="leg-item"><span class="leg-dot leg-heavy"></span>Core stack</span>
+                        <span class="leg-item"><span class="leg-dot leg-mid"></span>Regular use</span>
+                        <span class="leg-item"><span class="leg-dot leg-low"></span>Contextual</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-mixer">
+
+                <!-- CH 01: AI & Agents -->
+                <div class="mix-channel mix-channel--highlight">
+                    <div class="channel-peak" style="--peak-w: 100%"></div>
+                    <div class="channel-skills">
+                        <span class="sk sk-core">LLM</span>
+                        <span class="sk sk-core">RAG</span>
+                        <span class="sk sk-core">LangChain</span>
+                        <span class="sk sk-core">Agentic AI</span>
+                        <span class="sk sk-core">MCP</span>
+                        <span class="sk sk-mid">MSAF</span>
+                        <span class="sk sk-mid">Google ADK</span>
+                        <span class="sk sk-mid">Graph-RAG</span>
+                        <span class="sk sk-low">Azure OpenAI</span>
+                    </div>
+                    <div class="channel-footer">
+                        <span class="channel-num">01</span>
+                        <span class="channel-label">AI &amp; Agents</span>
+                    </div>
+                </div>
+
+                <!-- CH 02: Languages -->
+                <div class="mix-channel">
+                    <div class="channel-peak" style="--peak-w: 85%"></div>
+                    <div class="channel-skills">
+                        <span class="sk sk-core">Python</span>
+                        <span class="sk sk-core">SQL</span>
+                        <span class="sk sk-mid">TypeScript</span>
+                        <span class="sk sk-mid">JavaScript</span>
+                        <span class="sk sk-mid">Java</span>
+                        <span class="sk sk-mid">Shell / Bash</span>
+                        <span class="sk sk-low">C++</span>
+                        <span class="sk sk-low">R</span>
+                    </div>
+                    <div class="channel-footer">
+                        <span class="channel-num">02</span>
+                        <span class="channel-label">Languages</span>
+                    </div>
+                </div>
+
+                <!-- CH 03: Data Engineering -->
+                <div class="mix-channel">
+                    <div class="channel-peak" style="--peak-w: 75%"></div>
+                    <div class="channel-skills">
+                        <span class="sk sk-core">Spark</span>
+                        <span class="sk sk-core">Kafka</span>
+                        <span class="sk sk-core">Airflow</span>
+                        <span class="sk sk-core">Snowflake</span>
+                        <span class="sk sk-mid">dbt</span>
+                        <span class="sk sk-mid">ETL / ELT</span>
+                        <span class="sk sk-low">SSIS</span>
+                        <span class="sk sk-low">SSAS</span>
+                    </div>
+                    <div class="channel-footer">
+                        <span class="channel-num">03</span>
+                        <span class="channel-label">Data Engg</span>
+                    </div>
+                </div>
+
+                <!-- CH 04: Cloud -->
+                <div class="mix-channel">
+                    <div class="channel-peak" style="--peak-w: 60%"></div>
+                    <div class="channel-skills">
+                        <span class="sk sk-core">AWS</span>
+                        <span class="sk sk-core">Docker</span>
+                        <span class="sk sk-core">Git</span>
+                        <span class="sk sk-mid">S3</span>
+                        <span class="sk sk-mid">Athena</span>
+                        <span class="sk sk-mid">Redshift</span>
+                        <span class="sk sk-low">EC2</span>
+                        <span class="sk sk-low">RDS</span>
+                    </div>
+                    <div class="channel-footer">
+                        <span class="channel-num">04</span>
+                        <span class="channel-label">Cloud</span>
+                    </div>
+                </div>
+
+                <!-- CH 05: Databases -->
+                <div class="mix-channel">
+                    <div class="channel-peak" style="--peak-w: 55%"></div>
+                    <div class="channel-skills">
+                        <span class="sk sk-core">PostgreSQL</span>
+                        <span class="sk sk-core">MongoDB</span>
+                        <span class="sk sk-mid">MySQL</span>
+                        <span class="sk sk-mid">Cassandra</span>
+                        <span class="sk sk-low">MariaDB</span>
+                        <span class="sk sk-low">SAP HANA</span>
+                    </div>
+                    <div class="channel-footer">
+                        <span class="channel-num">05</span>
+                        <span class="channel-label">Databases</span>
+                    </div>
+                </div>
+
+                <!-- CH 06: Analytics & BI -->
+                <div class="mix-channel">
+                    <div class="channel-peak" style="--peak-w: 45%"></div>
+                    <div class="channel-skills">
+                        <span class="sk sk-core">Tableau</span>
+                        <span class="sk sk-core">Power BI</span>
+                        <span class="sk sk-mid">Grafana</span>
+                        <span class="sk sk-low">SSRS</span>
+                    </div>
+                    <div class="channel-footer">
+                        <span class="channel-num">06</span>
+                        <span class="channel-label">Analytics &amp; BI</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications">
+        <div class="container certs-container">
+            <div class="certs-header">
+                <span class="section-eyebrow">Verified credentials</span>
+                <h2 class="section-display-title certs-title">Certified</h2>
+            </div>
+            <div class="certs-grid">
+                <a href="https://www.credly.com/badges/eb145d22-9fdf-4353-b9d6-662635a713c4/" target="_blank" rel="noreferrer noopener" class="cert-card">
+                    <div class="cert-card-top">
+                        <img src="/assets/images/aws-logo.svg" alt="Amazon Web Services" class="cert-logo cert-logo--aws">
+                        <span class="cert-card-arrow">↗</span>
+                    </div>
+                    <p class="cert-card-name">AWS Solutions Architect</p>
+                    <p class="cert-card-level">Associate · SAA-C03 · Expires Oct 2028</p>
+                    <span class="cert-card-verify">Verify on Credly</span>
+                </a>
+                <a href="https://www.datacamp.com/certificate/DEA0011529585080" target="_blank" rel="noreferrer noopener" class="cert-card">
+                    <div class="cert-card-top">
+                        <img src="/assets/images/datacamp-logo.svg" alt="DataCamp" class="cert-logo cert-logo--datacamp">
+                        <span class="cert-card-arrow">↗</span>
+                    </div>
+                    <p class="cert-card-name">Associate Data Engineer</p>
+                    <p class="cert-card-level">Professional Certification · Expires Jun 2027</p>
+                    <span class="cert-card-verify">Verify on DataCamp</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container contact-container">
+            <div class="contact-headline">
+                <span class="section-eyebrow">Get In Touch</span>
+                <h2 class="contact-title">Let's<br>Talk</h2>
+                <p class="contact-sub">I'm always up for a conversation about data systems, AI pipelines, or whatever problem you're trying to solve.</p>
+            </div>
+            <div class="contact-links">
+                <a href="mailto:tanaymehendale@gmail.com?subject=Looking%20to%20connect%20-%20via%20Portfolio" class="contact-row contact-email-row">
+                    <span class="contact-row-label">Email</span>
+                    <span class="contact-row-value">tanaymehendale@gmail.com</span>
+                </a>
+                <div class="contact-row contact-li-row">
+                    <span class="contact-row-label">LinkedIn</span>
+                    <div class="contact-li-content">
+                        <div class="linkedin-badge">
+                            <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+                            <div class="LI-profile-badge" data-version="v1" data-size="large" data-locale="en_US" data-type="horizontal" data-theme="light" data-vanity="tanay-mehendale"></div>
+                        </div>
+                        <div class="linkedin-mobile">
+                            <a href="https://www.linkedin.com/in/tanay-mehendale" target="_blank" class="linkedin-button">
+                                <i class="fa fa-linkedin"></i> Connect on LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

@@ -1,0 +1,63 @@
+---
+layout: base.njk
+pageTitle: All Projects — Tanay Mehendale
+permalink: /projects/
+---
+
+<main class="all-projects-page">
+    <div class="container projects-container">
+
+        <div class="section-header-block">
+            <span class="section-eyebrow">View All</span>
+            <h1 class="section-display-title">Projects</h1>
+        </div>
+
+        <div class="filter-chips" role="group" aria-label="Filter projects by category">
+            <button class="filter-chip active" data-filter="all">All</button>
+            <button class="filter-chip" data-filter="ai-ml">AI &amp; Machine Learning</button>
+            <button class="filter-chip" data-filter="data-engg">Data Engineering</button>
+            <button class="filter-chip" data-filter="data-analytics">Data Analytics</button>
+            <button class="filter-chip chip-disabled" title="Coming soon" aria-disabled="true">Product Management</button>
+        </div>
+
+        <div class="all-projects-grid">
+            {% for project in projects %}
+            <a href="/projects/{{ project.slug }}/" class="proj-card proj-all-card" data-category="{{ project.category }}">
+                <div class="proj-card-top">
+                    <span class="proj-category-label">{{ project.category | categoryLabel }}</span>
+                    {% if project.featured %}<span class="proj-featured-badge">Featured</span>{% endif %}
+                </div>
+                <div class="proj-card-body">
+                    <h2 class="proj-card-title">{{ project.title }}</h2>
+                    <p class="proj-card-desc">{{ project.shortDesc }}</p>
+                    <div class="proj-tags">
+                        {% for tag in project.tags %}
+                        <span class="proj-tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <span class="proj-arrow">↗</span>
+            </a>
+            {% endfor %}
+        </div>
+
+    </div>
+</main>
+
+<script>
+(function () {
+    const chips = document.querySelectorAll('.filter-chip:not(.chip-disabled)');
+    const cards = document.querySelectorAll('.proj-all-card');
+
+    chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+            chips.forEach(function (c) { c.classList.remove('active'); });
+            chip.classList.add('active');
+            var cat = chip.dataset.filter;
+            cards.forEach(function (card) {
+                card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
+            });
+        });
+    });
+}());
+</script>
