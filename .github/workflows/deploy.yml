@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Create mapbox config
+        run: echo "const MAPBOX_TOKEN = '${{ secrets.MAPBOX_TOKEN }}';" > mapbox_config.js
+
       - name: Build with Eleventy
         run: npm run build
 
