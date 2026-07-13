@@ -65,7 +65,7 @@ CSS variables defined in `assets/css/style.css`. Light theme at `:root`, dark at
 - **`#journey`**: Two parallel implementations, CSS-toggled by viewport:
   - **Desktop** (`.journey-map-desktop`): Mapbox GL JS globe tour driven by `journey.js`. Requires `mapbox_config.js` (contains the Mapbox public token). Has start gate, chapter overlay, info card, cinematic controls (pause/speed/mute), ambient audio (`assets/audio/journey.mp3`), and arc animations between stops.
   - **Mobile** (`.journey-timeline-mobile`): Static HTML timeline with sticky year-strip navigator, animated spine, and chapter cards with IntersectionObserver fade-in. Hard-coded in `index.njk` (not data-driven from `journey.js`).
-- **`#skills`**: 6 "mixer channels" layout. Each channel has a CSS `--peak-w` variable (0–100%) controlling the visual weight bar, plus tagged skill lists (`sk-core`, `sk-mid`, `sk-low`).
+- **`#skills`**: A `.skills-marquee` line (7 flagship skills, the 5-second scan) sits above a 4-card `.skills-mixer` grid — `AI & Agents` (highlighted), `Software`, `Databases`, `Cloud & Infra` — each an evenly-weighted flat skill list sourced from the AI/SE resume variants. No fabricated proficiency meter.
 
 ### JS Responsibilities
 

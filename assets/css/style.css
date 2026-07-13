@@ -2833,40 +2833,39 @@ section .container {
     margin-bottom: 20px;
 }
 
-.skills-legend {
+/* ── Core Stack marquee — top-line skills at a glance ── */
+.skills-marquee {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
-    gap: 8px 20px;
+    align-items: baseline;
+    gap: 10px 16px;
+    max-width: 1100px;
+    margin: 0 auto clamp(28px, 4vw, 44px);
+    padding-bottom: clamp(20px, 3vw, 28px);
+    border-bottom: 1px solid var(--separator-color);
 }
 
-.leg-item {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 500;
+.marq-sk {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-size: clamp(1.25rem, 2.2vw, 1.9rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
     color: var(--text-color);
-    opacity: 0.45;
-    letter-spacing: 0.01em;
+    line-height: 1.1;
 }
 
-.leg-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    flex-shrink: 0;
+.marq-sep {
+    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+    font-weight: 400;
+    color: var(--accent-color);
+    line-height: 1.1;
 }
-
-.leg-heavy { background: var(--accent-color); }
-.leg-mid   { background: color-mix(in oklch, var(--accent-color) 55%, var(--bg-color)); }
-.leg-low   { background: color-mix(in oklch, var(--accent-color) 28%, var(--bg-color)); }
 
 /* ── Mixer board ── */
 .skills-mixer {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     border: 1px solid var(--separator-color);
     max-width: 1100px;
     margin: 0 auto;
@@ -2899,60 +2898,42 @@ section .container {
     background: color-mix(in oklch, var(--accent-color) 9%, var(--bg-color));
 }
 
-/* Peak indicator bar at the top of each channel */
-.channel-peak {
-    height: 2px;
-    width: var(--peak-w, 60%);
-    background: var(--separator-color);
-    margin-bottom: clamp(16px, 2vw, 24px);
-    flex-shrink: 0;
-    transition: background 0.2s ease;
-}
-
-.mix-channel--highlight .channel-peak {
-    background: var(--accent-color);
-}
-
-.mix-channel:hover .channel-peak {
-    background: color-mix(in oklch, var(--accent-color) 70%, var(--separator-color));
-}
-
-.mix-channel--highlight:hover .channel-peak {
-    background: var(--accent-color);
-}
-
-/* Skills stacked inside the channel */
+/* Skills stacked inside the channel — top rule replaces the old fader bar,
+   now an honest divider rather than a stand-in for a made-up percentage */
 .channel-skills {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
+    padding-top: clamp(14px, 2vw, 20px);
+    border-top: 2px solid var(--separator-color);
+    transition: border-color 0.2s ease;
+}
+
+.mix-channel--highlight .channel-skills {
+    border-top-color: var(--accent-color);
+}
+
+.mix-channel:hover .channel-skills {
+    border-top-color: color-mix(in oklch, var(--accent-color) 70%, var(--separator-color));
+}
+
+.mix-channel--highlight:hover .channel-skills {
+    border-top-color: var(--accent-color);
 }
 
 .sk {
     font-family: 'Hanken Grotesk', 'Segoe UI', sans-serif;
     line-height: 1.4;
     display: block;
+    font-weight: 500;
+    font-size: clamp(0.8rem, 1vw, 0.94rem);
+    color: var(--text-color);
+    opacity: 0.7;
 }
 
-.sk-core {
-    font-weight: 600;
-    font-size: clamp(0.82rem, 1.1vw, 1rem);
-    color: var(--text-color);
-}
-
-.sk-mid {
-    font-weight: 400;
-    font-size: clamp(0.76rem, 1vw, 0.92rem);
-    color: var(--text-color);
-    opacity: 0.65;
-}
-
-.sk-low {
-    font-weight: 400;
-    font-size: clamp(0.7rem, 0.9vw, 0.82rem);
-    color: var(--text-color);
-    opacity: 0.35;
+.mix-channel--highlight .sk {
+    opacity: 0.9;
 }
 
 /* Channel footer — category label sits at bottom like a mixer strip */
@@ -2994,7 +2975,7 @@ section .container {
 /* ── Responsive ── */
 @media (max-width: 900px) {
     .skills-mixer {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .mix-channel {
@@ -3002,13 +2983,13 @@ section .container {
         min-height: 240px;
     }
 
-    /* Remove right border on every 3rd channel */
-    .mix-channel:nth-child(3n) {
+    /* Remove right border on every 2nd channel */
+    .mix-channel:nth-child(2n) {
         border-right: none;
     }
 
     /* Re-add right border for channels that now have a right neighbour */
-    .mix-channel:not(:nth-child(3n)) {
+    .mix-channel:not(:nth-child(2n)) {
         border-right: 1px solid var(--separator-color);
     }
 }
@@ -3030,24 +3011,12 @@ section .container {
     }
 
     .skills-mixer {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
     }
 
     .mix-channel {
-        min-height: 200px;
-    }
-
-    /* Remove right border on every 2nd channel */
-    .mix-channel:nth-child(3n) {
-        border-right: 1px solid var(--separator-color);
-    }
-
-    .mix-channel:nth-child(2n) {
-        border-right: none;
-    }
-
-    .mix-channel:not(:nth-child(2n)) {
-        border-right: 1px solid var(--separator-color);
+        min-height: 0;
+        border-right: none !important;
     }
 }
 
