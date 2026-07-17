@@ -4,14 +4,36 @@ module.exports = [
     category: "ai-ml",
     image: "/assets/images/projects/apartment-finder-ai-arch.png",
     title: "ApartmentFinder AI",
-    shortDesc: "A Multi-Agent AI system that simplifies relocation moves — Google ADK, RAG pipelines, and MCP in one coherent product.",
+    shortDesc: "A hierarchical multi-agent system that turns apartment hunting from five browser tabs into one conversation — Google ADK, RAG pipelines, and MCP in one coherent product.",
     tags: ["AI Agents", "RAG Pipeline", "MCP", "Google ADK"],
     featured: true,
-    isComingSoon: true,
-    comingSoonMessage: "ApartmentFinder AI is a multi-agent AI system designed for simplifying the chaos of relocations",
-    comingSoonIcon: "fa-book",
-    comingSoonCallout: "Give it a read on Kaggle!",
+    impact: "Deployed live as a working product: a user states their budget, city, and a landmark (e.g., their office) and, within one conversation, gets <b>ranked, in-budget apartment recommendations with real commute times and neighborhood safety context</b>.",
+    sections: [
+      {
+        title: "Problem Statement",
+        content: `<p>Relocating to a new city means manually stitching together three separate workflows: searching listing sites for budget/layout, copying every address into Google Maps to check commute times, and searching Reddit/Google to vet neighborhood safety — then compiling it all into a spreadsheet by hand. It's slow, repetitive, and easy to get wrong (e.g., checking the wrong commute distance because of a mis-geocoded landmark).</p>`
+      },
+      {
+        title: "Approach",
+        content: `<p>Built a <b>hierarchical multi-agent architecture</b> on Google's Agent Development Kit (ADK) with Gemini 2.5 Flash, rather than one monolithic prompt. A <b>Manager</b> agent handles the conversation and requirement-gathering (city, state, budget, landmark, plus optional bedrooms/bathrooms/roommates), then delegates to a <b>Research Team</b> — a sequential pipeline of specialist sub-agents (Analyst &rarr; Reviewer &rarr; Summarizer) that each own one concern: fetching and filtering listings, checking real commute times, researching neighborhood safety, and synthesizing a final recommendation. Splitting responsibilities this way keeps each agent's prompt focused and makes the pipeline's state transitions (e.g., "no results found") deterministic instead of relying on the LLM to self-report status in free text.</p>`
+      },
+      {
+        title: "Methodology",
+        content: `<ul style="margin-left: 2em;">
+          <li><b>Tool-grounded agents, not hallucinated data:</b> listings come from live provider APIs (RentCast, Apify/Zillow) with automatic failover; commute times come from the Google Maps Distance Matrix API using resolved lat/lng (not raw address strings, which was a real bug caught in production); landmark resolution uses Places API (New) text search scoped to the target city.</li>
+          <li><b>Deterministic control flow around a probabilistic core:</b> a pre-agent callback gate routes on a structured search-status signal rather than trusting the model to phrase "no results" correctly in prose — closing a class of routing bugs found during testing.</li>
+          <li><b>Follow-up-aware state:</b> users can revise one requirement mid-conversation ("actually make it $3,000") and only the changed field is re-resolved; everything else carries forward from session state instead of forcing a full re-ask.</li>
+          <li><b>Full observability:</b> every agent hop, tool call, and LLM generation is traced end-to-end in Langfuse via OpenTelemetry instrumentation, making multi-agent runs debuggable instead of a black box.</li>
+          <li><b>Production hardening:</b> containerized on Cloud Run with Firestore-backed usage counters (survives cold starts, unlike file-based counters), CORS-safe direct-to-backend SSE streaming to route around Vercel's serverless timeout, and graceful session recovery when a scaled-to-zero backend loses in-memory state.</li>
+        </ul>`
+      },
+      {
+        title: "Result",
+        content: `<p>A live, working product: a user states their budget, city, and a landmark (e.g., their office), and within one conversation receives ranked, in-budget apartment recommendations with real commute times and neighborhood safety context — fully deployed (Next.js frontend on Vercel, FastAPI/ADK backend on Cloud Run) and instrumented for observability rather than left as a local prototype.</p>`
+      }
+    ],
     links: [
+      { label: "Live Webapp", url: "https://apartment-finder-ai.vercel.app", icon: "fa-external-link" },
       { label: "Kaggle Writeup", url: "https://www.kaggle.com/competitions/agents-intensive-capstone-project/writeups/apartmentfinder-ai", icon: "fa-external-link" },
       { label: "GitHub Repository", url: "https://github.com/tanaymehendale/apartment-finder-AI", icon: "fa-external-link" }
     ]
