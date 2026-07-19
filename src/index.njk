@@ -92,7 +92,6 @@ pageTitle: "Tanay Mehendale - Portfolio"
 
             <!-- Cinematic controls (pause, speed, mute, explore) -->
             <div id="jmap-controls" aria-label="Journey controls">
-                <span class="jmap-controls-label">Controls</span>
                 <div class="jmap-controls-row">
                     <button id="jmap-pause-btn" class="jmap-ctrl-btn" aria-label="Pause journey">
                         <span class="jmap-ctrl-icon">⏸</span><span class="jmap-ctrl-label">Pause</span>
@@ -105,6 +104,15 @@ pageTitle: "Tanay Mehendale - Portfolio"
                     </button>
                     <button id="jmap-explore-btn" class="jmap-ctrl-btn" aria-label="Enter free explore mode">
                         <span class="jmap-ctrl-icon">🗺</span><span class="jmap-ctrl-label">Explore</span>
+                    </button>
+                    <button id="jmap-zoomin-btn" class="jmap-ctrl-btn" aria-label="Zoom in">
+                        <span class="jmap-ctrl-icon">+</span><span class="jmap-ctrl-label">Zoom In</span>
+                    </button>
+                    <button id="jmap-zoomout-btn" class="jmap-ctrl-btn" aria-label="Zoom out">
+                        <span class="jmap-ctrl-icon">−</span><span class="jmap-ctrl-label">Zoom Out</span>
+                    </button>
+                    <button id="jmap-exit-btn" class="jmap-ctrl-btn" aria-label="Exit and return to start">
+                        <span class="jmap-ctrl-icon">✕</span><span class="jmap-ctrl-label">Exit</span>
                     </button>
                 </div>
             </div>
@@ -129,7 +137,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
                     <div class="jmap-hint-row"><span class="jmap-hint-key">1×</span><span class="jmap-hint-desc">Cycle playback speed</span></div>
                     <div class="jmap-hint-row"><span class="jmap-hint-key">🗺</span><span class="jmap-hint-desc">Free-roam the globe</span></div>
                 </div>
-                <button class="jmap-hint-dismiss" aria-label="Dismiss controls guide">Got it</button>
+                <button class="jmap-hint-dismiss" aria-label="Dismiss controls guide">✕</button>
             </div>
 
             <!-- Free explore pin legend hint -->

@@ -231,6 +231,7 @@ class JourneyMap {
         this._freeExploreActive = false;
         this._personalMarkers = [];
         this._wishlistMarkers = [];
+        this._clusterMarkers = [];
     }
 
     // ── Initialisation ────────────────────────────────────────────────────────
@@ -280,7 +281,7 @@ class JourneyMap {
             if (gate) gate.classList.add('visible');
 
             const startBtn = document.getElementById('jmap-start-btn');
-            if (startBtn) startBtn.addEventListener('click', () => this._startJourney(), { once: true });
+            if (startBtn) startBtn.addEventListener('click', () => this._startJourney());
 
             const gateMusicBtn = document.getElementById('jmap-gate-music-toggle');
             if (gateMusicBtn) gateMusicBtn.addEventListener('click', () => {
@@ -302,6 +303,8 @@ class JourneyMap {
     }
 
     _startJourney() {
+        if (this._journeyStarted) return;
+
         const gate = document.getElementById('jmap-start-gate');
         if (gate) {
             gate.classList.remove('visible');
@@ -384,9 +387,22 @@ class JourneyMap {
 
         this._hideInfoCard();
 
-        // Update distance counter
+        const d = ms => ms / this._speedMultiplier;
+
+        // Update distance counter — its duration is matched to how long the
+        // upcoming transition actually takes, so it lands in step with the arc/road
+        // instead of finishing well before the camera does.
         const targetKm = this._cumDistances[index] || 0;
-        this._animateDistanceCounter(this._totalDistanceSoFar, targetKm);
+        let counterDuration;
+        if (goingForward && stop.transitionType === 'flight') {
+            // Zoom-out-to-show-arc delay + the plane's full arc traversal
+            counterDuration = d(1900) + d(3500);
+        } else if (goingForward && stop.transitionType === 'road') {
+            counterDuration = d(2600);
+        } else {
+            counterDuration = d(2400);
+        }
+        this._animateDistanceCounter(this._totalDistanceSoFar, targetKm, counterDuration);
         this._totalDistanceSoFar = targetKm;
 
         const proceed = () => {
@@ -398,7 +414,6 @@ class JourneyMap {
                 }
             } else {
                 // Backward or no transition: simple fly
-                const d = ms => ms / this._speedMultiplier;
                 this.map.flyTo({
                     center: stop.coordinates,
                     zoom: 12,
@@ -534,23 +549,25 @@ class JourneyMap {
         this.map.addLayer({
             id: idBloom, type: 'line', source: sourceId,
             layout: { 'line-cap': 'round', 'line-join': 'round' },
-            paint: { 'line-color': bloomColor, 'line-width': 18, 'line-blur': 14, 'line-opacity': 0.22 },
+            paint: { 'line-color': bloomColor, 'line-width': 22, 'line-blur': 14, 'line-opacity': 0.3 },
         });
 
         // Layer 2 — tight inner glow
         this.map.addLayer({
             id: idGlow, type: 'line', source: sourceId,
             layout: { 'line-cap': 'round', 'line-join': 'round' },
-            paint: { 'line-color': glowColor, 'line-width': 7, 'line-blur': 5, 'line-opacity': 0.6 },
+            paint: { 'line-color': glowColor, 'line-width': 9, 'line-blur': 5, 'line-opacity': 0.75 },
         });
 
-        // Layer 3 — bright core (dashed to indicate direction)
+        // Layer 3 — bright core (dashed to indicate direction). Kept visible at any
+        // zoom (incl. the wide Explore overview) so the trail never washes out
+        // against bright daytime satellite imagery.
         this.map.addLayer({
             id: idCore, type: 'line', source: sourceId,
             layout: { 'line-cap': 'round', 'line-join': 'round' },
             paint: {
                 'line-color': coreColor,
-                'line-width': isFlight ? 1.8 : 1.5,
+                'line-width': isFlight ? 2.2 : 1.8,
                 'line-blur': 0,
                 'line-opacity': 1,
                 'line-dasharray': isFlight ? [3, 2] : [2, 2],
@@ -649,7 +666,11 @@ class JourneyMap {
         }
 
         el.appendChild(inner);
-        el.addEventListener('click', () => this._showInfoCard(stop));
+        el.addEventListener('click', () => {
+            // In free explore mode, experience pins just mark the arc — not clickable
+            if (this._freeExploreActive) return;
+            this._showInfoCard(stop);
+        });
 
         const marker = new mapboxgl.Marker({ element: el, anchor: 'bottom' })
             .setLngLat(stop.coordinates)
@@ -742,12 +763,11 @@ class JourneyMap {
 
     // ── Distance counter ──────────────────────────────────────────────────────
 
-    _animateDistanceCounter(fromKm, toKm) {
+    _animateDistanceCounter(fromKm, toKm, duration = 2000 / this._speedMultiplier) {
         if (this._distRafId) cancelAnimationFrame(this._distRafId);
         const valEl = document.getElementById('jmap-dist-val');
         if (!valEl) return;
 
-        const duration = 2000 / this._speedMultiplier;
         const start = performance.now();
 
         const tick = (now) => {
@@ -1060,8 +1080,27 @@ class JourneyMap {
 
         const exploreBtn = document.getElementById('jmap-explore-btn');
         if (exploreBtn) exploreBtn.addEventListener('click', () => {
-            this._freeExploreActive ? this._exitFreeExplore() : this._enterFreeExplore();
+            this._freeExploreActive ? this._returnToStory() : this._enterFreeExplore();
         });
+
+        const exitBtn = document.getElementById('jmap-exit-btn');
+        if (exitBtn) exitBtn.addEventListener('click', () => this._exitToStartGate());
+
+        const zoomInBtn = document.getElementById('jmap-zoomin-btn');
+        if (zoomInBtn) zoomInBtn.addEventListener('click', () => {
+            this.map.zoomTo(this.map.getZoom() + 1, { duration: 300 });
+        });
+
+        const zoomOutBtn = document.getElementById('jmap-zoomout-btn');
+        if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => {
+            this.map.zoomTo(this.map.getZoom() - 1, { duration: 300 });
+        });
+
+        // Re-group personal/wishlist pins into "stack" markers whenever the
+        // camera settles, so overlapping pins never sit un-clickable underneath
+        // each other in free explore mode.
+        this.map.on('zoomend', () => this._recomputeClusters());
+        this.map.on('moveend', () => this._recomputeClusters());
 
         const panelClose = document.getElementById('jmap-panel-close');
         if (panelClose) panelClose.addEventListener('click', () => this._hideExpandedPanel());
@@ -1094,7 +1133,6 @@ class JourneyMap {
     // ── Onboarding hint ───────────────────────────────────────────────────────
 
     _showHint() {
-        if (localStorage.getItem('jmapHintDismissed')) return;
         const el = document.getElementById('jmap-hint');
         if (!el) return;
         el.setAttribute('aria-hidden', 'false');
@@ -1106,7 +1144,6 @@ class JourneyMap {
         if (!el) return;
         el.classList.remove('visible');
         el.setAttribute('aria-hidden', 'true');
-        localStorage.setItem('jmapHintDismissed', '1');
     }
 
     // ── Free explore mode ─────────────────────────────────────────────────────
@@ -1120,7 +1157,7 @@ class JourneyMap {
 
         // Remove any brightness filters left over from the finale
         const mapEl = document.getElementById('journey-map');
-        if (mapEl) { mapEl.classList.remove('jmap-dim', 'jmap-brighten'); }
+        if (mapEl) { mapEl.classList.remove('jmap-dim', 'jmap-brighten'); mapEl.classList.add('jmap-explore-active'); }
 
         // Show extra pins
         this._personalMarkers.forEach(m => m.getElement().classList.remove('jmap-pin-hidden'));
@@ -1128,12 +1165,14 @@ class JourneyMap {
 
         // Fly to a global overview that shows both hemispheres (India on right, Americas on left)
         this.map.flyTo({ center: [-20, 25], zoom: 1.3, pitch: 0, bearing: 0, duration: 1800, essential: true });
+        this._recomputeClusters();
 
-        // Update controls UI
+        // Update controls UI — this button now toggles Explore <-> Story;
+        // the separate Exit button (always visible) handles the full reset.
         const controls = document.getElementById('jmap-controls');
         if (controls) controls.classList.add('explore-active');
         const btn = document.getElementById('jmap-explore-btn');
-        if (btn) { this._setCtrlBtn(btn, '✕', 'Exit'); btn.classList.add('active'); btn.setAttribute('aria-label','Exit free explore mode'); }
+        if (btn) { this._setCtrlBtn(btn, '🎬', 'Story'); btn.classList.add('active'); btn.setAttribute('aria-label','Return to guided story'); }
 
         // Hide info card and expanded panel during explore
         const card = document.querySelector('.jmap-info-card');
@@ -1148,7 +1187,10 @@ class JourneyMap {
         }
     }
 
-    _exitFreeExplore() {
+    // Explore <-> Story toggle: leaves free-explore and resumes the guided tour
+    // at the current stop. Lightweight — unlike the Exit button, this does NOT
+    // reset the journey back to the start gate.
+    _returnToStory() {
         this._freeExploreActive = false;
         this.map.dragPan.disable();
         this.map.scrollZoom.disable();
@@ -1158,12 +1200,16 @@ class JourneyMap {
         // Hide extra pins
         this._personalMarkers.forEach(m => m.getElement().classList.add('jmap-pin-hidden'));
         this._wishlistMarkers.forEach(m => m.getElement().classList.add('jmap-pin-hidden'));
+        this._clearClusterMarkers();
 
         // Reset controls UI
         const controls = document.getElementById('jmap-controls');
         if (controls) controls.classList.remove('explore-active');
         const btn = document.getElementById('jmap-explore-btn');
         if (btn) { this._setCtrlBtn(btn, '🗺', 'Explore'); btn.classList.remove('active'); btn.setAttribute('aria-label','Enter free explore mode'); }
+
+        const mapEl = document.getElementById('journey-map');
+        if (mapEl) mapEl.classList.remove('jmap-explore-active');
 
         // Hide explore hint
         const hint = document.getElementById('jmap-explore-hint');
@@ -1175,7 +1221,172 @@ class JourneyMap {
         }
     }
 
+    // Exit button: always available, separate from the Explore/Story toggle.
+    // Leaves free-explore (if active) AND resets the whole tour back to the
+    // pre-start gate ("The Arc"), rather than resuming mid-journey.
+    _exitToStartGate() {
+        this._freeExploreActive = false;
+        this.map.dragPan.disable();
+        this.map.scrollZoom.disable();
+        this.map.dragRotate.disable();
+        this.map.touchZoomRotate.disable();
+
+        // Hide extra pins
+        this._personalMarkers.forEach(m => m.getElement().classList.add('jmap-pin-hidden'));
+        this._wishlistMarkers.forEach(m => m.getElement().classList.add('jmap-pin-hidden'));
+        this._clearClusterMarkers();
+
+        // Reset controls UI
+        const controls = document.getElementById('jmap-controls');
+        if (controls) controls.classList.remove('explore-active');
+        const btn = document.getElementById('jmap-explore-btn');
+        if (btn) { this._setCtrlBtn(btn, '🗺', 'Explore'); btn.classList.remove('active'); btn.setAttribute('aria-label','Enter free explore mode'); }
+
+        const mapEl = document.getElementById('journey-map');
+        if (mapEl) mapEl.classList.remove('jmap-explore-active');
+
+        // Hide explore hint, info card, expanded panel, finale overlay
+        const hint = document.getElementById('jmap-explore-hint');
+        if (hint) { hint.classList.remove('visible'); hint.setAttribute('aria-hidden', 'true'); }
+        this._hideInfoCard();
+        this._hideExpandedPanel();
+        const overlay = document.getElementById('jmap-finale-overlay');
+        if (overlay) { overlay.classList.remove('visible'); overlay.setAttribute('aria-hidden', 'true'); }
+        this._hideHint();
+
+        // Stop ambient audio and reset to off-by-default
+        if (this._audioEl) { this._audioEl.pause(); this._audioEl.currentTime = 0; }
+        this._muted = true;
+        this._syncMuteUI();
+
+        // Cancel in-flight animations
+        if (this._planeMarker) { this._planeMarker.remove(); this._planeMarker = null; }
+        if (this._planeRafId) cancelAnimationFrame(this._planeRafId);
+        if (this._revealRafId) cancelAnimationFrame(this._revealRafId);
+        if (this._distRafId) cancelAnimationFrame(this._distRafId);
+
+        // Remove path layers and stop pins
+        this._pathLayers.forEach(({ id, sourceId }) => {
+            try { this.map.removeLayer(id); } catch (e) {}
+            if (sourceId) { try { this.map.removeSource(sourceId); } catch (e) {} }
+        });
+        this._pathLayers = [];
+        this._pinMarkers.forEach(m => m.remove());
+        this._pinMarkers = [];
+
+        // Reset tour state
+        this.currentIndex = 0;
+        this._isAnimating = false;
+        this._paused = false;
+        this._pendingResume = null;
+        this._totalDistanceSoFar = 0;
+        this._journeyStarted = false;
+
+        const distVal = document.getElementById('jmap-dist-val');
+        if (distVal) distVal.textContent = '0';
+
+        const pauseBtn = document.getElementById('jmap-pause-btn');
+        if (pauseBtn) { pauseBtn.disabled = false; this._setCtrlBtn(pauseBtn, '⏸', 'Pause'); pauseBtn.classList.remove('active'); }
+
+        this._setControlsVisible(false);
+
+        // Fly back to the initial global overview
+        this.map.flyTo({ center: [20, 15], zoom: 1.8, pitch: 0, bearing: 0, duration: 1800, essential: true });
+
+        // Bring back the start gate ("The Arc")
+        const gate = document.getElementById('jmap-start-gate');
+        if (gate) {
+            gate.style.pointerEvents = '';
+            gate.classList.add('visible');
+        }
+    }
+
     // ── Personal & wishlist pin builders ─────────────────────────────────────
+
+    _clearClusterMarkers() {
+        this._clusterMarkers.forEach(m => m.remove());
+        this._clusterMarkers = [];
+    }
+
+    // Groups personal/wishlist pins that land within a few screen-pixels of each
+    // other (globe zoomed out) behind a single "stack" pin, so overlapping pins
+    // are never invisibly stuck on top of one another. Re-run on every zoomend/
+    // moveend while free explore is active.
+    _recomputeClusters() {
+        this._clearClusterMarkers();
+        if (!this._freeExploreActive) return;
+
+        const items = [
+            ...this.personalPins.map((pin, i) => ({ pin, marker: this._personalMarkers[i] })),
+            ...this.wishlistPins.map((pin, i) => ({ pin, marker: this._wishlistMarkers[i] })),
+        ];
+
+        const threshold = 30; // px
+        const points = items.map(item => {
+            const p = this.map.project(item.pin.coordinates);
+            return { ...item, x: p.x, y: p.y };
+        });
+
+        const used = new Array(points.length).fill(false);
+        const groups = [];
+        for (let i = 0; i < points.length; i++) {
+            if (used[i]) continue;
+            const group = [i];
+            used[i] = true;
+            for (let j = i + 1; j < points.length; j++) {
+                if (used[j]) continue;
+                if (Math.hypot(points[i].x - points[j].x, points[i].y - points[j].y) < threshold) {
+                    group.push(j);
+                    used[j] = true;
+                }
+            }
+            groups.push(group);
+        }
+
+        groups.forEach(group => {
+            if (group.length === 1) {
+                points[group[0]].marker.getElement().classList.remove('jmap-pin-hidden');
+                return;
+            }
+
+            // Cluster: hide the individual pins, show one stack marker instead
+            group.forEach(idx => points[idx].marker.getElement().classList.add('jmap-pin-hidden'));
+
+            const center = [
+                group.reduce((sum, idx) => sum + points[idx].pin.coordinates[0], 0) / group.length,
+                group.reduce((sum, idx) => sum + points[idx].pin.coordinates[1], 0) / group.length,
+            ];
+
+            const el = document.createElement('div');
+            el.className = 'jmap-pin jmap-pin-stack';
+
+            const inner = document.createElement('div');
+            inner.className = 'jmap-pin-inner';
+            const count = document.createElement('span');
+            count.textContent = String(group.length);
+            inner.appendChild(count);
+            el.appendChild(inner);
+
+            const tooltip = document.createElement('div');
+            tooltip.className = 'jmap-wishlist-tooltip jmap-stack-tooltip';
+            tooltip.innerHTML = `<span class="jmap-wishlist-label">${group.length} places here</span><span class="jmap-wishlist-note">Click to expand</span>`;
+            el.appendChild(tooltip);
+
+            el.addEventListener('mouseenter', () => tooltip.classList.add('visible'));
+            el.addEventListener('mouseleave', () => tooltip.classList.remove('visible'));
+            el.addEventListener('click', () => {
+                tooltip.classList.remove('visible');
+                const nextZoom = Math.min(this.map.getZoom() + 4, 14);
+                this.map.flyTo({ center, zoom: nextZoom, duration: 900, essential: true });
+            });
+
+            const marker = new mapboxgl.Marker({ element: el, anchor: 'bottom' })
+                .setLngLat(center)
+                .addTo(this.map);
+
+            this._clusterMarkers.push(marker);
+        });
+    }
 
     _buildPersonalPins() {
         this.personalPins.forEach(pin => {
@@ -1224,7 +1435,7 @@ class JourneyMap {
 
             el.addEventListener('mouseenter', () => tooltip.classList.add('visible'));
             el.addEventListener('mouseleave', () => tooltip.classList.remove('visible'));
-            el.addEventListener('click',      () => tooltip.classList.toggle('visible'));
+            el.addEventListener('click', () => tooltip.classList.toggle('visible'));
 
             const marker = new mapboxgl.Marker({ element: el, anchor: 'bottom' })
                 .setLngLat(pin.coordinates)
@@ -1288,32 +1499,46 @@ class JourneyMap {
         const paragraphs = (stop.story || '').split(/\n\s*\n/).map(s => s.trim()).filter(Boolean);
         const photos = stop.photos || [];
         const hasPhotos = photos.length > 0;
+        const isMemory = stop.type === 'personal';
 
         if (storyEl) {
             storyEl.innerHTML = '';
-            const inlineCount = Math.min(photos.length, paragraphs.length, 2);
+            storyEl.classList.toggle('jmap-panel-story--memory', isMemory);
 
-            paragraphs.forEach((text, i) => {
-                const p = document.createElement('p');
-                p.textContent = text;
-
-                if (i < inlineCount) {
-                    const row = document.createElement('div');
-                    row.className = 'jmap-story-row' + (i % 2 === 1 ? ' jmap-story-row--reverse' : '');
-                    row.appendChild(this._buildPhotoFigure(photos[i]));
-                    row.appendChild(p);
-                    storyEl.appendChild(row);
-                } else {
+            if (isMemory) {
+                // Memories: story text reads first, bigger photos follow below —
+                // the "Full story" experience layout (photo/text rows) stays untouched.
+                paragraphs.forEach(text => {
+                    const p = document.createElement('p');
+                    p.textContent = text;
                     storyEl.appendChild(p);
-                }
-            });
+                });
+                photos.forEach(photo => storyEl.appendChild(this._buildPhotoFigure(photo)));
+            } else {
+                const inlineCount = Math.min(photos.length, paragraphs.length, 2);
 
-            const overflowPhotos = photos.slice(inlineCount);
-            if (overflowPhotos.length) {
-                const grid = document.createElement('div');
-                grid.className = 'jmap-panel-photo-grid';
-                overflowPhotos.forEach(p => grid.appendChild(this._buildPhotoFigure(p)));
-                storyEl.appendChild(grid);
+                paragraphs.forEach((text, i) => {
+                    const p = document.createElement('p');
+                    p.textContent = text;
+
+                    if (i < inlineCount) {
+                        const row = document.createElement('div');
+                        row.className = 'jmap-story-row' + (i % 2 === 1 ? ' jmap-story-row--reverse' : '');
+                        row.appendChild(this._buildPhotoFigure(photos[i]));
+                        row.appendChild(p);
+                        storyEl.appendChild(row);
+                    } else {
+                        storyEl.appendChild(p);
+                    }
+                });
+
+                const overflowPhotos = photos.slice(inlineCount);
+                if (overflowPhotos.length) {
+                    const grid = document.createElement('div');
+                    grid.className = 'jmap-panel-photo-grid';
+                    overflowPhotos.forEach(p => grid.appendChild(this._buildPhotoFigure(p)));
+                    storyEl.appendChild(grid);
+                }
             }
         }
 
@@ -1324,6 +1549,7 @@ class JourneyMap {
         panel.setAttribute('aria-hidden', 'false');
         panel.classList.add('visible');
         this._setMapOverlaysInert(true);
+        document.body.classList.add('no-scroll');
     }
 
     _hideExpandedPanel() {
@@ -1332,6 +1558,7 @@ class JourneyMap {
         panel.classList.remove('visible');
         panel.setAttribute('aria-hidden', 'true');
         this._setMapOverlaysInert(false);
+        document.body.classList.remove('no-scroll');
     }
 
     // While the story takeover is open, keep focus from leaking into the map's other overlays

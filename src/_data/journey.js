@@ -199,18 +199,6 @@ module.exports = [
     ],
   },
   {
-    id: 'netherlands',
-    label: 'The Netherlands',
-    type: 'personal',
-    coordinates: [4.9003, 52.3676],
-    location: 'Amsterdam, The Netherlands',
-    emoji: '🌷',
-    story: 'Haven\'t been here yet — but the connection runs deep. More world-class EDM artists come from the Netherlands than anywhere else on earth: Hardwell, Martin Garrix, Armin van Buuren, Tiësto, Afrojack.\n\nThe country that gave the world the best music also gave it the best driver. Max Verstappen is Dutch. Enough said. This is also very much on the list.',
-    photos: [
-      { src: '/assets/images/journey/personal/amsterdam.jpg', caption: 'Amsterdam — EDM capital of the world and home of the GOAT.' },
-    ],
-  },
-  {
     id: 'northern-lights',
     label: 'Northern Lights',
     type: 'personal',
@@ -261,6 +249,14 @@ module.exports = [
 
 
   // ── Wishlist pins (visible in free explore mode) ──────────────────────────
+  {
+    id: 'netherlands',
+    label: 'The Netherlands',
+    type: 'wishlist',
+    coordinates: [4.9003, 52.3676],
+    location: 'Amsterdam, The Netherlands',
+    note: 'More world-class EDM artists come from here than anywhere else on earth — Hardwell, Martin Garrix, Tiësto, Afrojack. Also the home country of Max Verstappen. Enough said.',
+  },
   {
     id: 'banff',
     label: 'Banff National Park',
