@@ -10,15 +10,19 @@ pageTitle: "Tanay Mehendale - Portfolio"
             <h1 class="lead-name">Tanay<br>Mehendale</h1>
             <p class="lead-eyebrow">AI Engineer - Agentic AI</p>
             <div class="lead-meta">
-                <span class="lead-fact">HCLTech</span>
-                <span class="lead-sep">·</span>
-                <span class="lead-fact">MS-MIS @ Texas A&amp;M</span>
-                <span class="lead-sep">·</span>
+                <span class="lead-fact-pair">
+                    <span class="lead-fact">HCLTech</span>
+                    <span class="lead-sep">·</span>
+                </span>
+                <span class="lead-fact-pair">
+                    <span class="lead-fact">MS-MIS @ Texas A&amp;M</span>
+                    <span class="lead-sep">·</span>
+                </span>
                 <span class="lead-fact">DJ &amp; Producer</span>
             </div>
             <div class="lead-cta-row">
                 <a href="/assets/docs/Tanay Mehendale_Resume_AI.pdf" class="lead-resume-link" target="_blank" rel="noreferrer noopener">
-                    View Resume <span class="lead-arrow">↗</span>
+                    View Resume <span class="lead-arrow"><svg class="arrow-icon" width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M1.5 9.5l8-8M9.5 9.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 </a>
                 <a href="https://github.com/tanaymehendale" target="_blank" rel="noreferrer noopener" class="lead-social-pin" aria-label="GitHub profile">
                     <i class="fa fa-github" aria-hidden="true"></i>
@@ -87,7 +91,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
                     <div class="jmap-skill-chips" data-reveal></div>
                     <blockquote class="jmap-quote" data-reveal></blockquote>
                 </div>
-                <button class="jmap-story-btn" aria-label="Open full story and photos" style="display:none">Full story ↗</button>
+                <button class="jmap-story-btn" aria-label="Open full story and photos" style="display:none">Full story <svg class="arrow-icon" width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M1.5 9.5l8-8M9.5 9.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             </div>
 
             <!-- Cinematic controls (pause, speed, mute, explore) -->
@@ -205,6 +209,11 @@ pageTitle: "Tanay Mehendale - Portfolio"
                         <button class="strip-year" data-target="chapter-2021">2021</button>
                         <button class="strip-year" data-target="chapter-2017">2017</button>
                     </nav>
+                    <div class="strip-scroll-dots" aria-hidden="true">
+                        <span class="strip-dot"></span>
+                        <span class="strip-dot"></span>
+                        <span class="strip-dot"></span>
+                    </div>
                 </div>
 
                 <!-- Spine + chapters -->
@@ -215,7 +224,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
                     <div class="journey-chapter" id="chapter-2026">
                         <div class="chapter-node" aria-hidden="true"></div>
                         <div class="chapter-content">
-                            <div class="chapter-header">
+                            <div class="chapter-header" role="button" tabindex="0" aria-expanded="false" aria-controls="chapter-2026-drawer">
                                 <img src="/assets/images/HCLT-logo.png" alt="HCLTech" class="chapter-logo">
                                 <div class="chapter-id">
                                     <h3 class="chapter-org">HCLTech</h3>
@@ -223,13 +232,16 @@ pageTitle: "Tanay Mehendale - Portfolio"
                                 </div>
                                 <time class="chapter-date">Feb 2026 – Present</time>
                                 <span class="chapter-type chapter-type--work">Work</span>
+                                <span class="chapter-chevron" aria-hidden="true">&#9662;</span>
                             </div>
-                            <p class="chapter-skills">Microsoft Agent Framework · AI Agents · LLMs</p>
-                            <ul class="chapter-bullets">
-                                <li>Supporting a strategic enterprise tech account as an AI Engineer at HCLTech</li>
-                                <li>Contribute to AI‑led proposal development, solution narratives, and executive‑ready responses aligned with enterprise cloud, data, and responsible AI principles</li>
-                                <li>Collaborate across technical, commercial, and stakeholder teams to deliver compliant, high‑quality submissions for complex, large‑scale engagements</li>
-                            </ul>
+                            <div class="chapter-drawer" id="chapter-2026-drawer">
+                                <p class="chapter-skills">Microsoft Agent Framework · AI Agents · LLMs</p>
+                                <ul class="chapter-bullets">
+                                    <li>Supporting a strategic enterprise tech account as an AI Engineer at HCLTech</li>
+                                    <li>Contribute to AI‑led proposal development, solution narratives, and executive‑ready responses aligned with enterprise cloud, data, and responsible AI principles</li>
+                                    <li>Collaborate across technical, commercial, and stakeholder teams to deliver compliant, high‑quality submissions for complex, large‑scale engagements</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -237,7 +249,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
                     <div class="journey-chapter" id="chapter-2025">
                         <div class="chapter-node" aria-hidden="true"></div>
                         <div class="chapter-content">
-                            <div class="chapter-header">
+                            <div class="chapter-header" role="button" tabindex="0" aria-expanded="false" aria-controls="chapter-2025-drawer">
                                 <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="chapter-logo">
                                 <div class="chapter-id">
                                     <h3 class="chapter-org">Texas A&amp;M University</h3>
@@ -245,14 +257,17 @@ pageTitle: "Tanay Mehendale - Portfolio"
                                 </div>
                                 <time class="chapter-date">Aug 2025 – Feb 2026</time>
                                 <span class="chapter-type chapter-type--work">Work</span>
+                                <span class="chapter-chevron" aria-hidden="true">&#9662;</span>
                             </div>
-                            <p class="chapter-skills">Python · ETL · AWS · Data Pipelines · Pandas · Medallion Architecture</p>
-                            <ul class="chapter-bullets">
-                                <li>Architected a Python based ETL pipeline to consolidate 3 data sources into a multi-layer data lake on Amazon S3, reducing data preparation time by 40% and aiding time series analysis</li>
-                                <li>Developed scalable logic to ingest 2M+ unstructured raw text via Reddit API, implementing regex-based alias matching across 25+ subreddits to expand data coverage by 300%</li>
-                                <li>Optimized performance by resolving API failures, resulting in 100% data capture reliability and a 34% increase in speed</li>
-                                <li>Integrated LLM based sentiment analysis to derive 12 distinct themes, creating high-value categorical features to improve segmentation and trend modeling</li>
-                            </ul>
+                            <div class="chapter-drawer" id="chapter-2025-drawer">
+                                <p class="chapter-skills">Python · ETL · AWS · Data Pipelines · Pandas · Medallion Architecture</p>
+                                <ul class="chapter-bullets">
+                                    <li>Architected a Python based ETL pipeline to consolidate 3 data sources into a multi-layer data lake on Amazon S3, reducing data preparation time by 40% and aiding time series analysis</li>
+                                    <li>Developed scalable logic to ingest 2M+ unstructured raw text via Reddit API, implementing regex-based alias matching across 25+ subreddits to expand data coverage by 300%</li>
+                                    <li>Optimized performance by resolving API failures, resulting in 100% data capture reliability and a 34% increase in speed</li>
+                                    <li>Integrated LLM based sentiment analysis to derive 12 distinct themes, creating high-value categorical features to improve segmentation and trend modeling</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -260,7 +275,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
                     <div class="journey-chapter" id="chapter-2024">
                         <div class="chapter-node" aria-hidden="true"></div>
                         <div class="chapter-content">
-                            <div class="chapter-header">
+                            <div class="chapter-header" role="button" tabindex="0" aria-expanded="false" aria-controls="chapter-2024-drawer">
                                 <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="chapter-logo">
                                 <div class="chapter-id">
                                     <h3 class="chapter-org">Texas A&amp;M University</h3>
@@ -268,14 +283,17 @@ pageTitle: "Tanay Mehendale - Portfolio"
                                 </div>
                                 <time class="chapter-date">Apr 2024 – May 2025</time>
                                 <span class="chapter-type chapter-type--work">Work</span>
+                                <span class="chapter-chevron" aria-hidden="true">&#9662;</span>
                             </div>
-                            <p class="chapter-skills">HCI · Systems Analysis &amp; Design · ERP · SAP</p>
-                            <ul class="chapter-bullets">
-                                <li><strong>ISTM 380 Human-Computer Interaction:</strong> User Experience, UI/UX, Design principles, Accessibility, Usability, Attention, Memory</li>
-                                <li><strong>ISTM 320 Systems Analysis &amp; Design:</strong> Requirements Gathering, Data Modeling (ERDs, Data Flow Diagrams, UML)</li>
-                                <li><strong>SCMT 468 Enterprise Resource Planning:</strong> SAP, Sales &amp; Distribution, Materials Management, Warehouse Management, Inventory Management</li>
-                                <li>Mentored 245+ students across 4 courses through labs and office hours, clarifying requirements, debugging, and coaching presentations</li>
-                            </ul>
+                            <div class="chapter-drawer" id="chapter-2024-drawer">
+                                <p class="chapter-skills">HCI · Systems Analysis &amp; Design · ERP · SAP</p>
+                                <ul class="chapter-bullets">
+                                    <li><strong>ISTM 380 Human-Computer Interaction:</strong> User Experience, UI/UX, Design principles, Accessibility, Usability, Attention, Memory</li>
+                                    <li><strong>ISTM 320 Systems Analysis &amp; Design:</strong> Requirements Gathering, Data Modeling (ERDs, Data Flow Diagrams, UML)</li>
+                                    <li><strong>SCMT 468 Enterprise Resource Planning:</strong> SAP, Sales &amp; Distribution, Materials Management, Warehouse Management, Inventory Management</li>
+                                    <li>Mentored 245+ students across 4 courses through labs and office hours, clarifying requirements, debugging, and coaching presentations</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -283,7 +301,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
                     <div class="journey-chapter" id="chapter-2023">
                         <div class="chapter-node" aria-hidden="true"></div>
                         <div class="chapter-content">
-                            <div class="chapter-header">
+                            <div class="chapter-header" role="button" tabindex="0" aria-expanded="false" aria-controls="chapter-2023-drawer">
                                 <img src="/assets/images/tamu-logo.png" alt="Texas A&M University" class="chapter-logo">
                                 <div class="chapter-id">
                                     <h3 class="chapter-org">Mays Business School, Texas A&amp;M University</h3>
@@ -291,15 +309,18 @@ pageTitle: "Tanay Mehendale - Portfolio"
                                 </div>
                                 <time class="chapter-date">Aug 2023 – May 2025</time>
                                 <span class="chapter-type chapter-type--edu">MS</span>
+                                <span class="chapter-chevron" aria-hidden="true">&#9662;</span>
                             </div>
-                            <p class="chapter-skills">GPA: 3.83 · Head of Marketing &amp; Comms, BITS</p>
-                            <ul class="chapter-bullets">
-                                <li>ISTM 622 – Advanced Data Management</li>
-                                <li>ISTM 637 – Data Warehousing</li>
-                                <li>ECEN 758 – Data Mining</li>
-                                <li>CSCE 679 – Data Visualization</li>
-                                <li>STAT 650 – Statistics &amp; Foundations of Big Data</li>
-                            </ul>
+                            <div class="chapter-drawer" id="chapter-2023-drawer">
+                                <p class="chapter-skills">GPA: 3.83 · Head of Marketing &amp; Comms, BITS</p>
+                                <ul class="chapter-bullets">
+                                    <li>ISTM 622 – Advanced Data Management</li>
+                                    <li>ISTM 637 – Data Warehousing</li>
+                                    <li>ECEN 758 – Data Mining</li>
+                                    <li>CSCE 679 – Data Visualization</li>
+                                    <li>STAT 650 – Statistics &amp; Foundations of Big Data</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -307,7 +328,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
                     <div class="journey-chapter" id="chapter-2021">
                         <div class="chapter-node" aria-hidden="true"></div>
                         <div class="chapter-content">
-                            <div class="chapter-header">
+                            <div class="chapter-header" role="button" tabindex="0" aria-expanded="false" aria-controls="chapter-2021-drawer">
                                 <img src="/assets/images/ltimindtree-logo-blue.png" alt="LTIMindtree" class="chapter-logo">
                                 <div class="chapter-id">
                                     <h3 class="chapter-org">LTIMindtree</h3>
@@ -315,14 +336,17 @@ pageTitle: "Tanay Mehendale - Portfolio"
                                 </div>
                                 <time class="chapter-date">Jan 2021 – Jun 2023</time>
                                 <span class="chapter-type chapter-type--work">Work</span>
+                                <span class="chapter-chevron" aria-hidden="true">&#9662;</span>
                             </div>
-                            <p class="chapter-skills">SQL · Python · ETL · AWS · S3 · Glue · ABAP · Data Modeling</p>
-                            <ul class="chapter-bullets">
-                                <li>Developed 45+ custom ERP transactions using ABAP with SQL, improving data retrieval speed by 95% for 400+ users</li>
-                                <li>Supported SAP to AWS ETL migration by extracting ERP data, validating S3 and Glue outputs, improving Redshift load consistency across weekly cycles</li>
-                                <li>Diagnosed and resolved 30+ technical support issues via root cause analysis, cutting average resolution time by 35%</li>
-                                <li>Collaborated with global teams to optimize SDLC audits and change management practices, reducing SOX compliance issues by 84% across 52+ releases</li>
-                            </ul>
+                            <div class="chapter-drawer" id="chapter-2021-drawer">
+                                <p class="chapter-skills">SQL · Python · ETL · AWS · S3 · Glue · ABAP · Data Modeling</p>
+                                <ul class="chapter-bullets">
+                                    <li>Developed 45+ custom ERP transactions using ABAP with SQL, improving data retrieval speed by 95% for 400+ users</li>
+                                    <li>Supported SAP to AWS ETL migration by extracting ERP data, validating S3 and Glue outputs, improving Redshift load consistency across weekly cycles</li>
+                                    <li>Diagnosed and resolved 30+ technical support issues via root cause analysis, cutting average resolution time by 35%</li>
+                                    <li>Collaborated with global teams to optimize SDLC audits and change management practices, reducing SOX compliance issues by 84% across 52+ releases</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -330,7 +354,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
                     <div class="journey-chapter" id="chapter-2017">
                         <div class="chapter-node" aria-hidden="true"></div>
                         <div class="chapter-content">
-                            <div class="chapter-header">
+                            <div class="chapter-header" role="button" tabindex="0" aria-expanded="false" aria-controls="chapter-2017-drawer">
                                 <img src="/assets/images/spit-logo.png" alt="S.P.I.T." class="chapter-logo">
                                 <div class="chapter-id">
                                     <h3 class="chapter-org">Sardar Patel Institute of Technology, University of Mumbai</h3>
@@ -338,11 +362,14 @@ pageTitle: "Tanay Mehendale - Portfolio"
                                 </div>
                                 <time class="chapter-date">Aug 2017 – May 2021</time>
                                 <span class="chapter-type chapter-type--edu">B.Tech</span>
+                                <span class="chapter-chevron" aria-hidden="true">&#9662;</span>
                             </div>
-                            <ul class="chapter-bullets">
-                                <li>Semi Finalist (Top 20 of 800+ teams) at IICDC-2019, national innovation hackathon by Texas Instruments &amp; Dept. of Science &amp; Technology, Govt. of India — affordable non-invasive flow meter</li>
-                                <li>Winner — Case Study Presentation by Fire &amp; Security Association of India (FSAI)</li>
-                            </ul>
+                            <div class="chapter-drawer" id="chapter-2017-drawer">
+                                <ul class="chapter-bullets">
+                                    <li>Semi Finalist (Top 20 of 800+ teams) at IICDC-2019, national innovation hackathon by Texas Instruments &amp; Dept. of Science &amp; Technology, Govt. of India — affordable non-invasive flow meter</li>
+                                    <li>Winner — Case Study Presentation by Fire &amp; Security Association of India (FSAI)</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -372,7 +399,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
                 <a href="/projects/{{ hero.slug }}/" class="proj-card proj-hero">
                     <div class="proj-card-top">
                         <span class="proj-category-label">{{ hero.category | categoryLabel }}</span>
-                        <span class="proj-arrow">↗</span>
+                        <span class="proj-arrow"><svg class="arrow-icon" width="12" height="12" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M1.5 9.5l8-8M9.5 9.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                     </div>
                     {% if hero.image %}
                     <div class="proj-hero-image">
@@ -407,7 +434,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
                                 {% endfor %}
                             </div>
                         </div>
-                        <span class="proj-arrow">↗</span>
+                        <span class="proj-arrow"><svg class="arrow-icon" width="12" height="12" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M1.5 9.5l8-8M9.5 9.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                     </a>
                     {% endif %}
                     {% endfor %}
@@ -416,7 +443,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
             </div>
 
             <div class="proj-view-all">
-                <a href="/projects/" class="proj-view-all-link">View All {{ projects | length }} projects <span class="proj-arrow-inline">↗</span></a>
+                <a href="/projects/" class="proj-view-all-link">View All {{ projects | length }} projects <span class="proj-arrow-inline"><svg class="arrow-icon" width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M1.5 9.5l8-8M9.5 9.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
             </div>
 
         </div>
@@ -540,7 +567,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
                 <a href="https://www.credly.com/badges/eb145d22-9fdf-4353-b9d6-662635a713c4/" target="_blank" rel="noreferrer noopener" class="cert-card">
                     <div class="cert-card-top">
                         <img src="/assets/images/aws-logo.svg" alt="Amazon Web Services" class="cert-logo cert-logo--aws">
-                        <span class="cert-card-arrow">↗</span>
+                        <span class="cert-card-arrow"><svg class="arrow-icon" width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M1.5 9.5l8-8M9.5 9.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                     </div>
                     <p class="cert-card-name">AWS Solutions Architect</p>
                     <p class="cert-card-level">Associate · SAA-C03 · Expires Oct 2028</p>
@@ -549,7 +576,7 @@ pageTitle: "Tanay Mehendale - Portfolio"
                 <a href="https://www.datacamp.com/certificate/DEA0011529585080" target="_blank" rel="noreferrer noopener" class="cert-card">
                     <div class="cert-card-top">
                         <img src="/assets/images/datacamp-logo.svg" alt="DataCamp" class="cert-logo cert-logo--datacamp">
-                        <span class="cert-card-arrow">↗</span>
+                        <span class="cert-card-arrow"><svg class="arrow-icon" width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><path d="M1.5 9.5l8-8M9.5 9.5V1.5H1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                     </div>
                     <p class="cert-card-name">Associate Data Engineer</p>
                     <p class="cert-card-level">Professional Certification · Expires Jun 2027</p>

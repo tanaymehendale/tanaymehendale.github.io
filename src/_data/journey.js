@@ -192,10 +192,10 @@ module.exports = [
     coordinates: [-122.4784, 37.8197],
     location: 'Golden Gate Bridge, San Francisco, CA',
     emoji: '🌉',
-    story: 'San Francisco was a day trip from San Jose. The fog, the bridge, the cold in June that nobody warns you about, the hills that make you question every transport decision you\'ve made.\n\nSometimes the best things aren\'t on the itinerary. This was one of those days.',
+    story: 'San Francisco was a day trip from San Jose, no real plan beyond seeing the city. The Golden Gate Bridge, Lombard Street\'s crooked switchbacks, the hills, the fog rolling in cold in June when nobody warns you.\n\nI kept catching myself doing a double take — I\'d driven these streets a hundred times before, as a kid, in GTA San Andreas. Standing there in real life, comparing the two, was its own kind of surreal.',
     photos: [
-      { src: '/assets/images/journey/personal/golden-gate.jpg', caption: 'Golden Gate at dusk. SF taught me that the best things are rarely on the plan.' },
-      { src: '/assets/images/journey/personal/sf-skyline.jpg', caption: 'The San Francisco skyline — the view that made the detour worth it.' },
+      { src: '/assets/images/journey/personal/golden-gate.jpg', caption: 'Golden Gate at dusk — the landmark I\'d only ever seen rendered in a PS2 draw distance.' },
+      { src: '/assets/images/journey/personal/sf-skyline.jpg', caption: 'The San Francisco skyline, in person this time instead of loading in behind a GTA San Andreas cutscene.' },
     ],
   },
   {

@@ -5,6 +5,13 @@
     box-sizing: border-box;
 }
 
+/* Shared inline arrow icon — replaces bare "↗" Unicode characters, which
+   some platforms render as a colorful emoji glyph instead of plain text. */
+.arrow-icon {
+    flex-shrink: 0;
+    vertical-align: -1px;
+}
+
 :root {
     /* Light theme colors inspired by mosaic.so */
     --bg-color: #ffffff;
@@ -254,6 +261,28 @@ button,
     transform: translateY(-2px);
 }
 
+.lead-fact-pair {
+    display: inline-flex;
+    white-space: nowrap;
+    gap: 10px;
+}
+
+/* Mobile: shorter hero + re-centered photo crop.
+   The source photo is a wide landscape shot with the subject in the right
+   third of frame — at full 100vh height on a narrow viewport, object-fit:cover
+   has to zoom in so far that only empty background survives. A shorter
+   container is closer to the photo's own aspect ratio, so cover magnifies
+   less and the subject stays in frame alongside the landscape. */
+@media (max-width: 768px) {
+    #lead {
+        min-height: 90vh;
+    }
+
+    #lead-bg-img {
+        object-position: 82% 25%;
+    }
+}
+
 
 /* ═══════════════════════════════════════
    HEADER / NAVIGATION
@@ -294,6 +323,17 @@ header::before {
     transition: opacity 0.38s ease;
 }
 
+/* Mobile/tablet strip is taller than the desktop pill's --nav-height default.
+   Redefining the token itself (rather than just the header's own height)
+   means every dependent offset — scroll-padding-top, the journey year-strip's
+   sticky top, project-page top padding — grows in step automatically instead
+   of drifting out of sync with the taller bar. */
+@media (max-width: 1024px) {
+    :root {
+        --nav-height: 64px;
+    }
+}
+
 /* ── Mobile: transparent strip → liquid glass on scroll ── */
 @media (max-width: 1024px) {
     header {
@@ -314,32 +354,58 @@ header::before {
         background: transparent;
     }
 
+    /* The glass itself now lives entirely on ::after (below), sized taller
+       than the bar and mask-faded, so header stays a transparent shell —
+       otherwise its own flat, unmasked box would still read as a hard edge
+       underneath the fade. Nav content is lifted above that layer with its
+       own stacking context so the logo/buttons never fade with it. */
     header.scrolled {
-        background: oklch(16% 0.024 288 / 0.72);
-        backdrop-filter: blur(42px) saturate(200%) brightness(108%);
-        -webkit-backdrop-filter: blur(42px) saturate(200%) brightness(108%);
-        border: 1px solid oklch(100% 0 0 / 0.14);
-        box-shadow:
-            inset 0 1.5px 0 oklch(100% 0 0 / 0.22),
-            inset 0 -1px 0 oklch(0% 0 0 / 0.28),
-            0 2px 4px oklch(0% 0 0 / 0.12),
-            0 10px 30px oklch(5% 0.025 288 / 0.42),
-            0 1px 2px oklch(0% 0 0 / 0.08);
+        background: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    header.scrolled nav {
+        position: relative;
+        z-index: 1;
     }
 
     header.scrolled::before {
         opacity: 1;
     }
 
-    body:not(.dark-mode) header.scrolled {
+    /* Glass layer — spans the bar itself plus a long tail below it. Opaque
+       for roughly the bar's own height, then dissolves gradually to
+       transparent over a much longer distance than the bar is tall, so it
+       reads as a dissolve rather than a fade bolted onto a hard edge.
+       Always rendered (content set unconditionally) with opacity:0, so the
+       .scrolled toggle has a real "from" state to transition through —
+       otherwise the box only exists once .scrolled is applied and it just
+       snaps in at full strength instead of fading in. */
+    header::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: calc(var(--nav-height) + 90px);
+        background: oklch(16% 0.024 288 / 0.72);
+        backdrop-filter: blur(42px) saturate(200%) brightness(108%);
+        -webkit-backdrop-filter: blur(42px) saturate(200%) brightness(108%);
+        -webkit-mask-image: linear-gradient(to bottom, black, black 38%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black, black 38%, transparent 100%);
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+
+    header.scrolled::after {
+        opacity: 1;
+    }
+
+    body:not(.dark-mode) header::after {
         background: oklch(100% 0 0 / 0.38);
-        border: 1px solid oklch(96% 0.005 290 / 0.85);
-        box-shadow:
-            inset 0 1.5px 0 oklch(100% 0 0),
-            inset 0 -1px 0 oklch(72% 0.012 290 / 0.18),
-            0 2px 4px oklch(0% 0 0 / 0.05),
-            0 10px 30px oklch(48% 0.01 290 / 0.14),
-            0 1px 2px oklch(0% 0 0 / 0.04);
     }
 
     /* Keep nav readable over the always-dark hero */
@@ -611,9 +677,12 @@ body:not(.dark-mode) nav ul li a::after {
     body:not(.dark-mode) .theme-toggle:hover { color: oklch(10% 0.02 240); background: oklch(0% 0 0 / 0.06); }
 }
 
-/* ── Resume CTA button — inside the pill on desktop ── */
+/* ── Resume CTA button — inside the pill on desktop ──
+   display is intentionally NOT set here: the mobile block (max-width:1024px,
+   above) hides it and the desktop block (min-width:1025px, below) shows it.
+   Setting display here previously overrode the mobile hide since this
+   unconditional rule sat later in the cascade — see nav redesign notes. */
 .nav-resume-btn {
-    display: inline-flex;
     align-items: center;
     gap: 0.25em;
     background: var(--accent-color);
@@ -677,12 +746,10 @@ section + section {
     border-top: 1px solid var(--separator-color);
 }
 
-section .container {
-    background: var(--section-gradient);
-    padding: clamp(1.5rem, 4vw, 4rem) clamp(1rem, 3vw, 2rem);
-    border-radius: 1.5rem;
-    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.05);
-}
+/* Section content used to sit inside a card here (gradient background,
+   rounded corners, shadow) — removed so sections read as part of the page
+   instead of a generic boxed container. Layout/centering still comes from
+   the base .container rule above plus each section's own max-width. */
 
 /* active underline replaced by weight/brightness in nav ul li a styles above */
 
@@ -748,9 +815,34 @@ section .container {
     padding: 0 15px;
     max-width: 1100px;
     margin: 0 auto;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }
 
 .journey-strip::-webkit-scrollbar { display: none; }
+
+/* Scroll-progress dots — the strip's own edge fade (above) hints more content
+   exists off-screen, these confirm roughly how far along you are */
+.strip-scroll-dots {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    padding: 5px 0 7px;
+}
+
+.strip-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--separator-color);
+    transition: background 0.2s ease, width 0.2s ease, border-radius 0.2s ease;
+}
+
+.strip-dot.on {
+    background: var(--accent-color);
+    width: 12px;
+    border-radius: 3px;
+}
 
 .strip-year {
     flex-shrink: 0;
@@ -864,6 +956,42 @@ section .container {
     gap: clamp(10px, 2vw, 18px);
     flex-wrap: wrap;
     margin-bottom: 14px;
+    position: relative;
+    padding-right: 1.6rem;
+    cursor: pointer;
+}
+
+/* Chevron — pinned to the header's right edge, not inline with the
+   logo/org/role content. Header itself carries the click/keyboard
+   interaction (role="button"); the chevron is purely a visual indicator. */
+.chapter-chevron {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+    opacity: 0.4;
+    font-size: 0.8rem;
+    line-height: 1;
+    transition: transform 0.3s ease, opacity 0.2s ease, color 0.2s ease;
+    pointer-events: none;
+}
+
+.journey-chapter.expanded .chapter-chevron {
+    transform: translateY(-50%) rotate(180deg);
+    opacity: 0.9;
+    color: var(--accent-color);
+}
+
+/* Drawer — skills tag-line + bullets, collapsed by default */
+.chapter-drawer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+}
+
+.journey-chapter.expanded .chapter-drawer {
+    max-height: 1200px;
 }
 
 .chapter-logo {
@@ -1029,8 +1157,13 @@ section .container {
 }
 
 /* ── Map wrapper ── */
-#journey {
-    padding: 0;
+/* Desktop-only: the full-bleed map needs the section's own padding removed.
+   This was previously unscoped and also zeroed out the mobile timeline's
+   top padding, leaving it flush against the hero with no breathing room. */
+@media (min-width: 769px) {
+    #journey {
+        padding: 0;
+    }
 }
 
 .journey-map-desktop {
@@ -2838,6 +2971,18 @@ section .container {
     pointer-events: none;
 }
 
+/* Mobile: grow tap area to the 44px touch-target guideline without
+   changing the visual pill size on desktop */
+@media (max-width: 768px) {
+    .filter-chip {
+        padding-block: 14px;
+    }
+
+    .strip-year {
+        padding-block: 15px;
+    }
+}
+
 .all-projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -3121,6 +3266,29 @@ section .container {
     .skills-title { font-size: 2.6rem; }
 }
 
+/* Mobile: skills wrap as plain text instead of one-per-line — the single
+   biggest lever for the section's scroll length. No pill/chip chrome,
+   same voice as the marquee line above it. */
+@media (max-width: 768px) {
+    .channel-skills {
+        flex-direction: row;
+        flex-wrap: wrap;
+        row-gap: 0.65em;
+        column-gap: 0;
+    }
+
+    .sk {
+        display: inline;
+        line-height: 1.9;
+    }
+
+    .sk:not(:last-child)::after {
+        content: '·';
+        margin: 0 0.65em;
+        opacity: 0.4;
+    }
+}
+
 /* ================================
    Certifications Section
    ================================ */
@@ -3267,6 +3435,16 @@ section .container {
 
 @media (max-width: 768px) {
     .floating-buttons {
+        flex-direction: column;
+    }
+
+    .floating-buttons .float-resume {
+        display: flex;
+    }
+}
+
+@media (min-width: 769px) {
+    .floating-buttons .float-resume {
         display: none;
     }
 }
@@ -3912,6 +4090,72 @@ body:not(.dark-mode) .scroll-top {
 }
 
 body:not(.dark-mode) .scroll-top:hover {
+    background: oklch(100% 0 0 / 0.6);
+}
+
+/* ── Mobile-only floating Resume CTA — same liquid-glass circle as
+   scroll-top, accent-tinted icon marks it as the call to action.
+   display is intentionally NOT set here — see nav-resume-btn above for
+   why an unconditional display here would win the cascade over the
+   max-width:768px block and silently show this on desktop too. ── */
+.float-resume {
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border-radius: 999px;
+    justify-content: center;
+    align-items: center;
+    color: var(--accent-color);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+
+    background: oklch(16% 0.024 288 / 0.35);
+    backdrop-filter: blur(40px) saturate(180%) brightness(110%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(110%);
+    border: 1px solid oklch(100% 0 0 / 0.15);
+    box-shadow:
+        inset 0 1.5px 0 oklch(100% 0 0 / 0.22),
+        inset 0 -1px 0 oklch(0% 0 0 / 0.28),
+        0 4px 12px oklch(0% 0 0 / 0.18),
+        0 10px 32px oklch(5% 0.025 288 / 0.45);
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.float-resume::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+        to bottom,
+        oklch(100% 0 0 / 0.18) 0%,
+        oklch(100% 0 0 / 0.06) 2px,
+        transparent 45%
+    );
+    pointer-events: none;
+}
+
+body:not(.dark-mode) .float-resume {
+    background: oklch(100% 0 0 / 0.42);
+    border: 1px solid oklch(80% 0.008 290 / 0.6);
+    box-shadow:
+        inset 0 1.5px 0 oklch(100% 0 0),
+        inset 0 -1px 0 oklch(72% 0.012 290 / 0.18),
+        0 4px 12px oklch(0% 0 0 / 0.07),
+        0 10px 28px oklch(60% 0.012 290 / 0.15);
+}
+
+.float-resume:hover {
+    background: oklch(16% 0.024 288 / 0.52);
+    box-shadow:
+        inset 0 1.5px 0 oklch(100% 0 0 / 0.28),
+        inset 0 -1px 0 oklch(0% 0 0 / 0.35),
+        0 4px 16px oklch(0% 0 0 / 0.24),
+        0 14px 40px oklch(5% 0.025 288 / 0.55);
+}
+
+body:not(.dark-mode) .float-resume:hover {
     background: oklch(100% 0 0 / 0.6);
 }
 

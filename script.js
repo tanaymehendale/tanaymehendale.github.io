@@ -16,11 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Remove floating buttons on mobile
-    if (window.innerWidth <= 768) {
-        const floatingButtons = document.querySelector('.floating-buttons');
-        if (floatingButtons) floatingButtons.remove();
-    }
 });
 
 const scrollDown = document.getElementById('scroll-down');
@@ -188,6 +183,37 @@ document.addEventListener('DOMContentLoaded', () => {
             if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     });
+
+    // Chapter drawer: tap/enter/space on the header expands or collapses the bullets
+    chapters.forEach(chapter => {
+        const header = chapter.querySelector('.chapter-header');
+        if (!header) return;
+        const toggle = () => {
+            const expanded = chapter.classList.toggle('expanded');
+            header.setAttribute('aria-expanded', String(expanded));
+        };
+        header.addEventListener('click', toggle);
+        header.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggle();
+            }
+        });
+    });
+
+    // Year-strip horizontal scroll progress → dot indicator
+    const strip = document.querySelector('.journey-strip');
+    const dots = [...document.querySelectorAll('.strip-dot')];
+    if (strip && dots.length) {
+        const updateDots = () => {
+            const maxScroll = strip.scrollWidth - strip.clientWidth;
+            const ratio = maxScroll > 0 ? strip.scrollLeft / maxScroll : 0;
+            const active = Math.min(dots.length - 1, Math.floor(ratio * dots.length));
+            dots.forEach((d, i) => d.classList.toggle('on', i === active));
+        };
+        strip.addEventListener('scroll', updateDots, { passive: true });
+        updateDots();
+    }
 });
 
 // ── Journey Map ────────────────────────────────────────────────────────────────
